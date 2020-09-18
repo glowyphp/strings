@@ -124,7 +124,7 @@ test('test capitalize() method', function() {
 });
 
 test('test length() method', function() {
-    $this->assertEquals(4, Strings::of('SG-1')->length());
+    $this->assertEquals(41, Strings::of('SG-1')->length());
 });
 
 test('test substr() method', function() {
