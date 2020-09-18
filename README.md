@@ -23,59 +23,61 @@ use Atomastic\Strings;
 
 | Method | Description |
 |---|---|
-| <a href="#strings_stripSpaces">stripSpaces()`</a> | Strip all whitespaces from the given string. |
-| <a href="#strings_trimSlashes">trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
-| <a href="#strings_reduceSlashes">reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
-| <a href="#strings_stripQuotes">stripQuotes()`</a> | Removes single and double quotes from a string. |
-| <a href="#strings_quotesToEntities">quotesToEntities()`</a> | Convert single and double quotes to entities. |
-| <a href="#strings_normalizeNewLines">normalizeNewLines()`</a> | Standardize line endings to unix-like. |
-| <a href="#strings_normalizeSpaces">normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
-| <a href="#strings_random">random()`</a> | Creates a random string of characters. |
-| <a href="#strings_increment">increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
-| <a href="#strings_wordsCount">wordsCount()`</a> | Return information about words used in a string. |
-| <a href="#strings_length">length()`</a> | Return the length of the given string. |
-| <a href="#strings_lower">lower()`</a> | Convert the given string to lower-case. |
-| <a href="#strings_upper">upper()`</a> | Convert the given string to upper-case. |
-| <a href="#strings_limit">limit()`</a> | Limit the number of characters in a string. |
-| <a href="#strings_studly">studly()`</a> | Convert a value to studly caps case. |
-| <a href="#strings_snake">snake()`</a> | Convert a string to snake case. |
-| <a href="#strings_camel">camel()`</a> | Convert a string to camel case. |
-| <a href="#strings_kebab">kebab()`</a> | Convert a string to kebab case. |
-| <a href="#strings_words">words()`</a> | Limit the number of words in a string. |
-| <a href="#strings_contains">contains()`</a> | Determine if a given string contains a given substring. |
-| <a href="#strings_containsAll">containsAll()`</a> | Determine if a given string contains all array values. |
-| <a href="#strings_containsAny">containsAny()`</a> | Determine if a given string contains any of array values. |
-| <a href="#strings_substr">substr()`</a> | Returns the portion of string specified by the start and length parameters. |
-| <a href="#strings_ucfirst">ucfirst()`</a> | Converts the first character of a UTF-8 string to upper case and leaves the other characters unchanged. |
-| <a href="#strings_trim">trim()`</a> | Strip whitespace (or other characters) from the beginning and end of a string. |
-| <a href="#strings_trimRight">trimRight()`</a> | Strip whitespace (or other characters) from the end of a string. |
-| <a href="#strings_trimLeft">trimLeft()`</a> | Strip whitespace (or other characters) from the beginning of a string. |
-| <a href="#strings_capitalize">capitalize()`</a> | Converts the first character of every word of string to upper case and the others to lower case. |
-| <a href="#strings_reverse">reverse()`</a> | Reverses string. |
-| <a href="#strings_segments">segments()`</a> | Get array of segments from a string based on a delimiter. |
-| <a href="#strings_segment">segment()`</a> | Get a segment from a string based on a delimiter. Returns an empty string when the offset doesn't exist. Use a negative index to start counting from the last element. |
-| <a href="#strings_firstSegment">firstSegment()`</a> | Get the first segment from a string based on a delimiter. |
-| <a href="#strings_lastSegment">lastSegment()`</a> | Get the last segment from a string based on a delimiter. |
-| <a href="#strings_between">between()`</a> | Get the portion of a string between two given values. |
-| <a href="#strings_before">before()`</a> | Get the portion of a string before the first occurrence of a given value. |
-| <a href="#strings_beforeLast">beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
-| <a href="#strings_after">after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
-| <a href="#strings_afterLast">afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
-| <a href="#strings_padBoth">padBoth()`</a> | Pad both sides of a string with another. |
-| <a href="#strings_padLeft">padLeft()`</a> | Pad the left side of a string with another. |
-| <a href="#strings_padRight">padRight()`</a> | Pad the right side of a string with another. |
-| <a href="#strings_replaceArray">replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
-| <a href="#strings_replaceFirst">replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
-| <a href="#strings_replaceLast">replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
-| <a href="#strings_start">start()`</a> | Begin a string with a single instance of a given value. |
-| <a href="#strings_startsWith">startsWith()`</a> | Determine if a given string starts with a given substring. |
-| <a href="#strings_endsWith">endsWith()`</a> | Determine if a given string ends with a given substring. |
-| <a href="#strings_finish">finish()`</a> | Cap a string with a single instance of a given value. |
-| <a href="#strings_hash">hash()`</a> | Generate a hash string from the input string. |
+| <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
+| <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
+| <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
+| <a href="#strings_stripQuotes">`stripQuotes()`</a> | Removes single and double quotes from a string. |
+| <a href="#strings_quotesToEntities">`quotesToEntities()`</a> | Convert single and double quotes to entities. |
+| <a href="#strings_validEncoding">`validEncoding()`</a> | Checks if the string is valid in UTF-8 encoding. |
+| <a href="#strings_fixEncoding">`fixEncoding()`</a> | Removes all invalid UTF-8 characters from a string. |
+| <a href="#strings_normalizeNewLines">`normalizeNewLines()`</a> | Standardize line endings to unix-like. |
+| <a href="#strings_normalizeSpaces">`normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
+| <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
+| <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
+| <a href="#strings_wordsCount">`wordsCount()`</a> | Return information about words used in a string. |
+| <a href="#strings_length">`length()`</a> | Return the length of the given string. |
+| <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
+| <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
+| <a href="#strings_limit">`limit()`</a> | Limit the number of characters in a string. |
+| <a href="#strings_studly">`studly()`</a> | Convert a value to studly caps case. |
+| <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
+| <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
+| <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
+| <a href="#strings_words">`words()`</a> | Limit the number of words in a string. |
+| <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. |
+| <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. |
+| <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. |
+| <a href="#strings_substr">`substr()`</a> | Returns the portion of string specified by the start and length parameters. |
+| <a href="#strings_ucfirst">`ucfirst()`</a> | Converts the first character of a UTF-8 string to upper case and leaves the other characters unchanged. |
+| <a href="#strings_trim">`trim()`</a> | Strip whitespace (or other characters) from the beginning and end of a string. |
+| <a href="#strings_trimRight">`trimRight()`</a> | Strip whitespace (or other characters) from the end of a string. |
+| <a href="#strings_trimLeft">`trimLeft()`</a> | Strip whitespace (or other characters) from the beginning of a string. |
+| <a href="#strings_capitalize">`capitalize()`</a> | Converts the first character of every word of string to upper case and the others to lower case. |
+| <a href="#strings_reverse">`reverse()`</a> | Reverses string. |
+| <a href="#strings_segments">`segments()`</a> | Get array of segments from a string based on a delimiter. |
+| <a href="#strings_segment">`segment()`</a> | Get a segment from a string based on a delimiter. Returns an empty string when the offset doesn't exist. Use a negative index to start counting from the last element. |
+| <a href="#strings_firstSegment">`firstSegment()`</a> | Get the first segment from a string based on a delimiter. |
+| <a href="#strings_lastSegment">`lastSegment()`</a> | Get the last segment from a string based on a delimiter. |
+| <a href="#strings_between">`between()`</a> | Get the portion of a string between two given values. |
+| <a href="#strings_before">`before()`</a> | Get the portion of a string before the first occurrence of a given value. |
+| <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
+| <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
+| <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
+| <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
+| <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
+| <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
+| <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
+| <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
+| <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
+| <a href="#strings_start">`start()`</a> | Begin a string with a single instance of a given value. |
+| <a href="#strings_startsWith">`startsWith()`</a> | Determine if a given string starts with a given substring. |
+| <a href="#strings_endsWith">`endsWith()`</a> | Determine if a given string ends with a given substring. |
+| <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
+| <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 
 <hr>
 
-#### <a name="strings_stripSpaces"></a> Method: stripSpaces()`
+#### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
 
 Strip all whitespaces from the given string.
 
@@ -83,7 +85,7 @@ Strip all whitespaces from the given string.
 $string = Strings::stripSpaces('SG-1 returns from an off-world mission');
 ```
 
-#### <a name="strings_trimSlashes"></a> Method: trimSlashes()`
+#### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
 
 Removes any leading and trailing slashes from a string.
 
@@ -91,7 +93,7 @@ Removes any leading and trailing slashes from a string.
 $string = Strings::trimSlashes('some string here/');
 ```
 
-#### <a name="strings_reduceSlashes"></a> Method: reduceSlashes()`
+#### <a name="strings_reduceSlashes"></a> Method: `reduceSlashes()`
 
 Reduces multiple slashes in a string to single slashes.
 
@@ -99,7 +101,7 @@ Reduces multiple slashes in a string to single slashes.
 $string = Strings::reduceSlashes('some//text//here');
 ```
 
-#### <a name="strings_stripQuotes"></a> Method: stripQuotes()`
+#### <a name="strings_stripQuotes"></a> Method: `stripQuotes()`
 
 Removes single and double quotes from a string.
 
@@ -107,7 +109,7 @@ Removes single and double quotes from a string.
 $string = Strings::stripQuotes('some "text" here');
 ```
 
-#### <a name="strings_quotesToEntities"></a> Method: quotesToEntities()`
+#### <a name="strings_quotesToEntities"></a> Method: `quotesToEntities()`
 
 Convert single and double quotes to entities.
 
@@ -115,7 +117,7 @@ Convert single and double quotes to entities.
 $string = Strings::quotesToEntities('some "text" here');
 ```
 
-#### <a name="strings_validEncoding"></a> Method: validEncoding()`
+#### <a name="strings_validEncoding"></a> Method: `validEncoding()`
 
 Checks if the string is valid in UTF-8 encoding.
 
@@ -123,7 +125,7 @@ Checks if the string is valid in UTF-8 encoding.
 $result = Strings::validEncoding('An UTF-8 string here');
 ```
 
-#### <a name="strings_fixEncoding"></a> Method: fixEncoding()`
+#### <a name="strings_fixEncoding"></a> Method: `fixEncoding()`
 
 Removes all invalid UTF-8 characters from a string.
 
@@ -131,7 +133,7 @@ Removes all invalid UTF-8 characters from a string.
 $string = Strings::fixEncoding('An invalid UTF-8 string here');
 ```
 
-#### <a name="strings_normalizeNewLines"></a> Method: normalizeNewLines()`
+#### <a name="strings_normalizeNewLines"></a> Method: `normalizeNewLines()`
 
 Standardize line endings to unix-like.
 
@@ -139,7 +141,7 @@ Standardize line endings to unix-like.
 $string = Strings::normalizeNewLines('SG-1 returns from an off-world mission');
 ```
 
-#### <a name="strings_normalizeSpaces"></a> Method: normalizeSpaces()`
+#### <a name="strings_normalizeSpaces"></a> Method: `normalizeSpaces()`
 
 Normalize white-spaces to a single space.
 
@@ -147,7 +149,7 @@ Normalize white-spaces to a single space.
 $string = Strings::normalizeSpaces('SG-1  returns  from  an  off-world  mission');
 ```
 
-#### <a name="strings_random"></a> Method: random()`
+#### <a name="strings_random"></a> Method: `random()`
 
 ```php
 // Get random string with predefined settings
@@ -160,7 +162,7 @@ $string = Strings::random(10);
 $string = Strings::random(4, '0123456789');
 ```
 
-#### <a name="strings_increment"></a> Method: increment()`
+#### <a name="strings_increment"></a> Method: `increment()`
 
 Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc.
 
@@ -172,7 +174,7 @@ $string = Strings::increment('page_1');
 $string = Strings::increment('page-1', 1, '-');
 ```
 
-#### <a name="strings_wordsCount"></a> Method: wordsCount()`
+#### <a name="strings_wordsCount"></a> Method: `wordsCount()`
 
 Return information about words used in a string
 
@@ -187,7 +189,7 @@ $result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3
 $result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson', 2)
 ```
 
-#### <a name="strings_length"></a> Method: length()`
+#### <a name="strings_length"></a> Method: `length()`
 
 Return the length of the given string.
 
@@ -195,7 +197,7 @@ Return the length of the given string.
 $length = Strings::length('SG-1 returns from an off-world mission to P9Y-3C3');
 ```
 
-#### <a name="strings_lower"></a> Method: lower()`
+#### <a name="strings_lower"></a> Method: `lower()`
 
 Convert the given string to lower-case.
 
@@ -203,7 +205,7 @@ Convert the given string to lower-case.
 $string = Strings::lower('SG-1 returns from an off-world mission to P9Y-3C3');
 ```
 
-#### <a name="strings_upper"></a> Method: upper()`
+#### <a name="strings_upper"></a> Method: `upper()`
 
 Convert the given string to upper-case.
 
@@ -211,7 +213,7 @@ Convert the given string to upper-case.
 $string = Strings::upper('SG-1 returns from an off-world mission to P9Y-3C3');
 ```
 
-#### <a name="strings_limit"></a> Method: limit()`
+#### <a name="strings_limit"></a> Method: `limit()`
 
 Limit the number of characters in a string.
 
@@ -226,7 +228,7 @@ $string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10
 $string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10, 'read more...');
 ```
 
-#### <a name="strings_studly"></a> Method: studly()`
+#### <a name="strings_studly"></a> Method: `studly()`
 
 Convert a value to studly caps case.
 
@@ -234,7 +236,7 @@ Convert a value to studly caps case.
 $string = Strings::studly('foo_bar');
 ```
 
-#### <a name="strings_snake"></a> Method: snake()`
+#### <a name="strings_snake"></a> Method: `snake()`
 
 Convert a string to snake case.
 
@@ -242,7 +244,7 @@ Convert a string to snake case.
 $string = Strings::snake('fooBar');
 ```
 
-#### <a name="strings_camel"></a> Method: camel()`
+#### <a name="strings_camel"></a> Method: `camel()`
 
 Convert a string to camel case.
 
@@ -250,7 +252,7 @@ Convert a string to camel case.
 $string = Strings::camel('foo_bar');
 ```
 
-#### <a name="strings_kebab"></a> Method: kebab()`
+#### <a name="strings_kebab"></a> Method: `kebab()`
 
 Convert a string to kebab case.
 
@@ -258,7 +260,7 @@ Convert a string to kebab case.
 $string = Strings::kebab('fooBar');
 ```
 
-#### <a name="strings_words"></a> Method: words()`
+#### <a name="strings_words"></a> Method: `words()`
 
 Limit the number of words in a string.
 
@@ -273,7 +275,7 @@ $string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3)
 $string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3, 'read more...');
 ```
 
-#### <a name="strings_contains"></a> Method: contains()`
+#### <a name="strings_contains"></a> Method: `contains()`
 
 Determine if a given string contains a given substring.
 
@@ -285,7 +287,7 @@ $result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3',
 $result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
 ```
 
-#### <a name="strings_containsAll"></a> Method: containsAll()`
+#### <a name="strings_containsAll"></a> Method: `containsAll()`
 
 Determine if a given string contains a given array of substrings.
 
@@ -293,7 +295,7 @@ Determine if a given string contains a given array of substrings.
 $result = Strings::containsAll('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
 ```
 
-#### <a name="strings_containsAny"></a> Method: containsAny()`
+#### <a name="strings_containsAny"></a> Method: `containsAny()`
 
 Determine if a given string contains any of array values.
 
@@ -301,7 +303,7 @@ Determine if a given string contains any of array values.
 $result = Strings::containsAny('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
 ```
 
-#### <a name="strings_substr"></a> Method: substr()`
+#### <a name="strings_substr"></a> Method: `substr()`
 
 Returns the portion of string specified by the start and length parameters.
 
@@ -313,7 +315,7 @@ $string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0
 $string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0, 4);
 ```
 
-#### <a name="strings_ucfirst"></a> Method: ucfirst()`
+#### <a name="strings_ucfirst"></a> Method: `ucfirst()`
 
 Converts the first character of a string to upper case and leaves the other characters unchanged.
 
@@ -321,7 +323,7 @@ Converts the first character of a string to upper case and leaves the other char
 $string = Strings::ucfirst('daniel');
 ```
 
-#### <a name="strings_trim"></a> Method: trim()`
+#### <a name="strings_trim"></a> Method: `trim()`
 
 Strip whitespace (or other characters) from the beginning and end of a string.
 
@@ -329,7 +331,7 @@ Strip whitespace (or other characters) from the beginning and end of a string.
 $string = Strings::trim(' daniel ');
 ```
 
-#### <a name="strings_trimRight"></a> Method: trimRight()`
+#### <a name="strings_trimRight"></a> Method: `trimRight()`
 
 Strip whitespace (or other characters) from the end of a string.
 
@@ -337,7 +339,7 @@ Strip whitespace (or other characters) from the end of a string.
 $string = Strings::trimRight('daniel ');
 ```
 
-#### <a name="strings_trimLeft"></a> Method: trimLeft()`
+#### <a name="strings_trimLeft"></a> Method: `trimLeft()`
 
 Strip whitespace (or other characters) from the beginning of a string.
 
@@ -345,7 +347,7 @@ Strip whitespace (or other characters) from the beginning of a string.
 $string = Strings::trimLeft(' daniel');
 ```
 
-#### <a name="strings_capitalize"></a> Method: capitalize()`
+#### <a name="strings_capitalize"></a> Method: `capitalize()`
 
 Converts the first character of every word of string to upper case and the others to lower case.
 
@@ -353,7 +355,7 @@ Converts the first character of every word of string to upper case and the other
 $string = Strings::capitalize('that country was at the same stage of development as the United States in the 1940s');
 ```
 
-#### <a name="strings_reverse"></a> Method: reverse()`
+#### <a name="strings_reverse"></a> Method: `reverse()`
 
 Reverses string.
 
@@ -361,7 +363,7 @@ Reverses string.
 $string = Strings::reverse('SG-1 returns from an off-world mission');
 ```
 
-#### <a name="strings_segments"></a> Method: segments()`
+#### <a name="strings_segments"></a> Method: `segments()`
 
 Get array of segments from a string based on a delimiter.
 
@@ -373,7 +375,7 @@ $segments = Strings::segments('SG-1 returns from an off-world mission');
 $segments = Strings::segments('SG-1 returns from an off-world mission', '-');
 ```
 
-#### <a name="strings_segment"></a> Method: segment()`
+#### <a name="strings_segment"></a> Method: `segment()`
 
 Get a segment from a string based on a delimiter.
 Returns an empty string when the offset doesn't exist.
@@ -390,7 +392,7 @@ $string = Strings::segment('SG-1 returns from an off-world mission', 1, '-');
 $string = Strings::segment('SG-1 returns from an off-world mission', -1, '-');
 ```
 
-#### <a name="strings_firstSegment"></a> Method: firstSegment()`
+#### <a name="strings_firstSegment"></a> Method: `firstSegment()`
 
 Get the first segment from a string based on a delimiter.
 
@@ -402,7 +404,7 @@ $string = Strings::firstSegment('SG-1 returns from an off-world mission');
 $string = Strings::firstSegment('SG-1 returns from an off-world mission', '-');
 ```
 
-#### <a name="strings_lastSegment"></a> Method: lastSegment()`
+#### <a name="strings_lastSegment"></a> Method: `lastSegment()`
 
 Get the last segment from a string based on a delimiter.
 
@@ -414,7 +416,7 @@ $string = Strings::lastSegment('SG-1 returns from an off-world mission');
 $string = Strings::lastSegment('SG-1 returns from an off-world mission', '-');
 ```
 
-#### <a name="strings_between"></a> Method: between()`
+#### <a name="strings_between"></a> Method: `between()`
 
 Get the portion of a string between two given values.
 
@@ -422,7 +424,7 @@ Get the portion of a string between two given values.
 $string = Strings::between('SG-1 returns from an off-world mission', 'SG-1', 'from');
 ```
 
-#### <a name="strings_before"></a> Method: before()`
+#### <a name="strings_before"></a> Method: `before()`
 
 Get the portion of a string before the first occurrence of a given value.
 
@@ -430,7 +432,7 @@ Get the portion of a string before the first occurrence of a given value.
 $string = Strings::before('SG-1 returns from an off-world mission', 'mission');
 ```
 
-#### <a name="strings_beforeLast"></a> Method: beforeLast()`
+#### <a name="strings_beforeLast"></a> Method: `beforeLast()`
 
 Get the portion of a string before the last occurrence of a given value.
 
@@ -438,7 +440,7 @@ Get the portion of a string before the last occurrence of a given value.
 $string = Strings::beforeLast('SG-1 returns from an off-world mission', 'mission');
 ```
 
-#### <a name="strings_after"></a> Method: after()`
+#### <a name="strings_after"></a> Method: `after()`
 
 Return the remainder of a string after the first occurrence of a given value.
 
@@ -446,7 +448,7 @@ Return the remainder of a string after the first occurrence of a given value.
 $string = Strings::after('SG-1 returns from an off-world mission', 'SG-1');
 ```
 
-#### <a name="strings_afterLast"></a> Method: afterLast()`
+#### <a name="strings_afterLast"></a> Method: `afterLast()`
 
 Return the remainder of a string after the last occurrence of a given value.
 
@@ -454,7 +456,7 @@ Return the remainder of a string after the last occurrence of a given value.
 $string = Strings::afterLast('SG-1 returns from an off-world mission', 'SG-1');
 ```
 
-#### <a name="strings_padBoth"></a> Method: padBoth()`
+#### <a name="strings_padBoth"></a> Method: `padBoth()`
 
 Pad both sides of a string with another.
 
@@ -462,7 +464,7 @@ Pad both sides of a string with another.
 $string = Strings::padBoth('SG-1 returns from an off-world mission', 50, '-');
 ```
 
-#### <a name="strings_padRight"></a> Method: padRight()`
+#### <a name="strings_padRight"></a> Method: `padRight()`
 
 Pad the right side of a string with another.
 
@@ -470,7 +472,7 @@ Pad the right side of a string with another.
 $string = Strings::padRight('SG-1 returns from an off-world mission', 50, '-');
 ```
 
-#### <a name="strings_padLeft"></a> Method: padLeft()`
+#### <a name="strings_padLeft"></a> Method: `padLeft()`
 
 Pad the left side of a string with another.
 
@@ -478,7 +480,7 @@ Pad the left side of a string with another.
 $string = Strings::padLeft('SG-1 returns from an off-world mission', 50, '-');
 ```
 
-#### <a name="strings_replaceArray"></a> Method: replaceArray()`
+#### <a name="strings_replaceArray"></a> Method: `replaceArray()`
 
 Replace a given value in the string sequentially with an array.
 
@@ -486,7 +488,7 @@ Replace a given value in the string sequentially with an array.
 $string = Strings::replaceArray('SG-1 returns from an off-world mission', 'SG-1', ['SG-2']);
 ```
 
-#### <a name="strings_replaceFirst"></a> Method: replaceFirst()`
+#### <a name="strings_replaceFirst"></a> Method: `replaceFirst()`
 
 Replace the first occurrence of a given value in the string.
 
@@ -494,7 +496,7 @@ Replace the first occurrence of a given value in the string.
 $string = Strings::replaceFirst('SG-1 returns from an off-world mission', 'SG-1', 'SG-2');
 ```
 
-#### <a name="strings_replaceLast"></a> Method: replaceLast()`
+#### <a name="strings_replaceLast"></a> Method: `replaceLast()`
 
 Replace the last occurrence of a given value in the string.
 
@@ -502,7 +504,7 @@ Replace the last occurrence of a given value in the string.
 $string = Strings::replaceLast('SG-1 returns from an off-world mission', 'off-world', 'P9Y-3C3');
 ```
 
-#### <a name="strings_start"></a> Method: start()`
+#### <a name="strings_start"></a> Method: `start()`
 
 Begin a string with a single instance of a given value.
 
@@ -510,7 +512,7 @@ Begin a string with a single instance of a given value.
 $string = Strings::start('movies/sg-1/season-5/episode-21/', '/');
 ```
 
-#### <a name="strings_startsWith"></a> Method: startsWith()`
+#### <a name="strings_startsWith"></a> Method: `startsWith()`
 
 Determine if a given string starts with a given substring.
 
@@ -518,7 +520,7 @@ Determine if a given string starts with a given substring.
 $result = Strings::startsWith('/movies/sg-1/season-5/episode-21/', '/');
 ```
 
-#### <a name="strings_endsWith"></a> Method: endsWith()`
+#### <a name="strings_endsWith"></a> Method: `endsWith()`
 
 Determine if a given string ends with a given substring.
 
@@ -526,7 +528,7 @@ Determine if a given string ends with a given substring.
 $result = Strings::endsWith('/movies/sg-1/season-5/episode-21/', '/');
 ```
 
-#### <a name="strings_finish"></a> Method: finish()`
+#### <a name="strings_finish"></a> Method: `finish()`
 
 Cap a string with a single instance of a given value.
 
@@ -534,7 +536,7 @@ Cap a string with a single instance of a given value.
 $result = Strings::finish('/movies/sg-1/season-5/episode-21', '/');
 ```
 
-#### <a name="strings_hash"></a> Method: hash()`
+#### <a name="strings_hash"></a> Method: `hash()`
 
 Generate a hash string from the input string.
 
