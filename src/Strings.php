@@ -128,7 +128,7 @@ class Strings
      */
     public static function of($string = '', string $encoding = 'UTF-8'): self
     {
-        return new static($string, $encoding);
+        return new Strings($string, $encoding);
     }
 
     /**
@@ -241,7 +241,7 @@ class Strings
     public function limit(int $limit = 100, string $append = '...')
     {
         if (mb_strwidth($this->string, 'UTF-8') <= $limit) {
-            $this->string = $string;
+            $this->string = $this->string;
         }
 
         $this->string = static::of(mb_strimwidth($this->string, 0, $limit, '', $this->encoding))->trimRight() . $append;
