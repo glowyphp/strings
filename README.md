@@ -28,8 +28,6 @@ use Atomastic\Strings\Strings;
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
 | <a href="#strings_stripQuotes">`stripQuotes()`</a> | Removes single and double quotes from a string. |
 | <a href="#strings_quotesToEntities">`quotesToEntities()`</a> | Convert single and double quotes to entities. |
-| <a href="#strings_validEncoding">`validEncoding()`</a> | Checks if the string is valid in UTF-8 encoding. |
-| <a href="#strings_fixEncoding">`fixEncoding()`</a> | Removes all invalid UTF-8 characters from a string. |
 | <a href="#strings_normalizeNewLines">`normalizeNewLines()`</a> | Standardize line endings to unix-like. |
 | <a href="#strings_normalizeSpaces">`normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
 | <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
