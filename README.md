@@ -16,7 +16,7 @@ composer require atomastic/strings
 ### Usage
 
 ```php
-use Atomastic\Strings;
+use Atomastic\Strings\Strings;
 ```
 
 ### Methods
