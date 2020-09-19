@@ -176,58 +176,107 @@ $string = Strings::of('some "text" here')->quotesToEntities();
 
 #### <a name="strings_normalizeNewLines"></a> Method: `normalizeNewLines()`
 
-Standardize line endings to unix-like.
+```php
+/**
+ * Standardize line endings to unix-like.
+ */
+public function normalizeNewLines(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::normalizeNewLines('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->normalizeNewLines();
 ```
 
 #### <a name="strings_normalizeSpaces"></a> Method: `normalizeSpaces()`
 
-Normalize white-spaces to a single space.
+```php
+/**
+ * Normalize white-spaces to a single space.
+ */
+public function normalizeSpaces(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::normalizeSpaces('SG-1  returns  from  an  off-world  mission');
+$string = Strings::of('SG-1  returns  from  an  off-world  mission')->normalizeSpaces();
 ```
 
 #### <a name="strings_random"></a> Method: `random()`
 
 ```php
+/**
+ * Creates a random string of characters.
+ *
+ * @param  int    $length   The number of characters. Default is 16
+ * @param  string $keyspace The keyspace
+ */
+public function random(int $length = 64, string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): self
+```
+
+**Examples**
+
+```php
 // Get random string with predefined settings
-$string = Strings::random();
+$string = Strings::of()->random();
 
 // Get random string with custom length
-$string = Strings::random(10);
+$string = Strings::of()->random(10);
 
 // Get random string with custom length and custom keyspace
-$string = Strings::random(4, '0123456789');
+$string = Strings::of()->random(4, '0123456789');
 ```
 
 #### <a name="strings_increment"></a> Method: `increment()`
 
-Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc.
+```php
+/**
+ * Add's _1 to a string or increment the ending number to allow _2, _3, etc.
+ *
+ * @param  int    $first     Start with
+ * @param  string $separator Separator
+ */
+public function increment(int $first = 1, string $separator = '_')
+```
+
+**Examples**
 
 ```php
 // Increment string with predefined settings
-$string = Strings::increment('page_1');
+$string = Strings::of('page_1')->increment();
 
 // Increment string with custom settings
-$string = Strings::increment('page-1', 1, '-');
+$string = Strings::of('page-1')->increment(1, '-');
 ```
 
 #### <a name="strings_wordsCount"></a> Method: `wordsCount()`
 
-Return information about words used in a string
+```php
+/**
+ * Return information about words used in a string
+ *
+ * @param  int    $format   Specify the return value of this function. The current supported values are:
+ *                          0 - returns the number of words found
+ *                          1 - returns an array containing all the words found inside the string
+ *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
+ * @param  string $charlist A list of additional characters which will be considered as 'word'
+ */
+public function wordsCount(int $format = 0, string $charlist = '')
+```
+
+**Examples**
 
 ```php
 // Returns the number of words found
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson');
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount();
 
 // Returns an array containing all the words found inside the string
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson', 1)
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(1);
 
 // Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson', 2)
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(2);
 ```
 
 #### <a name="strings_length"></a> Method: `length()`
