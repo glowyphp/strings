@@ -459,70 +459,148 @@ $result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->cont
 
 #### <a name="strings_containsAll"></a> Method: `containsAll()`
 
-Determine if a given string contains a given array of substrings.
+```php
+/**
+ * Determine if a given string contains all array values.
+ *
+ * @param  string[] $needles The array of strings to find in haystack.
+ */
+public function containsAll(array $needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::containsAll('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAll(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_containsAny"></a> Method: `containsAny()`
 
-Determine if a given string contains any of array values.
+```php
+/**
+ * Determine if a given string contains any of array values.
+ *
+ * @param  string   $haystack The string being checked.
+ * @param  string[] $needles  The array of strings to find in haystack.
+ */
+public function containsAny(array $needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::containsAny('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAny(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_substr"></a> Method: `substr()`
 
-Returns the portion of string specified by the start and length parameters.
+```php
+/**
+ * Returns the portion of string specified by the start and length parameters.
+ *
+ * @param  int      $start  If start is non-negative, the returned string will
+ *                          start at the start'th position in $string, counting from zero.
+ *                          For instance, in the string 'abcdef', the character at position
+ *                          0 is 'a', the character at position 2 is 'c', and so forth.
+ * @param  int|null $length Maximum number of characters to use from string.
+ *                          If omitted or NULL is passed, extract all characters to the end of the string.
+ */
+public function substr(int $start, ?int $length = null): self
+```
+
+**Examples**
 
 ```php
 // Returns the portion of string specified by the start 0.
-$string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0);
 
 // Returns the portion of string specified by the start 0 and length 4.
-$string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0, 4);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4);
 ```
 
 #### <a name="strings_ucfirst"></a> Method: `ucfirst()`
 
-Converts the first character of a string to upper case and leaves the other characters unchanged.
+```php
+/**
+ * Converts the first character of a string to upper case
+ * and leaves the other characters unchanged.
+ */
+public function ucfirst(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::ucfirst('daniel');
+$string = Strings::of('daniel')->ucfirst();
 ```
 
 #### <a name="strings_trim"></a> Method: `trim()`
 
-Strip whitespace (or other characters) from the beginning and end of a string.
+```php
+/**
+ * Strip whitespace (or other characters) from the beginning and end of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trim(' daniel ');
+$string = Strings::of(' daniel ')->trim();
 ```
 
 #### <a name="strings_trimRight"></a> Method: `trimRight()`
 
-Strip whitespace (or other characters) from the end of a string.
+```php
+/**
+ * Strip whitespace (or other characters) from the end of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimRight('daniel ');
+$string = Strings::of('daniel ')->trimRight();
 ```
 
 #### <a name="strings_trimLeft"></a> Method: `trimLeft()`
 
-Strip whitespace (or other characters) from the beginning of a string.
+```
+/**
+ * Strip whitespace (or other characters) from the beginning of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimLeft(' daniel');
+$string = Strings::of(' daniel')->trimLeft();
 ```
 
 #### <a name="strings_capitalize"></a> Method: `capitalize()`
 
-Converts the first character of every word of string to upper case and the others to lower case.
+```php
+/**
+ * Converts the first character of every word of string to upper case and the others to lower case.
+ */
+public function capitalize(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::capitalize('that country was at the same stage of development as the United States in the 1940s');
+$string = Strings::of('that country was at the same stage of development as the United States in the 1940s')->capitalize();
 ```
 
 #### <a name="strings_reverse"></a> Method: `reverse()`
