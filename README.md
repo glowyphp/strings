@@ -1,13 +1,14 @@
 <h1 align="center">Strings Component</h1>
 
 <p align="center">
-<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev">
+<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg"> 
+  <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a>
 </p>
 <br>
 
 ### Installation
 
-With [Composer](https://getcomposer.org):
+#### With [Composer](https://getcomposer.org)
 
 ```
 composer require atomastic/strings
@@ -23,6 +24,7 @@ use Atomastic\Strings\Strings;
 
 | Method | Description |
 |---|---|
+| <a href="#strings_of">`of()`</a> | Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
@@ -75,282 +77,530 @@ use Atomastic\Strings\Strings;
 
 <hr>
 
-#### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
-
-Strip all whitespaces from the given string.
+#### <a name="strings_of"></a> Method: `of()`
 
 ```php
-$string = Strings::stripSpaces('SG-1 returns from an off-world mission');
+/**
+ * Initializes a Strings object and assigns both $string and $encoding properties
+ * the supplied values. $string is cast to a string prior to assignment. Throws
+ * an InvalidArgumentException if the first argument is an array or object
+ * without a __toString method.
+ *
+ * @param mixed  $string   Value to modify, after being cast to string. Default: ''
+ * @param string $encoding The character encoding. Default: UTF-8
+ */
+public static function of($string = '', string $encoding = 'UTF-8'): self
+```
+
+**Examples**
+
+```php
+$string = Strings::of('SG-1 returns from an off-world mission');
+```
+
+#### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
+
+```php
+/**
+ * Strip all whitespaces from the given string.
+ */
+public function stripSpaces(): self
+```
+
+**Examples**
+
+```php
+$string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
 ```
 
 #### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
 
-Removes any leading and trailing slashes from a string.
+```php
+/**
+ * Removes any leading and traling slashes from a string.
+ */
+public function trimSlashes(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimSlashes('some string here/');
+$string = Strings::of('some string here/')->trimSlashes();
 ```
 
 #### <a name="strings_reduceSlashes"></a> Method: `reduceSlashes()`
 
-Reduces multiple slashes in a string to single slashes.
+```php
+/**
+ * Reduces multiple slashes in a string to single slashes.
+ */
+public function reduceSlashes(): self
+```    
+
+**Examples**
 
 ```php
-$string = Strings::reduceSlashes('some//text//here');
+$string = Strings::of('some//text//here')->reduceSlashes();
 ```
 
 #### <a name="strings_stripQuotes"></a> Method: `stripQuotes()`
 
-Removes single and double quotes from a string.
+```php
+/**
+ * Removes single and double quotes from a string.
+ */
+public function stripQuotes(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::stripQuotes('some "text" here');
+$string = Strings::of('some "text" here')->stripQuotes();
 ```
 
 #### <a name="strings_quotesToEntities"></a> Method: `quotesToEntities()`
 
-Convert single and double quotes to entities.
-
 ```php
-$string = Strings::quotesToEntities('some "text" here');
+/**
+ * Convert single and double quotes to entities.
+ *
+ * @param  string $string String with single and double quotes
+ */
 ```
 
-#### <a name="strings_validEncoding"></a> Method: `validEncoding()`
-
-Checks if the string is valid in UTF-8 encoding.
+**Examples**
 
 ```php
-$result = Strings::validEncoding('An UTF-8 string here');
-```
-
-#### <a name="strings_fixEncoding"></a> Method: `fixEncoding()`
-
-Removes all invalid UTF-8 characters from a string.
-
-```php
-$string = Strings::fixEncoding('An invalid UTF-8 string here');
+$string = Strings::of('some "text" here')->quotesToEntities();
 ```
 
 #### <a name="strings_normalizeNewLines"></a> Method: `normalizeNewLines()`
 
-Standardize line endings to unix-like.
+```php
+/**
+ * Standardize line endings to unix-like.
+ */
+public function normalizeNewLines(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::normalizeNewLines('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->normalizeNewLines();
 ```
 
 #### <a name="strings_normalizeSpaces"></a> Method: `normalizeSpaces()`
 
-Normalize white-spaces to a single space.
+```php
+/**
+ * Normalize white-spaces to a single space.
+ */
+public function normalizeSpaces(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::normalizeSpaces('SG-1  returns  from  an  off-world  mission');
+$string = Strings::of('SG-1  returns  from  an  off-world  mission')->normalizeSpaces();
 ```
 
 #### <a name="strings_random"></a> Method: `random()`
 
 ```php
+/**
+ * Creates a random string of characters.
+ *
+ * @param  int    $length   The number of characters. Default is 16
+ * @param  string $keyspace The keyspace
+ */
+public function random(int $length = 64, string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): self
+```
+
+**Examples**
+
+```php
 // Get random string with predefined settings
-$string = Strings::random();
+$string = Strings::of()->random();
 
 // Get random string with custom length
-$string = Strings::random(10);
+$string = Strings::of()->random(10);
 
 // Get random string with custom length and custom keyspace
-$string = Strings::random(4, '0123456789');
+$string = Strings::of()->random(4, '0123456789');
 ```
 
 #### <a name="strings_increment"></a> Method: `increment()`
 
-Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc.
+```php
+/**
+ * Add's _1 to a string or increment the ending number to allow _2, _3, etc.
+ *
+ * @param  int    $first     Start with
+ * @param  string $separator Separator
+ */
+public function increment(int $first = 1, string $separator = '_')
+```
+
+**Examples**
 
 ```php
 // Increment string with predefined settings
-$string = Strings::increment('page_1');
+$string = Strings::of('page_1')->increment();
 
 // Increment string with custom settings
-$string = Strings::increment('page-1', 1, '-');
+$string = Strings::of('page-1')->increment(1, '-');
 ```
 
 #### <a name="strings_wordsCount"></a> Method: `wordsCount()`
 
-Return information about words used in a string
+```php
+/**
+ * Return information about words used in a string
+ *
+ * @param  int    $format   Specify the return value of this function. The current supported values are:
+ *                          0 - returns the number of words found
+ *                          1 - returns an array containing all the words found inside the string
+ *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
+ * @param  string $charlist A list of additional characters which will be considered as 'word'
+ */
+public function wordsCount(int $format = 0, string $charlist = '')
+```
+
+**Examples**
 
 ```php
 // Returns the number of words found
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson');
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount();
 
 // Returns an array containing all the words found inside the string
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson', 1)
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(1);
 
 // Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::wordsCount('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson', 2)
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(2);
 ```
 
 #### <a name="strings_length"></a> Method: `length()`
 
-Return the length of the given string.
+```php
+/**
+ * Return the length of the given string.
+ */
+public function length(): int
+```
+
+**Examples**
 
 ```php
-$length = Strings::length('SG-1 returns from an off-world mission to P9Y-3C3');
+$length = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->length();
 ```
 
 #### <a name="strings_lower"></a> Method: `lower()`
 
-Convert the given string to lower-case.
+```
+/**
+ * Convert the given string to lower-case.
+ */
+public function lower(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::lower('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->lower();
 ```
 
 #### <a name="strings_upper"></a> Method: `upper()`
 
-Convert the given string to upper-case.
+```php
+/**
+ * Convert the given string to upper-case.
+ */
+public function upper(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::upper('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->upper();
 ```
 
 #### <a name="strings_limit"></a> Method: `limit()`
 
-Limit the number of characters in a string.
+```php
+/**
+ * Limit the number of characters in a string.
+ *
+ * @param  int    $limit  Limit of characters
+ * @param  string $append Text to append to the string IF it gets truncated
+ */
+public function limit(int $limit = 100, string $append = '...'): self
+```
+
+**Examples**
 
 ```php
 // Get string with predefined limit settings
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit();
 
 // Get string with limit 10
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10);
 
 // Get string with limit 10 and append 'read more...'
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10, 'read more...');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10, 'read more...');
 ```
 
 #### <a name="strings_studly"></a> Method: `studly()`
 
-Convert a value to studly caps case.
+```php
+/**
+ * Convert a string to studly caps case.
+ */
+public function studly(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::studly('foo_bar');
+$string = Strings::of('foo_bar')->studly();
 ```
 
 #### <a name="strings_snake"></a> Method: `snake()`
 
-Convert a string to snake case.
+```php
+/**
+ * Convert a string to snake case.
+ *
+ * @param  string $delimiter Delimeter
+ */
+public function snake(string $delimiter = '_'): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::snake('fooBar');
+$string = Strings::of('fooBar')->snake();
 ```
 
 #### <a name="strings_camel"></a> Method: `camel()`
 
-Convert a string to camel case.
+```php
+/**
+ * Convert a string to camel case.
+ */
+public function camel(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::camel('foo_bar');
+$string = Strings::of('foo_bar')->camel();
 ```
 
 #### <a name="strings_kebab"></a> Method: `kebab()`
 
-Convert a string to kebab case.
+```php
+/**
+ * Convert a string to kebab case.
+ */
+public function kebab(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::kebab('fooBar');
+$string = Strings::of('fooBar')->kebab();
 ```
 
 #### <a name="strings_words"></a> Method: `words()`
 
-Limit the number of words in a string.
+```php
+/**
+ * Limit the number of words in a string.
+ *
+ * @param  int    $words  Words limit
+ * @param  string $append Text to append to the string IF it gets truncated
+ */
+public function words(int $words = 100, string $append = '...'): self
+```
+
+**Examples**
 
 ```php
 // Get the number of words in a string with predefined limit settings
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words();
 
 // Get the number of words in a string with limit 3
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
 
 // Get the number of words in a string with limit 3 and append 'read more...'
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3, 'read more...');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
 ```
 
 #### <a name="strings_contains"></a> Method: `contains()`
 
-Determine if a given string contains a given substring.
+```php
+/**
+ * Determine if a given string contains a given substring.
+ *
+ * @param  string|string[] $needles The string to find in haystack.
+ */
+public function contains($needles): bool
+```
+
+**Examples**
 
 ```php
 // Determine if a given string contains a given substring.
-$result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3', 'SG-1');
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains('SG-1');
 
 // Determine if a given string contains a given array of substrings.
-$result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_containsAll"></a> Method: `containsAll()`
 
-Determine if a given string contains a given array of substrings.
+```php
+/**
+ * Determine if a given string contains all array values.
+ *
+ * @param  string[] $needles The array of strings to find in haystack.
+ */
+public function containsAll(array $needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::containsAll('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAll(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_containsAny"></a> Method: `containsAny()`
 
-Determine if a given string contains any of array values.
+```php
+/**
+ * Determine if a given string contains any of array values.
+ *
+ * @param  string   $haystack The string being checked.
+ * @param  string[] $needles  The array of strings to find in haystack.
+ */
+public function containsAny(array $needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::containsAny('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAny(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_substr"></a> Method: `substr()`
 
-Returns the portion of string specified by the start and length parameters.
+```php
+/**
+ * Returns the portion of string specified by the start and length parameters.
+ *
+ * @param  int      $start  If start is non-negative, the returned string will
+ *                          start at the start'th position in $string, counting from zero.
+ *                          For instance, in the string 'abcdef', the character at position
+ *                          0 is 'a', the character at position 2 is 'c', and so forth.
+ * @param  int|null $length Maximum number of characters to use from string.
+ *                          If omitted or NULL is passed, extract all characters to the end of the string.
+ */
+public function substr(int $start, ?int $length = null): self
+```
+
+**Examples**
 
 ```php
 // Returns the portion of string specified by the start 0.
-$string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0);
 
 // Returns the portion of string specified by the start 0 and length 4.
-$string = Strings::substr('SG-1 returns from an off-world mission to P9Y-3C3', 0, 4);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4);
 ```
 
 #### <a name="strings_ucfirst"></a> Method: `ucfirst()`
 
-Converts the first character of a string to upper case and leaves the other characters unchanged.
+```php
+/**
+ * Converts the first character of a string to upper case
+ * and leaves the other characters unchanged.
+ */
+public function ucfirst(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::ucfirst('daniel');
+$string = Strings::of('daniel')->ucfirst();
 ```
 
 #### <a name="strings_trim"></a> Method: `trim()`
 
-Strip whitespace (or other characters) from the beginning and end of a string.
+```php
+/**
+ * Strip whitespace (or other characters) from the beginning and end of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trim(' daniel ');
+$string = Strings::of(' daniel ')->trim();
 ```
 
 #### <a name="strings_trimRight"></a> Method: `trimRight()`
 
-Strip whitespace (or other characters) from the end of a string.
+```php
+/**
+ * Strip whitespace (or other characters) from the end of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimRight('daniel ');
+$string = Strings::of('daniel ')->trimRight();
 ```
 
 #### <a name="strings_trimLeft"></a> Method: `trimLeft()`
 
-Strip whitespace (or other characters) from the beginning of a string.
+```
+/**
+ * Strip whitespace (or other characters) from the beginning of a string.
+ *
+ * @param string $character_mask Optionally, the stripped characters can also be
+ *                               specified using the character_mask parameter..
+ */
+public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimLeft(' daniel');
+$string = Strings::of(' daniel')->trimLeft();
 ```
 
 #### <a name="strings_capitalize"></a> Method: `capitalize()`
 
-Converts the first character of every word of string to upper case and the others to lower case.
+```php
+/**
+ * Converts the first character of every word of string to upper case and the others to lower case.
+ */
+public function capitalize(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::capitalize('that country was at the same stage of development as the United States in the 1940s');
+$string = Strings::of('that country was at the same stage of development as the United States in the 1940s')->capitalize();
 ```
 
 #### <a name="strings_reverse"></a> Method: `reverse()`
