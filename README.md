@@ -758,118 +758,242 @@ public function beforeLast(string $search): self
 **Examples**
 
 ```php
-$string = Strings::beforeLast('SG-1 returns from an off-world mission', 'mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->beforeLast('mission');
 ```
 
 #### <a name="strings_after"></a> Method: `after()`
 
-Return the remainder of a string after the first occurrence of a given value.
+```php
+/**
+ * Return the remainder of a string after the first occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function after(string $search): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::after('SG-1 returns from an off-world mission', 'SG-1');
+$string = Strings::of('SG-1 returns from an off-world mission')->after('SG-1');
 ```
 
 #### <a name="strings_afterLast"></a> Method: `afterLast()`
 
-Return the remainder of a string after the last occurrence of a given value.
+```php
+/**
+ * Return the remainder of a string after the last occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function afterLast(string $search): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::afterLast('SG-1 returns from an off-world mission', 'SG-1');
+$string = Strings::of('SG-1 returns from an off-world mission')->afterLast('SG-1');
 ```
 
 #### <a name="strings_padBoth"></a> Method: `padBoth()`
 
-Pad both sides of a string with another.
+```php
+/**
+ * Pad both sides of a string with another.
+ *
+ * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
+ * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+ */
+public function padBoth(int $length, string $pad = ' '): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::padBoth('SG-1 returns from an off-world mission', 50, '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->padBoth(50, '-');
 ```
 
 #### <a name="strings_padRight"></a> Method: `padRight()`
 
-Pad the right side of a string with another.
+```php
+/**
+ * Pad the right side of a string with another.
+ *
+ * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
+ * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+ */
+public function padRight(int $length, string $pad = ' '): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::padRight('SG-1 returns from an off-world mission', 50, '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->padRight(50, '-');
 ```
 
 #### <a name="strings_padLeft"></a> Method: `padLeft()`
-
-Pad the left side of a string with another.
+```php
+/**
+ * Pad the left side of a string with another.
+ *
+ * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
+ * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+ */
+public function padLeft(int $length, string $pad = ' '): self
+```
+**Examples**
 
 ```php
-$string = Strings::padLeft('SG-1 returns from an off-world mission', 50, '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->padLeft(50, '-');
 ```
 
 #### <a name="strings_replaceArray"></a> Method: `replaceArray()`
 
-Replace a given value in the string sequentially with an array.
+```php
+/**
+ * Replace a given value in the string sequentially with an array.
+ *
+ * @param  string $search  Search
+ * @param  array  $replace Replace
+ */
+public function replaceArray(string $search, array $replace): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::replaceArray('SG-1 returns from an off-world mission', 'SG-1', ['SG-2']);
+$string = Strings::of('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']);
 ```
 
 #### <a name="strings_replaceFirst"></a> Method: `replaceFirst()`
 
-Replace the first occurrence of a given value in the string.
+```php
+/**
+ * Replace the first occurrence of a given value in the string.
+ *
+ * @param  string $search  Search
+ * @param  string $replace Replace
+ */
+public function replaceFirst(string $search, string $replace): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::replaceFirst('SG-1 returns from an off-world mission', 'SG-1', 'SG-2');
+$string = Strings::of('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2');
 ```
 
 #### <a name="strings_replaceLast"></a> Method: `replaceLast()`
 
-Replace the last occurrence of a given value in the string.
+```php
+/**
+ * Replace the last occurrence of a given value in the string.
+ *
+ * @param  string $search  Search
+ * @param  string $replace Replace
+ */
+public function replaceLast(string $search, string $replace): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::replaceLast('SG-1 returns from an off-world mission', 'off-world', 'P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3');
 ```
 
 #### <a name="strings_start"></a> Method: `start()`
 
-Begin a string with a single instance of a given value.
+```php
+/**
+ * Begin a string with a single instance of a given value.
+ *
+ * @param  string $prefix Prefix
+ */
+public function start(string $prefix): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::start('movies/sg-1/season-5/episode-21/', '/');
+$string = Strings::of('movies/sg-1/season-5/episode-21/')->start('/');
 ```
 
 #### <a name="strings_startsWith"></a> Method: `startsWith()`
 
-Determine if a given string starts with a given substring.
+```php
+/**
+ * Determine if a given string starts with a given substring.
+ *
+ * @param  string|string[] $needles needles
+ */
+public function startsWith($needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::startsWith('/movies/sg-1/season-5/episode-21/', '/');
+$result = Strings::of('/movies/sg-1/season-5/episode-21/')->startsWith('/');
 ```
 
 #### <a name="strings_endsWith"></a> Method: `endsWith()`
 
-Determine if a given string ends with a given substring.
+```php
+/**
+ * Determine if a given string ends with a given substring.
+ *
+ * @param  string|string[] $needles needles
+ */
+public function endsWith($needles): bool
+```
+
+**Examples**
 
 ```php
-$result = Strings::endsWith('/movies/sg-1/season-5/episode-21/', '/');
+$result = Strings::of('/movies/sg-1/season-5/episode-21/')->endsWith('/');
 ```
 
 #### <a name="strings_finish"></a> Method: `finish()`
 
-Cap a string with a single instance of a given value.
+```php
+/**
+ * Cap a string with a single instance of a given value.
+ *
+ * @param  string $cap Cap
+ */
+public function finish(string $cap): self
+```
+
+**Examples**
 
 ```php
-$result = Strings::finish('/movies/sg-1/season-5/episode-21', '/');
+$result = Strings::of('/movies/sg-1/season-5/episode-21')->finish('/');
 ```
 
 #### <a name="strings_hash"></a> Method: `hash()`
 
-Generate a hash string from the input string.
+```php
+/**
+ * Generate a hash string from the input string.
+ *
+ * @param  string $string     String
+ * @param  string $algorithm  Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4", etc..).
+ *                            For a list of supported algorithms see hash_algos(). Default is md5.
+ * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
+ */
+public function hash(string $algorithm = 'md5', bool $raw_output = false): self
+```
+
+**Examples**
 
 ```php
 // Get string hash with predefined settings
-$result = Strings::hash('SG-1 returns from an off-world mission');
+$result = Strings::of('SG-1 returns from an off-world mission')->hash();
 
 // Get string hash with hashed with sha256 algorithm
-$result = Strings::hash('SG-1 returns from an off-world mission', 'sha256');
+$result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256');
 
 // Get string hash with hashed with sha256 algorithm and with raw output
-$result = Strings::hash('SG-1 returns from an off-world mission', 'sha256', true);
+$result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256', true);
 ```
 
 ### License
