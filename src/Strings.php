@@ -121,7 +121,12 @@ class Strings
     }
 
     /**
-     * Get a new stringable object from the given string.
+     * Create a new stringable object from the given string.
+     *
+     * Initializes a Strings object and assigns both $string and $encoding properties
+     * the supplied values. $string is cast to a string prior to assignment. Throws
+     * an InvalidArgumentException if the first argument is an array or object
+     * without a __toString method.
      *
      * @param mixed  $string   Value to modify, after being cast to string. Default: ''
      * @param string $encoding The character encoding. Default: UTF-8
@@ -223,7 +228,7 @@ class Strings
      * @param  int    $first     Start with
      * @param  string $separator Separator
      */
-    public function increment(int $first = 1, string $separator = '_')
+    public function increment(int $first = 1, string $separator = '_'): self
     {
         preg_match('/(.+)' . $separator . '([0-9]+)$/', $this->string, $match);
 
@@ -238,7 +243,7 @@ class Strings
      * @param  int    $limit  Limit of characters
      * @param  string $append Text to append to the string IF it gets truncated
      */
-    public function limit(int $limit = 100, string $append = '...')
+    public function limit(int $limit = 100, string $append = '...'): self
     {
         if (mb_strwidth($this->string, 'UTF-8') <= $limit) {
             $this->string = $this->string;
@@ -252,7 +257,7 @@ class Strings
     /**
      * Convert the given string to lower-case.
      */
-    public function lower()
+    public function lower(): self
     {
         $this->string = mb_strtolower($this->string, $this->encoding);
 
@@ -262,7 +267,7 @@ class Strings
     /**
      * Convert the given string to upper-case.
      */
-    public function upper()
+    public function upper(): self
     {
         $this->string = mb_strtoupper($this->string, $this->encoding);
 
