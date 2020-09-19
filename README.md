@@ -29,7 +29,7 @@ use Atomastic\Strings\Strings;
 // Using public method __construct()
 $strings = new Strings();
 
-// Using public static method of()
+// Using public static method create()
 $strings = Strings::create();
 
 // Using global helper function strings()
@@ -40,7 +40,7 @@ $strings = strings();
 
 | Method | Description |
 |---|---|
-| <a href="#strings_of">`of()`</a> | Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
+| <a href="#strings_of">`create()`</a> | Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
@@ -93,7 +93,7 @@ $strings = strings();
 
 #### Methods Details
 
-##### <a name="strings_of"></a> Method: `of()`
+##### <a name="strings_of"></a> Method: `create()`
 
 ```php
 /**
