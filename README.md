@@ -28,7 +28,7 @@ use Atomastic\Strings\Strings;
 $strings = new Strings();
 
 // Using public static method of()
-$strings = new Strings::of();
+$strings = Strings::of();
 
 // Using global helper function strings()
 $strings = strings();
