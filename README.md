@@ -7,6 +7,8 @@
 
 ### Installation
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d)](https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard)
+
 With [Composer](https://getcomposer.org):
 
 ```
