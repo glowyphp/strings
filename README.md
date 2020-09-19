@@ -10,6 +10,8 @@
 * [Installation](#installation)
 * [Usage](#usage)
 * [Methods](#methods)
+* [Tests](#tests)
+* [License](#license)
 
 ### Installation
 
@@ -1008,6 +1010,14 @@ $result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256');
 
 // Get string hash with hashed with sha256 algorithm and with raw output
 $result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256', true);
+```
+
+### Tests
+
+Run tests
+
+```
+./vendor/bin/pest
 ```
 
 ### License
