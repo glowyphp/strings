@@ -115,23 +115,44 @@ $string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
 
 #### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
 
-Removes any leading and trailing slashes from a string.
+```php
+/**
+ * Removes any leading and traling slashes from a string.
+ */
+public function trimSlashes(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::trimSlashes('some string here/');
+$string = Strings::of('some string here/')->trimSlashes();
 ```
 
 #### <a name="strings_reduceSlashes"></a> Method: `reduceSlashes()`
 
-Reduces multiple slashes in a string to single slashes.
+```php
+/**
+ * Reduces multiple slashes in a string to single slashes.
+ */
+public function reduceSlashes(): self
+```    
+
+**Examples**
 
 ```php
-$string = Strings::reduceSlashes('some//text//here');
+$string = Strings::of('some//text//here')->reduceSlashes();
 ```
 
 #### <a name="strings_stripQuotes"></a> Method: `stripQuotes()`
 
-Removes single and double quotes from a string.
+```php
+/**
+ * Removes single and double quotes from a string.
+ */
+public function stripQuotes(): self
+```
+
+**Examples**
 
 ```php
 $string = Strings::stripQuotes('some "text" here');
