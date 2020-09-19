@@ -155,7 +155,7 @@ public function stripQuotes(): self
 **Examples**
 
 ```php
-$string = Strings::stripQuotes('some "text" here');
+$string = Strings::of('some "text" here')->stripQuotes();
 ```
 
 #### <a name="strings_quotesToEntities"></a> Method: `quotesToEntities()`
@@ -281,100 +281,180 @@ $result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Da
 
 #### <a name="strings_length"></a> Method: `length()`
 
-Return the length of the given string.
+```php
+/**
+ * Return the length of the given string.
+ */
+public function length(): int
+```
+
+**Examples**
 
 ```php
-$length = Strings::length('SG-1 returns from an off-world mission to P9Y-3C3');
+$length = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->length();
 ```
 
 #### <a name="strings_lower"></a> Method: `lower()`
 
-Convert the given string to lower-case.
+```
+/**
+ * Convert the given string to lower-case.
+ */
+public function lower(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::lower('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->lower();
 ```
 
 #### <a name="strings_upper"></a> Method: `upper()`
 
-Convert the given string to upper-case.
+```php
+/**
+ * Convert the given string to upper-case.
+ */
+public function upper(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::upper('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->upper();
 ```
 
 #### <a name="strings_limit"></a> Method: `limit()`
 
-Limit the number of characters in a string.
+```php
+/**
+ * Limit the number of characters in a string.
+ *
+ * @param  int    $limit  Limit of characters
+ * @param  string $append Text to append to the string IF it gets truncated
+ */
+public function limit(int $limit = 100, string $append = '...'): self
+```
+
+**Examples**
 
 ```php
 // Get string with predefined limit settings
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit();
 
 // Get string with limit 10
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10);
 
 // Get string with limit 10 and append 'read more...'
-$string = Strings::limit('SG-1 returns from an off-world mission to P9Y-3C3', 10, 'read more...');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10, 'read more...');
 ```
 
 #### <a name="strings_studly"></a> Method: `studly()`
 
-Convert a value to studly caps case.
+```php
+/**
+ * Convert a string to studly caps case.
+ */
+public function studly(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::studly('foo_bar');
+$string = Strings::of('foo_bar')->studly();
 ```
 
 #### <a name="strings_snake"></a> Method: `snake()`
 
-Convert a string to snake case.
+```php
+/**
+ * Convert a string to snake case.
+ *
+ * @param  string $delimiter Delimeter
+ */
+public function snake(string $delimiter = '_'): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::snake('fooBar');
+$string = Strings::of('fooBar')->snake();
 ```
 
 #### <a name="strings_camel"></a> Method: `camel()`
 
-Convert a string to camel case.
+```php
+/**
+ * Convert a string to camel case.
+ */
+public function camel(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::camel('foo_bar');
+$string = Strings::of('foo_bar')->camel();
 ```
 
 #### <a name="strings_kebab"></a> Method: `kebab()`
 
-Convert a string to kebab case.
+```php
+/**
+ * Convert a string to kebab case.
+ */
+public function kebab(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::kebab('fooBar');
+$string = Strings::of('fooBar')->kebab();
 ```
 
 #### <a name="strings_words"></a> Method: `words()`
 
-Limit the number of words in a string.
+```php
+/**
+ * Limit the number of words in a string.
+ *
+ * @param  int    $words  Words limit
+ * @param  string $append Text to append to the string IF it gets truncated
+ */
+public function words(int $words = 100, string $append = '...'): self
+```
+
+**Examples**
 
 ```php
 // Get the number of words in a string with predefined limit settings
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words();
 
 // Get the number of words in a string with limit 3
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3);
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
 
 // Get the number of words in a string with limit 3 and append 'read more...'
-$string = Strings::words('SG-1 returns from an off-world mission to P9Y-3C3', 3, 'read more...');
+$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
 ```
 
 #### <a name="strings_contains"></a> Method: `contains()`
 
-Determine if a given string contains a given substring.
+```php
+/**
+ * Determine if a given string contains a given substring.
+ *
+ * @param  string|string[] $needles The string to find in haystack.
+ */
+public function contains($needles): bool
+```
+
+**Examples**
 
 ```php
 // Determine if a given string contains a given substring.
-$result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3', 'SG-1');
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains('SG-1');
 
 // Determine if a given string contains a given array of substrings.
-$result = Strings::contains('SG-1 returns from an off-world mission to P9Y-3C3', ['SG-1', 'P9Y-3C3']);
+$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains(['SG-1', 'P9Y-3C3']);
 ```
 
 #### <a name="strings_containsAll"></a> Method: `containsAll()`
