@@ -605,84 +605,157 @@ $string = Strings::of('that country was at the same stage of development as the 
 
 #### <a name="strings_reverse"></a> Method: `reverse()`
 
-Reverses string.
+```php
+/**
+ * Reverses string.
+ */
+public function reverse(): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::reverse('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->reverse();
 ```
 
 #### <a name="strings_segments"></a> Method: `segments()`
 
-Get array of segments from a string based on a delimiter.
+```php
+/**
+ * Get array of segments from a string based on a delimiter.
+ *
+ * @param string $delimiter Delimeter
+ */
+public function segments(string $delimiter = ' '): array
+```
+
+**Examples**
 
 ```php
 // Get array of segments from a string based on a predefined delimiter.
-$segments = Strings::segments('SG-1 returns from an off-world mission');
+$segments = Strings::of('SG-1 returns from an off-world mission')->segments();
 
 // Get array of segments from a string based on a delimiter '-'.
-$segments = Strings::segments('SG-1 returns from an off-world mission', '-');
+$segments = Strings::of('SG-1 returns from an off-world mission')->segments('-');
 ```
 
 #### <a name="strings_segment"></a> Method: `segment()`
 
-Get a segment from a string based on a delimiter.
-Returns an empty string when the offset doesn't exist.
-Use a negative index to start counting from the last element.
+```php
+/**
+ * Get a segment from a string based on a delimiter.
+ * Returns an empty string when the offset doesn't exist.
+ * Use a negative index to start counting from the last element.
+ *
+ * @param int    $index     Index
+ * @param string $delimiter Delimeter
+ */
+public function segment(int $index, string $delimiter = ' '): self
+```
+
+**Examples**
 
 ```php
 // Get a segment 1 from a string based on a predefined delimiter.
-$string = Strings::segment('SG-1 returns from an off-world mission', 1);
+$string = Strings::of('SG-1 returns from an off-world mission')->segment(1);
 
 // Get a segment 1 from a string based on a delimiter '-'.
-$string = Strings::segment('SG-1 returns from an off-world mission', 1, '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->segment(1, '-');
 
 // Get a segment 1 from a string starting from the last based on a delimiter '-'.
-$string = Strings::segment('SG-1 returns from an off-world mission', -1, '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->segment(-1, '-');
 ```
 
 #### <a name="strings_firstSegment"></a> Method: `firstSegment()`
 
-Get the first segment from a string based on a delimiter.
+```php
+/**
+ * Get the first segment from a string based on a delimiter.
+ *
+ * @param string $delimiter Delimeter
+ */
+public function firstSegment(string $delimiter = ' '): self
+```
+
+**Examples**
 
 ```php
 // Get a first segment from a string based on a predefined delimiter.
-$string = Strings::firstSegment('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->firstSegment();
 
 // Get a first segment from a string based on a delimiter '-'.
-$string = Strings::firstSegment('SG-1 returns from an off-world mission', '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->firstSegment('-');
 ```
 
 #### <a name="strings_lastSegment"></a> Method: `lastSegment()`
 
-Get the last segment from a string based on a delimiter.
+```php
+/**
+ * Get the last segment from a string based on a delimiter.
+ *
+ * @param string $string    String
+ * @param string $delimiter Delimeter
+ */
+public function lastSegment(string $delimiter = ' '): self
+```
+
+**Examples**
 
 ```php
 // Get a last segment from a string based on a predefined delimiter.
-$string = Strings::lastSegment('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->lastSegment();
 
 // Get a last segment from a string based on a delimiter '-'.
-$string = Strings::lastSegment('SG-1 returns from an off-world mission', '-');
+$string = Strings::of('SG-1 returns from an off-world mission')->lastSegment('-');
 ```
 
 #### <a name="strings_between"></a> Method: `between()`
 
-Get the portion of a string between two given values.
+```php
+/**
+ * Get the portion of a string between two given values.
+ *
+ * @param  string $from From
+ * @param  string $to   To
+ */
+public function between(string $from, string $to): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::between('SG-1 returns from an off-world mission', 'SG-1', 'from');
+$string = Strings::of('SG-1 returns from an off-world mission')->between('SG-1', 'from');
 ```
 
 #### <a name="strings_before"></a> Method: `before()`
 
-Get the portion of a string before the first occurrence of a given value.
+```php
+/**
+ * Get the portion of a string before the first occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function before(string $search): self
+```
+
+**Examples**
 
 ```php
-$string = Strings::before('SG-1 returns from an off-world mission', 'mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->before('mission');
 ```
 
 #### <a name="strings_beforeLast"></a> Method: `beforeLast()`
 
-Get the portion of a string before the last occurrence of a given value.
+```php
+/**
+ * Get the portion of a string before the last occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function beforeLast(string $search): self
+```
+
+**Examples**
 
 ```php
 $string = Strings::beforeLast('SG-1 returns from an off-world mission', 'mission');
