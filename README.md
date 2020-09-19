@@ -1,7 +1,7 @@
 <h1 align="center">Strings Component</h1>
 
 <p align="center">
-<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg"> 
+<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
   <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a>
 </p>
 
@@ -22,6 +22,15 @@ composer require atomastic/strings
 
 ```php
 use Atomastic\Strings\Strings;
+
+// Using public method __construct()
+$strings = new Strings();
+
+// Using public static method of()
+$strings = new Strings::of();
+
+// Using global helper function strings()
+$strings = strings();
 ```
 
 ### Methods
@@ -79,9 +88,9 @@ use Atomastic\Strings\Strings;
 | <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 
-<hr>
+#### Methods Details
 
-#### <a name="strings_of"></a> Method: `of()`
+##### <a name="strings_of"></a> Method: `of()`
 
 ```php
 /**
@@ -102,7 +111,7 @@ public static function of($string = '', string $encoding = 'UTF-8'): self
 $string = Strings::of('SG-1 returns from an off-world mission');
 ```
 
-#### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
+##### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
 
 ```php
 /**
