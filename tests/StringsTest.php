@@ -4,6 +4,14 @@ declare(strict_types = 1);
 
 use Atomastic\Strings\Strings;
 
+test('test create() method', function() {
+    $this->assertEquals(new Strings(), Strings::create());
+});
+
+test('test strings() helper', function() {
+    $this->assertEquals(Strings::create(), strings());
+});
+
 test('test trimSlashes() method', function() {
     $this->assertEquals('some text here', Strings::create('some text here/')->trimSlashes());
 });
@@ -246,12 +254,4 @@ test('test hash() method', function() {
 
     // with sha256 algorithm and raw output
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
-});
-
-test('test create() method', function() {
-    $this->assertEquals(new Strings(), Strings::create());
-});
-
-test('test strings() helper', function() {
-    $this->assertEquals(Strings::create(), strings());
 });
