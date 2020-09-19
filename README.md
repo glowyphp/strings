@@ -91,7 +91,7 @@ $strings = strings();
 
 #### Methods Details
 
-###### <a name="strings_of"></a> Method: `of()`
+##### <a name="strings_of"></a> Method: `of()`
 
 ```php
 /**
@@ -112,7 +112,7 @@ public static function of($string = '', string $encoding = 'UTF-8'): self
 $string = Strings::of('SG-1 returns from an off-world mission');
 ```
 
-###### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
+##### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
 
 ```php
 /**
