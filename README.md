@@ -30,7 +30,7 @@ use Atomastic\Strings\Strings;
 $strings = new Strings();
 
 // Using public static method of()
-$strings = Strings::of();
+$strings = Strings::create();
 
 // Using global helper function strings()
 $strings = strings();
@@ -111,7 +111,7 @@ public static function of($string = '', string $encoding = 'UTF-8'): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission');
+$string = Strings::create('SG-1 returns from an off-world mission');
 ```
 
 ##### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
@@ -126,7 +126,7 @@ public function stripSpaces(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
+$string = Strings::create('SG-1 returns from an off-world mission')->stripSpaces();
 ```
 
 ##### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
@@ -141,7 +141,7 @@ public function trimSlashes(): self
 **Examples**
 
 ```php
-$string = Strings::of('some string here/')->trimSlashes();
+$string = Strings::create('some string here/')->trimSlashes();
 ```
 
 ##### <a name="strings_reduceSlashes"></a> Method: `reduceSlashes()`
@@ -156,7 +156,7 @@ public function reduceSlashes(): self
 **Examples**
 
 ```php
-$string = Strings::of('some//text//here')->reduceSlashes();
+$string = Strings::create('some//text//here')->reduceSlashes();
 ```
 
 ##### <a name="strings_stripQuotes"></a> Method: `stripQuotes()`
@@ -171,7 +171,7 @@ public function stripQuotes(): self
 **Examples**
 
 ```php
-$string = Strings::of('some "text" here')->stripQuotes();
+$string = Strings::create('some "text" here')->stripQuotes();
 ```
 
 ##### <a name="strings_quotesToEntities"></a> Method: `quotesToEntities()`
@@ -187,7 +187,7 @@ $string = Strings::of('some "text" here')->stripQuotes();
 **Examples**
 
 ```php
-$string = Strings::of('some "text" here')->quotesToEntities();
+$string = Strings::create('some "text" here')->quotesToEntities();
 ```
 
 ##### <a name="strings_normalizeNewLines"></a> Method: `normalizeNewLines()`
@@ -202,7 +202,7 @@ public function normalizeNewLines(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->normalizeNewLines();
+$string = Strings::create('SG-1 returns from an off-world mission')->normalizeNewLines();
 ```
 
 ##### <a name="strings_normalizeSpaces"></a> Method: `normalizeSpaces()`
@@ -217,7 +217,7 @@ public function normalizeSpaces(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1  returns  from  an  off-world  mission')->normalizeSpaces();
+$string = Strings::create('SG-1  returns  from  an  off-world  mission')->normalizeSpaces();
 ```
 
 ##### <a name="strings_random"></a> Method: `random()`
@@ -236,13 +236,13 @@ public function random(int $length = 64, string $keyspace = '0123456789abcdefghi
 
 ```php
 // Get random string with predefined settings
-$string = Strings::of()->random();
+$string = Strings::create()->random();
 
 // Get random string with custom length
-$string = Strings::of()->random(10);
+$string = Strings::create()->random(10);
 
 // Get random string with custom length and custom keyspace
-$string = Strings::of()->random(4, '0123456789');
+$string = Strings::create()->random(4, '0123456789');
 ```
 
 ##### <a name="strings_increment"></a> Method: `increment()`
@@ -261,10 +261,10 @@ public function increment(int $first = 1, string $separator = '_')
 
 ```php
 // Increment string with predefined settings
-$string = Strings::of('page_1')->increment();
+$string = Strings::create('page_1')->increment();
 
 // Increment string with custom settings
-$string = Strings::of('page-1')->increment(1, '-');
+$string = Strings::create('page-1')->increment(1, '-');
 ```
 
 ##### <a name="strings_wordsCount"></a> Method: `wordsCount()`
@@ -286,13 +286,13 @@ public function wordsCount(int $format = 0, string $charlist = '')
 
 ```php
 // Returns the number of words found
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount();
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount();
 
 // Returns an array containing all the words found inside the string
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(1);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(1);
 
 // Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(2);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(2);
 ```
 
 ##### <a name="strings_length"></a> Method: `length()`
@@ -307,7 +307,7 @@ public function length(): int
 **Examples**
 
 ```php
-$length = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->length();
+$length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->length();
 ```
 
 ##### <a name="strings_lower"></a> Method: `lower()`
@@ -322,7 +322,7 @@ public function lower(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->lower();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->lower();
 ```
 
 ##### <a name="strings_upper"></a> Method: `upper()`
@@ -337,7 +337,7 @@ public function upper(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->upper();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->upper();
 ```
 
 ##### <a name="strings_limit"></a> Method: `limit()`
@@ -356,13 +356,13 @@ public function limit(int $limit = 100, string $append = '...'): self
 
 ```php
 // Get string with predefined limit settings
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->limit();
 
 // Get string with limit 10
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10);
 
 // Get string with limit 10 and append 'read more...'
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10, 'read more...');
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->limit(10, 'read more...');
 ```
 
 ##### <a name="strings_studly"></a> Method: `studly()`
@@ -377,7 +377,7 @@ public function studly(): self
 **Examples**
 
 ```php
-$string = Strings::of('foo_bar')->studly();
+$string = Strings::create('foo_bar')->studly();
 ```
 
 ##### <a name="strings_snake"></a> Method: `snake()`
@@ -394,7 +394,7 @@ public function snake(string $delimiter = '_'): self
 **Examples**
 
 ```php
-$string = Strings::of('fooBar')->snake();
+$string = Strings::create('fooBar')->snake();
 ```
 
 ##### <a name="strings_camel"></a> Method: `camel()`
@@ -409,7 +409,7 @@ public function camel(): self
 **Examples**
 
 ```php
-$string = Strings::of('foo_bar')->camel();
+$string = Strings::create('foo_bar')->camel();
 ```
 
 ##### <a name="strings_kebab"></a> Method: `kebab()`
@@ -424,7 +424,7 @@ public function kebab(): self
 **Examples**
 
 ```php
-$string = Strings::of('fooBar')->kebab();
+$string = Strings::create('fooBar')->kebab();
 ```
 
 ##### <a name="strings_words"></a> Method: `words()`
@@ -443,13 +443,13 @@ public function words(int $words = 100, string $append = '...'): self
 
 ```php
 // Get the number of words in a string with predefined limit settings
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words();
 
 // Get the number of words in a string with limit 3
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
 
 // Get the number of words in a string with limit 3 and append 'read more...'
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
 ```
 
 ##### <a name="strings_contains"></a> Method: `contains()`
@@ -467,10 +467,10 @@ public function contains($needles): bool
 
 ```php
 // Determine if a given string contains a given substring.
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains('SG-1');
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->contains('SG-1');
 
 // Determine if a given string contains a given array of substrings.
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->contains(['SG-1', 'P9Y-3C3']);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->contains(['SG-1', 'P9Y-3C3']);
 ```
 
 ##### <a name="strings_containsAll"></a> Method: `containsAll()`
@@ -487,7 +487,7 @@ public function containsAll(array $needles): bool
 **Examples**
 
 ```php
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAll(['SG-1', 'P9Y-3C3']);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->containsAll(['SG-1', 'P9Y-3C3']);
 ```
 
 ##### <a name="strings_containsAny"></a> Method: `containsAny()`
@@ -505,7 +505,7 @@ public function containsAny(array $needles): bool
 **Examples**
 
 ```php
-$result = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->containsAny(['SG-1', 'P9Y-3C3']);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->containsAny(['SG-1', 'P9Y-3C3']);
 ```
 
 ##### <a name="strings_substr"></a> Method: `substr()`
@@ -528,10 +528,10 @@ public function substr(int $start, ?int $length = null): self
 
 ```php
 // Returns the portion of string specified by the start 0.
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0);
 
 // Returns the portion of string specified by the start 0 and length 4.
-$string = Strings::of('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4);
 ```
 
 ##### <a name="strings_ucfirst"></a> Method: `ucfirst()`
@@ -547,7 +547,7 @@ public function ucfirst(): self
 **Examples**
 
 ```php
-$string = Strings::of('daniel')->ucfirst();
+$string = Strings::create('daniel')->ucfirst();
 ```
 
 ##### <a name="strings_trim"></a> Method: `trim()`
@@ -565,7 +565,7 @@ public function trim(string $character_mask = " \t\n\r\0\x0B"): self
 **Examples**
 
 ```php
-$string = Strings::of(' daniel ')->trim();
+$string = Strings::create(' daniel ')->trim();
 ```
 
 ##### <a name="strings_trimRight"></a> Method: `trimRight()`
@@ -583,7 +583,7 @@ public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
 **Examples**
 
 ```php
-$string = Strings::of('daniel ')->trimRight();
+$string = Strings::create('daniel ')->trimRight();
 ```
 
 ##### <a name="strings_trimLeft"></a> Method: `trimLeft()`
@@ -601,7 +601,7 @@ public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
 **Examples**
 
 ```php
-$string = Strings::of(' daniel')->trimLeft();
+$string = Strings::create(' daniel')->trimLeft();
 ```
 
 ##### <a name="strings_capitalize"></a> Method: `capitalize()`
@@ -616,7 +616,7 @@ public function capitalize(): self
 **Examples**
 
 ```php
-$string = Strings::of('that country was at the same stage of development as the United States in the 1940s')->capitalize();
+$string = Strings::create('that country was at the same stage of development as the United States in the 1940s')->capitalize();
 ```
 
 ##### <a name="strings_reverse"></a> Method: `reverse()`
@@ -631,7 +631,7 @@ public function reverse(): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->reverse();
+$string = Strings::create('SG-1 returns from an off-world mission')->reverse();
 ```
 
 ##### <a name="strings_segments"></a> Method: `segments()`
@@ -649,10 +649,10 @@ public function segments(string $delimiter = ' '): array
 
 ```php
 // Get array of segments from a string based on a predefined delimiter.
-$segments = Strings::of('SG-1 returns from an off-world mission')->segments();
+$segments = Strings::create('SG-1 returns from an off-world mission')->segments();
 
 // Get array of segments from a string based on a delimiter '-'.
-$segments = Strings::of('SG-1 returns from an off-world mission')->segments('-');
+$segments = Strings::create('SG-1 returns from an off-world mission')->segments('-');
 ```
 
 ##### <a name="strings_segment"></a> Method: `segment()`
@@ -673,13 +673,13 @@ public function segment(int $index, string $delimiter = ' '): self
 
 ```php
 // Get a segment 1 from a string based on a predefined delimiter.
-$string = Strings::of('SG-1 returns from an off-world mission')->segment(1);
+$string = Strings::create('SG-1 returns from an off-world mission')->segment(1);
 
 // Get a segment 1 from a string based on a delimiter '-'.
-$string = Strings::of('SG-1 returns from an off-world mission')->segment(1, '-');
+$string = Strings::create('SG-1 returns from an off-world mission')->segment(1, '-');
 
 // Get a segment 1 from a string starting from the last based on a delimiter '-'.
-$string = Strings::of('SG-1 returns from an off-world mission')->segment(-1, '-');
+$string = Strings::create('SG-1 returns from an off-world mission')->segment(-1, '-');
 ```
 
 ##### <a name="strings_firstSegment"></a> Method: `firstSegment()`
@@ -697,10 +697,10 @@ public function firstSegment(string $delimiter = ' '): self
 
 ```php
 // Get a first segment from a string based on a predefined delimiter.
-$string = Strings::of('SG-1 returns from an off-world mission')->firstSegment();
+$string = Strings::create('SG-1 returns from an off-world mission')->firstSegment();
 
 // Get a first segment from a string based on a delimiter '-'.
-$string = Strings::of('SG-1 returns from an off-world mission')->firstSegment('-');
+$string = Strings::create('SG-1 returns from an off-world mission')->firstSegment('-');
 ```
 
 ##### <a name="strings_lastSegment"></a> Method: `lastSegment()`
@@ -719,10 +719,10 @@ public function lastSegment(string $delimiter = ' '): self
 
 ```php
 // Get a last segment from a string based on a predefined delimiter.
-$string = Strings::of('SG-1 returns from an off-world mission')->lastSegment();
+$string = Strings::create('SG-1 returns from an off-world mission')->lastSegment();
 
 // Get a last segment from a string based on a delimiter '-'.
-$string = Strings::of('SG-1 returns from an off-world mission')->lastSegment('-');
+$string = Strings::create('SG-1 returns from an off-world mission')->lastSegment('-');
 ```
 
 ##### <a name="strings_between"></a> Method: `between()`
@@ -740,7 +740,7 @@ public function between(string $from, string $to): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->between('SG-1', 'from');
+$string = Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from');
 ```
 
 ##### <a name="strings_before"></a> Method: `before()`
@@ -757,7 +757,7 @@ public function before(string $search): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->before('mission');
+$string = Strings::create('SG-1 returns from an off-world mission')->before('mission');
 ```
 
 ##### <a name="strings_beforeLast"></a> Method: `beforeLast()`
@@ -774,7 +774,7 @@ public function beforeLast(string $search): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->beforeLast('mission');
+$string = Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission');
 ```
 
 ##### <a name="strings_after"></a> Method: `after()`
@@ -791,7 +791,7 @@ public function after(string $search): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->after('SG-1');
+$string = Strings::create('SG-1 returns from an off-world mission')->after('SG-1');
 ```
 
 ##### <a name="strings_afterLast"></a> Method: `afterLast()`
@@ -808,7 +808,7 @@ public function afterLast(string $search): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->afterLast('SG-1');
+$string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
 ```
 
 ##### <a name="strings_padBoth"></a> Method: `padBoth()`
@@ -826,7 +826,7 @@ public function padBoth(int $length, string $pad = ' '): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->padBoth(50, '-');
+$string = Strings::create('SG-1 returns from an off-world mission')->padBoth(50, '-');
 ```
 
 ##### <a name="strings_padRight"></a> Method: `padRight()`
@@ -844,7 +844,7 @@ public function padRight(int $length, string $pad = ' '): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->padRight(50, '-');
+$string = Strings::create('SG-1 returns from an off-world mission')->padRight(50, '-');
 ```
 
 ##### <a name="strings_padLeft"></a> Method: `padLeft()`
@@ -860,7 +860,7 @@ public function padLeft(int $length, string $pad = ' '): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->padLeft(50, '-');
+$string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-');
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`
@@ -878,7 +878,7 @@ public function replaceArray(string $search, array $replace): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']);
+$string = Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']);
 ```
 
 ##### <a name="strings_replaceFirst"></a> Method: `replaceFirst()`
@@ -896,7 +896,7 @@ public function replaceFirst(string $search, string $replace): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2');
+$string = Strings::create('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2');
 ```
 
 ##### <a name="strings_replaceLast"></a> Method: `replaceLast()`
@@ -914,7 +914,7 @@ public function replaceLast(string $search, string $replace): self
 **Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3');
+$string = Strings::create('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3');
 ```
 
 ##### <a name="strings_start"></a> Method: `start()`
@@ -931,7 +931,7 @@ public function start(string $prefix): self
 **Examples**
 
 ```php
-$string = Strings::of('movies/sg-1/season-5/episode-21/')->start('/');
+$string = Strings::create('movies/sg-1/season-5/episode-21/')->start('/');
 ```
 
 ##### <a name="strings_startsWith"></a> Method: `startsWith()`
@@ -948,7 +948,7 @@ public function startsWith($needles): bool
 **Examples**
 
 ```php
-$result = Strings::of('/movies/sg-1/season-5/episode-21/')->startsWith('/');
+$result = Strings::create('/movies/sg-1/season-5/episode-21/')->startsWith('/');
 ```
 
 ##### <a name="strings_endsWith"></a> Method: `endsWith()`
@@ -965,7 +965,7 @@ public function endsWith($needles): bool
 **Examples**
 
 ```php
-$result = Strings::of('/movies/sg-1/season-5/episode-21/')->endsWith('/');
+$result = Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('/');
 ```
 
 ##### <a name="strings_finish"></a> Method: `finish()`
@@ -982,7 +982,7 @@ public function finish(string $cap): self
 **Examples**
 
 ```php
-$result = Strings::of('/movies/sg-1/season-5/episode-21')->finish('/');
+$result = Strings::create('/movies/sg-1/season-5/episode-21')->finish('/');
 ```
 
 ##### <a name="strings_hash"></a> Method: `hash()`
@@ -1003,13 +1003,13 @@ public function hash(string $algorithm = 'md5', bool $raw_output = false): self
 
 ```php
 // Get string hash with predefined settings
-$result = Strings::of('SG-1 returns from an off-world mission')->hash();
+$result = Strings::create('SG-1 returns from an off-world mission')->hash();
 
 // Get string hash with hashed with sha256 algorithm
-$result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256');
+$result = Strings::create('SG-1 returns from an off-world mission')->hash('sha256');
 
 // Get string hash with hashed with sha256 algorithm and with raw output
-$result = Strings::of('SG-1 returns from an off-world mission')->hash('sha256', true);
+$result = Strings::create('SG-1 returns from an off-world mission')->hash('sha256', true);
 ```
 
 ### Tests
