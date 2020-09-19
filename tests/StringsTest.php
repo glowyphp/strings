@@ -248,6 +248,10 @@ test('test hash() method', function() {
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
 });
 
+test('test create() method', function() {
+    $this->assertEquals(new Strings(), Strings::create());
+});
+
 test('test strings() helper', function() {
     $this->assertEquals(Strings::create(), strings());
 });
