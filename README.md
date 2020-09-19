@@ -100,7 +100,14 @@ $string = Strings::of('SG-1 returns from an off-world mission');
 
 #### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
 
-Strip all whitespaces from the given string.
+```php
+/**
+ * Strip all whitespaces from the given string.
+ */
+public function stripSpaces(): self
+```
+
+**Examples**
 
 ```php
 $string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
