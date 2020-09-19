@@ -19,13 +19,6 @@
     "require": {
         "php": "^7.3 || ^8.0"
     },
-    "config": {
-        "apcu-autoloader": true,
-        "optimize-autoloader": true,
-        "platform": {
-            "php": "^7.3 || ^8.0"
-        }
-    },
     "autoload":{
         "psr-4": {
             "Atomastic\\Strings\\": "src/"
