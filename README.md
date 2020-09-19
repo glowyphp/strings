@@ -81,7 +81,10 @@ use Atomastic\Strings\Strings;
 
 ```php
 /**
- * Get a new stringable object from the given string.
+ * Initializes a Strings object and assigns both $string and $encoding properties
+ * the supplied values. $string is cast to a string prior to assignment. Throws
+ * an InvalidArgumentException if the first argument is an array or object
+ * without a __toString method.
  *
  * @param mixed  $string   Value to modify, after being cast to string. Default: ''
  * @param string $encoding The character encoding. Default: UTF-8
@@ -89,10 +92,10 @@ use Atomastic\Strings\Strings;
 public static function of($string = '', string $encoding = 'UTF-8'): self
 ```
 
-Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method.
+**Examples**
 
 ```php
-$string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
+$string = Strings::of('SG-1 returns from an off-world mission');
 ```
 
 #### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
