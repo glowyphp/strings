@@ -35,5 +35,5 @@ jobs:
       run: composer update  --dev --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
       if: "matrix.php >= 8"
 
-    - name: Run test suite
+    - name: Run Tests
       run: ./vendor/bin/pest
