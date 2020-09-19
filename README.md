@@ -6,6 +6,9 @@
 </p>
 <br>
 
+* [Installation](#installation)
+* [Usage](#usage)
+
 ### Installation
 
 #### With [Composer](https://getcomposer.org)
