@@ -8,7 +8,7 @@
 
 ### Installation
 
-With [Composer](https://getcomposer.org):
+#### With [Composer](https://getcomposer.org)
 
 ```
 composer require atomastic/strings
@@ -24,6 +24,7 @@ use Atomastic\Strings\Strings;
 
 | Method | Description |
 |---|---|
+| <a href="#strings_of">`of()`</a> | Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
@@ -76,12 +77,30 @@ use Atomastic\Strings\Strings;
 
 <hr>
 
+#### <a name="strings_of"></a> Method: `of()`
+
+```php
+/**
+ * Get a new stringable object from the given string.
+ *
+ * @param mixed  $string   Value to modify, after being cast to string. Default: ''
+ * @param string $encoding The character encoding. Default: UTF-8
+ */
+public static function of($string = '', string $encoding = 'UTF-8'): self
+```
+
+Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method.
+
+```php
+$string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
+```
+
 #### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
 
 Strip all whitespaces from the given string.
 
 ```php
-$string = Strings::stripSpaces('SG-1 returns from an off-world mission');
+$string = Strings::of('SG-1 returns from an off-world mission')->stripSpaces();
 ```
 
 #### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
