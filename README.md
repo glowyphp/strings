@@ -160,26 +160,18 @@ $string = Strings::stripQuotes('some "text" here');
 
 #### <a name="strings_quotesToEntities"></a> Method: `quotesToEntities()`
 
-Convert single and double quotes to entities.
-
 ```php
-$string = Strings::quotesToEntities('some "text" here');
+/**
+ * Convert single and double quotes to entities.
+ *
+ * @param  string $string String with single and double quotes
+ */
 ```
 
-#### <a name="strings_validEncoding"></a> Method: `validEncoding()`
-
-Checks if the string is valid in UTF-8 encoding.
+**Examples**
 
 ```php
-$result = Strings::validEncoding('An UTF-8 string here');
-```
-
-#### <a name="strings_fixEncoding"></a> Method: `fixEncoding()`
-
-Removes all invalid UTF-8 characters from a string.
-
-```php
-$string = Strings::fixEncoding('An invalid UTF-8 string here');
+$string = Strings::of('some "text" here')->quotesToEntities();
 ```
 
 #### <a name="strings_normalizeNewLines"></a> Method: `normalizeNewLines()`
