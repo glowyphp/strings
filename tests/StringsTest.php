@@ -247,3 +247,7 @@ test('test hash() method', function() {
     // with sha256 algorithm and raw output
     $this->assertEquals(Strings::of('test')->hash('sha256', true), Strings::of('test')->hash('sha256', true));
 });
+
+test('test strings() helper', function() {
+    $this->assertEquals(Strings::of(), strings());
+});

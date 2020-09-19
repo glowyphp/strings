@@ -29,7 +29,10 @@
     "autoload":{
         "psr-4": {
             "Atomastic\\Strings\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "require-dev": {
         "doctrine/coding-standard": "8.1.0",
