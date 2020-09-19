@@ -9,6 +9,7 @@
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Methods](#methods)
 
 ### Installation
 
