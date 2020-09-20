@@ -146,6 +146,8 @@ test('test length() method', function() {
 test('test substr() method', function() {
     $this->assertEquals('SG-1 returns from an off-world mission to P9Y-3C3', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0));
     $this->assertEquals('SG-1', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4));
+    $this->assertEquals('fòôbàř', Strings::create('fòôbàř')->substr(0));
+    $this->assertEquals('fòô', Strings::create('fòôbàř')->substr(0, 3));
 });
 
 test('test trim() method', function() {
