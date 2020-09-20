@@ -91,7 +91,7 @@ $strings = strings();
 | <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 | <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string |
-| <a href="#strings_append">`prepend()`</a> | The append method appends the given values to the string |
+| <a href="#strings_append">`append()`</a> | The append method appends the given values to the string |
 
 #### Methods Details
 
