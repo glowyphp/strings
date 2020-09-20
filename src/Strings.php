@@ -792,7 +792,7 @@ class Strings
     public function startsWith($needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if ((string) $needle !== '' && strncmp($this->string, $needle, static::create($needle)->length()) === 0) {
+            if ((string) $needle !== '' && strncmp($this->string, (string) $needle, static::create($needle)->length()) === 0) {
                 return true;
             }
         }
