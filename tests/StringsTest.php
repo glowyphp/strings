@@ -83,6 +83,18 @@ test('test snake() method', function() {
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));
     $this->assertEquals('fòô_bàř', Strings::create('fòôBàř')->snake());
     $this->assertEquals('fòô__bàř', Strings::create('fòôBàř')->snake('__'));
+
+    $this->assertEquals('fòô_p_h_p_bàř', Strings::create('FòôPHPBàř')->snake());
+    $this->assertEquals('fòô_php_bàř', Strings::create('FòôPhpBàř')->snake());
+    $this->assertEquals('fòô php bàř', Strings::create('FòôPhpBàř')->snake(' '));
+    $this->assertEquals('fòô_php_bàř', Strings::create('Fòô Php Bàř')->snake());
+    $this->assertEquals('fòô_php_bàř', Strings::create('Fòô    Php      Bàř   ')->snake());
+
+    // ensure cache keys don't overlap
+    $this->assertEquals('fòô__php__bàř', Strings::create('FòôPhpBàř')->snake('__'));
+    $this->assertEquals('fòô_php_bàř_', Strings::create('FòôPhpBàř_')->snake('_'));
+    $this->assertEquals('fòô_php_bàř', Strings::create('fòô php Bàř')->snake());
+    $this->assertEquals('fòô_php_bàř_fòô', Strings::create('fòô php BàřFòô')->snake());
 });
 
 test('test camel() method', function() {
