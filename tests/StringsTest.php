@@ -14,10 +14,13 @@ test('test strings() helper', function() {
 
 test('test trimSlashes() method', function() {
     $this->assertEquals('some text here', Strings::create('some text here/')->trimSlashes());
+    $this->assertEquals('some text here', Strings::create('some text here//')->trimSlashes());
+    $this->assertEquals('some text here', Strings::create('some text here///')->trimSlashes());
 });
 
 test('test reduceSlashes() method', function() {
     $this->assertEquals('some/text/here', Strings::create('some//text//here')->reduceSlashes());
+    $this->assertEquals('fòô/fòô/fòô', Strings::create('fòô//fòô//fòô')->reduceSlashes());
 });
 
 test('test stripQuotes() method', function() {
@@ -72,19 +75,24 @@ test('test upper() method', function() {
 
 test('test studly() method', function() {
     $this->assertEquals('FooBar', Strings::create('foo_bar')->studly());
+    $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
 });
 
 test('test snake() method', function() {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));
+    $this->assertEquals('fòô_bàř', Strings::create('fòôBàř')->snake());
+    $this->assertEquals('fòô__bàř', Strings::create('fòôBàř')->snake('__'));
 });
 
 test('test camel() method', function() {
     $this->assertEquals('fooBar', Strings::create('foo_bar')->camel());
+    $this->assertEquals('fòôBàř', Strings::create('fòô_bàř')->camel());
 });
 
 test('test kebab() method', function() {
     $this->assertEquals('foo-bar', Strings::create('fooBar')->kebab());
+    $this->assertEquals('fòô-bàř', Strings::create('fòôBàř')->kebab());
 });
 
 test('test words() method', function() {
