@@ -291,13 +291,7 @@ test('test finish() method', function() {
 });
 
 test('test hash() method', function() {
-
-    // with default params
     $this->assertEquals(Strings::create('test')->hash(), Strings::create('test')->hash());
-
-    // with sha256 algorithm
     $this->assertEquals(Strings::create('test')->hash('sha256'), Strings::create('test')->hash('sha256'));
-
-    // with sha256 algorithm and raw output
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
 });
