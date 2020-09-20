@@ -261,6 +261,27 @@ test('test startsWith() method', function() {
 test('test endsWith() method', function() {
     $this->assertTrue(Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('/'));
     $this->assertFalse(Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('//'));
+    $this->assertTrue(Strings::create('fòôbàřs')->endsWith('bàřs'));
+    $this->assertTrue(Strings::create('fòô')->endsWith('fòô'));
+    $this->assertTrue(Strings::create('fòôbàřs')->endsWith(['bàřs']));
+    $this->assertTrue(Strings::create('fòôbàřs')->endsWith(['bar', 'bàřs']));
+    $this->assertFalse(Strings::create('fòô')->endsWith('bàř'));
+    $this->assertFalse(Strings::create('fòô')->endsWith(['bàř']));
+    $this->assertFalse(Strings::create('fòô')->endsWith(null));
+    $this->assertFalse(Strings::create('fòô')->endsWith([null]));
+    $this->assertFalse(Strings::create('0123')->endsWith([null]));
+    $this->assertTrue(Strings::create('0123')->endsWith(3));
+    $this->assertFalse(Strings::create('fòôbàřs')->endsWith('F'));
+    $this->assertFalse(Strings::create('fòôbàřs')->endsWith(''));
+    $this->assertFalse(Strings::create('')->endsWith(''));
+    $this->assertTrue(Strings::create('7')->endsWith('7'));
+    $this->assertTrue(Strings::create('a7')->endsWith('7'));
+    $this->assertTrue(Strings::create('a7')->endsWith(7));
+    $this->assertTrue(Strings::create('a7.12')->endsWith(7.12));
+    $this->assertFalse(Strings::create('a7.12')->endsWith(7.13));
+    $this->assertTrue(Strings::create(7.123)->endsWith('3'));
+    $this->assertTrue(Strings::create(7.123)->endsWith('.123'));
+    $this->assertFalse(Strings::create(7.123)->endsWith('7.13'));
 });
 
 test('test finish() method', function() {
