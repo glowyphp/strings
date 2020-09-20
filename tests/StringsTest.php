@@ -152,18 +152,22 @@ test('test substr() method', function() {
 
 test('test trim() method', function() {
     $this->assertEquals('daniel', Strings::create(' daniel ')->trim());
+    $this->assertEquals('fòôbàř', Strings::create(' fòôbàř ')->trim());
 });
 
 test('test trimLeft() method', function() {
     $this->assertEquals('daniel', Strings::create(' daniel')->trimLeft());
+    $this->assertEquals('fòôbàř', Strings::create(' fòôbàř')->trimLeft());
 });
 
 test('test trimRight() method', function() {
     $this->assertEquals('daniel', Strings::create('daniel ')->trimRight());
+    $this->assertEquals('fòôbàř', Strings::create('fòôbàř ')->trimRight());
 });
 
 test('test reverse() method', function() {
     $this->assertEquals('1-GS', Strings::create('SG-1')->reverse());
+    $this->assertEquals('řàbôòf', Strings::create('fòôbàř')->reverse());
 });
 
 test('test segments() method', function() {
