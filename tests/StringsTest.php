@@ -184,10 +184,12 @@ test('test between() method', function() {
 
 test('test before() method', function() {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->before('mission'));
+    $this->assertEquals('fòô ', Strings::create('fòô bàřs')->before('bàřs'));
 });
 
 test('test beforeLast() method', function() {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission'));
+    $this->assertEquals('fòô ', Strings::create('fòô bàřs')->beforeLast('bàřs'));
 });
 
 test('test after() method', function() {
