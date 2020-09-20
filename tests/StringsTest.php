@@ -286,6 +286,8 @@ test('test endsWith() method', function() {
 
 test('test finish() method', function() {
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21')->finish('/'));
+    $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21/')->finish('/'));
+    $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21//')->finish('/'));
 });
 
 test('test hash() method', function() {
