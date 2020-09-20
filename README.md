@@ -90,6 +90,8 @@ $strings = strings();
 | <a href="#strings_endsWith">`endsWith()`</a> | Determine if a given string ends with a given substring. |
 | <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
+| <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string |
+| <a href="#strings_append">`prepend()`</a> | The append method appends the given values to the string |
 
 #### Methods Details
 
@@ -1010,6 +1012,41 @@ $result = Strings::create('SG-1 returns from an off-world mission')->hash('sha25
 
 // Get string hash with hashed with sha256 algorithm and with raw output
 $result = Strings::create('SG-1 returns from an off-world mission')->hash('sha256', true);
+```
+
+##### <a name="strings_prepend"></a> Method: `prepend()`
+
+```php
+/**
+ * Prepend the given values to the string.
+ *
+ * @param  array  $values
+ */
+public function prepend(...$values): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
+```
+
+
+##### <a name="strings_append"></a> Method: `append()`
+
+```php
+/**
+ * Append the given values to the string.
+ *
+ * @param  array  $values
+ */
+public function append(...$values): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('WORK HARD.')->append(' PLAY HARD.');
 ```
 
 ### Tests

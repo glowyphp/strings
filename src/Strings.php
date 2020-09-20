@@ -831,6 +831,30 @@ class Strings
     }
 
     /**
+     * Prepend the given values to the string.
+     *
+     * @param  array  $values
+     */
+    public function prepend(...$values): self
+    {
+        $this->string = implode('', $values) . $this->string;
+
+        return $this;
+    }
+
+    /**
+     * Append the given values to the string.
+     *
+     * @param  array  $values
+     */
+    public function append(...$values): self
+    {
+        $this->string = $this->string . implode('', $values);
+
+        return $this;
+    }
+
+    /**
      * Generate a hash string from the input string.
      *
      * @param  string $string     String

@@ -323,3 +323,11 @@ test('test hash() method', function() {
     $this->assertEquals(Strings::create('test')->hash('sha256'), Strings::create('test')->hash('sha256'));
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
 });
+
+test('test prepend() method', function() {
+    $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('PLAY HARD.')->prepend('WORK HARD. '));
+});
+
+test('test append() method', function() {
+    $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('WORK HARD.')->append(' PLAY HARD.'));
+});
