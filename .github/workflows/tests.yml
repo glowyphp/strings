@@ -37,3 +37,6 @@ jobs:
 
     - name: Run Tests
       run: ./vendor/bin/pest
+ 
+    - name: Coveralls
+      uses: coverallsapp/github-action@v1.1.2
