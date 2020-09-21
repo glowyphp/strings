@@ -314,7 +314,7 @@ $length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 
 ##### <a name="strings_lower"></a> Method: `lower()`
 
-```
+```php
 /**
  * Convert the given string to lower-case.
  */
