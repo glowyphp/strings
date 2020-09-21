@@ -40,7 +40,7 @@ $strings = strings();
 
 | Method | Description |
 |---|---|
-| <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both $string and $encoding properties the supplied values. $string is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
+| <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
