@@ -331,3 +331,11 @@ test('test prepend() method', function() {
 test('test append() method', function() {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('WORK HARD.')->append(' PLAY HARD.'));
 });
+
+test('test shuffle() method', function() {
+    $this->assertEquals(Strings::create('fòôbàřs')->length(),
+                        Strings::create(Strings::create('fòôbàřs')->shuffle())->length());
+
+    $this->assertEquals(Strings::create('WORK HARD. PLAY HARD.')->length(),
+                        Strings::create(Strings::create('WORK HARD. PLAY HARD.')->shuffle())->length());
+});

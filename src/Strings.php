@@ -872,4 +872,24 @@ class Strings
 
         return $this;
     }
+
+    /**
+     * Randomly shuffles a string.
+     */
+    public function shuffle(): self
+    {
+        $indexes = range(0, static::create($this->string)->length()  - 1);
+
+        shuffle($indexes);
+
+        $shuffled_string = '';
+
+        foreach ($indexes as $i) {
+            $shuffled_string .= static::create($this->string)->substr($i, 1);
+        }
+
+        $this->string = $shuffled_string;
+
+        return $this;
+    }
 }

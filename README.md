@@ -90,8 +90,9 @@ $strings = strings();
 | <a href="#strings_endsWith">`endsWith()`</a> | Determine if a given string ends with a given substring. |
 | <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
-| <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string |
-| <a href="#strings_append">`append()`</a> | The append method appends the given values to the string |
+| <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string. |
+| <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
+| <a href="#strings_shuffle">`shuffle()`</a> |  Randomly shuffles a string. |
 
 #### Methods Details
 
@@ -1031,7 +1032,6 @@ public function prepend(...$values): self
 $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
 ```
 
-
 ##### <a name="strings_append"></a> Method: `append()`
 
 ```php
@@ -1047,6 +1047,21 @@ public function append(...$values): self
 
 ```php
 $string = Strings::create('WORK HARD.')->append(' PLAY HARD.');
+```
+
+##### <a name="strings_shuffle"></a> Method: `shuffle()`
+
+```php
+/**
+ * Randomly shuffles a string.
+ */
+public function shuffle(): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('hello')->shuffle();
 ```
 
 ### Tests
