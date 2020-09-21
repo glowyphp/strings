@@ -593,7 +593,7 @@ $string = Strings::create('daniel ')->trimRight();
 
 ##### <a name="strings_trimLeft"></a> Method: `trimLeft()`
 
-```
+```php
 /**
  * Strip whitespace (or other characters) from the beginning of a string.
  *
