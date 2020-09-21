@@ -339,3 +339,8 @@ test('test shuffle() method', function() {
     $this->assertEquals(Strings::create('WORK HARD. PLAY HARD.')->length(),
                         Strings::create(Strings::create('WORK HARD. PLAY HARD.')->shuffle())->length());
 });
+
+test('test similarity() method', function() {
+    $this->assertEquals(100, Strings::create('fòôbàřs')->similarity('fòôbàřs'));
+    $this->assertEquals(62.5, Strings::create('fòôbàřs')->similarity('fòô'));
+});

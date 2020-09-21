@@ -92,7 +92,9 @@ $strings = strings();
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 | <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string. |
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
-| <a href="#strings_shuffle">`shuffle()`</a> |  Randomly shuffles a string. |
+| <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
+| <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
+
 
 #### Methods Details
 
@@ -1062,6 +1064,23 @@ public function shuffle(): self
 
 ```php
 $string = Strings::create('hello')->shuffle();
+```
+
+##### <a name="strings_similarity"></a> Method: `similarity()`
+
+```php
+/**
+ * Calculate the similarity between two strings.
+ *
+ * @param string $string The delimiting string.
+ */
+public function similarity(string $string): float
+```
+
+**Examples**
+
+```php
+$percent = Strings::create('hello')->similarity('hello');
 ```
 
 ### Tests

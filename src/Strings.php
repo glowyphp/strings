@@ -892,4 +892,16 @@ class Strings
 
         return $this;
     }
+
+    /**
+     * Calculate the similarity between two strings.
+     *
+     * @param string $string The delimiting string.
+     */
+    public function similarity(string $string): float
+    {
+        similar_text($this->string, $string, $percent);
+
+        return $percent;
+    }
 }
