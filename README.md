@@ -94,7 +94,7 @@ $strings = strings();
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
-
+| <a href="#strings_at">`at()`</a> | Returns the character at $index, with indexes starting at 0. |
 
 #### Methods Details
 
@@ -1081,6 +1081,23 @@ public function similarity(string $string): float
 
 ```php
 $percent = Strings::create('hello')->similarity('hello');
+```
+
+##### <a name="strings_at"></a> Method: `at()`
+
+```php
+/**
+* Returns the character at $index, with indexes starting at 0.
+*
+* @param int $index Position of the character
+*/
+public function at(int $index): self
+```
+
+**Examples**
+
+```php
+$character = Strings::create('hello')->at(3);
 ```
 
 ### Tests

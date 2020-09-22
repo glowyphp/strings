@@ -904,4 +904,16 @@ class Strings
 
         return $percent;
     }
+
+    /**
+    * Returns the character at $index, with indexes starting at 0.
+    *
+    * @param int $index Position of the character
+    */
+    public function at(int $index): self
+    {
+        $this->string = (string) $this->substr($index, 1);
+
+        return $this;
+    }
 }

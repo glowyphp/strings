@@ -344,3 +344,7 @@ test('test similarity() method', function() {
     $this->assertEquals(100, Strings::create('fòôbàřs')->similarity('fòôbàřs'));
     $this->assertEquals(62.5, Strings::create('fòôbàřs')->similarity('fòô'));
 });
+
+test('test at() method', function() {
+    $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
+});
