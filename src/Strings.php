@@ -25,6 +25,7 @@ use function mb_strimwidth;
 use function mb_stripos;
 use function mb_strlen;
 use function mb_strpos;
+use function mb_strripos;
 use function mb_strrpos;
 use function mb_strtolower;
 use function mb_strtoupper;
@@ -520,11 +521,47 @@ class Strings
      */
     public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
     {
+        if ($needle === '' || $this->string === '') {
+            return false;
+        }
+
         if ($case_sensitive) {
             return mb_strpos((string) $this->string, $needle, $offset, $this->encoding);
         }
 
         return mb_stripos((string) $this->string, $needle, $offset, $this->encoding);
+    }
+
+    /**
+     * Returns the index of the last occurrence of $needle in the string, and false if not found.
+     * Accepts an optional $offset from which to begin the search. Offsets may be negative to
+     * count from the last character in the string.
+     *
+     * @param int|string $needle         The string to find in haystack.
+     * @param int        $offset         The search offset. If it is not specified, 0 is used.
+     * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     */
+    public function indexOfLast(string $needle, int $offset = 0, bool $case_sensitive = true)
+    {
+        if ($needle === '' || $this->string === '') {
+            return false;
+        }
+
+        $max_length = static::create($this->string, $this->encoding)->length();
+
+        if ($offset < 0) {
+            $offset = $max_length - (int) abs($offset);
+        }
+
+        if ($offset > $max_length || $offset < 0) {
+            return false;
+        }
+
+        if ($case_sensitive) {
+            return mb_strrpos((string) $this->string, $needle, $offset, $this->encoding);
+        }
+
+        return mb_strripos((string) $this->string, $needle, $offset, $this->encoding);
     }
 
     /**

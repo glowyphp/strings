@@ -381,3 +381,9 @@ test('test indexOf() method', function() {
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 3, false));
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 0, false));
 });
+
+test('test indexOfLast() method', function() {
+    $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô'));
+    $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô', 11));
+    $this->assertEquals(11, Strings::create('bàřsfòôbàřsFòô')->indexOfLast('Fòô', 0, false));
+});

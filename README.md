@@ -97,7 +97,8 @@ $strings = strings();
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
-| <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of $needle in the string, and false if not found. Accepts an optional offset from which to begin the search. |
+| <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false.  |
+| <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
 | <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
 
 #### Methods Details
@@ -1166,6 +1167,27 @@ public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
 
 ```php
 $index = Strings::create('hello')->indexOf('e');
+```
+
+##### <a name="strings_indexOfLast"></a> Method: `indexOfLast()`
+
+```php
+/**
+ * Returns the index of the last occurrence of $needle in the string, and false if not found.
+ * Accepts an optional $offset from which to begin the search. Offsets may be negative to
+ * count from the last character in the string.
+ *
+ * @param int|string $needle         The string to find in haystack.
+ * @param int        $offset         The search offset. If it is not specified, 0 is used.
+ * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ */
+public function indexOfLast(string $needle, int $offset = 0, bool $case_sensitive = true)
+```
+
+**Examples**
+
+```php
+$index = Strings::create('hello')->indexOfLast('l');
 ```
 
 ##### <a name="strings_move"></a> Method: `move()`
