@@ -516,7 +516,7 @@ class Strings
      *
      * @param int|string $needle         The string to find in haystack.
      * @param int        $offset         The search offset. If it is not specified, 0 is used.
-     * @param  bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
     {
