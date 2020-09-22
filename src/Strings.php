@@ -249,7 +249,7 @@ class Strings
             $this->string = $this->string;
         }
 
-        $this->string = static::create(mb_strimwidth($this->string, 0, $limit, '', $this->encoding))->trimRight() . $append;
+        $this->string = static::create(mb_strimwidth($this->string, 0, $limit, '', $this->encoding), $this->encoding)->trimRight() . $append;
 
         return $this;
     }
@@ -307,7 +307,7 @@ class Strings
 
         if (! ctype_lower($this->string)) {
             $string = preg_replace('/\s+/u', '', ucwords($this->string));
-            $string = static::create(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $string))->lower();
+            $string = static::create(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $string), $this->encoding)->lower();
         }
 
         $this->string = $this->cache['snake'][$key][$delimiter] = $string;
@@ -324,7 +324,7 @@ class Strings
             return $this->cache['camel'][$this->string];
         }
 
-        $this->string = $this->cache['camel'][$this->string] = lcfirst((string) static::create($this->string)->studly());
+        $this->string = $this->cache['camel'][$this->string] = lcfirst((string) static::create($this->string, $this->encoding)->studly());
 
         return $this;
     }
@@ -334,7 +334,7 @@ class Strings
      */
     public function kebab(): self
     {
-        $this->string = static::create($this->string)->snake('-');
+        $this->string = static::create($this->string, $this->encoding)->snake('-');
 
         return $this;
     }
@@ -349,11 +349,11 @@ class Strings
     {
         preg_match('/^\s*+(?:\S++\s*+){1,' . $words . '}/u', $this->string, $matches);
 
-        if (! isset($matches[0]) || static::create($this->string)->length() === static::create($matches[0])->length()) {
+        if (! isset($matches[0]) || static::create($this->string, $this->encoding)->length() === static::create($matches[0], $this->encoding)->length()) {
             $this->string = $this->string;
         }
 
-        $this->string = static::create($matches[0])->trimRight() . $append;
+        $this->string = static::create($matches[0], $this->encoding)->trimRight() . $append;
 
         return $this;
     }
@@ -422,7 +422,7 @@ class Strings
     public function containsAll(array $needles): bool
     {
         foreach ($needles as $needle) {
-            if (! static::create($this->string)->contains($needle)) {
+            if (! static::create($this->string, $this->encoding)->contains($needle)) {
                 return false;
             }
         }
@@ -439,7 +439,7 @@ class Strings
     public function containsAny(array $needles): bool
     {
         foreach ($needles as $needle) {
-            if (static::create($this->string)->contains($needle)) {
+            if (static::create($this->string, $this->encoding)->contains($needle)) {
                 return true;
             }
         }
@@ -453,7 +453,7 @@ class Strings
      */
     public function ucfirst(): self
     {
-        $this->string = static::create(static::create($this->string)->substr(0, 1))->upper() . static::create($this->string)->substr(1);
+        $this->string = static::create(static::create($this->string, $this->encoding)->substr(0, 1))->upper() . static::create($this->string, $this->encoding)->substr(1);
 
         return $this;
     }
@@ -545,8 +545,8 @@ class Strings
     {
         $result = '';
 
-        for ($i = static::create($this->string)->length(); $i >= 0; $i--) {
-            $result .= (string) static::create($this->string)->substr($i, 1);
+        for ($i = static::create($this->string, $this->encoding)->length(); $i >= 0; $i--) {
+            $result .= (string) static::create($this->string, $this->encoding)->substr($i, 1);
         }
 
         $this->string = $result;
@@ -622,7 +622,7 @@ class Strings
         if ($from === '' || $to === '') {
             $this->string = $this->string;
         } else {
-            $this->string = static::create((string) static::create($this->string)->after($from))->beforeLast($to);
+            $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to);
         }
 
         return $this;
@@ -652,7 +652,7 @@ class Strings
         if ($position === false) {
             $this->string = $this->string;
         } else {
-            $this->string = (string) static::create($this->string)->substr(0, $position);
+            $this->string = (string) static::create($this->string, $this->encoding)->substr(0, $position);
         }
 
         return $this;
@@ -682,7 +682,7 @@ class Strings
         if ($position === false) {
             $this->string = $this->string;
         } else {
-            $this->string = (string) $this->substr($position + static::create($search)->length());
+            $this->string = (string) $this->substr($position + static::create($search, $this->encoding)->length());
         }
 
         return $this;
@@ -769,7 +769,7 @@ class Strings
         $position = strpos($this->string, $search);
 
         if ($position !== false) {
-            $this->string = substr_replace($this->string, $replace, $position, static::create($search)->length());
+            $this->string = substr_replace($this->string, $replace, $position, static::create($search, $this->encoding)->length());
         } else {
             $this->string = $search;
         }
@@ -788,7 +788,7 @@ class Strings
         $position = strrpos($this->string, $search);
 
         if ($position !== false) {
-            $this->string = substr_replace($this->string, $replace, $position, static::create($search)->length());
+            $this->string = substr_replace($this->string, $replace, $position, static::create($search, $this->encoding)->length());
         } else {
             $this->string = $search;
         }
@@ -818,7 +818,7 @@ class Strings
     public function startsWith($needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if ((string) $needle !== '' && strncmp($this->string, (string) $needle, static::create($needle)->length()) === 0) {
+            if ((string) $needle !== '' && strncmp($this->string, (string) $needle, static::create($needle, $this->encoding)->length()) === 0) {
                 return true;
             }
         }
@@ -834,7 +834,7 @@ class Strings
     public function endsWith($needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && (string) static::create($this->string)->substr(-static::create($needle)->length()) === (string) $needle) {
+            if ($needle !== '' && (string) static::create($this->string, $this->encoding)->substr(-static::create($needle, $this->encoding)->length()) === (string) $needle) {
                 return true;
             }
         }
@@ -904,14 +904,14 @@ class Strings
      */
     public function shuffle(): self
     {
-        $indexes = range(0, static::create($this->string)->length()  - 1);
+        $indexes = range(0, static::create($this->string, $this->encoding)->length()  - 1);
 
         shuffle($indexes);
 
         $shuffled_string = '';
 
         foreach ($indexes as $i) {
-            $shuffled_string .= static::create($this->string)->substr($i, 1);
+            $shuffled_string .= static::create($this->string, $this->encoding)->substr($i, 1);
         }
 
         $this->string = $shuffled_string;
