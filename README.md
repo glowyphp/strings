@@ -97,8 +97,8 @@ $strings = strings();
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at $index, with indexes starting at 0. |
-| <a href="#strings_indexOf">`at()`</a> | Returns the index of the first occurrence of $needle in the string, and false if not found. Accepts an optional offset from which to begin the search. |
-| <a href="#strings_move">`at()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
+| <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of $needle in the string, and false if not found. Accepts an optional offset from which to begin the search. |
+| <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
 
 #### Methods Details
 
