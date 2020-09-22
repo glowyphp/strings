@@ -50,10 +50,10 @@ $strings = strings();
 | <a href="#strings_normalizeSpaces">`normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
 | <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
-| <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
-| <a href="#strings_countSubString">`count()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
+| <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
+| <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
 | <a href="#strings_limit">`limit()`</a> | Limit the number of characters in a string. |
@@ -274,60 +274,6 @@ $string = Strings::create('page_1')->increment();
 $string = Strings::create('page-1')->increment(1, '-');
 ```
 
-##### <a name="strings_countSubString"></a> Method: `countSubString()`
-
-```php
-/**
- * Returns the number of occurrences of $substring in the given string.
- * By default, the comparison is case-sensitive, but can be made insensitive
- * by setting $case_sensitive to false.
- *
- * @param  string $substring      The substring to search for
- * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity
- */
-public function countSubString(string $substring, bool $case_sensitive = true): int
-```
-
-**Examples**
-
-```php
-// Returns the number of occurrences of $substring in the given string.
-$result = Strings::create('Test string here for test')->countSubString('test');
-
-// Returns the number of occurrences of $substring in the given string with $case_sensitive false.
-$result = Strings::create('Test string here for test')->countSubString('test', false);
-
-```
-
-
-##### <a name="strings_countWords"></a> Method: `countWords()`
-
-```php
-/**
- * Return information about words used in a string
- *
- * @param  int    $format   Specify the return value of this function. The current supported values are:
- *                          0 - returns the number of words found
- *                          1 - returns an array containing all the words found inside the string
- *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
- * @param  string $charlist A list of additional characters which will be considered as 'word'
- */
-public function countWords(int $format = 0, string $charlist = '')
-```
-
-**Examples**
-
-```php
-// Returns the number of words found
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords();
-
-// Returns an array containing all the words found inside the string
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(1);
-
-// Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(2);
-```
-
 ##### <a name="strings_length"></a> Method: `length()`
 
 ```php
@@ -356,6 +302,58 @@ public function count(): int
 
 ```php
 $count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
+```
+##### <a name="strings_countSubString"></a> Method: `countSubString()`
+
+```php
+/**
+ * Returns the number of occurrences of $substring in the given string.
+ * By default, the comparison is case-sensitive, but can be made insensitive
+ * by setting $case_sensitive to false.
+ *
+ * @param  string $substring      The substring to search for
+ * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity
+ */
+public function countSubString(string $substring, bool $case_sensitive = true): int
+```
+
+**Examples**
+
+```php
+// Returns the number of occurrences of $substring in the given string.
+$result = Strings::create('Test string here for test')->countSubString('test');
+
+// Returns the number of occurrences of $substring in the given string with $case_sensitive false.
+$result = Strings::create('Test string here for test')->countSubString('test', false);
+
+```
+
+##### <a name="strings_countWords"></a> Method: `countWords()`
+
+```php
+/**
+ * Return information about words used in a string
+ *
+ * @param  int    $format   Specify the return value of this function. The current supported values are:
+ *                          0 - returns the number of words found
+ *                          1 - returns an array containing all the words found inside the string
+ *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
+ * @param  string $charlist A list of additional characters which will be considered as 'word'
+ */
+public function countWords(int $format = 0, string $charlist = '')
+```
+
+**Examples**
+
+```php
+// Returns the number of words found
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords();
+
+// Returns an array containing all the words found inside the string
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(1);
+
+// Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(2);
 ```
 
 ##### <a name="strings_lower"></a> Method: `lower()`
