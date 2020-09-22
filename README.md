@@ -97,6 +97,8 @@ $strings = strings();
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at $index, with indexes starting at 0. |
+| <a href="#strings_indexOf">`at()`</a> | Returns the index of the first occurrence of $needle in the string, and false if not found. Accepts an optional offset from which to begin the search. |
+| <a href="#strings_move">`at()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
 
 #### Methods Details
 
@@ -505,9 +507,10 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 /**
  * Determine if a given string contains a given substring.
  *
- * @param  string|string[] $needles The string to find in haystack.
+ * @param  string|string[] $needles        The string to find in haystack.
+ * @param  bool            $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function contains($needles): bool
+public function contains($needles, bool $case_sensitive = true): bool
 ```
 
 **Examples**
@@ -526,9 +529,10 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 /**
  * Determine if a given string contains all array values.
  *
- * @param  string[] $needles The array of strings to find in haystack.
+ * @param  string[] $needles        The array of strings to find in haystack.
+ * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function containsAll(array $needles): bool
+public function containsAll(array $needles, bool $case_sensitive = true): bool
 ```
 
 **Examples**
@@ -543,10 +547,11 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 /**
  * Determine if a given string contains any of array values.
  *
- * @param  string   $haystack The string being checked.
- * @param  string[] $needles  The array of strings to find in haystack.
+ * @param  string   $haystack       The string being checked.
+ * @param  string[] $needles        The array of strings to find in haystack.
+ * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function containsAny(array $needles): bool
+public function containsAny(array $needles, bool $case_sensitive = true): bool
 ```
 
 **Examples**
@@ -1065,9 +1070,9 @@ $result = Strings::create('SG-1 returns from an off-world mission')->hash('sha25
 /**
  * Prepend the given values to the string.
  *
- * @param  array  $values
+ * @param  string[] $values
  */
-public function prepend(...$values): self
+public function prepend(string ...$values): self
 ```
 
 **Examples**
@@ -1082,9 +1087,9 @@ $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
 /**
  * Append the given values to the string.
  *
- * @param  array  $values
+ * @param  string[] $values
  */
-public function append(...$values): self
+public function append(string ...$values): self
 ```
 
 **Examples**
@@ -1141,6 +1146,48 @@ public function at(int $index): self
 ```php
 $character = Strings::create('hello')->at(3);
 ```
+
+##### <a name="strings_indexOf"></a> Method: `indexOf()`
+
+```php
+/**
+ * Returns the index of the first occurrence of $needle in the string,
+ * and false if not found. Accepts an optional offset from which to begin
+ * the search.
+ *
+ * @param int|string $needle         The string to find in haystack.
+ * @param int        $offset         The search offset. If it is not specified, 0 is used.
+ * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ */
+public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
+```
+
+**Examples**
+
+```php
+$index = Strings::create('hello')->indexOf('e');
+```
+
+##### <a name="strings_move"></a> Method: `move()`
+
+```php
+/**
+ * Move substring of desired $length to $destination index of the original string.
+ * In case $destination is less than $length returns the string untouched.
+ *
+ * @param int $start       Start
+ * @param int $length      Length
+ * @param int $destination Destination
+ */
+public function move(int $start, int $length, int $destination): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('hello world')->move(0, 5, 10);
+```
+
 
 ### Tests
 
