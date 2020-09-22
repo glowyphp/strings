@@ -367,6 +367,24 @@ class Strings
     }
 
     /**
+     * Returns the number of occurrences of $substring in the given string.
+     * By default, the comparison is case-sensitive, but can be made insensitive
+     * by setting $case_sensitive to false.
+     *
+     * @param  string $substring      The substring to search for
+     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity
+     */
+    public function countSubString(string $substring, bool $case_sensitive = true): int
+    {
+        if ($case_sensitive) {
+            return mb_substr_count($this->string, $substring);
+        }
+
+        return mb_substr_count((string) static::create($this->string, $this->encoding)->lower(),
+                               (string) static::create($substring, $this->encoding)->lower());
+    }
+
+    /**
      * Return information about words used in a string
      *
      * @param  int    $format   Specify the return value of this function. The current supported values are:
@@ -795,7 +813,7 @@ class Strings
     /**
      * Determine if a given string starts with a given substring.
      *
-     * @param  string|string[] $needles needles
+     * @param  string|string[] $needles Needles
      */
     public function startsWith($needles): bool
     {

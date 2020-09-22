@@ -159,6 +159,11 @@ test('test count() method', function() {
     $this->assertEquals(4, Strings::create('SG-1')->count());
 });
 
+test('test countSubString() method', function() {
+    $this->assertEquals(3, Strings::create('fòôbàř fòô bàř fòôbàř')->countSubString('fòô'));
+    $this->assertEquals(3, Strings::create('fòôbàř Fòô bàř fòôbàř')->countSubString('Fòô', false));
+});
+
 test('test substr() method', function() {
     $this->assertEquals('SG-1 returns from an off-world mission to P9Y-3C3', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0));
     $this->assertEquals('SG-1', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4));
