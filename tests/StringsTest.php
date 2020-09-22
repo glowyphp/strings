@@ -133,14 +133,26 @@ test('test contains() method', function() {
     $this->assertFalse(Strings::create('Lorem ipsum dolor')->contains('test'));
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains(['ipsum', 'dolor']));
     $this->assertFalse(Strings::create('Lorem ipsum dolor')->contains(['test1', 'test2']));
+
+    $this->assertFalse(Strings::create('Lorem ipsum Dolor')->contains('dolor'));
+    $this->assertTrue(Strings::create('Lorem ipsum Dolor')->contains('dolor', false));
+
+    $this->assertFalse(Strings::create('Lorem Ipsum Dolor')->contains(['ipsum', 'dolor']));
+    $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->contains(['ipsum', 'dolor'], false));
 });
 
 test('test containsAll() method', function() {
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->containsAll(['ipsum', 'dolor']));
+
+    $this->assertFalse(Strings::create('Lorem Ipsum Dolor')->containsAll(['ipsum', 'dolor']));
+    $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->containsAll(['ipsum', 'dolor'], false));
 });
 
 test('test containsAny() method', function() {
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->containsAny(['ipsum', 'dolor']));
+
+    $this->assertFalse(Strings::create('Lorem Ipsum Dolor')->containsAny(['ipsum', 'dolor']));
+    $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->containsAny(['ipsum', 'dolor'], false));
 });
 
 test('test ucfirst() method', function() {
@@ -356,4 +368,16 @@ test('test similarity() method', function() {
 
 test('test at() method', function() {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
+});
+
+test('test move() method', function() {
+    $this->assertEquals('bàřsfòô', Strings::create('fòôbàřs')->move(0, 3, 7));
+});
+
+test('test indexOf() method', function() {
+    $this->assertEquals(0, Strings::create('fòôbàřs')->indexOf('fòô'));
+    $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs'));
+    $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs', 3));
+    $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 3, false));
+    $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 0, false));
 });

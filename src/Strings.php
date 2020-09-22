@@ -29,12 +29,16 @@ use function mb_strtolower;
 use function mb_strtoupper;
 use function mb_strwidth;
 use function mb_substr;
+use function mb_substr_count;
 use function method_exists;
 use function preg_match;
 use function preg_quote;
 use function preg_replace;
 use function random_int;
+use function range;
 use function rtrim;
+use function shuffle;
+use function similar_text;
 use function str_pad;
 use function str_replace;
 use function str_word_count;
@@ -371,8 +375,8 @@ class Strings
      * By default, the comparison is case-sensitive, but can be made insensitive
      * by setting $case_sensitive to false.
      *
-     * @param  string $substring      The substring to search for
-     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity
+     * @param  string $substring      The substring to search.
+     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function countSubString(string $substring, bool $case_sensitive = true): int
     {
@@ -380,8 +384,10 @@ class Strings
             return mb_substr_count($this->string, $substring);
         }
 
-        return mb_substr_count((string) static::create($this->string, $this->encoding)->lower(),
-                               (string) static::create($substring, $this->encoding)->lower());
+        return mb_substr_count(
+            (string) static::create($this->string, $this->encoding)->lower(),
+            (string) static::create($substring, $this->encoding)->lower()
+        );
     }
 
     /**
@@ -402,11 +408,12 @@ class Strings
      * Determine if a given string contains a given substring.
      *
      * @param  string|string[] $needles The string to find in haystack.
+     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function contains($needles): bool
+    public function contains($needles, bool $case_sensitive = true): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && mb_strpos($this->string, $needle) !== false) {
+            if ($needle !== '' && (bool) static::create($this->string, $this->encoding)->indexOf($needle, 0, $case_sensitive) !== false) {
                 return true;
             }
         }
@@ -418,11 +425,12 @@ class Strings
      * Determine if a given string contains all array values.
      *
      * @param  string[] $needles The array of strings to find in haystack.
+     * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function containsAll(array $needles): bool
+    public function containsAll(array $needles, bool $case_sensitive = true): bool
     {
         foreach ($needles as $needle) {
-            if (! static::create($this->string, $this->encoding)->contains($needle)) {
+            if (! static::create($this->string, $this->encoding)->contains($needle, $case_sensitive)) {
                 return false;
             }
         }
@@ -435,11 +443,12 @@ class Strings
      *
      * @param  string   $haystack The string being checked.
      * @param  string[] $needles  The array of strings to find in haystack.
+     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function containsAny(array $needles): bool
+    public function containsAny(array $needles, bool $case_sensitive = true): bool
     {
         foreach ($needles as $needle) {
-            if (static::create($this->string, $this->encoding)->contains($needle)) {
+            if (static::create($this->string, $this->encoding)->contains($needle, $case_sensitive)) {
                 return true;
             }
         }
@@ -497,6 +506,24 @@ class Strings
         $this->string = mb_substr($this->string, $start, $length, $this->encoding);
 
         return $this;
+    }
+
+    /**
+     * Returns the index of the first occurrence of $needle in the string,
+     * and false if not found. Accepts an optional offset from which to begin
+     * the search.
+     *
+     * @param int|string $needle The string to find in haystack.
+     * @param int        $offset The search offset. If it is not specified, 0 is used.
+     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     */
+    public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
+    {
+        if ($case_sensitive) {
+            return mb_strpos((string) $this->string, $needle, $offset, $this->encoding);
+        }
+
+        return mb_stripos((string) $this->string, $needle, $offset, $this->encoding);
     }
 
     /**
@@ -859,7 +886,7 @@ class Strings
     /**
      * Prepend the given values to the string.
      *
-     * @param  array  $values
+     * @param  string[] $values
      */
     public function prepend(...$values): self
     {
@@ -871,11 +898,11 @@ class Strings
     /**
      * Append the given values to the string.
      *
-     * @param  array  $values
+     * @param  string[] $values
      */
     public function append(...$values): self
     {
-        $this->string = $this->string . implode('', $values);
+        $this->string .= implode('', (array) $values);
 
         return $this;
     }
@@ -932,13 +959,36 @@ class Strings
     }
 
     /**
-    * Returns the character at $index, with indexes starting at 0.
-    *
-    * @param int $index Position of the character
-    */
+     * Returns the character at $index, with indexes starting at 0.
+     *
+     * @param int $index Position of the character
+     */
     public function at(int $index): self
     {
         $this->string = (string) $this->substr($index, 1);
+
+        return $this;
+    }
+
+    /**
+     * Move substring of desired $length to $destination index of the original string.
+     * In case $destination is less than $length returns the string untouched.
+     *
+     * @param int $start       Start
+     * @param int $length      Length
+     * @param int $destination Destination
+     */
+    public function move(int $start, int $length, int $destination): self
+    {
+        if ($destination <= $length) {
+            return $this;
+        }
+
+        $substr = mb_substr($this->string, $start, $length);
+        $this->string = mb_substr($this->string, 0, $destination) . $substr . mb_substr($this->string, $destination);
+
+        $pos = mb_strpos($this->string, $substr, 0);
+        $this->string = mb_substr($this->string, 0, $pos) . mb_substr($this->string, $pos + mb_strlen($substr));
 
         return $this;
     }
