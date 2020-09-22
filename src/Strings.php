@@ -22,6 +22,7 @@ use function ltrim;
 use function mb_convert_case;
 use function mb_internal_encoding;
 use function mb_strimwidth;
+use function mb_stripos;
 use function mb_strlen;
 use function mb_strpos;
 use function mb_strrpos;
@@ -407,8 +408,8 @@ class Strings
     /**
      * Determine if a given string contains a given substring.
      *
-     * @param  string|string[] $needles The string to find in haystack.
-     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string|string[] $needles        The string to find in haystack.
+     * @param  bool            $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function contains($needles, bool $case_sensitive = true): bool
     {
@@ -424,7 +425,7 @@ class Strings
     /**
      * Determine if a given string contains all array values.
      *
-     * @param  string[] $needles The array of strings to find in haystack.
+     * @param  string[] $needles        The array of strings to find in haystack.
      * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function containsAll(array $needles, bool $case_sensitive = true): bool
@@ -441,9 +442,9 @@ class Strings
     /**
      * Determine if a given string contains any of array values.
      *
-     * @param  string   $haystack The string being checked.
-     * @param  string[] $needles  The array of strings to find in haystack.
-     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string   $haystack       The string being checked.
+     * @param  string[] $needles        The array of strings to find in haystack.
+     * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function containsAny(array $needles, bool $case_sensitive = true): bool
     {
@@ -513,9 +514,9 @@ class Strings
      * and false if not found. Accepts an optional offset from which to begin
      * the search.
      *
-     * @param int|string $needle The string to find in haystack.
-     * @param int        $offset The search offset. If it is not specified, 0 is used.
-     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param int|string $needle         The string to find in haystack.
+     * @param int        $offset         The search offset. If it is not specified, 0 is used.
+     * @param  bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
      */
     public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
     {
@@ -888,7 +889,7 @@ class Strings
      *
      * @param  string[] $values
      */
-    public function prepend(...$values): self
+    public function prepend(string ...$values): self
     {
         $this->string = implode('', $values) . $this->string;
 
@@ -900,7 +901,7 @@ class Strings
      *
      * @param  string[] $values
      */
-    public function append(...$values): self
+    public function append(string ...$values): self
     {
         $this->string .= implode('', (array) $values);
 
@@ -984,10 +985,10 @@ class Strings
             return $this;
         }
 
-        $substr = mb_substr($this->string, $start, $length);
+        $substr       = mb_substr($this->string, $start, $length);
         $this->string = mb_substr($this->string, 0, $destination) . $substr . mb_substr($this->string, $destination);
 
-        $pos = mb_strpos($this->string, $substr, 0);
+        $pos          = mb_strpos($this->string, $substr, 0);
         $this->string = mb_substr($this->string, 0, $pos) . mb_substr($this->string, $pos + mb_strlen($substr));
 
         return $this;
