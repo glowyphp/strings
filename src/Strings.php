@@ -367,7 +367,7 @@ class Strings
      *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
      * @param  string $charlist A list of additional characters which will be considered as 'word'
      */
-    public function wordsCount(int $format = 0, string $charlist = '')
+    public function countWords(int $format = 0, string $charlist = '')
     {
         return str_word_count($this->string, $format, $charlist);
     }

@@ -50,7 +50,7 @@ $strings = strings();
 | <a href="#strings_normalizeSpaces">`normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
 | <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
-| <a href="#strings_wordsCount">`wordsCount()`</a> | Return information about words used in a string. |
+| <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
@@ -272,7 +272,7 @@ $string = Strings::create('page_1')->increment();
 $string = Strings::create('page-1')->increment(1, '-');
 ```
 
-##### <a name="strings_wordsCount"></a> Method: `wordsCount()`
+##### <a name="strings_countWords"></a> Method: `countWords()`
 
 ```php
 /**
@@ -284,20 +284,20 @@ $string = Strings::create('page-1')->increment(1, '-');
  *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
  * @param  string $charlist A list of additional characters which will be considered as 'word'
  */
-public function wordsCount(int $format = 0, string $charlist = '')
+public function countWords(int $format = 0, string $charlist = '')
 ```
 
 **Examples**
 
 ```php
 // Returns the number of words found
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount();
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords();
 
 // Returns an array containing all the words found inside the string
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(1);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(1);
 
 // Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->wordsCount(2);
+$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(2);
 ```
 
 ##### <a name="strings_length"></a> Method: `length()`

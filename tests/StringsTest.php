@@ -118,14 +118,14 @@ test('test words() method', function() {
                          Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words(10, '>>>'));
 });
 
-test('test wordsCount() method', function() {
+test('test countWords() method', function() {
     $this->assertEquals(69,
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->wordsCount());
+                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->countWords());
      $this->assertEquals(['Lorem', 'ipsum', 'dolor'],
-                          Strings::create('Lorem ipsum dolor')->wordsCount(1));
+                          Strings::create('Lorem ipsum dolor')->countWords(1));
 
      $this->assertEquals([0 => 'Lorem', 6 => 'ipsum', 12 => 'dolor'],
-                          Strings::create('Lorem ipsum dolor')->wordsCount(2));
+                          Strings::create('Lorem ipsum dolor')->countWords(2));
 });
 
 test('test contains() method', function() {
