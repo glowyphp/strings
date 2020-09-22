@@ -359,6 +359,14 @@ class Strings
     }
 
     /**
+     * Returns the length of the string, analog to length().
+     */
+    public function count(): int
+    {
+        return $this->length();
+    }
+
+    /**
      * Return information about words used in a string
      *
      * @param  int    $format   Specify the return value of this function. The current supported values are:

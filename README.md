@@ -52,6 +52,7 @@ $strings = strings();
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
 | <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
+| <a href="#strings_count">`count()`</a> |  Returns the length of the string, analog to `length()`. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
 | <a href="#strings_limit">`limit()`</a> | Limit the number of characters in a string. |
@@ -313,6 +314,21 @@ public function length(): int
 
 ```php
 $length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->length();
+```
+
+##### <a name="strings_count"></a> Method: `count()`
+
+```php
+/**
+ * Returns the length of the string, analog to length().
+ */
+public function count(): int
+```
+
+**Examples**
+
+```php
+$count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
 ```
 
 ##### <a name="strings_lower"></a> Method: `lower()`
