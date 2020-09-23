@@ -100,6 +100,11 @@ $strings = strings();
 | <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false.  |
 | <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
 | <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
+| <a href="#strings_toString">`toString()`</a> | Return Strings object as string. |
+| <a href="#strings_toInteger">`toInteger()`</a> | Return Strings object as integer. |
+| <a href="#strings_toFloat">`toFloat()`</a> | Return Strings object as float. |
+| <a href="#strings_toBoolean">`toBoolean()`</a> | Returns a boolean representation of the given logical string value. <br><br>For example:<br> 'true', '1', 'on' and 'yes' will return true.<br>'false', '0', 'off', and 'no' will return false.<br><br>In all instances, case is ignored.<br><br>For other numeric strings, their sign will determine the return value. In addition, blank strings consisting of only whitespace will return false. For all other strings, the return value is a result of a boolean cast.|
+| <a href="#strings_toArray">`toBoolean()`</a> | Return Strings object as array based on a delimiter. |
 
 #### Methods Details
 
