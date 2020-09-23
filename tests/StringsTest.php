@@ -387,3 +387,41 @@ test('test indexOfLast() method', function() {
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô', 11));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsFòô')->indexOfLast('Fòô', 0, false));
 });
+
+test('test toString() method', function() {
+    $this->assertTrue(is_string(Strings::create('fòôbàřs')->toString()));
+});
+
+test('test toInteger() method', function() {
+    $this->assertTrue(is_int(Strings::create('10')->toInteger()));
+});
+
+test('test toFloat() method', function() {
+    $this->assertTrue(is_float(Strings::create('7.13')->toFloat()));
+});
+
+test('test toBoolean() method', function() {
+    $this->assertTrue(Strings::create('1')->toBoolean());
+    $this->assertTrue(Strings::create(1)->toBoolean());
+    $this->assertTrue(Strings::create('true')->toBoolean());
+    $this->assertTrue(Strings::create('trUe')->toBoolean());
+    $this->assertTrue(Strings::create('TRUE')->toBoolean());
+    $this->assertFalse(Strings::create('0')->toBoolean());
+    $this->assertFalse(Strings::create(0)->toBoolean());
+    $this->assertFalse(Strings::create('false')->toBoolean());
+    $this->assertFalse(Strings::create('falSe')->toBoolean());
+    $this->assertFalse(Strings::create('FALSE')->toBoolean());
+
+    // Default is true
+    $this->assertTrue(Strings::create('fòôbàřs')->toBoolean());
+
+    // Empty is false
+    $this->assertFalse(Strings::create()->toBoolean());
+});
+
+test('test toArray() method', function() {
+    $this->assertEquals(['fòôbàřs'], Strings::create('fòôbàřs')->toArray());
+    $this->assertEquals(['fòô', 'bàřs'], Strings::create('fòô bàřs')->toArray(' '));
+    $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
+    $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
+});

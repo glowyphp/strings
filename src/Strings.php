@@ -1030,4 +1030,77 @@ class Strings
 
         return $this;
     }
+
+    /**
+     * Return Strings object as string.
+     */
+    public function toString(): string
+    {
+        return strval($this->string);
+    }
+
+    /**
+     * Return Strings object as integer.
+     */
+    public function toInteger(): int
+    {
+        return intval($this->string);
+    }
+
+    /**
+     * Return Strings object as float.
+     */
+    public function toFloat(): float
+    {
+        return floatval($this->string);
+    }
+
+    /**
+     * Returns a boolean representation of the given logical string value.
+     *
+     * For example:
+     * 'true', '1', 'on' and 'yes' will return true.
+     * 'false', '0', 'off', and 'no' will return false.
+     *
+     * In all instances, case is ignored.
+     *
+     * For other numeric strings, their sign will determine the return value.
+     * In addition, blank strings consisting of only whitespace will return
+     * false. For all other strings, the return value is a result of a
+     * boolean cast.
+     */
+    public function toBoolean(): bool
+    {
+        $result = filter_var($this->string, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        return $result === null ? true : $result;
+    }
+
+    /**
+     * Return Strings object as array based on a delimiter.
+     *
+     * @param string $delimiter Delimeter. Default is null.
+     */
+    public function toArray(string $delimiter = null): array
+    {
+        $encoding = $this->encoding;
+        $string   = static::create($this->string, $encoding)->trim()->toString();
+
+        if ($delimiter !== null) {
+            $array = explode($delimiter, $string);
+        } else {
+            $array = [$string];
+        }
+
+        array_walk(
+            $array,
+            static function (&$value) use ($encoding) {
+                if ((string) $value === $value) {
+                    $value = static::create($value, $encoding)->trim()->toString();
+                }
+            }
+        );
+
+        return $array;
+    }
 }
