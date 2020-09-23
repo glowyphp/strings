@@ -1184,11 +1184,11 @@ class Strings
     {
         if ($this->length() === 0) return false;
 
-        $decoded = base64_decode($this->toString(), true);
+        $decoded = base64_decode($this->string, true);
 
         if ($decoded === false) return false;
 
-        return (base64_encode($decoded) === $this->toString());
+        return (base64_encode($decoded) === $this->string);
     }
 
     /**
