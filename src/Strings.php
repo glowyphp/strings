@@ -1032,6 +1032,21 @@ class Strings
     }
 
     /**
+     * Inserts $substring into the string at the $index provided.
+     *
+     * @param string $substring Substring
+     * @param int    $index     Index
+     */
+    public function insert(string $substring, int $index): self
+    {
+        $this->string = static::create($this->string)->substr(0, $index)->toString().
+                        $substring.
+                        static::create($this->string)->substr($index)->toString();
+
+        return $this;
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string

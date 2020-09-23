@@ -100,6 +100,7 @@ $strings = strings();
 | <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false.  |
 | <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
 | <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
+| <a href="#strings_insert">`insert()`</a> | Inserts `$substring` into the string at the $index provided. |
 | <a href="#strings_toString">`toString()`</a> | Return Strings object as string. |
 | <a href="#strings_toInteger">`toInteger()`</a> | Return Strings object as integer. |
 | <a href="#strings_toFloat">`toFloat()`</a> | Return Strings object as float. |
@@ -1213,6 +1214,25 @@ public function move(int $start, int $length, int $destination): self
 
 ```php
 $string = Strings::create('hello world')->move(0, 5, 10);
+```
+
+##### <a name="strings_insert"></a> Method: `insert()`
+
+```php
+/**
+ * Inserts $substring into the string at the $index provided.
+ *
+ * @param string $substring Substring
+ * @param int    $index     Index
+ */
+public function insert(string $substring, int $index): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('world')->insert('hello ');
+$string = Strings::create('hello')->insert(' world', 5);
 ```
 
 ##### <a name="strings_toString"></a> Method: `toString()`

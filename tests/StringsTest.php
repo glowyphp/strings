@@ -425,3 +425,7 @@ test('test toArray() method', function() {
     $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
     $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
 });
+
+test('test insert() method', function() {
+    $this->assertEquals('fòôfòôbàřs', Strings::create('fòôbàřs')->insert('fòô', 3));
+});
