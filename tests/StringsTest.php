@@ -429,3 +429,91 @@ test('test toArray() method', function() {
 test('test insert() method', function() {
     $this->assertEquals('fòôfòôbàřs', Strings::create('fòôbàřs')->insert('fòô', 3));
 });
+
+test('test isEmpty() method', function() {
+    $this->assertTrue(Strings::create()->isEmpty());
+    $this->assertFalse(Strings::create(' ')->isEmpty());
+    $this->assertFalse(Strings::create('fòôbàřs')->isEmpty());
+});
+
+test('test isAscii() method', function() {
+    $this->assertTrue(Strings::create('#')->isAscii());
+    $this->assertFalse(Strings::create('fòôbàřs')->isAscii());
+});
+
+test('test isAlphanumeric() method', function() {
+    $this->assertTrue(Strings::create('fòôbàřs')->isAlphanumeric());
+    $this->assertTrue(Strings::create('12345')->isAlphanumeric());
+    $this->assertTrue(Strings::create('fòôbàřs12345')->isAlphanumeric());
+});
+
+test('test isAlpha() method', function() {
+    $this->assertTrue(Strings::create('fòôbàřs')->isAlpha());
+    $this->assertFalse(Strings::create('12345')->isAlpha());
+    $this->assertFalse(Strings::create('fòôbàřs12345')->isAlpha());
+});
+
+test('test isBlank() method', function() {
+    $this->assertTrue(Strings::create(' ')->isBlank());
+    $this->assertFalse(Strings::create(' fòôbàřs')->isBlank());
+});
+
+test('test isNumeric() method', function() {
+    $this->assertTrue(Strings::create(42)->isNumeric());
+    $this->assertTrue(Strings::create('42')->isNumeric());
+    $this->assertTrue(Strings::create(0x539)->isNumeric());
+    $this->assertFalse(Strings::create('0x539')->isNumeric());
+    $this->assertTrue(Strings::create(02471)->isNumeric());
+    $this->assertTrue(Strings::create('02471')->isNumeric());
+    $this->assertTrue(Strings::create(0b10100111001)->isNumeric());
+    $this->assertFalse(Strings::create('0b10100111001')->isNumeric());
+    $this->assertTrue(Strings::create(1337e0)->isNumeric());
+    $this->assertTrue(Strings::create('1337e0')->isNumeric());
+    $this->assertFalse(Strings::create('not numeric')->isNumeric());
+    $this->assertTrue(Strings::create(9.1)->isNumeric());
+    $this->assertFalse(Strings::create(null)->isNumeric());
+});
+
+test('test isDigit() method', function() {
+    $this->assertFalse(Strings::create('fòôbàřs')->isDigit());
+    $this->assertTrue(Strings::create('01234569')->isDigit());
+    $this->assertFalse(Strings::create('fòôbàřs01234569')->isDigit());
+});
+
+test('test isLower() method', function() {
+    $this->assertTrue(Strings::create('fòôbàřs')->isLower());
+    $this->assertFalse(Strings::create('Fòôbàřs')->isLower());
+});
+
+test('test isUpper() method', function() {
+    $this->assertFalse(Strings::create('fòôbàřs')->isUpper());
+    $this->assertTrue(Strings::create('FOOBAR')->isUpper());
+});
+
+test('test isHexadecimal() method', function() {
+    $this->assertFalse(Strings::create('fòôbàřs')->isHexadecimal());
+    $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
+});
+
+test('test isPrintable() method', function() {
+    $this->assertTrue(Strings::create('fòôbàřs')->isPrintable());
+    $this->assertTrue(Strings::create('19FDE')->isPrintable());
+    $this->assertTrue(Strings::create('LKA#@%.54')->isPrintable());
+});
+
+test('test isPunctuation() method', function() {
+    $this->assertFalse(Strings::create('fòôbàřs')->isPunctuation());
+    $this->assertTrue(Strings::create(',')->isPunctuation());
+    $this->assertTrue(Strings::create('.')->isPunctuation());
+});
+
+test('test isJson() method', function() {
+    $this->assertTrue(Strings::create('{"yaml": "json"}')->isJson());
+    $this->assertFalse(Strings::create('fòôbàřs')->isJson());
+});
+
+test('test isSerialized() method', function() {
+    $this->assertTrue(Strings::create('s:6:"foobar";')->isSerialized());
+    $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
+    $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
+});

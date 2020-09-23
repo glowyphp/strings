@@ -1047,6 +1047,123 @@ class Strings
     }
 
     /**
+     * Returns true if the string is not empty, false otherwise.
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->string);
+    }
+
+    /**
+     * Returns true if the string contains ASCII, false otherwise.
+     */
+    public function isAscii(): bool
+    {
+        return mb_ereg_match('^[[:ascii:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
+     */
+    public function isAlphanumeric(): bool
+    {
+        return mb_ereg_match('^[[:alnum:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only alphabetic chars, false otherwise.
+     */
+    public function isAlpha(): bool
+    {
+        return mb_ereg_match('^[[:alpha:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only whitespace chars, false otherwise.
+     */
+    public function isBlank(): bool
+    {
+        return mb_ereg_match('^[[:space:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is a number or a numeric strings, false otherwise.
+     */
+    public function isNumeric(): bool
+    {
+        return is_numeric($this->string);
+    }
+
+    /**
+     * Returns true if the string contains only digit chars, false otherwise.
+     */
+    public function isDigit(): bool
+    {
+        return mb_ereg_match('^[[:digit:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only lower case chars, false otherwise.
+     */
+    public function isLower(): bool
+    {
+        return mb_ereg_match('^[[:lower:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only upper case chars, false otherwise.
+     */
+    public function isUpper(): bool
+    {
+        return mb_ereg_match('^[[:upper:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only hexadecimal chars, false otherwise.
+     */
+    public function isHexadecimal(): bool
+    {
+        return mb_ereg_match('^[[:xdigit:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only printable (non-invisible) chars, false otherwise.
+     */
+    public function isPrintable(): bool
+    {
+        return mb_ereg_match('^[[:print:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string contains only punctuation chars, false otherwise.
+     */
+    public function isPunctuation(): bool
+    {
+        return mb_ereg_match('^[[:punct:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is serialized, false otherwise.
+     */
+    public function isSerialized(): bool
+    {
+        if ($this->string === '') {
+            return false;
+        }
+
+        return $this->string === 'b:0;' || @\unserialize($this->string) !== false;
+    }
+
+    /**
+     * Returns true if the string is JSON, false otherwise.
+     */
+    public function isJson(): bool
+    {
+       json_decode($this->string);
+       return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string
