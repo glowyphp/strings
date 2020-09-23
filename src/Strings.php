@@ -9,17 +9,25 @@ use InvalidArgumentException;
 use function abs;
 use function array_reverse;
 use function array_shift;
+use function array_walk;
 use function ctype_lower;
 use function explode;
+use function filter_var;
+use function floatval;
 use function hash;
 use function hash_algos;
 use function implode;
 use function in_array;
+use function intval;
 use function is_array;
+use function is_numeric;
 use function is_object;
+use function json_decode;
+use function json_last_error;
 use function lcfirst;
 use function ltrim;
 use function mb_convert_case;
+use function mb_ereg_match;
 use function mb_internal_encoding;
 use function mb_strimwidth;
 use function mb_stripos;
@@ -47,10 +55,15 @@ use function str_word_count;
 use function strncmp;
 use function strpos;
 use function strrpos;
+use function strval;
 use function substr_replace;
 use function trim;
 use function ucwords;
+use function unserialize;
 
+use const FILTER_NULL_ON_FAILURE;
+use const FILTER_VALIDATE_BOOLEAN;
+use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
 use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
@@ -1039,8 +1052,8 @@ class Strings
      */
     public function insert(string $substring, int $index): self
     {
-        $this->string = static::create($this->string)->substr(0, $index)->toString().
-                        $substring.
+        $this->string = static::create($this->string)->substr(0, $index)->toString() .
+                        $substring .
                         static::create($this->string)->substr($index)->toString();
 
         return $this;
@@ -1151,7 +1164,7 @@ class Strings
             return false;
         }
 
-        return $this->string === 'b:0;' || @\unserialize($this->string) !== false;
+        return $this->string === 'b:0;' || @unserialize($this->string) !== false;
     }
 
     /**
@@ -1159,8 +1172,9 @@ class Strings
      */
     public function isJson(): bool
     {
-       json_decode($this->string);
-       return json_last_error() === JSON_ERROR_NONE;
+        json_decode($this->string);
+
+        return json_last_error() === JSON_ERROR_NONE;
     }
 
     /**
@@ -1205,7 +1219,7 @@ class Strings
     {
         $result = filter_var($this->string, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
-        return $result === null ? true : $result;
+        return $result ?? true;
     }
 
     /**
@@ -1213,7 +1227,7 @@ class Strings
      *
      * @param string $delimiter Delimeter. Default is null.
      */
-    public function toArray(string $delimiter = null): array
+    public function toArray(?string $delimiter = null): array
     {
         $encoding = $this->encoding;
         $string   = static::create($this->string, $encoding)->trim()->toString();
@@ -1226,10 +1240,12 @@ class Strings
 
         array_walk(
             $array,
-            static function (&$value) use ($encoding) {
-                if ((string) $value === $value) {
-                    $value = static::create($value, $encoding)->trim()->toString();
+            static function (&$value) use ($encoding): void {
+                if ((string) $value !== $value) {
+                    return;
                 }
+
+                $value = static::create($value, $encoding)->trim()->toString();
             }
         );
 
