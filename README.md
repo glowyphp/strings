@@ -1215,6 +1215,95 @@ public function move(int $start, int $length, int $destination): self
 $string = Strings::create('hello world')->move(0, 5, 10);
 ```
 
+##### <a name="strings_toString"></a> Method: `toString()`
+
+```php
+/**
+ * Return Strings object as string.
+ */
+public function toString(): string
+```
+
+**Examples**
+
+```php
+$string = Strings::create('hello world')->toString();
+```
+
+##### <a name="strings_toInteger"></a> Method: `toInteger()`
+
+```php
+/**
+ * Return Strings object as integer.
+ */
+public function toInteger(): int
+```
+
+**Examples**
+
+```php
+$integer = Strings::create('42')->toInteger();
+```
+
+##### <a name="strings_toFloat"></a> Method: `toFloat()`
+
+```php
+/**
+ * Return Strings object as float.
+ */
+public function toFloat(): float
+```
+
+**Examples**
+
+```php
+$float = Strings::create('42.0')->toFloat();
+```
+
+##### <a name="strings_toBoolean"></a> Method: `toBoolean()`
+
+```php
+/**
+ * Returns a boolean representation of the given logical string value.
+ *
+ * For example:
+ * 'true', '1', 'on' and 'yes' will return true.
+ * 'false', '0', 'off', and 'no' will return false.
+ *
+ * In all instances, case is ignored.
+ *
+ * For other numeric strings, their sign will determine the return value.
+ * In addition, blank strings consisting of only whitespace will return
+ * false. For all other strings, the return value is a result of a
+ * boolean cast.
+ */
+public function toBoolean(): bool
+```
+
+**Examples**
+
+```php
+$state = Strings::create('on')->toBoolean();
+$state = Strings::create('off')->toBoolean();
+```
+
+##### <a name="strings_toArray"></a> Method: `toArray()`
+
+```php
+/**
+ * Return Strings object as array based on a delimiter.
+ *
+ * @param string $delimiter Delimeter. Default is null.
+ */
+public function toArray(string $delimiter = null): array
+```
+
+**Examples**
+
+```php
+$array = Strings::create('hello world')->toArray();
+$array = Strings::create('hello, world')->toArray(',');
+```
 
 ### Tests
 
