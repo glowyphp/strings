@@ -1,84 +1,90 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Atomastic\Strings\Strings;
 
-test('test create() method', function() {
+test('test create() method', function (): void {
     $this->assertEquals(new Strings(), Strings::create());
 });
 
-test('test strings() helper', function() {
+test('test strings() helper', function (): void {
     $this->assertEquals(Strings::create(), strings());
 });
 
-test('test trimSlashes() method', function() {
+test('test trimSlashes() method', function (): void {
     $this->assertEquals('some text here', Strings::create('some text here/')->trimSlashes());
     $this->assertEquals('some text here', Strings::create('some text here//')->trimSlashes());
     $this->assertEquals('some text here', Strings::create('some text here///')->trimSlashes());
 });
 
-test('test reduceSlashes() method', function() {
+test('test reduceSlashes() method', function (): void {
     $this->assertEquals('some/text/here', Strings::create('some//text//here')->reduceSlashes());
     $this->assertEquals('fòô/fòô/fòô', Strings::create('fòô//fòô//fòô')->reduceSlashes());
 });
 
-test('test stripQuotes() method', function() {
+test('test stripQuotes() method', function (): void {
     $this->assertEquals('some text here', Strings::create('some "text" here')->stripQuotes());
     $this->assertEquals('some text here', Strings::create('some \'"text"\' here')->stripQuotes());
 });
 
-test('test quotesToEntities() method', function() {
+test('test quotesToEntities() method', function (): void {
     $this->assertEquals('&#39; &quot;', Strings::create('\' "')->quotesToEntities());
 });
 
-test('test normalizeNewLines() method', function() {
+test('test normalizeNewLines() method', function (): void {
     $this->assertEquals("\n \n", Strings::create("\r\n \r")->normalizeNewLines());
 });
 
-test('test normalizeSpaces() method', function() {
+test('test normalizeSpaces() method', function (): void {
     $this->assertEquals(' ', Strings::create('   ')->normalizeSpaces());
 });
 
-test('test random() method', function() {
+test('test random() method', function (): void {
     $this->assertNotEquals(Strings::create()->random(), Strings::create()->random());
     $this->assertNotEquals(Strings::create()->random(10), Strings::create()->random(10));
     $this->assertNotEquals(Strings::create()->random(10, '0123456789'), Strings::create()->random(10, '0123456789'));
     $this->assertEquals(10, Strings::create(Strings::create()->random(10, '0123456789'))->length());
 });
 
-test('test increment() method', function() {
+test('test increment() method', function (): void {
     $this->assertEquals('page_2', Strings::create('page_1')->increment());
     $this->assertEquals('page_3', Strings::create('page')->increment(3));
     $this->assertEquals('page-3', Strings::create('page')->increment(3, '-'));
 });
 
 
-test('test limit() method', function() {
-    $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore...',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit());
+test('test limit() method', function (): void {
+    $this->assertEquals(
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore...',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit()
+    );
 
-    $this->assertEquals('Lorem...',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit(5));
+    $this->assertEquals(
+        'Lorem...',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit(5)
+    );
 
-    $this->assertEquals('Lorem>>>',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit(5, '>>>'));
+    $this->assertEquals(
+        'Lorem>>>',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit(5, '>>>')
+    );
 });
 
-test('test lower() method', function() {
+test('test lower() method', function (): void {
     $this->assertEquals('daniel', Strings::create('DANIEL')->lower());
 });
 
-test('test upper() method', function() {
+test('test upper() method', function (): void {
     $this->assertEquals('DANIEL', Strings::create('daniel')->upper());
 });
 
-test('test studly() method', function() {
+test('test studly() method', function (): void {
     $this->assertEquals('FooBar', Strings::create('foo_bar')->studly());
     $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
 });
 
-test('test snake() method', function() {
+test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));
     $this->assertEquals('fòô_bàř', Strings::create('fòôBàř')->snake());
@@ -97,38 +103,50 @@ test('test snake() method', function() {
     $this->assertEquals('fòô_php_bàř_fòô', Strings::create('fòô php BàřFòô')->snake());
 });
 
-test('test camel() method', function() {
+test('test camel() method', function (): void {
     $this->assertEquals('fooBar', Strings::create('foo_bar')->camel());
     $this->assertEquals('fòôBàř', Strings::create('fòô_bàř')->camel());
 });
 
-test('test kebab() method', function() {
+test('test kebab() method', function (): void {
     $this->assertEquals('foo-bar', Strings::create('fooBar')->kebab());
     $this->assertEquals('fòô-bàř', Strings::create('fòôBàř')->kebab());
 });
 
-test('test words() method', function() {
-    $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum....',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words());
+test('test words() method', function (): void {
+    $this->assertEquals(
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum....',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words()
+    );
 
-    $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words(10));
+    $this->assertEquals(
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do...',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words(10)
+    );
 
-    $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do>>>',
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words(10, '>>>'));
+    $this->assertEquals(
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do>>>',
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->words(10, '>>>')
+    );
 });
 
-test('test countWords() method', function() {
-    $this->assertEquals(69,
-                         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->countWords());
-     $this->assertEquals(['Lorem', 'ipsum', 'dolor'],
-                          Strings::create('Lorem ipsum dolor')->countWords(1));
+test('test countWords() method', function (): void {
+    $this->assertEquals(
+        69,
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->countWords()
+    );
+     $this->assertEquals(
+         ['Lorem', 'ipsum', 'dolor'],
+         Strings::create('Lorem ipsum dolor')->countWords(1)
+     );
 
-     $this->assertEquals([0 => 'Lorem', 6 => 'ipsum', 12 => 'dolor'],
-                          Strings::create('Lorem ipsum dolor')->countWords(2));
+     $this->assertEquals(
+         [0 => 'Lorem', 6 => 'ipsum', 12 => 'dolor'],
+         Strings::create('Lorem ipsum dolor')->countWords(2)
+     );
 });
 
-test('test contains() method', function() {
+test('test contains() method', function (): void {
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains('ipsum'));
     $this->assertFalse(Strings::create('Lorem ipsum dolor')->contains('test'));
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains(['ipsum', 'dolor']));
@@ -141,147 +159,147 @@ test('test contains() method', function() {
     $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->contains(['ipsum', 'dolor'], false));
 });
 
-test('test containsAll() method', function() {
+test('test containsAll() method', function (): void {
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->containsAll(['ipsum', 'dolor']));
 
     $this->assertFalse(Strings::create('Lorem Ipsum Dolor')->containsAll(['ipsum', 'dolor']));
     $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->containsAll(['ipsum', 'dolor'], false));
 });
 
-test('test containsAny() method', function() {
+test('test containsAny() method', function (): void {
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->containsAny(['ipsum', 'dolor']));
 
     $this->assertFalse(Strings::create('Lorem Ipsum Dolor')->containsAny(['ipsum', 'dolor']));
     $this->assertTrue(Strings::create('Lorem Ipsum Dolor')->containsAny(['ipsum', 'dolor'], false));
 });
 
-test('test ucfirst() method', function() {
+test('test ucfirst() method', function (): void {
     $this->assertEquals('Daniel', Strings::create('daniel')->ucfirst());
 });
 
-test('test capitalize() method', function() {
+test('test capitalize() method', function (): void {
     $this->assertEquals('Daniel', Strings::create('daniel')->capitalize());
 });
 
-test('test length() method', function() {
+test('test length() method', function (): void {
     $this->assertEquals(4, Strings::create('SG-1')->length());
 });
 
-test('test count() method', function() {
+test('test count() method', function (): void {
     $this->assertEquals(4, Strings::create('SG-1')->count());
 });
 
-test('test countSubString() method', function() {
+test('test countSubString() method', function (): void {
     $this->assertEquals(3, Strings::create('fòôbàř fòô bàř fòôbàř')->countSubString('fòô'));
     $this->assertEquals(3, Strings::create('fòôbàř Fòô bàř fòôbàř')->countSubString('Fòô', false));
 });
 
-test('test substr() method', function() {
+test('test substr() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world mission to P9Y-3C3', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0));
     $this->assertEquals('SG-1', Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->substr(0, 4));
     $this->assertEquals('fòôbàř', Strings::create('fòôbàř')->substr(0));
     $this->assertEquals('fòô', Strings::create('fòôbàř')->substr(0, 3));
 });
 
-test('test trim() method', function() {
+test('test trim() method', function (): void {
     $this->assertEquals('daniel', Strings::create(' daniel ')->trim());
     $this->assertEquals('fòôbàř', Strings::create(' fòôbàř ')->trim());
 });
 
-test('test trimLeft() method', function() {
+test('test trimLeft() method', function (): void {
     $this->assertEquals('daniel', Strings::create(' daniel')->trimLeft());
     $this->assertEquals('fòôbàř', Strings::create(' fòôbàř')->trimLeft());
 });
 
-test('test trimRight() method', function() {
+test('test trimRight() method', function (): void {
     $this->assertEquals('daniel', Strings::create('daniel ')->trimRight());
     $this->assertEquals('fòôbàř', Strings::create('fòôbàř ')->trimRight());
 });
 
-test('test reverse() method', function() {
+test('test reverse() method', function (): void {
     $this->assertEquals('1-GS', Strings::create('SG-1')->reverse());
     $this->assertEquals('řàbôòf', Strings::create('fòôbàř')->reverse());
 });
 
-test('test segments() method', function() {
+test('test segments() method', function (): void {
     $this->assertEquals(['SG-1', 'returns', 'from', 'an', 'off-world', 'mission'], Strings::create('SG-1 returns from an off-world mission')->segments());
     $this->assertEquals(['movies', 'sg-1', 'season-5', 'episode-21'], Strings::create('movies/sg-1/season-5/episode-21')->segments('/'));
 });
 
-test('test segment() method', function() {
+test('test segment() method', function (): void {
     $this->assertEquals('SG-1', Strings::create('SG-1 returns from an off-world mission')->segment(0));
     $this->assertEquals('mission', Strings::create('SG-1 returns from an off-world mission')->segment(-1));
     $this->assertEquals('movies', Strings::create('movies/sg-1/season-5/episode-21')->segment(0, '/'));
     $this->assertEquals('episode-21', Strings::create('movies/sg-1/season-5/episode-21')->segment(-1, '/'));
 });
 
-test('test firstSegment() method', function() {
+test('test firstSegment() method', function (): void {
     $this->assertEquals('SG-1', Strings::create('SG-1 returns from an off-world mission')->firstSegment());
     $this->assertEquals('movies', Strings::create('movies/sg-1/season-5/episode-21')->firstSegment('/'));
 });
 
-test('test lastSegment() method', function() {
+test('test lastSegment() method', function (): void {
     $this->assertEquals('mission', Strings::create('SG-1 returns from an off-world mission')->lastSegment());
     $this->assertEquals('episode-21', Strings::create('movies/sg-1/season-5/episode-21')->lastSegment('/'));
 });
 
-test('test between() method', function() {
+test('test between() method', function (): void {
     $this->assertEquals(' returns ', Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from'));
 });
 
-test('test before() method', function() {
+test('test before() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->before('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->before('bàřs'));
 });
 
-test('test beforeLast() method', function() {
+test('test beforeLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->beforeLast('bàřs'));
 });
 
-test('test after() method', function() {
+test('test after() method', function (): void {
     $this->assertEquals(' returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->after('SG-1'));
 });
 
-test('test afterLast() method', function() {
+test('test afterLast() method', function (): void {
     $this->assertEquals(' returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1'));
 });
 
-test('test stripSpaces() method', function() {
+test('test stripSpaces() method', function (): void {
     $this->assertEquals('SG-1returnsfromanoff-worldmission', Strings::create('SG-1 returns from an off-world mission')->stripSpaces());
 });
 
-test('test padBoth() method', function() {
+test('test padBoth() method', function (): void {
     $this->assertEquals('------SG-1 returns from an off-world mission------', Strings::create('SG-1 returns from an off-world mission')->padBoth(50, '-'));
 });
 
-test('test padRight() method', function() {
+test('test padRight() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world mission------------', Strings::create('SG-1 returns from an off-world mission')->padRight(50, '-'));
 });
 
-test('test padLeft() method', function() {
+test('test padLeft() method', function (): void {
     $this->assertEquals('------------SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-'));
 });
 
-test('test replaceArray() method', function() {
+test('test replaceArray() method', function (): void {
     $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']));
 });
 
-test('test replaceFirst() method', function() {
+test('test replaceFirst() method', function (): void {
     $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2'));
 });
 
-test('test replaceLast() method', function() {
+test('test replaceLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an P9Y-3C3 mission', Strings::create('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3'));
 });
 
-test('test start() method', function() {
+test('test start() method', function (): void {
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('movies/sg-1/season-5/episode-21/')->start('/'));
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21/')->start('/'));
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('//movies/sg-1/season-5/episode-21/')->start('/'));
 });
 
-test('test startsWith() method', function() {
+test('test startsWith() method', function (): void {
     $this->assertTrue(Strings::create('/movies/sg-1/season-5/episode-21/')->startsWith('/'));
     $this->assertFalse(Strings::create('/movies/sg-1/season-5/episode-21/')->startsWith('//'));
     $this->assertTrue(Strings::create('fòôbàřs')->startsWith('fòô'));
@@ -307,7 +325,7 @@ test('test startsWith() method', function() {
     $this->assertFalse(Strings::create(7.123)->startsWith('7.13'));
 });
 
-test('test endsWith() method', function() {
+test('test endsWith() method', function (): void {
     $this->assertTrue(Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('/'));
     $this->assertFalse(Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('//'));
     $this->assertTrue(Strings::create('fòôbàřs')->endsWith('bàřs'));
@@ -333,48 +351,52 @@ test('test endsWith() method', function() {
     $this->assertFalse(Strings::create(7.123)->endsWith('7.13'));
 });
 
-test('test finish() method', function() {
+test('test finish() method', function (): void {
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21')->finish('/'));
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21/')->finish('/'));
     $this->assertEquals('/movies/sg-1/season-5/episode-21/', Strings::create('/movies/sg-1/season-5/episode-21//')->finish('/'));
 });
 
-test('test hash() method', function() {
+test('test hash() method', function (): void {
     $this->assertEquals(Strings::create('test')->hash(), Strings::create('test')->hash());
     $this->assertEquals(Strings::create('test')->hash('sha256'), Strings::create('test')->hash('sha256'));
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
 });
 
-test('test prepend() method', function() {
+test('test prepend() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('PLAY HARD.')->prepend('WORK HARD. '));
 });
 
-test('test append() method', function() {
+test('test append() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('WORK HARD.')->append(' PLAY HARD.'));
 });
 
-test('test shuffle() method', function() {
-    $this->assertEquals(Strings::create('fòôbàřs')->length(),
-                        Strings::create(Strings::create('fòôbàřs')->shuffle())->length());
+test('test shuffle() method', function (): void {
+    $this->assertEquals(
+        Strings::create('fòôbàřs')->length(),
+        Strings::create(Strings::create('fòôbàřs')->shuffle())->length()
+    );
 
-    $this->assertEquals(Strings::create('WORK HARD. PLAY HARD.')->length(),
-                        Strings::create(Strings::create('WORK HARD. PLAY HARD.')->shuffle())->length());
+    $this->assertEquals(
+        Strings::create('WORK HARD. PLAY HARD.')->length(),
+        Strings::create(Strings::create('WORK HARD. PLAY HARD.')->shuffle())->length()
+    );
 });
 
-test('test similarity() method', function() {
+test('test similarity() method', function (): void {
     $this->assertEquals(100, Strings::create('fòôbàřs')->similarity('fòôbàřs'));
     $this->assertEquals(62.5, Strings::create('fòôbàřs')->similarity('fòô'));
 });
 
-test('test at() method', function() {
+test('test at() method', function (): void {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
 });
 
-test('test move() method', function() {
+test('test move() method', function (): void {
     $this->assertEquals('bàřsfòô', Strings::create('fòôbàřs')->move(0, 3, 7));
 });
 
-test('test indexOf() method', function() {
+test('test indexOf() method', function (): void {
     $this->assertEquals(0, Strings::create('fòôbàřs')->indexOf('fòô'));
     $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs'));
     $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs', 3));
@@ -382,25 +404,25 @@ test('test indexOf() method', function() {
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 0, false));
 });
 
-test('test indexOfLast() method', function() {
+test('test indexOfLast() method', function (): void {
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô'));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô', 11));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsFòô')->indexOfLast('Fòô', 0, false));
 });
 
-test('test toString() method', function() {
+test('test toString() method', function (): void {
     $this->assertTrue(is_string(Strings::create('fòôbàřs')->toString()));
 });
 
-test('test toInteger() method', function() {
+test('test toInteger() method', function (): void {
     $this->assertTrue(is_int(Strings::create('10')->toInteger()));
 });
 
-test('test toFloat() method', function() {
+test('test toFloat() method', function (): void {
     $this->assertTrue(is_float(Strings::create('7.13')->toFloat()));
 });
 
-test('test toBoolean() method', function() {
+test('test toBoolean() method', function (): void {
     $this->assertTrue(Strings::create('1')->toBoolean());
     $this->assertTrue(Strings::create(1)->toBoolean());
     $this->assertTrue(Strings::create('true')->toBoolean());
@@ -419,46 +441,46 @@ test('test toBoolean() method', function() {
     $this->assertFalse(Strings::create()->toBoolean());
 });
 
-test('test toArray() method', function() {
+test('test toArray() method', function (): void {
     $this->assertEquals(['fòôbàřs'], Strings::create('fòôbàřs')->toArray());
     $this->assertEquals(['fòô', 'bàřs'], Strings::create('fòô bàřs')->toArray(' '));
     $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
     $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
 });
 
-test('test insert() method', function() {
+test('test insert() method', function (): void {
     $this->assertEquals('fòôfòôbàřs', Strings::create('fòôbàřs')->insert('fòô', 3));
 });
 
-test('test isEmpty() method', function() {
+test('test isEmpty() method', function (): void {
     $this->assertTrue(Strings::create()->isEmpty());
     $this->assertFalse(Strings::create(' ')->isEmpty());
     $this->assertFalse(Strings::create('fòôbàřs')->isEmpty());
 });
 
-test('test isAscii() method', function() {
+test('test isAscii() method', function (): void {
     $this->assertTrue(Strings::create('#')->isAscii());
     $this->assertFalse(Strings::create('fòôbàřs')->isAscii());
 });
 
-test('test isAlphanumeric() method', function() {
+test('test isAlphanumeric() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isAlphanumeric());
     $this->assertTrue(Strings::create('12345')->isAlphanumeric());
     $this->assertTrue(Strings::create('fòôbàřs12345')->isAlphanumeric());
 });
 
-test('test isAlpha() method', function() {
+test('test isAlpha() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isAlpha());
     $this->assertFalse(Strings::create('12345')->isAlpha());
     $this->assertFalse(Strings::create('fòôbàřs12345')->isAlpha());
 });
 
-test('test isBlank() method', function() {
+test('test isBlank() method', function (): void {
     $this->assertTrue(Strings::create(' ')->isBlank());
     $this->assertFalse(Strings::create(' fòôbàřs')->isBlank());
 });
 
-test('test isNumeric() method', function() {
+test('test isNumeric() method', function (): void {
     $this->assertTrue(Strings::create(42)->isNumeric());
     $this->assertTrue(Strings::create('42')->isNumeric());
     $this->assertTrue(Strings::create(0x539)->isNumeric());
@@ -474,45 +496,45 @@ test('test isNumeric() method', function() {
     $this->assertFalse(Strings::create(null)->isNumeric());
 });
 
-test('test isDigit() method', function() {
+test('test isDigit() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isDigit());
     $this->assertTrue(Strings::create('01234569')->isDigit());
     $this->assertFalse(Strings::create('fòôbàřs01234569')->isDigit());
 });
 
-test('test isLower() method', function() {
+test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());
 });
 
-test('test isUpper() method', function() {
+test('test isUpper() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isUpper());
     $this->assertTrue(Strings::create('FOOBAR')->isUpper());
 });
 
-test('test isHexadecimal() method', function() {
+test('test isHexadecimal() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isHexadecimal());
     $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
 });
 
-test('test isPrintable() method', function() {
+test('test isPrintable() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isPrintable());
     $this->assertTrue(Strings::create('19FDE')->isPrintable());
     $this->assertTrue(Strings::create('LKA#@%.54')->isPrintable());
 });
 
-test('test isPunctuation() method', function() {
+test('test isPunctuation() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isPunctuation());
     $this->assertTrue(Strings::create(',')->isPunctuation());
     $this->assertTrue(Strings::create('.')->isPunctuation());
 });
 
-test('test isJson() method', function() {
+test('test isJson() method', function (): void {
     $this->assertTrue(Strings::create('{"yaml": "json"}')->isJson());
     $this->assertFalse(Strings::create('fòôbàřs')->isJson());
 });
 
-test('test isSerialized() method', function() {
+test('test isSerialized() method', function (): void {
     $this->assertTrue(Strings::create('s:6:"foobar";')->isSerialized());
     $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
     $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
