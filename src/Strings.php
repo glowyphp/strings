@@ -1178,6 +1178,20 @@ class Strings
     }
 
     /**
+     * Returns true if the string is base64 encoded, false otherwise.
+     */
+    public function isBase64(): bool
+    {
+        if ($this->length() === 0) return false;
+
+        $decoded = base64_decode($this->toString(), true);
+
+        if ($decoded === false) return false;
+
+        return (base64_encode($decoded) === $this->toString());
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string

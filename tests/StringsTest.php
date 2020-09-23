@@ -539,3 +539,8 @@ test('test isSerialized() method', function (): void {
     $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
     $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
 });
+
+test('test isBase64() method', function (): void {
+    $this->assertTrue(Strings::create('ZsOyw7Riw6DFmXM=')->isBase64());
+    $this->assertFalse(Strings::create('fòôbàřs')->isBase64());
+});
