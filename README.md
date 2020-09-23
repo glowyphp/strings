@@ -53,7 +53,7 @@ $strings = strings();
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
 | <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
-| <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
+| <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
 | <a href="#strings_limit">`limit()`</a> | Limit the number of characters in a string. |
@@ -62,9 +62,9 @@ $strings = strings();
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
 | <a href="#strings_words">`words()`</a> | Limit the number of words in a string. |
-| <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
-| <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
-| <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false.|
+| <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
+| <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
+| <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.|
 | <a href="#strings_substr">`substr()`</a> | Returns the portion of string specified by the start and length parameters. |
 | <a href="#strings_ucfirst">`ucfirst()`</a> | Converts the first character of a UTF-8 string to upper case and leaves the other characters unchanged. |
 | <a href="#strings_trim">`trim()`</a> | Strip whitespace (or other characters) from the beginning and end of a string. |
@@ -97,8 +97,8 @@ $strings = strings();
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
-| <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false.  |
-| <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$case_sensitive` to false. |
+| <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.  |
+| <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
 | <a href="#strings_insert">`insert()`</a> | Inserts `$substring` into the string at the $index provided. |
 | <a href="#strings_toString">`toString()`</a> | Return Strings object as string. |
@@ -347,12 +347,12 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 wit
 /**
  * Returns the number of occurrences of $substring in the given string.
  * By default, the comparison is case-sensitive, but can be made insensitive
- * by setting $case_sensitive to false.
+ * by setting $caseSensitive to false.
  *
  * @param  string $substring      The substring to search for
- * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity
+ * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity
  */
-public function countSubString(string $substring, bool $case_sensitive = true): int
+public function countSubString(string $substring, bool $caseSensitive = true): int
 ```
 
 **Examples**
@@ -361,7 +361,7 @@ public function countSubString(string $substring, bool $case_sensitive = true): 
 // Returns the number of occurrences of $substring in the given string.
 $result = Strings::create('Test string here for test')->countSubString('test');
 
-// Returns the number of occurrences of $substring in the given string with $case_sensitive false.
+// Returns the number of occurrences of $substring in the given string with $caseSensitive false.
 $result = Strings::create('Test string here for test')->countSubString('test', false);
 
 ```
@@ -515,9 +515,9 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
  * Determine if a given string contains a given substring.
  *
  * @param  string|string[] $needles        The string to find in haystack.
- * @param  bool            $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ * @param  bool            $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function contains($needles, bool $case_sensitive = true): bool
+public function contains($needles, bool $caseSensitive = true): bool
 ```
 
 **Examples**
@@ -537,9 +537,9 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
  * Determine if a given string contains all array values.
  *
  * @param  string[] $needles        The array of strings to find in haystack.
- * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function containsAll(array $needles, bool $case_sensitive = true): bool
+public function containsAll(array $needles, bool $caseSensitive = true): bool
 ```
 
 **Examples**
@@ -556,9 +556,9 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
  *
  * @param  string   $haystack       The string being checked.
  * @param  string[] $needles        The array of strings to find in haystack.
- * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function containsAny(array $needles, bool $case_sensitive = true): bool
+public function containsAny(array $needles, bool $caseSensitive = true): bool
 ```
 
 **Examples**
@@ -1164,9 +1164,9 @@ $character = Strings::create('hello')->at(3);
  *
  * @param int|string $needle         The string to find in haystack.
  * @param int        $offset         The search offset. If it is not specified, 0 is used.
- * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
+public function indexOf($needle, int $offset = 0, bool $caseSensitive = true)
 ```
 
 **Examples**
@@ -1185,9 +1185,9 @@ $index = Strings::create('hello')->indexOf('e');
  *
  * @param int|string $needle         The string to find in haystack.
  * @param int        $offset         The search offset. If it is not specified, 0 is used.
- * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+ * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
  */
-public function indexOfLast(string $needle, int $offset = 0, bool $case_sensitive = true)
+public function indexOfLast(string $needle, int $offset = 0, bool $caseSensitive = true)
 ```
 
 **Examples**
