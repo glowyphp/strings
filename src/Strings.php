@@ -10,6 +10,8 @@ use function abs;
 use function array_reverse;
 use function array_shift;
 use function array_walk;
+use function base64_decode;
+use function base64_encode;
 use function ctype_lower;
 use function explode;
 use function filter_var;
@@ -388,14 +390,14 @@ class Strings
     /**
      * Returns the number of occurrences of $substring in the given string.
      * By default, the comparison is case-sensitive, but can be made insensitive
-     * by setting $case_sensitive to false.
+     * by setting $caseSensitive to false.
      *
-     * @param  string $substring      The substring to search.
-     * @param  bool   $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string $substring     The substring to search.
+     * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function countSubString(string $substring, bool $case_sensitive = true): int
+    public function countSubString(string $substring, bool $caseSensitive = true): int
     {
-        if ($case_sensitive) {
+        if ($caseSensitive) {
             return mb_substr_count($this->string, $substring);
         }
 
@@ -422,13 +424,13 @@ class Strings
     /**
      * Determine if a given string contains a given substring.
      *
-     * @param  string|string[] $needles        The string to find in haystack.
-     * @param  bool            $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string|string[] $needles       The string to find in haystack.
+     * @param  bool            $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function contains($needles, bool $case_sensitive = true): bool
+    public function contains($needles, bool $caseSensitive = true): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && (bool) static::create($this->string, $this->encoding)->indexOf($needle, 0, $case_sensitive) !== false) {
+            if ($needle !== '' && (bool) static::create($this->string, $this->encoding)->indexOf($needle, 0, $caseSensitive) !== false) {
                 return true;
             }
         }
@@ -439,13 +441,13 @@ class Strings
     /**
      * Determine if a given string contains all array values.
      *
-     * @param  string[] $needles        The array of strings to find in haystack.
-     * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string[] $needles       The array of strings to find in haystack.
+     * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function containsAll(array $needles, bool $case_sensitive = true): bool
+    public function containsAll(array $needles, bool $caseSensitive = true): bool
     {
         foreach ($needles as $needle) {
-            if (! static::create($this->string, $this->encoding)->contains($needle, $case_sensitive)) {
+            if (! static::create($this->string, $this->encoding)->contains($needle, $caseSensitive)) {
                 return false;
             }
         }
@@ -456,14 +458,14 @@ class Strings
     /**
      * Determine if a given string contains any of array values.
      *
-     * @param  string   $haystack       The string being checked.
-     * @param  string[] $needles        The array of strings to find in haystack.
-     * @param  bool     $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param  string   $haystack      The string being checked.
+     * @param  string[] $needles       The array of strings to find in haystack.
+     * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function containsAny(array $needles, bool $case_sensitive = true): bool
+    public function containsAny(array $needles, bool $caseSensitive = true): bool
     {
         foreach ($needles as $needle) {
-            if (static::create($this->string, $this->encoding)->contains($needle, $case_sensitive)) {
+            if (static::create($this->string, $this->encoding)->contains($needle, $caseSensitive)) {
                 return true;
             }
         }
@@ -528,17 +530,17 @@ class Strings
      * and false if not found. Accepts an optional offset from which to begin
      * the search.
      *
-     * @param int|string $needle         The string to find in haystack.
-     * @param int        $offset         The search offset. If it is not specified, 0 is used.
-     * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param int|string $needle        The string to find in haystack.
+     * @param int        $offset        The search offset. If it is not specified, 0 is used.
+     * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function indexOf($needle, int $offset = 0, bool $case_sensitive = true)
+    public function indexOf($needle, int $offset = 0, bool $caseSensitive = true)
     {
         if ($needle === '' || $this->string === '') {
             return false;
         }
 
-        if ($case_sensitive) {
+        if ($caseSensitive) {
             return mb_strpos((string) $this->string, $needle, $offset, $this->encoding);
         }
 
@@ -550,11 +552,11 @@ class Strings
      * Accepts an optional $offset from which to begin the search. Offsets may be negative to
      * count from the last character in the string.
      *
-     * @param int|string $needle         The string to find in haystack.
-     * @param int        $offset         The search offset. If it is not specified, 0 is used.
-     * @param bool       $case_sensitive Whether or not to enforce case-sensitivity. Default is true.
+     * @param int|string $needle        The string to find in haystack.
+     * @param int        $offset        The search offset. If it is not specified, 0 is used.
+     * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
      */
-    public function indexOfLast(string $needle, int $offset = 0, bool $case_sensitive = true)
+    public function indexOfLast(string $needle, int $offset = 0, bool $caseSensitive = true)
     {
         if ($needle === '' || $this->string === '') {
             return false;
@@ -570,7 +572,7 @@ class Strings
             return false;
         }
 
-        if ($case_sensitive) {
+        if ($caseSensitive) {
             return mb_strrpos((string) $this->string, $needle, $offset, $this->encoding);
         }
 
@@ -1182,13 +1184,17 @@ class Strings
      */
     public function isBase64(): bool
     {
-        if ($this->length() === 0) return false;
+        if ($this->length() === 0) {
+            return false;
+        }
 
         $decoded = base64_decode($this->string, true);
 
-        if ($decoded === false) return false;
+        if ($decoded === false) {
+            return false;
+        }
 
-        return (base64_encode($decoded) === $this->string);
+        return base64_encode($decoded) === $this->string;
     }
 
     /**
