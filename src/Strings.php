@@ -259,6 +259,18 @@ class Strings
     }
 
     /**
+     * Returns a repeated string given a multiplier.
+     *
+     * @param int $multiplier The number of times to repeat the string.
+     */
+    public function repeat(int $multiplier): self
+    {
+        $this->string = str_repeat($this->string, $multiplier);
+
+        return $this;
+    }
+
+    /**
      * Limit the number of characters in a string.
      *
      * @param  int    $limit  Limit of characters

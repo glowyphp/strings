@@ -50,6 +50,7 @@ $strings = strings();
 | <a href="#strings_normalizeSpaces">`normalizeSpaces()`</a> | Normalize white-spaces to a single space. |
 | <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
+| <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
 | <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
@@ -297,6 +298,23 @@ $string = Strings::create('page_1')->increment();
 
 // Increment string with custom settings
 $string = Strings::create('page-1')->increment(1, '-');
+```
+
+##### <a name="strings_repeat"></a> Method: `repeat()`
+
+```php
+/**
+ * Returns a repeated string given a multiplier.
+ *
+ * @param int $multiplier The number of times to repeat the string.
+ */
+public function repeat(int $multiplier): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('fòô')->repeat(3);
 ```
 
 ##### <a name="strings_length"></a> Method: `length()`
