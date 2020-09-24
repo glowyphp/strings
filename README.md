@@ -123,6 +123,7 @@ $strings = strings();
 | <a href="#strings_isJson">`isJson()`</a> | Returns true if the string is JSON, false otherwise. |
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
+| <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
 
 #### Methods Details
 
@@ -1631,12 +1632,30 @@ public function isSimilar(string $string, float $minPercentForSimilarity = 80.0)
 **Examples**
 
 ```php
-if (Strings::create('fòôbàřs'))->isSimilar('fòôbàřs')) {
+if (Strings::create('fòôbàřs')->isSimilar('fòôbàřs')) {
     // do something...
 }
 
+if (Strings::create('fòôbàřs')->isSimilar('fòô', 50.0)) {
+    // do something...
+}
+```
 
-if (Strings::create('fòôbàřs'))->isSimilar('fòô', 50.0)) {
+##### <a name="strings_isEqual"></a> Method: `isEqual()`
+
+```php
+/**
+ * Determine whether the string is equals to $string.
+ *
+ * @param $string String to compare.
+ */
+public function isEqual(string $string): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
     // do something...
 }
 ```
