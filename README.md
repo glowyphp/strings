@@ -42,7 +42,6 @@ $strings = strings();
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
-| <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
 | <a href="#strings_stripQuotes">`stripQuotes()`</a> | Removes single and double quotes from a string. |
 | <a href="#strings_quotesToEntities">`quotesToEntities()`</a> | Convert single and double quotes to entities. |
@@ -71,6 +70,7 @@ $strings = strings();
 | <a href="#strings_trim">`trim()`</a> | Strip whitespace (or other characters) from the beginning and end of a string. |
 | <a href="#strings_trimRight">`trimRight()`</a> | Strip whitespace (or other characters) from the end of a string. |
 | <a href="#strings_trimLeft">`trimLeft()`</a> | Strip whitespace (or other characters) from the beginning of a string. |
+| <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
 | <a href="#strings_capitalize">`capitalize()`</a> | Converts the first character of every word of string to upper case and the others to lower case. |
 | <a href="#strings_reverse">`reverse()`</a> | Reverses string. |
 | <a href="#strings_segments">`segments()`</a> | Get array of segments from a string based on a delimiter. |
@@ -160,21 +160,6 @@ public function stripSpaces(): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->stripSpaces();
-```
-
-##### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
-
-```php
-/**
- * Removes any leading and traling slashes from a string.
- */
-public function trimSlashes(): self
-```
-
-**Examples**
-
-```php
-$string = Strings::create('some string here/')->trimSlashes();
 ```
 
 ##### <a name="strings_reduceSlashes"></a> Method: `reduceSlashes()`
@@ -695,6 +680,21 @@ public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
 
 ```php
 $string = Strings::create(' daniel')->trimLeft();
+```
+
+##### <a name="strings_trimSlashes"></a> Method: `trimSlashes()`
+
+```php
+/**
+ * Removes any leading and traling slashes from a string.
+ */
+public function trimSlashes(): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('some string here/')->trimSlashes();
 ```
 
 ##### <a name="strings_capitalize"></a> Method: `capitalize()`
