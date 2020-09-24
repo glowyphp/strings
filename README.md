@@ -121,7 +121,6 @@ $strings = strings();
 | <a href="#strings_isSerialized">`isSerialized()`</a> | Returns true if the string is serialized, false otherwise. |
 | <a href="#strings_isJson">`isJson()`</a> | Returns true if the string is JSON, false otherwise. |
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
-| <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 
 #### Methods Details
 
@@ -1507,6 +1506,91 @@ public function isHexadecimal(): bool
 
 ```php
 if (Strings::create('19FDE')->isHexadecimal()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isPrintable"></a> Method: `isPrintable()`
+
+```php
+/**
+ * Returns true if the string contains only printable (non-invisible) chars, false otherwise.
+ */
+public function isPrintable(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('LKA#@%.54')->isPrintable()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isPunctuation"></a> Method: `isPunctuation()`
+
+```php
+/**
+ * Returns true if the string contains only punctuation chars, false otherwise.
+ */
+public function isPunctuation(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create(',')->isPunctuation()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isSerialized"></a> Method: `isSerialized()`
+
+```php
+/**
+ * Returns true if the string is serialized, false otherwise.
+ */
+public function isSerialized(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('s:11:"fòôbàřs";'))->isSerialized()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isJson"></a> Method: `isJson()`
+
+```php
+/**
+ * Returns true if the string is JSON, false otherwise.
+ */
+public function isJson(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('{"yaml": "json"}'))->isJson()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBase64"></a> Method: `isBase64()`
+
+```php
+/**
+ * Returns true if the string is base64 encoded, false otherwise.
+ */
+public function isBase64(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('ZsOyw7Riw6DFmXM='))->isBase64()) {
     // do something...
 }
 ```
