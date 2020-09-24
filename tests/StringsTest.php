@@ -544,3 +544,10 @@ test('test isBase64() method', function (): void {
     $this->assertTrue(Strings::create('ZsOyw7Riw6DFmXM=')->isBase64());
     $this->assertFalse(Strings::create('fòôbàřs')->isBase64());
 });
+
+test('test isSimilar() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isSimilar('fòôbàřs'));
+    $this->assertTrue(Strings::create('fòôbàřs')->isSimilar('fòôbàřs', 100));
+    $this->assertTrue(Strings::create('fòôbàřs')->isSimilar('fòô', 50));
+    $this->assertFalse(Strings::create('fòôbàřs')->isSimilar('fòô', 70));
+});

@@ -1198,6 +1198,19 @@ class Strings
     }
 
     /**
+     * Check if two strings are similar.
+     *
+     * @param string $string                  The string to compare against.
+     * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+     *
+     * @return bool
+     */
+    public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
+    {
+        return $this->similarity($string) >= $minPercentForSimilarity;
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string

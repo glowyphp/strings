@@ -121,6 +121,7 @@ $strings = strings();
 | <a href="#strings_isSerialized">`isSerialized()`</a> | Returns true if the string is serialized, false otherwise. |
 | <a href="#strings_isJson">`isJson()`</a> | Returns true if the string is JSON, false otherwise. |
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
+| <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 
 #### Methods Details
 
@@ -1591,6 +1592,33 @@ public function isBase64(): bool
 
 ```php
 if (Strings::create('ZsOyw7Riw6DFmXM='))->isBase64()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isSimilar"></a> Method: `isSimilar()`
+
+```php
+/**
+ * Check if two strings are similar.
+ *
+ * @param string $string                  The string to compare against.
+ * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+ *
+ * @return bool
+ */
+public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs'))->isSimilar('fòôbàřs')) {
+    // do something...
+}
+
+
+if (Strings::create('fòôbàřs'))->isSimilar('fòô', 50.0)) {
     // do something...
 }
 ```
