@@ -106,6 +106,22 @@ $strings = strings();
 | <a href="#strings_toFloat">`toFloat()`</a> | Return Strings object as float. |
 | <a href="#strings_toBoolean">`toBoolean()`</a> | Returns a boolean representation of the given logical string value. <br><br>For example:<br> 'true', '1', 'on' and 'yes' will return true.<br>'false', '0', 'off', and 'no' will return false.<br><br>In all instances, case is ignored.<br><br>For other numeric strings, their sign will determine the return value. In addition, blank strings consisting of only whitespace will return false. For all other strings, the return value is a result of a boolean cast.|
 | <a href="#strings_toArray">`toArray()`</a> | Return Strings object as array based on a delimiter. |
+| <a href="#strings_isEmpty">`isEmpty()`</a> | Returns true if the string is not empty, false otherwise. |
+| <a href="#strings_isAscii">`isAscii()`</a> | Returns true if the string contains ASCII, false otherwise. |
+| <a href="#strings_isAlphanumeric">`isAlphanumeric()`</a> | Returns true if the string contains only alphabetic and numeric chars, false otherwise. |
+| <a href="#strings_isAlpha">`isAlpha()`</a> | Returns true if the string contains only alphabetic and numeric chars, false otherwise. |
+| <a href="#strings_isBlank">`isBlank()`</a> | Returns true if the string contains only whitespace chars, false otherwise. |
+| <a href="#strings_isNumeric">`isNumeric()`</a> | Returns true if the string is a number or a numeric strings, false otherwise. |
+| <a href="#strings_isDigit">`isDigit()`</a> | Returns true if the string contains only digit chars, false otherwise. |
+| <a href="#strings_isLower">`isLower()`</a> | Returns true if the string contains only lower case chars, false otherwise. |
+| <a href="#strings_isUpper">`isUpper()`</a> | Returns true if the string contains only upper case chars, false otherwise. |
+| <a href="#strings_isHexadecimal">`isHexadecimal()`</a> | Returns true if the string contains only hexadecimal chars, false otherwise. |
+| <a href="#strings_isPrintable">`isPrintable()`</a> | Returns true if the string contains only printable (non-invisible) chars, false otherwise. |
+| <a href="#strings_isPunctuation">`isPunctuation()`</a> | Returns true if the string contains only punctuation chars, false otherwise. |
+| <a href="#strings_isSerialized">`isSerialized()`</a> | Returns true if the string is serialized, false otherwise. |
+| <a href="#strings_isJson">`isJson()`</a> | Returns true if the string is JSON, false otherwise. |
+| <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
+| <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 
 #### Methods Details
 
@@ -1323,6 +1339,176 @@ public function toArray(string $delimiter = null): array
 ```php
 $array = Strings::create('hello world')->toArray();
 $array = Strings::create('hello, world')->toArray(',');
+```
+
+##### <a name="strings_isEmpty"></a> Method: `isEmpty()`
+
+```php
+/**
+ * Returns true if the string is not empty, false otherwise.
+ */
+public function isEmpty(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create()->isEmpty()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAscii"></a> Method: `isAscii()`
+
+```php
+/**
+ * Returns true if the string contains ASCII, false otherwise.
+ */
+public function isAscii(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('#@$%')->isAscii()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAlphanumeric"></a> Method: `isAlphanumeric()`
+
+```php
+/**
+ * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
+ */
+public function isAlphanumeric(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs12345')->isAlphanumeric()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAlpha"></a> Method: `isAlpha()`
+
+```php
+/**
+ * Returns true if the string contains only alphabetic chars, false otherwise.
+ */
+public function isAlpha(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isAlpha()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBlank"></a> Method: `isBlank()`
+
+```php
+/**
+ * Returns true if the string contains only whitespace chars, false otherwise.
+ */
+public function isBlank(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create()->isBlank()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isNumeric"></a> Method: `isNumeric()`
+
+```php
+/**
+ * Returns true if the string is a number or a numeric strings, false otherwise.
+ */
+public function isNumeric(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('42')->isNumeric()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isDigit"></a> Method: `isDigit()`
+
+```php
+/**
+ * Returns true if the string contains only digit chars, false otherwise.
+ */
+public function isDigit(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('01234569')->isDigit()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isLower"></a> Method: `isLower()`
+
+```php
+/**
+ * Returns true if the string contains only lower case chars, false otherwise.
+ */
+public function isLower(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isLower()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isUpper"></a> Method: `isUpper()`
+
+```php
+/**
+ * Returns true if the string contains only upper case chars, false otherwise.
+ */
+public function isUpper(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('FOOBAR')->isUpper()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isHexadecimal"></a> Method: `isHexadecimal()`
+
+```php
+/**
+ * Returns true if the string contains only hexadecimal chars, false otherwise.
+ */
+public function isHexadecimal(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('19FDE')->isHexadecimal()) {
+    // do something...
+}
 ```
 
 ### Tests
