@@ -201,6 +201,7 @@ $string = Strings::create('some "text" here')->stripQuotes();
  *
  * @param  string $string String with single and double quotes
  */
+public function quotesToEntities(): self
 ```
 
 **Examples**
