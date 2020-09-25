@@ -546,8 +546,8 @@ test('test isBase64() method', function (): void {
 });
 
 test('test isEqual() method', function (): void {
-    $this->assertTrue(Strings::create('fòôbàřs')->isEquals('fòôbàřs'));
-    $this->assertFalse(Strings::create('fòôbàřs')->isEquals('fòô'));
+    $this->assertTrue(Strings::create('fòôbàřs')->isEqual('fòôbàřs'));
+    $this->assertFalse(Strings::create('fòôbàřs')->isEqual('fòô'));
 });
 
 test('test repeat() method', function (): void {
