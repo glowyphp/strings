@@ -130,6 +130,7 @@ $strings = strings();
 
 #### Methods Details
 
+
 ##### <a name="strings_create"></a> Method: `create()`
 
 ```php
@@ -1180,4 +1181,498 @@ $percent = Strings::create('hello')->similarity('hello');
 
 ```php
 /**
-* Returns the character at $index, with indexes starting at 
+* Returns the character at $index, with indexes starting at 0.
+*
+* @param int $index Position of the character
+*/
+public function at(int $index): self
+```
+
+**Examples**
+
+```php
+$character = Strings::create('hello')->at(3);
+```
+
+##### <a name="strings_indexOf"></a> Method: `indexOf()`
+
+```php
+/**
+ * Returns the index of the first occurrence of $needle in the string,
+ * and false if not found. Accepts an optional offset from which to begin
+ * the search.
+ *
+ * @param int|string $needle         The string to find in haystack.
+ * @param int        $offset         The search offset. If it is not specified, 0 is used.
+ * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+ */
+public function indexOf($needle, int $offset = 0, bool $caseSensitive = true)
+```
+
+**Examples**
+
+```php
+$index = Strings::create('hello')->indexOf('e');
+```
+
+##### <a name="strings_indexOfLast"></a> Method: `indexOfLast()`
+
+```php
+/**
+ * Returns the index of the last occurrence of $needle in the string, and false if not found.
+ * Accepts an optional $offset from which to begin the search. Offsets may be negative to
+ * count from the last character in the string.
+ *
+ * @param int|string $needle         The string to find in haystack.
+ * @param int        $offset         The search offset. If it is not specified, 0 is used.
+ * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+ */
+public function indexOfLast(string $needle, int $offset = 0, bool $caseSensitive = true)
+```
+
+**Examples**
+
+```php
+$index = Strings::create('hello')->indexOfLast('l');
+```
+
+##### <a name="strings_move"></a> Method: `move()`
+
+```php
+/**
+ * Move substring of desired $length to $destination index of the original string.
+ * In case $destination is less than $length returns the string untouched.
+ *
+ * @param int $start       Start
+ * @param int $length      Length
+ * @param int $destination Destination
+ */
+public function move(int $start, int $length, int $destination): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('hello world')->move(0, 5, 10);
+```
+
+##### <a name="strings_insert"></a> Method: `insert()`
+
+```php
+/**
+ * Inserts $substring into the string at the $index provided.
+ *
+ * @param string $substring Substring
+ * @param int    $index     Index
+ */
+public function insert(string $substring, int $index): self
+```
+
+**Examples**
+
+```php
+$string = Strings::create('world')->insert('hello ');
+$string = Strings::create('hello')->insert(' world', 5);
+```
+
+##### <a name="strings_toString"></a> Method: `toString()`
+
+```php
+/**
+ * Return Strings object as string.
+ */
+public function toString(): string
+```
+
+**Examples**
+
+```php
+$string = Strings::create('hello world')->toString();
+```
+
+##### <a name="strings_toInteger"></a> Method: `toInteger()`
+
+```php
+/**
+ * Return Strings object as integer.
+ */
+public function toInteger(): int
+```
+
+**Examples**
+
+```php
+$integer = Strings::create('42')->toInteger();
+```
+
+##### <a name="strings_toFloat"></a> Method: `toFloat()`
+
+```php
+/**
+ * Return Strings object as float.
+ */
+public function toFloat(): float
+```
+
+**Examples**
+
+```php
+$float = Strings::create('42.0')->toFloat();
+```
+
+##### <a name="strings_toBoolean"></a> Method: `toBoolean()`
+
+```php
+/**
+ * Returns a boolean representation of the given logical string value.
+ *
+ * For example:
+ * 'true', '1', 'on' and 'yes' will return true.
+ * 'false', '0', 'off', and 'no' will return false.
+ *
+ * In all instances, case is ignored.
+ *
+ * For other numeric strings, their sign will determine the return value.
+ * In addition, blank strings consisting of only whitespace will return
+ * false. For all other strings, the return value is a result of a
+ * boolean cast.
+ */
+public function toBoolean(): bool
+```
+
+**Examples**
+
+```php
+$state = Strings::create('on')->toBoolean();
+$state = Strings::create('off')->toBoolean();
+```
+
+##### <a name="strings_toArray"></a> Method: `toArray()`
+
+```php
+/**
+ * Return Strings object as array based on a delimiter.
+ *
+ * @param string $delimiter Delimeter. Default is null.
+ */
+public function toArray(string $delimiter = null): array
+```
+
+**Examples**
+
+```php
+$array = Strings::create('hello world')->toArray();
+$array = Strings::create('hello, world')->toArray(',');
+```
+
+##### <a name="strings_isEmpty"></a> Method: `isEmpty()`
+
+```php
+/**
+ * Returns true if the string is not empty, false otherwise.
+ */
+public function isEmpty(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create()->isEmpty()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAscii"></a> Method: `isAscii()`
+
+```php
+/**
+ * Returns true if the string contains ASCII, false otherwise.
+ */
+public function isAscii(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('#@$%')->isAscii()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAlphanumeric"></a> Method: `isAlphanumeric()`
+
+```php
+/**
+ * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
+ */
+public function isAlphanumeric(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs12345')->isAlphanumeric()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isAlpha"></a> Method: `isAlpha()`
+
+```php
+/**
+ * Returns true if the string contains only alphabetic chars, false otherwise.
+ */
+public function isAlpha(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isAlpha()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBlank"></a> Method: `isBlank()`
+
+```php
+/**
+ * Returns true if the string contains only whitespace chars, false otherwise.
+ */
+public function isBlank(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create()->isBlank()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isNumeric"></a> Method: `isNumeric()`
+
+```php
+/**
+ * Returns true if the string is a number or a numeric strings, false otherwise.
+ */
+public function isNumeric(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('42')->isNumeric()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isDigit"></a> Method: `isDigit()`
+
+```php
+/**
+ * Returns true if the string contains only digit chars, false otherwise.
+ */
+public function isDigit(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('01234569')->isDigit()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isLower"></a> Method: `isLower()`
+
+```php
+/**
+ * Returns true if the string contains only lower case chars, false otherwise.
+ */
+public function isLower(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isLower()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isUpper"></a> Method: `isUpper()`
+
+```php
+/**
+ * Returns true if the string contains only upper case chars, false otherwise.
+ */
+public function isUpper(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('FOOBAR')->isUpper()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isHexadecimal"></a> Method: `isHexadecimal()`
+
+```php
+/**
+ * Returns true if the string contains only hexadecimal chars, false otherwise.
+ */
+public function isHexadecimal(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('19FDE')->isHexadecimal()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isPrintable"></a> Method: `isPrintable()`
+
+```php
+/**
+ * Returns true if the string contains only printable (non-invisible) chars, false otherwise.
+ */
+public function isPrintable(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('LKA#@%.54')->isPrintable()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isPunctuation"></a> Method: `isPunctuation()`
+
+```php
+/**
+ * Returns true if the string contains only punctuation chars, false otherwise.
+ */
+public function isPunctuation(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create(',')->isPunctuation()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isSerialized"></a> Method: `isSerialized()`
+
+```php
+/**
+ * Returns true if the string is serialized, false otherwise.
+ */
+public function isSerialized(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('s:11:"fòôbàřs";'))->isSerialized()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isJson"></a> Method: `isJson()`
+
+```php
+/**
+ * Returns true if the string is JSON, false otherwise.
+ */
+public function isJson(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('{"yaml": "json"}'))->isJson()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBase64"></a> Method: `isBase64()`
+
+```php
+/**
+ * Returns true if the string is base64 encoded, false otherwise.
+ */
+public function isBase64(): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('ZsOyw7Riw6DFmXM='))->isBase64()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isSimilar"></a> Method: `isSimilar()`
+
+```php
+/**
+ * Check if two strings are similar.
+ *
+ * @param string $string                  The string to compare against.
+ * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+ *
+ * @return bool
+ */
+public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isSimilar('fòôbàřs')) {
+    // do something...
+}
+
+if (Strings::create('fòôbàřs')->isSimilar('fòô', 50.0)) {
+    // do something...
+}
+```
+
+##### <a name="strings_isEqual"></a> Method: `isEqual()`
+
+```php
+/**
+ * Determine whether the string is equals to $string.
+ *
+ * @param $string String to compare.
+ */
+public function isEqual(string $string): bool
+```
+
+**Examples**
+
+```php
+if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
+    // do something...
+}
+```
+
+### Tests
+
+Run tests
+
+```
+./vendor/bin/pest
+```
+
+### License
+[The MIT License (MIT)](https://github.com/atomastic/strings/blob/master/LICENSE)
+Copyright (c) 2020 [Sergey Romanenko](https://github.com/Awilum)
