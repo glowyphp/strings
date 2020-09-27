@@ -5,6 +5,8 @@
   <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a> <a href="https://codeclimate.com/github/atomastic/strings/maintainability"><img src="https://api.codeclimate.com/v1/badges/b1e18970e78af3a48a0d/maintainability" /></a>
 </p>
 
+Strings Component is a set of methods to help with the manipulation of strings.
+
 <br>
 
 * [Installation](#installation)
