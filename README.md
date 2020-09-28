@@ -4,7 +4,8 @@ Strings Component provide a fluent, object-oriented interface for working with s
 </p>
 
 <p align="center">
-<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
+<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fatomastic%2Fstrings?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fatomastic%2Fstrings.svg?type=shield"/></a>
+<img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
   <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a> <a href="https://codeclimate.com/github/atomastic/strings/maintainability"><img src="https://api.codeclimate.com/v1/badges/b1e18970e78af3a48a0d/maintainability" /></a>
 </p>
 
@@ -1676,3 +1677,6 @@ Run tests
 ### License
 [The MIT License (MIT)](https://github.com/atomastic/strings/blob/master/LICENSE)
 Copyright (c) 2020 [Sergey Romanenko](https://github.com/Awilum)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fatomastic%2Fstrings.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fatomastic%2Fstrings?ref=badge_large)
