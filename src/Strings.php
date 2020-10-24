@@ -1223,6 +1223,16 @@ class Strings
     }
 
     /**
+     * Determine whether the string is equals to $string.
+     *
+     * @param $string String to compare.
+     */
+    public function isEqual(string $string): bool
+    {
+        return ($string === $this->toString()) ? true : false;
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string
@@ -1295,15 +1305,5 @@ class Strings
         );
 
         return $array;
-    }
-
-    /**
-     * Determine whether the string is equals to $string.
-     *
-     * @param $string String to compare.
-     */
-    public function isEqual(string $string): bool
-    {
-        return ($string === $this->toString()) ? true : false;
     }
 }
