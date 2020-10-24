@@ -507,6 +507,11 @@ test('test isEmail() method', function (): void {
     $this->assertFalse(Strings::create('awilum.atomastic.com')->isEmail());
 });
 
+test('test isUrl() method', function (): void {
+    $this->assertTrue(Strings::create('http://atomastic.com')->isUrl());
+    $this->assertFalse(Strings::create('atomastic.com')->isUrl());
+});
+
 test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());

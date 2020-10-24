@@ -1519,7 +1519,6 @@ if (Strings::create('FOOBAR')->isUpper()) {
 }
 ```
 
-
 ##### <a name="strings_isEmail"></a> Method: `isEmail()`
 
 ```php
@@ -1533,6 +1532,23 @@ public function isEmail(): bool
 
 ```php
 if (Strings::create('awilum@atomastic.com')->isEmail()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isUrl"></a> Method: `isUrl()`
+
+```php
+/**
+* Returns true if the string is url and it is valid, false otherwise.
+*/
+public function isUrl(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('http://atomastic.com')->isUrl()) {
     // do something...
 }
 ```

@@ -1082,6 +1082,14 @@ class Strings
     }
 
     /**
+     * Returns true if the string is url and it is valid, false otherwise.
+     */
+    public function isUrl(): bool
+    {
+        return (bool) filter_var($this->string, FILTER_VALIDATE_URL);
+    }
+
+    /**
      * Returns true if the string is not empty, false otherwise.
      */
     public function isEmpty(): bool
