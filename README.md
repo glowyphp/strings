@@ -119,6 +119,7 @@ $strings = strings();
 | <a href="#strings_isDigit">`isDigit()`</a> | Returns true if the string contains only digit chars, false otherwise. |
 | <a href="#strings_isLower">`isLower()`</a> | Returns true if the string contains only lower case chars, false otherwise. |
 | <a href="#strings_isUpper">`isUpper()`</a> | Returns true if the string contains only upper case chars, false otherwise. |
+| <a href="#strings_isEmail">`isEmail()`</a> | Returns true if the string is email and it is valid, false otherwise. |
 | <a href="#strings_isHexadecimal">`isHexadecimal()`</a> | Returns true if the string contains only hexadecimal chars, false otherwise. |
 | <a href="#strings_isPrintable">`isPrintable()`</a> | Returns true if the string contains only printable (non-invisible) chars, false otherwise. |
 | <a href="#strings_isPunctuation">`isPunctuation()`</a> | Returns true if the string contains only punctuation chars, false otherwise. |
@@ -1514,6 +1515,24 @@ public function isUpper(): bool
 
 ```php
 if (Strings::create('FOOBAR')->isUpper()) {
+    // do something...
+}
+```
+
+
+##### <a name="strings_isEmail"></a> Method: `isEmail()`
+
+```php
+/**
+ * Returns true if the string is email and it is valid, false otherwise.
+ */
+public function isEmail(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('awilum@atomastic.com')->isEmail()) {
     // do something...
 }
 ```

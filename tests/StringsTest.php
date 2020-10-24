@@ -502,6 +502,11 @@ test('test isDigit() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs01234569')->isDigit());
 });
 
+test('test isEmail() method', function (): void {
+    $this->assertTrue(Strings::create('awilum@atomastic.com')->isEmail());
+    $this->assertFalse(Strings::create('awilum.atomastic.com')->isEmail());
+});
+
 test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());

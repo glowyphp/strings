@@ -1074,6 +1074,14 @@ class Strings
     }
 
     /**
+     * Returns true if the string is email and it is valid, false otherwise.
+     */
+    public function isEmail(): bool
+    {
+        return (bool) filter_var($this->string, FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
      * Returns true if the string is not empty, false otherwise.
      */
     public function isEmpty(): bool
