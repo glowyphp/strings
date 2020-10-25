@@ -1,6 +1,6 @@
 <h1 align="center">Strings Component</h1>
 <p align="center">
-Strings Component provide a fluent, object-oriented interface for working with string values, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+Strings Component provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
 </p>
 
 <p align="center">
@@ -10,11 +10,34 @@ Strings Component provide a fluent, object-oriented interface for working with s
 
 <br>
 
+* [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Methods](#methods)
 * [Tests](#tests)
 * [License](#license)
+
+### Introduction
+
+Strings Component provide a fluent, object-oriented interface for working with multibyte strings and allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+
+Here is a simple example of Strings Component usage compare to native PHP functions:
+
+```php
+// With Strings Component
+// Result: hello world!
+$string = strings(' Message: ')
+            ->append('Hello World')
+            ->append('!')
+            ->trimLeft()
+            ->after('Message:')
+            ->lower();
+
+
+// Native PHP
+// Result: hello world!
+$string = ltrim(mb_strtolower(array_reverse(explode(' Message:', ' Message:' . 'Hello World' . '!', 2))[0], 'UTF-8'));
+```
 
 ### Installation
 
