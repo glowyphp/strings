@@ -29,13 +29,13 @@ composer require atomastic/strings
 ```php
 use Atomastic\Strings\Strings;
 
-// Using public method __construct()
+// Create Strings instance using public method __construct()
 $strings = new Strings();
 
-// Using public static method create()
+// Create Strings instance using public static method create()
 $strings = Strings::create();
 
-// Using global helper function strings()
+// Create Strings instance using global helper function strings()
 $strings = strings();
 ```
 
