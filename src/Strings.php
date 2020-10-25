@@ -52,6 +52,7 @@ use function rtrim;
 use function shuffle;
 use function similar_text;
 use function str_pad;
+use function str_repeat;
 use function str_replace;
 use function str_word_count;
 use function strncmp;
@@ -65,6 +66,8 @@ use function unserialize;
 
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALIDATE_EMAIL;
+use const FILTER_VALIDATE_URL;
 use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
 use const STR_PAD_BOTH;
@@ -830,6 +833,20 @@ class Strings
     }
 
     /**
+     * Replace none alphanumeric characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+     */
+    public function replaceNonAlphanumeric(string $replacement = ''): self
+    {
+        $this->string = preg_replace('/[^\p{L}0-9\s]+/u',
+                                     $replacement,
+                                     static::create($this->string, $this->encoding)->trim()->toString());
+
+        return $this;
+    }
+
+    /**
      * Replace a given value in the string sequentially with an array.
      *
      * @param  string $search  Search
@@ -1230,8 +1247,6 @@ class Strings
      *
      * @param string $string                  The string to compare against.
      * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
-     *
-     * @return bool
      */
     public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
     {
@@ -1245,7 +1260,7 @@ class Strings
      */
     public function isEqual(string $string): bool
     {
-        return ($string === $this->toString()) ? true : false;
+        return $string === $this->toString();
     }
 
     /**

@@ -88,6 +88,7 @@ $strings = strings();
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
+| <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
 | <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
 | <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
@@ -961,6 +962,27 @@ public function padLeft(int $length, string $pad = ' '): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-');
+```
+
+##### <a name="strings_replaceNonAlphanumeric"></a> Method: `replaceNonAlphanumeric()`
+
+```php
+/**
+ * Replace none alphanumeric characters in the string with the given value.
+ *
+ * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+ */
+public function replaceNonAlphanumeric(string $replacement = ''): self
+```
+
+##### Example
+
+```php
+// Replace symbols -
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric();
+
+// Replace symbols - with _
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_');
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`

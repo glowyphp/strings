@@ -281,6 +281,15 @@ test('test padLeft() method', function (): void {
     $this->assertEquals('------------SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-'));
 });
 
+test('test replaceNonAlphanumeric() method', function (): void {
+    $this->assertEquals('Fòôbàřs 123', Strings::create('Fòôbàřs 123')->replaceNonAlphanumeric()->toString());
+    $this->assertEquals('Fòôbàřs123', Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric()->toString());
+    $this->assertEquals('Fòô bàřs 123', Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric(' ')->toString());
+    $this->assertEquals('Fòô_bàřs_123', Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_')->toString());
+    $this->assertEquals('Foo Bar 123', Strings::create('Foo Bar 123')->replaceNonAlphanumeric()->toString());
+    $this->assertEquals('Foo Bar 123', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlphanumeric()->toString());
+});
+
 test('test replaceArray() method', function (): void {
     $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']));
 });
