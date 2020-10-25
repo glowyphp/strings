@@ -89,6 +89,7 @@ $strings = strings();
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
 | <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
+| <a href="#strings_replaceNonAlpha">`replaceNonAlpha()`</a> | Replace none alpha characters in the string with the given value. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
 | <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
 | <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
@@ -983,6 +984,34 @@ $string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric();
 
 // Replace symbols - with _
 $string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_');
+
+// Replace symbols - with _ and replace all spaces.
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_', true);
+```
+
+##### <a name="strings_replaceNonAlpha"></a> Method: `replaceNonAlpha()`
+
+```php
+/**
+ * Replace none alpha characters in the string with the given value.
+ *
+ * @param string $replacement Value to replace none alpha characters with
+ * @param bool   $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replaceNonAlpha(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace none alpha characters in the string
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha();
+
+// Replace none alpha characters in the string with _
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_');
+
+// Replace none alpha characters in the string with _ and replace all spaces.
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_', true);
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`

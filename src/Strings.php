@@ -835,13 +835,49 @@ class Strings
     /**
      * Replace none alphanumeric characters in the string with the given value.
      *
-     * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+     * @param string  $replacement Value to replace none alphanumeric characters with. Default is ''
+     * @param bool    $strict      Should spaces be preserved or not. Default is false.
      */
-    public function replaceNonAlphanumeric(string $replacement = ''): self
+    public function replaceNonAlphanumeric(string $replacement = '', bool $strict = false): self
     {
-        $this->string = preg_replace('/[^\p{L}0-9\s]+/u',
-                                     $replacement,
-                                     static::create($this->string, $this->encoding)->trim()->toString());
+        $this->string = preg_replace(
+            '/[^\p{L}0-9\s]+/u',
+            $replacement,
+            static::create($this->string, $this->encoding)->trim()->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+
+        }
+
+        return $this;
+    }
+
+    /**
+     * Replace none alpha characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace none alpha characters with
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replaceNonAlpha(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/[^\p{L}\s]+/u',
+            $replacement,
+            static::create($this->string, $this->encoding)
+                ->trim()
+                ->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+
+        }
 
         return $this;
     }

@@ -288,6 +288,17 @@ test('test replaceNonAlphanumeric() method', function (): void {
     $this->assertEquals('Fòô_bàřs_123', Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_')->toString());
     $this->assertEquals('Foo Bar 123', Strings::create('Foo Bar 123')->replaceNonAlphanumeric()->toString());
     $this->assertEquals('Foo Bar 123', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlphanumeric()->toString());
+    $this->assertEquals('FooBar123', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlphanumeric('', true)->toString());
+});
+
+test('test replaceNonAlpha() method', function (): void {
+    $this->assertEquals('Fòôbàřs ', Strings::create('Fòôbàřs 123')->replaceNonAlpha()->toString());
+    $this->assertEquals('Fòôbàřs', Strings::create('Fòô-bàřs-123')->replaceNonAlpha()->toString());
+    $this->assertEquals('Fòô bàřs ', Strings::create('Fòô-bàřs-123')->replaceNonAlpha(' ')->toString());
+    $this->assertEquals('Fòô_bàřs_', Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_')->toString());
+    $this->assertEquals('Foo Bar ', Strings::create('Foo Bar 123')->replaceNonAlpha()->toString());
+    $this->assertEquals('Foo Bar ', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlpha()->toString());
+    $this->assertEquals('FooBar', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlpha('', true)->toString());
 });
 
 test('test replaceArray() method', function (): void {
