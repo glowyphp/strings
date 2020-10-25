@@ -44,6 +44,8 @@ $strings = strings();
 | Method | Description |
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
+| <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
+| <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
 | <a href="#strings_stripQuotes">`stripQuotes()`</a> | Removes single and double quotes from a string. |
@@ -153,6 +155,38 @@ public static function create($string = '', string $encoding = 'UTF-8'): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission');
+```
+
+##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
+
+```php
+/**
+ * Set the character encoding.
+ *
+ * @param string $encoding Character encoding.
+ */
+public function setEncoding(string $encoding): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->setEncoding('UTF-8');
+```
+
+##### <a name="strings_getEncoding"></a> Method: `getEncoding()`
+
+```php
+/**
+ * Get character encoding.
+ */
+public function getEncoding(): string
+```
+
+##### Example
+
+```php
+$encoding = Strings::create('SG-1 returns from an off-world mission')->getEncoding();
 ```
 
 ##### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`

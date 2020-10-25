@@ -161,6 +161,26 @@ class Strings
     }
 
     /**
+     * Set the character encoding.
+     *
+     * @param string $encoding Character encoding.
+     */
+    public function setEncoding(string $encoding): self
+    {
+        $this->encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * Get character encoding.
+     */
+    public function getEncoding(): string
+    {
+        return $this->encoding;
+    }
+
+    /**
      * Removes any leading and traling slashes from a string.
      */
     public function trimSlashes(): self

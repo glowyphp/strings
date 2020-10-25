@@ -583,3 +583,7 @@ test('test isEqual() method', function (): void {
 test('test repeat() method', function (): void {
     $this->assertEquals('fòôfòôfòô', Strings::create('fòô')->repeat(3));
 });
+
+test('test setEncoding() and getEncoding() methods', function (): void {
+    $this->assertEquals('UTF-8', Strings::create('fòô')->setEncoding('UTF-8')->getEncoding());
+});
