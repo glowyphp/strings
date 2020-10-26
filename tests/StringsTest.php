@@ -113,6 +113,24 @@ test('test kebab() method', function (): void {
     $this->assertEquals('fòô-bàř', Strings::create('fòôBàř')->kebab());
 });
 
+
+test('test words() method', function (): void {
+    $this->assertEquals(
+        ['Fòô', 'fòô', 'òôf'],
+        Strings::create('Fòô! fòô; òôf!? ! !!')->words()
+    );
+
+    $this->assertEquals(
+        ['Fòô', 'fòô;', 'òôf', '?'],
+        Strings::create('Fòô! fòô; òôf!? ! !!')->words('!')
+    );
+
+    $this->assertEquals(
+        ['F', 'òô', 'fòô', 'òôf'],
+        Strings::create('F!òô! fòô; òôf!? ! !!')->words()
+    );
+});
+
 test('test wordsLimit() method', function (): void {
     $this->assertEquals(
         'fòô...',

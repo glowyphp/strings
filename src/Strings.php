@@ -424,6 +424,20 @@ class Strings
     }
 
     /**
+     * Get words from the string.
+     *
+     * @param string $ignore Ingnore symbols.
+     */
+    public function words(string $ignore = '?!;:,.'): array
+    {
+        $words = preg_split('/[\s' . $ignore . ']+/', $this->string);
+
+        empty(end($words)) and array_pop($words);
+
+        return $words;
+    }
+
+    /**
      * Returns the length of the string, analog to length().
      */
     public function count(): int

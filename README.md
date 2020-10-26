@@ -66,6 +66,7 @@ $strings = strings();
 | <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
+| <a href="#strings_words">`words()`</a> | Get words from the string. |
 | <a href="#strings_wordsLimit">`wordsLimit()`</a> | Limit the number of words in a string. |
 | <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
 | <a href="#strings_charsFrequency">`charsFrequency()`</a> | Get chars usage frequency array. |
@@ -549,6 +550,24 @@ public function kebab(): self
 
 ```php
 $string = Strings::create('fooBar')->kebab();
+```
+
+
+##### <a name="strings_words"></a> Method: `words()`
+
+```php
+/**
+ * Get words from the string.
+ *
+ * @param string $ignore Ingnore symbols.
+ */
+public function words(string $ignore = '?!;:,.'): array
+```
+
+##### Example
+
+```php
+$words = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words();
 ```
 
 ##### <a name="strings_wordsLimit"></a> Method: `wordsLimit()`
