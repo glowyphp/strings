@@ -410,7 +410,7 @@ class Strings
      * @param  int    $words  Words limit
      * @param  string $append Text to append to the string IF it gets truncated
      */
-    public function words(int $words = 100, string $append = '...'): self
+    public function wordsLimit(int $words = 100, string $append = '...'): self
     {
         preg_match('/^\s*+(?:\S++\s*+){1,' . $words . '}/u', $this->string, $matches);
 

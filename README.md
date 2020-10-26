@@ -66,7 +66,7 @@ $strings = strings();
 | <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
-| <a href="#strings_words">`words()`</a> | Limit the number of words in a string. |
+| <a href="#strings_wordsLimit">`wordsLimit()`</a> | Limit the number of words in a string. |
 | <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
 | <a href="#strings_charsFrequency">`charsFrequency()`</a> | Get chars usage frequency array. |
 | <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
@@ -551,7 +551,7 @@ public function kebab(): self
 $string = Strings::create('fooBar')->kebab();
 ```
 
-##### <a name="strings_words"></a> Method: `words()`
+##### <a name="strings_wordsLimit"></a> Method: `wordsLimit()`
 
 ```php
 /**
@@ -560,20 +560,20 @@ $string = Strings::create('fooBar')->kebab();
  * @param  int    $words  Words limit
  * @param  string $append Text to append to the string IF it gets truncated
  */
-public function words(int $words = 100, string $append = '...'): self
+public function wordsLimit(int $words = 100, string $append = '...'): self
 ```
 
 ##### Example
 
 ```php
 // Get the number of words in a string with predefined limit settings
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit();
 
 // Get the number of words in a string with limit 3
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit(3);
 
 // Get the number of words in a string with limit 3 and append 'read more...'
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit(3, 'read more...');
 ```
 
 ##### <a name="strings_wordsFrequency"></a> Method: `wordsFrequency()`
