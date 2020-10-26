@@ -223,6 +223,7 @@ test('test reverse() method', function (): void {
 
 test('test segments() method', function (): void {
     $this->assertEquals(['SG-1', 'returns', 'from', 'an', 'off-world', 'mission'], Strings::create('SG-1 returns from an off-world mission')->segments());
+    $this->assertEquals(['Fòôbàřs', 'Fòô', 'bàřs'], Strings::create('Fòôbàřs Fòô bàřs')->segments());
     $this->assertEquals(['movies', 'sg-1', 'season-5', 'episode-21'], Strings::create('movies/sg-1/season-5/episode-21')->segments('/'));
 });
 
