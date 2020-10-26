@@ -490,6 +490,13 @@ test('test wordsSortDesc() method', function (): void {
     $this->assertEquals('fòô car bàřs apple', Strings::create('car fòô bàřs apple')->wordsSortDesc()->toString());
 });
 
+test('test wordsFrequency() method', function (): void {
+    $this->assertEquals(['car' => '25.00', 'fòô' => '25.00', 'bàřs' => '25.00', 'apple' => '25.00'], Strings::create('car fòô bàřs apple')->wordsFrequency());
+    $this->assertEquals(['car' => '25', 'fòô' => '25', 'bàřs' => '25', 'apple' => '25'], Strings::create('car fòô bàřs apple')->wordsFrequency(0));
+    $this->assertEquals(['fòô' => '40.00', 'àřs' => '20.00', 'car' => '10.00', 'bàřs' => '10.00', 'àř' => '10.00', 'apple' => '10.00'], Strings::create('car fòô fòô fòô fòô bàřs àřs àřs àř apple')->wordsFrequency());
+    $this->assertEquals(['fòô' => '40.00', 'àřs' => '20.00', 'car' => '10.00', 'bàřs' => '10.00', 'àř' => '10.00', 'apple' => '10.00'], Strings::create('car fòô, fòô fòô, fòô bàřs. àřs àřs àř apple')->wordsFrequency());
+});
+
 test('test insert() method', function (): void {
     $this->assertEquals('fòôfòôbàřs', Strings::create('fòôbàřs')->insert('fòô', 3));
 });

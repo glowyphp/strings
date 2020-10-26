@@ -67,6 +67,7 @@ $strings = strings();
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
 | <a href="#strings_words">`words()`</a> | Limit the number of words in a string. |
+| <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
 | <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.|
@@ -572,6 +573,35 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 
 // Get the number of words in a string with limit 3 and append 'read more...'
 $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
+```
+
+##### <a name="strings_wordsFrequency"></a> Method: `wordsFrequency()`
+
+```php
+/**
+ * Get words usage frequency array.
+ *
+ * @param int    $decimals     Number of decimal points. Default is 2.
+ * @param string $decPoint     Separator for the decimal point. Default is ".".
+ * @param string $thousandsSep Thousands separator. Default is ",".
+ */
+public function wordsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+```
+
+##### Example
+
+```php
+// Get words usage frequency array.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency();
+
+// Get words usage frequency array and set number of decimal points.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4);
+
+// Get words usage frequency array, set number of decimal points, set separator for the decimal point.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4, '.');
+
+// Get words usage frequency array, set number of decimal points, set separator for the decimal point, thousands separator.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4, '.', ',');
 ```
 
 ##### <a name="strings_contains"></a> Method: `contains()`

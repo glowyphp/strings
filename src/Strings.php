@@ -1154,6 +1154,7 @@ class Strings
         $this->string = (string) $this->substr($index, 1);
 
         return $this;
+
     }
 
     /**
@@ -1184,6 +1185,31 @@ class Strings
         return $this;
     }
 
+    /**
+     * Get words usage frequency array.
+     *
+     * @param int    $decimals     Number of decimal points. Default is 2.
+     * @param string $decPoint     Separator for the decimal point. Default is ".".
+     * @param string $thousandsSep Thousands separator. Default is ",".
+     */
+    public function wordsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+    {
+        $this->replacePunctuations();
+        $words = mb_split("\s", $this->string);
+        $totalAllWordsArray = count($words);
+        $wordsCount = array_count_values($words);
+
+        arsort($wordsCount);
+
+        $percentageCount = [];
+
+        foreach($wordsCount as $words => $word)
+        {
+            $percentageCount[$words] = number_format(($word / $totalAllWordsArray) * 100, $decimals, $decPoint, $thousandsSep);
+        }
+
+        return $percentageCount;
+    }
     /**
      * Move substring of desired $length to $destination index of the original string.
      * In case $destination is less than $length returns the string untouched.
