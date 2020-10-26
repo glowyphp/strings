@@ -64,7 +64,6 @@ use function sort;
 use function str_pad;
 use function str_repeat;
 use function str_replace;
-use function str_word_count;
 use function strncmp;
 use function strpos;
 use function strrpos;
@@ -480,17 +479,17 @@ class Strings
     }
 
     /**
-     * Return information about words used in a string
+     * Get words count from the string.
      *
-     * @param  int    $format   Specify the return value of this function. The current supported values are:
-     *                          0 - returns the number of words found
-     *                          1 - returns an array containing all the words found inside the string
-     *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-     * @param  string $charlist A list of additional characters which will be considered as 'word'
+     * @param string $ignore Ingnore symbols.
      */
-    public function countWords(int $format = 0, string $charlist = '')
+    public function wordsCount(string $ignore = '?!;:,.'): int
     {
-        return str_word_count($this->string, $format, $charlist);
+        $words = preg_split('/[\s' . $ignore . ']+/', $this->string);
+
+        empty(end($words)) and array_pop($words);
+
+        return count($words);
     }
 
     /**

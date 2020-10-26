@@ -57,7 +57,7 @@ $strings = strings();
 | <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
-| <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
+| <a href="#strings_wordsCount">`wordsCount()`</a> | Get words count from the string. |
 | <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
@@ -383,32 +383,22 @@ public function count(): int
 $count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
 ```
 
-##### <a name="strings_countWords"></a> Method: `countWords()`
+##### <a name="strings_wordsCount"></a> Method: `wordsCount()`
 
 ```php
 /**
- * Return information about words used in a string
+ * Get words count from the string.
  *
- * @param  int    $format   Specify the return value of this function. The current supported values are:
- *                          0 - returns the number of words found
- *                          1 - returns an array containing all the words found inside the string
- *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
- * @param  string $charlist A list of additional characters which will be considered as 'word'
+ * @param string $ignore Ingnore symbols.
  */
-public function countWords(int $format = 0, string $charlist = '')
+public function wordsCount(string $ignore = '?!;:,.'): int
 ```
 
 ##### Example
 
 ```php
 // Returns the number of words found
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords();
-
-// Returns an array containing all the words found inside the string
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(1);
-
-// Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(2);
+$result = Strings::create('SG-1 returns from an off-world mission')->wordsCount();
 ```
 
 ##### <a name="strings_countSubString"></a> Method: `countSubString()`

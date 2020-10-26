@@ -160,20 +160,16 @@ test('test wordsLimit() method', function (): void {
     );
 });
 
-test('test countWords() method', function (): void {
+test('test wordsCount() method', function (): void {
     $this->assertEquals(
         69,
-        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->countWords()
+        Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->wordsCount()
     );
-     $this->assertEquals(
-         ['Lorem', 'ipsum', 'dolor'],
-         Strings::create('Lorem ipsum dolor')->countWords(1)
-     );
 
-     $this->assertEquals(
-         [0 => 'Lorem', 6 => 'ipsum', 12 => 'dolor'],
-         Strings::create('Lorem ipsum dolor')->countWords(2)
-     );
+    $this->assertEquals(
+        4,
+        Strings::create('fòôs fòô php bàř!?')->wordsCount()
+    );
 });
 
 test('test contains() method', function (): void {
