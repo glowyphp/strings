@@ -853,9 +853,33 @@ class Strings
     }
 
     /**
+     * Replace all dashes characters in the string with the given value.
+     *
+     * @param string  $replacement Value to replace dashes characters with replacement. Default is ''
+     * @param bool    $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replaceDashes(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/\p{Pd}/u',
+            $replacement,
+            static::create($this->string, $this->encoding)->trim()->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+
+        }
+
+        return $this;
+    }
+
+    /**
      * Replace all punctuations characters in the string with the given value.
      *
-     * @param string  $replacement Value to replace none alphanumeric characters with. Default is ''
+     * @param string  $replacement Value to replace punctuations characters with replacement. Default is ''
      * @param bool    $strict      Should spaces be preserved or not. Default is false.
      */
     public function replacePunctuations(string $replacement = '', bool $strict = false): self

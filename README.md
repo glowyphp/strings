@@ -1006,7 +1006,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50,
 /**
  * Replace all punctuations characters in the string with the given value.
  *
- * @param string  $replacement Value to replace none alphanumeric characters with. Default is ''
+ * @param string  $replacement Value to replace none alphanumeric characters with replacement. Default is ''
  * @param bool    $strict      Should spaces be preserved or not. Default is false.
  */
 public function replacePunctuations(string $replacement = '', bool $strict = false): self
@@ -1021,8 +1021,33 @@ $string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations();
 // Replace all punctuations characters in the string with -
 $string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-');
 
-//  Replace all punctuations characters in the string with - and and replace all spaces.
+// Replace all punctuations characters in the string with - and and replace all spaces.
 $string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-', true);
+```
+
+##### <a name="strings_replaceDashes"></a> Method: `replaceDashes()`
+
+```php
+/**
+ * Replace all dashes characters in the string with the given value.
+ *
+ * @param string  $replacement Value to replace dashes characters with replacement. Default is ''
+ * @param bool    $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replaceDashes(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace all dashes characters in the string
+$string = Strings::create('Fòôbàřs - Fòô - bàřs')->replaceDashes()->toString();
+
+// Replace all dashes characters in the string with _
+$string = Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_')->toString();
+
+// Replace all dashes characters in the string with _ and and replace all spaces.
+$string = Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_', true)->toString();
 ```
 
 ##### <a name="strings_replaceNonAlphanumeric"></a> Method: `replaceNonAlphanumeric()`

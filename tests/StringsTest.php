@@ -288,6 +288,11 @@ test('test replacePunctuations() method', function (): void {
     $this->assertEquals('FòôbàřsFòôbàřs', Strings::create('Fòôbàřs. Fòô, bàřs')->replacePunctuations('', true)->toString());
 });
 
+test('test replaceDashes() method', function (): void {
+    $this->assertEquals('Fòôbàřs  Fòô  bàřs', Strings::create('Fòôbàřs - Fòô - bàřs')->replaceDashes()->toString());
+    $this->assertEquals('Fòôbàřs_Fòô_bàřs', Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_')->toString());
+    $this->assertEquals('Fòôbàřs_Fòô_bàřs', Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_', true)->toString());
+});
 
 test('test replaceNonAlphanumeric() method', function (): void {
     $this->assertEquals('Fòôbàřs 123', Strings::create('Fòôbàřs 123')->replaceNonAlphanumeric()->toString());
