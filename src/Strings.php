@@ -570,13 +570,7 @@ class Strings
      */
     public function length(): int
     {
-        if ($this->encoding) {
-            $result = mb_strlen($this->string, $this->encoding);
-        }
-
-        $result = mb_strlen($this->string);
-
-        return $result;
+        return mb_strlen($this->string, $this->encoding);
     }
 
     /**
