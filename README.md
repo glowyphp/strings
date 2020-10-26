@@ -136,7 +136,7 @@ $strings = strings();
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in string ascending. |
-| <a href="#strings_wordsSortDesc">`wordsSortDesc"()`</a> | Sort words in string descending. |
+| <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in string descending. |
 
 #### Methods Details
 
