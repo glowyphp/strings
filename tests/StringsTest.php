@@ -498,28 +498,30 @@ test('test wordsFrequency() method', function (): void {
 });
 
 test('test charsFrequency() method', function (): void {
-    $this->assertEquals(['c' => '33.33', 'a' => '33.33',  'r' => '33.33'], Strings::create('car')->charsFrequency());
-    $this->assertEquals(['ò' => '16.67',
-                         'ô' => '16.67',
-                         'c' => '8.33',
-                         'a' => '8.33',
-                         'r' => '8.33',
-                         'f' => '8.33',
-                         'b' => '8.33',
-                         'à' => '8.33',
-                         'ř' => '8.33',
-                         's' => '8.33'], Strings::create('car fòôbàřs òô')->charsFrequency());
-     $this->assertEquals(['ò' => '18.18',
-                          'ô' => '18.18',
-                          '!' => '9.09',
-                          'c' => '9.09',
-                          'a' => '9.09',
-                          'r' => '9.09',
-                          '#' => '9.09',
-                          'f' => '9.09',
-                          '@' => '9.09'], Strings::create(' !car   #fòô   @òô ')->charsFrequency());
-
-
+    $this->assertEquals(['c' => '33.33', 'a' => '33.33', 'r' => '33.33'], Strings::create('car')->charsFrequency());
+    $this->assertEquals([
+        'ò' => '16.67',
+        'ô' => '16.67',
+        'c' => '8.33',
+        'a' => '8.33',
+        'r' => '8.33',
+        'f' => '8.33',
+        'b' => '8.33',
+        'à' => '8.33',
+        'ř' => '8.33',
+        's' => '8.33',
+    ], Strings::create('car fòôbàřs òô')->charsFrequency());
+     $this->assertEquals([
+         'ò' => '18.18',
+         'ô' => '18.18',
+         '!' => '9.09',
+         'c' => '9.09',
+         'a' => '9.09',
+         'r' => '9.09',
+         '#' => '9.09',
+         'f' => '9.09',
+         '@' => '9.09',
+     ], Strings::create(' !car   #fòô   @òô ')->charsFrequency());
 });
 
 test('test insert() method', function (): void {

@@ -7,11 +7,14 @@ namespace Atomastic\Strings;
 use InvalidArgumentException;
 
 use function abs;
+use function array_count_values;
 use function array_reverse;
 use function array_shift;
 use function array_walk;
+use function arsort;
 use function base64_decode;
 use function base64_encode;
+use function count;
 use function ctype_lower;
 use function explode;
 use function filter_var;
@@ -31,6 +34,7 @@ use function ltrim;
 use function mb_convert_case;
 use function mb_ereg_match;
 use function mb_internal_encoding;
+use function mb_split;
 use function mb_strimwidth;
 use function mb_stripos;
 use function mb_strlen;
@@ -43,14 +47,18 @@ use function mb_strwidth;
 use function mb_substr;
 use function mb_substr_count;
 use function method_exists;
+use function number_format;
 use function preg_match;
 use function preg_quote;
 use function preg_replace;
+use function preg_split;
 use function random_int;
 use function range;
+use function rsort;
 use function rtrim;
 use function shuffle;
 use function similar_text;
+use function sort;
 use function str_pad;
 use function str_repeat;
 use function str_replace;
@@ -70,6 +78,7 @@ use const FILTER_VALIDATE_EMAIL;
 use const FILTER_VALIDATE_URL;
 use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
+use const PREG_SPLIT_NO_EMPTY;
 use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
@@ -855,8 +864,8 @@ class Strings
     /**
      * Replace all dashes characters in the string with the given value.
      *
-     * @param string  $replacement Value to replace dashes characters with replacement. Default is ''
-     * @param bool    $strict      Should spaces be preserved or not. Default is false.
+     * @param string $replacement Value to replace dashes characters with replacement. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
      */
     public function replaceDashes(string $replacement = '', bool $strict = false): self
     {
@@ -870,7 +879,6 @@ class Strings
             $this->string = static::create($this->string, $this->encoding)
                                 ->stripSpaces()
                                 ->toString();
-
         }
 
         return $this;
@@ -879,8 +887,8 @@ class Strings
     /**
      * Replace all punctuations characters in the string with the given value.
      *
-     * @param string  $replacement Value to replace punctuations characters with replacement. Default is ''
-     * @param bool    $strict      Should spaces be preserved or not. Default is false.
+     * @param string $replacement Value to replace punctuations characters with replacement. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
      */
     public function replacePunctuations(string $replacement = '', bool $strict = false): self
     {
@@ -894,7 +902,6 @@ class Strings
             $this->string = static::create($this->string, $this->encoding)
                                 ->stripSpaces()
                                 ->toString();
-
         }
 
         return $this;
@@ -903,8 +910,8 @@ class Strings
     /**
      * Replace none alphanumeric characters in the string with the given value.
      *
-     * @param string  $replacement Value to replace none alphanumeric characters with. Default is ''
-     * @param bool    $strict      Should spaces be preserved or not. Default is false.
+     * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
      */
     public function replaceNonAlphanumeric(string $replacement = '', bool $strict = false): self
     {
@@ -918,7 +925,6 @@ class Strings
             $this->string = static::create($this->string, $this->encoding)
                                 ->stripSpaces()
                                 ->toString();
-
         }
 
         return $this;
@@ -944,7 +950,6 @@ class Strings
             $this->string = static::create($this->string, $this->encoding)
                                 ->stripSpaces()
                                 ->toString();
-
         }
 
         return $this;
@@ -1154,7 +1159,6 @@ class Strings
         $this->string = (string) $this->substr($index, 1);
 
         return $this;
-
     }
 
     /**
@@ -1162,11 +1166,11 @@ class Strings
      */
     public function wordsSortDesc(): self
     {
-        $words = mb_split("\s", $this->string);
+        $words = mb_split('\s', $this->string);
 
         rsort($words);
 
-        $this->string = implode(" ", $words);
+        $this->string = implode(' ', $words);
 
         return $this;
     }
@@ -1176,11 +1180,11 @@ class Strings
      */
     public function wordsSortAsc(): self
     {
-        $words = mb_split("\s", $this->string);
+        $words = mb_split('\s', $this->string);
 
         sort($words);
 
-        $this->string = implode(" ", $words);
+        $this->string = implode(' ', $words);
 
         return $this;
     }
@@ -1192,20 +1196,19 @@ class Strings
      * @param string $decPoint     Separator for the decimal point. Default is ".".
      * @param string $thousandsSep Thousands separator. Default is ",".
      */
-    public function charsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+    public function charsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
     {
         $this->stripSpaces();
-        $chars = preg_split('//u', $this->string, -1, PREG_SPLIT_NO_EMPTY);
+        $chars              = preg_split('//u', $this->string, -1, PREG_SPLIT_NO_EMPTY);
         $totalAllCharsArray = count($chars);
-        $charsCount = array_count_values($chars);
+        $charsCount         = array_count_values($chars);
 
         arsort($charsCount);
 
         $percentageCount = [];
 
-        foreach($charsCount as $chars => $char)
-        {
-            $percentageCount[$chars] = number_format(($char / $totalAllCharsArray) * 100, $decimals, $decPoint, $thousandsSep);
+        foreach ($charsCount as $chars => $char) {
+            $percentageCount[$chars] = number_format($char / $totalAllCharsArray * 100, $decimals, $decPoint, $thousandsSep);
         }
 
         return $percentageCount;
@@ -1218,20 +1221,19 @@ class Strings
      * @param string $decPoint     Separator for the decimal point. Default is ".".
      * @param string $thousandsSep Thousands separator. Default is ",".
      */
-    public function wordsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+    public function wordsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
     {
         $this->replacePunctuations();
-        $words = mb_split("\s", $this->string);
+        $words              = mb_split('\s', $this->string);
         $totalAllWordsArray = count($words);
-        $wordsCount = array_count_values($words);
+        $wordsCount         = array_count_values($words);
 
         arsort($wordsCount);
 
         $percentageCount = [];
 
-        foreach($wordsCount as $words => $word)
-        {
-            $percentageCount[$words] = number_format(($word / $totalAllWordsArray) * 100, $decimals, $decPoint, $thousandsSep);
+        foreach ($wordsCount as $words => $word) {
+            $percentageCount[$words] = number_format($word / $totalAllWordsArray * 100, $decimals, $decPoint, $thousandsSep);
         }
 
         return $percentageCount;
