@@ -282,6 +282,13 @@ test('test padLeft() method', function (): void {
     $this->assertEquals('------------SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-'));
 });
 
+test('test replacePunctuations() method', function (): void {
+    $this->assertEquals('Fòôbàřs Fòô bàřs', Strings::create('Fòôbàřs. Fòô, bàřs')->replacePunctuations()->toString());
+    $this->assertEquals('Fòôbàřs-Fòô-bàřs', Strings::create('Fòôbàřs. Fòô, bàřs')->replacePunctuations('-', true)->toString());
+    $this->assertEquals('FòôbàřsFòôbàřs', Strings::create('Fòôbàřs. Fòô, bàřs')->replacePunctuations('', true)->toString());
+});
+
+
 test('test replaceNonAlphanumeric() method', function (): void {
     $this->assertEquals('Fòôbàřs 123', Strings::create('Fòôbàřs 123')->replaceNonAlphanumeric()->toString());
     $this->assertEquals('Fòôbàřs123', Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric()->toString());

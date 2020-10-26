@@ -90,6 +90,7 @@ $strings = strings();
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
+| <a href="#strings_replacePunctuations">`replacePunctuations()`</a> |  Replace all punctuations characters in the string with the given value. |
 | <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
 | <a href="#strings_replaceNonAlpha">`replaceNonAlpha()`</a> | Replace none alpha characters in the string with the given value. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
@@ -997,6 +998,31 @@ public function padLeft(int $length, string $pad = ' '): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-');
+```
+
+##### <a name="strings_replacePunctuations"></a> Method: `replacePunctuations()`
+
+```php
+/**
+ * Replace all punctuations characters in the string with the given value.
+ *
+ * @param string  $replacement Value to replace none alphanumeric characters with. Default is ''
+ * @param bool    $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replacePunctuations(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace all punctuations characters in the string
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations();
+
+// Replace all punctuations characters in the string with -
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-');
+
+//  Replace all punctuations characters in the string with - and and replace all spaces.
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-', true);
 ```
 
 ##### <a name="strings_replaceNonAlphanumeric"></a> Method: `replaceNonAlphanumeric()`
