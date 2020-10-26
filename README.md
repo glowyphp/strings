@@ -66,6 +66,7 @@ $strings = strings();
 | <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
+| <a href="#strings_lines">`lines()`</a> | Get array of individual lines in the string. |
 | <a href="#strings_words">`words()`</a> | Get words from the string. |
 | <a href="#strings_wordsLimit">`wordsLimit()`</a> | Limit the number of words in a string. |
 | <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
@@ -550,6 +551,22 @@ public function kebab(): self
 
 ```php
 $string = Strings::create('fooBar')->kebab();
+```
+
+
+##### <a name="strings_lines"></a> Method: `lines()`
+
+```php
+/**
+ * Get array of individual lines in the string.
+ */
+public function lines(): array
+```
+
+##### Example
+
+```php
+$lines = Strings::create("Fòô òô\n fòô fò fò \nfò\r")->lines();
 ```
 
 

@@ -114,6 +114,13 @@ test('test kebab() method', function (): void {
 });
 
 
+test('test lines() method', function (): void {
+    $this->assertEquals(
+        ['Fòô òô', ' fòô fò fò ', 'fò'],
+        Strings::create("Fòô òô\n fòô fò fò \nfò\r")->lines()
+    );
+});
+
 test('test words() method', function (): void {
     $this->assertEquals(
         ['Fòô', 'fòô', 'òôf'],

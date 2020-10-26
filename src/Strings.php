@@ -8,6 +8,7 @@ use InvalidArgumentException;
 
 use function abs;
 use function array_count_values;
+use function array_pop;
 use function array_reverse;
 use function array_shift;
 use function array_walk;
@@ -16,6 +17,7 @@ use function base64_decode;
 use function base64_encode;
 use function count;
 use function ctype_lower;
+use function end;
 use function explode;
 use function filter_var;
 use function floatval;
@@ -435,6 +437,18 @@ class Strings
         empty(end($words)) and array_pop($words);
 
         return $words;
+    }
+
+    /**
+     * Get array of individual lines in the string.
+     */
+    public function lines(): array
+    {
+        $lines = preg_split('/\r\n|\n|\r/', $this->string);
+
+        empty(end($lines)) and array_pop($lines);
+
+        return $lines;
     }
 
     /**
