@@ -1186,6 +1186,32 @@ class Strings
     }
 
     /**
+     * Get chars usage frequency array.
+     *
+     * @param int    $decimals     Number of decimal points. Default is 2.
+     * @param string $decPoint     Separator for the decimal point. Default is ".".
+     * @param string $thousandsSep Thousands separator. Default is ",".
+     */
+    public function charsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+    {
+        $this->stripSpaces();
+        $chars = preg_split('//u', $this->string, -1, PREG_SPLIT_NO_EMPTY);
+        $totalAllCharsArray = count($chars);
+        $charsCount = array_count_values($chars);
+
+        arsort($charsCount);
+
+        $percentageCount = [];
+
+        foreach($charsCount as $chars => $char)
+        {
+            $percentageCount[$chars] = number_format(($char / $totalAllCharsArray) * 100, $decimals, $decPoint, $thousandsSep);
+        }
+
+        return $percentageCount;
+    }
+
+    /**
      * Get words usage frequency array.
      *
      * @param int    $decimals     Number of decimal points. Default is 2.
@@ -1210,6 +1236,7 @@ class Strings
 
         return $percentageCount;
     }
+
     /**
      * Move substring of desired $length to $destination index of the original string.
      * In case $destination is less than $length returns the string untouched.
