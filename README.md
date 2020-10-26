@@ -134,6 +134,8 @@ $strings = strings();
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
+| <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in string ascending. |
+| <a href="#strings_wordsSortDesc">`wordsSortDesc"()`</a> | Sort words in string descending. |
 
 #### Methods Details
 
@@ -1836,6 +1838,38 @@ if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
     // do something...
 }
 ```
+
+##### <a name="strings_wordsSortAsc"></a> Method: `wordsSortAsc()`
+
+```php
+/**
+ * Sort words in string ascending.
+ */
+public function wordsSortAsc(): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('car fòô bàřs apple')->wordsSortAsc();
+```
+
+
+##### <a name="strings_wordsSortDesc"></a> Method: `wordsSortDesc()`
+
+```php
+/**
+ * Sort words in string descending.
+ */
+public function wordsSortDesc(): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('car fòô bàřs apple')->wordsSortDesc();
+```
+
 
 ### Tests
 

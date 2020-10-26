@@ -1157,6 +1157,34 @@ class Strings
     }
 
     /**
+     * Sort words in string descending.
+     */
+    public function wordsSortDesc(): self
+    {
+        $words = mb_split("\s", $this->string);
+
+        rsort($words);
+
+        $this->string = implode(" ", $words);
+
+        return $this;
+    }
+
+    /**
+     * Sort words in string ascending.
+     */
+    public function wordsSortAsc(): self
+    {
+        $words = mb_split("\s", $this->string);
+
+        sort($words);
+
+        $this->string = implode(" ", $words);
+
+        return $this;
+    }
+
+    /**
      * Move substring of desired $length to $destination index of the original string.
      * In case $destination is less than $length returns the string untouched.
      *

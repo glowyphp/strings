@@ -482,6 +482,14 @@ test('test toArray() method', function (): void {
     $this->assertEquals(['fòô', 'bàřs'], Strings::create(' fòô bàřs ')->toArray(' '));
 });
 
+test('test wordsSortAsc() method', function (): void {
+    $this->assertEquals('apple bàřs car fòô', Strings::create('car fòô bàřs apple')->wordsSortAsc()->toString());
+});
+
+test('test wordsSortDesc() method', function (): void {
+    $this->assertEquals('fòô car bàřs apple', Strings::create('car fòô bàřs apple')->wordsSortDesc()->toString());
+});
+
 test('test insert() method', function (): void {
     $this->assertEquals('fòôfòôbàřs', Strings::create('fòôbàřs')->insert('fòô', 3));
 });
