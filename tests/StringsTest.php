@@ -268,6 +268,7 @@ test('test afterLast() method', function (): void {
 
 test('test stripSpaces() method', function (): void {
     $this->assertEquals('SG-1returnsfromanoff-worldmission', Strings::create('SG-1 returns from an off-world mission')->stripSpaces());
+    $this->assertEquals('fòôbàřsfòôbàřsfòôbàřs', Strings::create('fòôbàřs fòôbàřs fòô bàřs')->stripSpaces());
 });
 
 test('test padBoth() method', function (): void {

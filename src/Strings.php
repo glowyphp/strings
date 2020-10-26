@@ -847,7 +847,7 @@ class Strings
      */
     public function stripSpaces(): self
     {
-        $this->string = preg_replace('/\s+/', '', $this->string);
+        $this->string = preg_replace('/\s+/u', '', $this->string);
 
         return $this;
     }
