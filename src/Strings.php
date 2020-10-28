@@ -7,12 +7,17 @@ namespace Atomastic\Strings;
 use InvalidArgumentException;
 
 use function abs;
+use function array_count_values;
+use function array_pop;
 use function array_reverse;
 use function array_shift;
 use function array_walk;
+use function arsort;
 use function base64_decode;
 use function base64_encode;
+use function count;
 use function ctype_lower;
+use function end;
 use function explode;
 use function filter_var;
 use function floatval;
@@ -31,6 +36,7 @@ use function ltrim;
 use function mb_convert_case;
 use function mb_ereg_match;
 use function mb_internal_encoding;
+use function mb_split;
 use function mb_strimwidth;
 use function mb_stripos;
 use function mb_strlen;
@@ -43,17 +49,21 @@ use function mb_strwidth;
 use function mb_substr;
 use function mb_substr_count;
 use function method_exists;
+use function number_format;
 use function preg_match;
 use function preg_quote;
 use function preg_replace;
+use function preg_split;
 use function random_int;
 use function range;
+use function rsort;
 use function rtrim;
 use function shuffle;
 use function similar_text;
+use function sort;
 use function str_pad;
+use function str_repeat;
 use function str_replace;
-use function str_word_count;
 use function strncmp;
 use function strpos;
 use function strrpos;
@@ -65,8 +75,11 @@ use function unserialize;
 
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALIDATE_EMAIL;
+use const FILTER_VALIDATE_URL;
 use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
+use const PREG_SPLIT_NO_EMPTY;
 use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
@@ -155,6 +168,26 @@ class Strings
     public static function create($string = '', string $encoding = 'UTF-8'): self
     {
         return new Strings($string, $encoding);
+    }
+
+    /**
+     * Set the character encoding.
+     *
+     * @param string $encoding Character encoding.
+     */
+    public function setEncoding(string $encoding): self
+    {
+        $this->encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * Get character encoding.
+     */
+    public function getEncoding(): string
+    {
+        return $this->encoding;
     }
 
     /**
@@ -378,7 +411,7 @@ class Strings
      * @param  int    $words  Words limit
      * @param  string $append Text to append to the string IF it gets truncated
      */
-    public function words(int $words = 100, string $append = '...'): self
+    public function wordsLimit(int $words = 100, string $append = '...'): self
     {
         preg_match('/^\s*+(?:\S++\s*+){1,' . $words . '}/u', $this->string, $matches);
 
@@ -389,6 +422,32 @@ class Strings
         $this->string = static::create($matches[0], $this->encoding)->trimRight() . $append;
 
         return $this;
+    }
+
+    /**
+     * Get words from the string.
+     *
+     * @param string $ignore Ingnore symbols.
+     */
+    public function words(string $ignore = '?!;:,.'): array
+    {
+        $words = preg_split('/[\s' . $ignore . ']+/', $this->string);
+
+        empty(end($words)) and array_pop($words);
+
+        return $words;
+    }
+
+    /**
+     * Get array of individual lines in the string.
+     */
+    public function lines(): array
+    {
+        $lines = preg_split('/\r\n|\n|\r/', $this->string);
+
+        empty(end($lines)) and array_pop($lines);
+
+        return $lines;
     }
 
     /**
@@ -420,17 +479,17 @@ class Strings
     }
 
     /**
-     * Return information about words used in a string
+     * Get words count from the string.
      *
-     * @param  int    $format   Specify the return value of this function. The current supported values are:
-     *                          0 - returns the number of words found
-     *                          1 - returns an array containing all the words found inside the string
-     *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-     * @param  string $charlist A list of additional characters which will be considered as 'word'
+     * @param string $ignore Ingnore symbols.
      */
-    public function countWords(int $format = 0, string $charlist = '')
+    public function wordsCount(string $ignore = '?!;:,.'): int
     {
-        return str_word_count($this->string, $format, $charlist);
+        $words = preg_split('/[\s' . $ignore . ']+/', $this->string);
+
+        empty(end($words)) and array_pop($words);
+
+        return count($words);
     }
 
     /**
@@ -511,13 +570,7 @@ class Strings
      */
     public function length(): int
     {
-        if ($this->encoding) {
-            $result = mb_strlen($this->string, $this->encoding);
-        }
-
-        $result = mb_strlen($this->string);
-
-        return $result;
+        return mb_strlen($this->string, $this->encoding);
     }
 
     /**
@@ -824,7 +877,101 @@ class Strings
      */
     public function stripSpaces(): self
     {
-        $this->string = preg_replace('/\s+/', '', $this->string);
+        $this->string = preg_replace('/\s+/u', '', $this->string);
+
+        return $this;
+    }
+
+    /**
+     * Replace all dashes characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace dashes characters with replacement. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replaceDashes(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/\p{Pd}/u',
+            $replacement,
+            static::create($this->string, $this->encoding)->trim()->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Replace all punctuations characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace punctuations characters with replacement. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replacePunctuations(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/\p{P}/u',
+            $replacement,
+            static::create($this->string, $this->encoding)->trim()->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Replace none alphanumeric characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replaceNonAlphanumeric(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/[^\p{L}0-9\s]+/u',
+            $replacement,
+            static::create($this->string, $this->encoding)->trim()->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Replace none alpha characters in the string with the given value.
+     *
+     * @param string $replacement Value to replace none alpha characters with
+     * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     */
+    public function replaceNonAlpha(string $replacement = '', bool $strict = false): self
+    {
+        $this->string = preg_replace(
+            '/[^\p{L}\s]+/u',
+            $replacement,
+            static::create($this->string, $this->encoding)
+                ->trim()
+                ->toString()
+        );
+
+        if ($strict) {
+            $this->string = static::create($this->string, $this->encoding)
+                                ->stripSpaces()
+                                ->toString();
+        }
 
         return $this;
     }
@@ -1036,6 +1183,84 @@ class Strings
     }
 
     /**
+     * Sort words in string descending.
+     */
+    public function wordsSortDesc(): self
+    {
+        $words = mb_split('\s', $this->string);
+
+        rsort($words);
+
+        $this->string = implode(' ', $words);
+
+        return $this;
+    }
+
+    /**
+     * Sort words in string ascending.
+     */
+    public function wordsSortAsc(): self
+    {
+        $words = mb_split('\s', $this->string);
+
+        sort($words);
+
+        $this->string = implode(' ', $words);
+
+        return $this;
+    }
+
+    /**
+     * Get chars usage frequency array.
+     *
+     * @param int    $decimals     Number of decimal points. Default is 2.
+     * @param string $decPoint     Separator for the decimal point. Default is ".".
+     * @param string $thousandsSep Thousands separator. Default is ",".
+     */
+    public function charsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
+    {
+        $this->stripSpaces();
+        $chars              = preg_split('//u', $this->string, -1, PREG_SPLIT_NO_EMPTY);
+        $totalAllCharsArray = count($chars);
+        $charsCount         = array_count_values($chars);
+
+        arsort($charsCount);
+
+        $percentageCount = [];
+
+        foreach ($charsCount as $chars => $char) {
+            $percentageCount[$chars] = number_format($char / $totalAllCharsArray * 100, $decimals, $decPoint, $thousandsSep);
+        }
+
+        return $percentageCount;
+    }
+
+    /**
+     * Get words usage frequency array.
+     *
+     * @param int    $decimals     Number of decimal points. Default is 2.
+     * @param string $decPoint     Separator for the decimal point. Default is ".".
+     * @param string $thousandsSep Thousands separator. Default is ",".
+     */
+    public function wordsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
+    {
+        $this->replacePunctuations();
+        $words              = mb_split('\s', $this->string);
+        $totalAllWordsArray = count($words);
+        $wordsCount         = array_count_values($words);
+
+        arsort($wordsCount);
+
+        $percentageCount = [];
+
+        foreach ($wordsCount as $words => $word) {
+            $percentageCount[$words] = number_format($word / $totalAllWordsArray * 100, $decimals, $decPoint, $thousandsSep);
+        }
+
+        return $percentageCount;
+    }
+
+    /**
      * Move substring of desired $length to $destination index of the original string.
      * In case $destination is less than $length returns the string untouched.
      *
@@ -1071,6 +1296,22 @@ class Strings
                         static::create($this->string)->substr($index)->toString();
 
         return $this;
+    }
+
+    /**
+     * Returns true if the string is email and it is valid, false otherwise.
+     */
+    public function isEmail(): bool
+    {
+        return (bool) filter_var($this->string, FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
+     * Returns true if the string is url and it is valid, false otherwise.
+     */
+    public function isUrl(): bool
+    {
+        return (bool) filter_var($this->string, FILTER_VALIDATE_URL);
     }
 
     /**
@@ -1214,12 +1455,20 @@ class Strings
      *
      * @param string $string                  The string to compare against.
      * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
-     *
-     * @return bool
      */
     public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
     {
         return $this->similarity($string) >= $minPercentForSimilarity;
+    }
+
+    /**
+     * Determine whether the string is equals to $string.
+     *
+     * @param $string String to compare.
+     */
+    public function isEqual(string $string): bool
+    {
+        return $string === $this->toString();
     }
 
     /**
@@ -1295,15 +1544,5 @@ class Strings
         );
 
         return $array;
-    }
-
-    /**
-     * Determine whether the string is equals to $string.
-     *
-     * @param $string String to compare.
-     */
-    public function isEqual(string $string): bool
-    {
-        return ($string === $this->toString()) ? true : false;
     }
 }

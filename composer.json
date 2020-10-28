@@ -1,9 +1,9 @@
 {
     "name": "atomastic/strings",
-    "description": "Strings Component is a set of methods to help with the manipulation of strings.",
+    "description": "Strings Component provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.",
     "license": "MIT",
     "keywords": [
-        "Strings", "strings", "php-strings", "php", "atomastic"
+        "Strings", "strings", "php-strings", "php", "atomastic", "strings-manipulation"
     ],
     "support": {
       "source": "https://github.com/atomastic/strings",

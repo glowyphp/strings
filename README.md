@@ -1,8 +1,11 @@
 <h1 align="center">Strings Component</h1>
+<p align="center">
+Strings Component provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+</p>
 
 <p align="center">
-<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/github/downloads/atomastic/strings/total.svg?color=green" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
-  <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a>
+<a href="https://github.com/atomastic/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/atomastic/strings.svg?label=version&color=green"></a> <a href="https://github.com/atomastic/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a> <a href="https://packagist.org/packages/atomastic/strings"><img src="https://poser.pugx.org/atomastic/strings/downloads" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
+  <a href="https://app.codacy.com/gh/atomastic/strings?utm_source=github.com&utm_medium=referral&utm_content=atomastic/strings&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/72b4dc84c20145e1b77dc0004a3c8e3d"></a> <a href="https://codeclimate.com/github/atomastic/strings/maintainability"><img src="https://api.codeclimate.com/v1/badges/b1e18970e78af3a48a0d/maintainability"/></a>
 </p>
 
 <br>
@@ -26,13 +29,13 @@ composer require atomastic/strings
 ```php
 use Atomastic\Strings\Strings;
 
-// Using public method __construct()
+// Create Strings instance using public method __construct()
 $strings = new Strings();
 
-// Using public static method create()
+// Create Strings instance using public static method create()
 $strings = Strings::create();
 
-// Using global helper function strings()
+// Create Strings instance using global helper function strings()
 $strings = strings();
 ```
 
@@ -41,6 +44,8 @@ $strings = strings();
 | Method | Description |
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
+| <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
+| <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
 | <a href="#strings_reduceSlashes">`reduceSlashes()`</a> | Reduces multiple slashes in a string to single slashes. |
 | <a href="#strings_stripQuotes">`stripQuotes()`</a> | Removes single and double quotes from a string. |
@@ -52,7 +57,7 @@ $strings = strings();
 | <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
-| <a href="#strings_countWords">`countWords()`</a> | Return information about words used in a string. |
+| <a href="#strings_wordsCount">`wordsCount()`</a> | Get words count from the string. |
 | <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
@@ -61,7 +66,11 @@ $strings = strings();
 | <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
 | <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
-| <a href="#strings_words">`words()`</a> | Limit the number of words in a string. |
+| <a href="#strings_lines">`lines()`</a> | Get array of individual lines in the string. |
+| <a href="#strings_words">`words()`</a> | Get words from the string. |
+| <a href="#strings_wordsLimit">`wordsLimit()`</a> | Limit the number of words in a string. |
+| <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
+| <a href="#strings_charsFrequency">`charsFrequency()`</a> | Get chars usage frequency array. |
 | <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.|
@@ -85,6 +94,10 @@ $strings = strings();
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
+| <a href="#strings_replacePunctuations">`replacePunctuations()`</a> | Replace all dashes characters in the string with the given value. |
+| <a href="#strings_replaceDashes">`replaceDashes()`</a> | Replace all punctuations characters in the string with the given value. |
+| <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
+| <a href="#strings_replaceNonAlpha">`replaceNonAlpha()`</a> | Replace none alpha characters in the string with the given value. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
 | <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
 | <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
@@ -116,6 +129,7 @@ $strings = strings();
 | <a href="#strings_isDigit">`isDigit()`</a> | Returns true if the string contains only digit chars, false otherwise. |
 | <a href="#strings_isLower">`isLower()`</a> | Returns true if the string contains only lower case chars, false otherwise. |
 | <a href="#strings_isUpper">`isUpper()`</a> | Returns true if the string contains only upper case chars, false otherwise. |
+| <a href="#strings_isEmail">`isEmail()`</a> | Returns true if the string is email and it is valid, false otherwise. |
 | <a href="#strings_isHexadecimal">`isHexadecimal()`</a> | Returns true if the string contains only hexadecimal chars, false otherwise. |
 | <a href="#strings_isPrintable">`isPrintable()`</a> | Returns true if the string contains only printable (non-invisible) chars, false otherwise. |
 | <a href="#strings_isPunctuation">`isPunctuation()`</a> | Returns true if the string contains only punctuation chars, false otherwise. |
@@ -124,8 +138,11 @@ $strings = strings();
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
+| <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
+| <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
 #### Methods Details
+
 
 ##### <a name="strings_create"></a> Method: `create()`
 
@@ -142,10 +159,42 @@ $strings = strings();
 public static function create($string = '', string $encoding = 'UTF-8'): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission');
+```
+
+##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
+
+```php
+/**
+ * Set the character encoding.
+ *
+ * @param string $encoding Character encoding.
+ */
+public function setEncoding(string $encoding): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->setEncoding('UTF-8');
+```
+
+##### <a name="strings_getEncoding"></a> Method: `getEncoding()`
+
+```php
+/**
+ * Get character encoding.
+ */
+public function getEncoding(): string
+```
+
+##### Example
+
+```php
+$encoding = Strings::create('SG-1 returns from an off-world mission')->getEncoding();
 ```
 
 ##### <a name="strings_stripSpaces"></a> Method: `stripSpaces()`
@@ -157,7 +206,7 @@ $string = Strings::create('SG-1 returns from an off-world mission');
 public function stripSpaces(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->stripSpaces();
@@ -172,7 +221,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->stripSpaces
 public function reduceSlashes(): self
 ```    
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('some//text//here')->reduceSlashes();
@@ -187,7 +236,7 @@ $string = Strings::create('some//text//here')->reduceSlashes();
 public function stripQuotes(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('some "text" here')->stripQuotes();
@@ -204,7 +253,7 @@ $string = Strings::create('some "text" here')->stripQuotes();
 public function quotesToEntities(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('some "text" here')->quotesToEntities();
@@ -219,7 +268,7 @@ $string = Strings::create('some "text" here')->quotesToEntities();
 public function normalizeNewLines(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->normalizeNewLines();
@@ -234,7 +283,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->normalizeNe
 public function normalizeSpaces(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1  returns  from  an  off-world  mission')->normalizeSpaces();
@@ -252,7 +301,7 @@ $string = Strings::create('SG-1  returns  from  an  off-world  mission')->normal
 public function random(int $length = 64, string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get random string with predefined settings
@@ -277,7 +326,7 @@ $string = Strings::create()->random(4, '0123456789');
 public function increment(int $first = 1, string $separator = '_')
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Increment string with predefined settings
@@ -298,7 +347,7 @@ $string = Strings::create('page-1')->increment(1, '-');
 public function repeat(int $multiplier): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('fòô')->repeat(3);
@@ -313,7 +362,7 @@ $string = Strings::create('fòô')->repeat(3);
 public function length(): int
 ```
 
-**Examples**
+##### Example
 
 ```php
 $length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->length();
@@ -328,38 +377,28 @@ $length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function count(): int
 ```
 
-**Examples**
+##### Example
 
 ```php
 $count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
 ```
 
-##### <a name="strings_countWords"></a> Method: `countWords()`
+##### <a name="strings_wordsCount"></a> Method: `wordsCount()`
 
 ```php
 /**
- * Return information about words used in a string
+ * Get words count from the string.
  *
- * @param  int    $format   Specify the return value of this function. The current supported values are:
- *                          0 - returns the number of words found
- *                          1 - returns an array containing all the words found inside the string
- *                          2 - returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
- * @param  string $charlist A list of additional characters which will be considered as 'word'
+ * @param string $ignore Ingnore symbols.
  */
-public function countWords(int $format = 0, string $charlist = '')
+public function wordsCount(string $ignore = '?!;:,.'): int
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Returns the number of words found
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords();
-
-// Returns an array containing all the words found inside the string
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(1);
-
-// Returns an associative array, where the key is the numeric position of the word inside the string and the value is the actual word itself
-$result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 with Daniel Jackson')->countWords(2);
+$result = Strings::create('SG-1 returns from an off-world mission')->wordsCount();
 ```
 
 ##### <a name="strings_countSubString"></a> Method: `countSubString()`
@@ -376,7 +415,7 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3 wit
 public function countSubString(string $substring, bool $caseSensitive = true): int
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Returns the number of occurrences of $substring in the given string.
@@ -396,7 +435,7 @@ $result = Strings::create('Test string here for test')->countSubString('test', f
 public function lower(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->lower();
@@ -411,7 +450,7 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function upper(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->upper();
@@ -429,7 +468,7 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function limit(int $limit = 100, string $append = '...'): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get string with predefined limit settings
@@ -451,7 +490,7 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function studly(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('foo_bar')->studly();
@@ -468,7 +507,7 @@ $string = Strings::create('foo_bar')->studly();
 public function snake(string $delimiter = '_'): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('fooBar')->snake();
@@ -483,7 +522,7 @@ $string = Strings::create('fooBar')->snake();
 public function camel(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('foo_bar')->camel();
@@ -498,13 +537,47 @@ $string = Strings::create('foo_bar')->camel();
 public function kebab(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('fooBar')->kebab();
 ```
 
+
+##### <a name="strings_lines"></a> Method: `lines()`
+
+```php
+/**
+ * Get array of individual lines in the string.
+ */
+public function lines(): array
+```
+
+##### Example
+
+```php
+$lines = Strings::create("Fòô òô\n fòô fò fò \nfò\r")->lines();
+```
+
+
 ##### <a name="strings_words"></a> Method: `words()`
+
+```php
+/**
+ * Get words from the string.
+ *
+ * @param string $ignore Ingnore symbols.
+ */
+public function words(string $ignore = '?!;:,.'): array
+```
+
+##### Example
+
+```php
+$words = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words();
+```
+
+##### <a name="strings_wordsLimit"></a> Method: `wordsLimit()`
 
 ```php
 /**
@@ -513,20 +586,78 @@ $string = Strings::create('fooBar')->kebab();
  * @param  int    $words  Words limit
  * @param  string $append Text to append to the string IF it gets truncated
  */
-public function words(int $words = 100, string $append = '...'): self
+public function wordsLimit(int $words = 100, string $append = '...'): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get the number of words in a string with predefined limit settings
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words();
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit();
 
 // Get the number of words in a string with limit 3
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3);
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit(3);
 
 // Get the number of words in a string with limit 3 and append 'read more...'
-$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->words(3, 'read more...');
+$string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->wordsLimit(3, 'read more...');
+```
+
+##### <a name="strings_wordsFrequency"></a> Method: `wordsFrequency()`
+
+```php
+/**
+ * Get words usage frequency array.
+ *
+ * @param int    $decimals     Number of decimal points. Default is 2.
+ * @param string $decPoint     Separator for the decimal point. Default is ".".
+ * @param string $thousandsSep Thousands separator. Default is ",".
+ */
+public function wordsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+```
+
+##### Example
+
+```php
+// Get words usage frequency array.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency();
+
+// Get words usage frequency array and set number of decimal points.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4);
+
+// Get words usage frequency array, set number of decimal points, set separator for the decimal point.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4, '.');
+
+// Get words usage frequency array, set number of decimal points, set separator for the decimal point, thousands separator.
+$result = Strings::create('car fòô bàřs apple')->wordsFrequency(4, '.', ',');
+```
+
+##### <a name="strings_charsFrequency"></a> Method: `charsFrequency()`
+
+```php
+/**
+ * Get chars usage frequency array.
+ *
+ * @param int    $decimals     Number of decimal points. Default is 2.
+ * @param string $decPoint     Separator for the decimal point. Default is ".".
+ * @param string $thousandsSep Thousands separator. Default is ",".
+ */
+public function charsFrequency(int $decimals = 2 , string $decPoint = "." , string $thousandsSep = ","): array
+```
+
+##### Example
+
+```php
+// Get chars usage frequency array.
+$result = Strings::create('car fòô bàřs apple')->charsFrequency();
+
+// Get chars usage frequency array and set number of decimal points.
+$result = Strings::create('car fòô bàřs apple')->charsFrequency(4);
+
+// Get chars usage frequency array, set number of decimal points, set separator for the decimal point.
+$result = Strings::create('car fòô bàřs apple')->charsFrequency(4, '.');
+
+// Get chars usage frequency array, set number of decimal points, set separator for the decimal point, thousands separator.
+$result = Strings::create('car fòô bàřs apple')->charsFrequency(4, '.', ',');
 ```
 
 ##### <a name="strings_contains"></a> Method: `contains()`
@@ -541,7 +672,7 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function contains($needles, bool $caseSensitive = true): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Determine if a given string contains a given substring.
@@ -563,7 +694,7 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function containsAll(array $needles, bool $caseSensitive = true): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->containsAll(['SG-1', 'P9Y-3C3']);
@@ -582,7 +713,7 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function containsAny(array $needles, bool $caseSensitive = true): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->containsAny(['SG-1', 'P9Y-3C3']);
@@ -604,7 +735,7 @@ $result = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function substr(int $start, ?int $length = null): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Returns the portion of string specified by the start 0.
@@ -624,7 +755,7 @@ $string = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->
 public function ucfirst(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('daniel')->ucfirst();
@@ -642,7 +773,7 @@ $string = Strings::create('daniel')->ucfirst();
 public function trim(string $character_mask = " \t\n\r\0\x0B"): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create(' daniel ')->trim();
@@ -660,7 +791,7 @@ $string = Strings::create(' daniel ')->trim();
 public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('daniel ')->trimRight();
@@ -678,7 +809,7 @@ $string = Strings::create('daniel ')->trimRight();
 public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create(' daniel')->trimLeft();
@@ -693,7 +824,7 @@ $string = Strings::create(' daniel')->trimLeft();
 public function trimSlashes(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('some string here/')->trimSlashes();
@@ -708,7 +839,7 @@ $string = Strings::create('some string here/')->trimSlashes();
 public function capitalize(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('that country was at the same stage of development as the United States in the 1940s')->capitalize();
@@ -723,7 +854,7 @@ $string = Strings::create('that country was at the same stage of development as 
 public function reverse(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->reverse();
@@ -740,7 +871,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->reverse();
 public function segments(string $delimiter = ' '): array
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get array of segments from a string based on a predefined delimiter.
@@ -764,7 +895,7 @@ $segments = Strings::create('SG-1 returns from an off-world mission')->segments(
 public function segment(int $index, string $delimiter = ' '): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get a segment 1 from a string based on a predefined delimiter.
@@ -788,7 +919,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->segment(-1,
 public function firstSegment(string $delimiter = ' '): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get a first segment from a string based on a predefined delimiter.
@@ -810,7 +941,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->firstSegmen
 public function lastSegment(string $delimiter = ' '): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get a last segment from a string based on a predefined delimiter.
@@ -832,7 +963,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->lastSegment
 public function between(string $from, string $to): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from');
@@ -849,7 +980,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->between('SG
 public function before(string $search): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->before('mission');
@@ -866,7 +997,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->before('mis
 public function beforeLast(string $search): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission');
@@ -883,7 +1014,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->beforeLast(
 public function after(string $search): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->after('SG-1');
@@ -900,7 +1031,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->after('SG-1
 public function afterLast(string $search): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
@@ -918,7 +1049,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->afterLast('
 public function padBoth(int $length, string $pad = ' '): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->padBoth(50, '-');
@@ -936,7 +1067,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->padBoth(50,
 public function padRight(int $length, string $pad = ' '): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->padRight(50, '-');
@@ -952,10 +1083,109 @@ $string = Strings::create('SG-1 returns from an off-world mission')->padRight(50
  */
 public function padLeft(int $length, string $pad = ' '): self
 ```
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50, '-');
+```
+
+##### <a name="strings_replacePunctuations"></a> Method: `replacePunctuations()`
+
+```php
+/**
+ * Replace all punctuations characters in the string with the given value.
+ *
+ * @param string  $replacement Value to replace none alphanumeric characters with replacement. Default is ''
+ * @param bool    $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replacePunctuations(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace all punctuations characters in the string
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations();
+
+// Replace all punctuations characters in the string with -
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-');
+
+// Replace all punctuations characters in the string with - and and replace all spaces.
+$string = Strings::create('Fòô. bàřs, bàřs')->replacePunctuations('-', true);
+```
+
+##### <a name="strings_replaceDashes"></a> Method: `replaceDashes()`
+
+```php
+/**
+ * Replace all dashes characters in the string with the given value.
+ *
+ * @param string  $replacement Value to replace dashes characters with replacement. Default is ''
+ * @param bool    $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replaceDashes(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace all dashes characters in the string
+$string = Strings::create('Fòôbàřs - Fòô - bàřs')->replaceDashes()->toString();
+
+// Replace all dashes characters in the string with _
+$string = Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_')->toString();
+
+// Replace all dashes characters in the string with _ and and replace all spaces.
+$string = Strings::create('Fòôbàřs-Fòô-bàřs')->replaceDashes('_', true)->toString();
+```
+
+##### <a name="strings_replaceNonAlphanumeric"></a> Method: `replaceNonAlphanumeric()`
+
+```php
+/**
+ * Replace none alphanumeric characters in the string with the given value.
+ *
+ * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
+ */
+public function replaceNonAlphanumeric(string $replacement = ''): self
+```
+
+##### Example
+
+```php
+// Replace symbols -
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric();
+
+// Replace symbols - with _
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_');
+
+// Replace symbols - with _ and replace all spaces.
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlphanumeric('_', true);
+```
+
+##### <a name="strings_replaceNonAlpha"></a> Method: `replaceNonAlpha()`
+
+```php
+/**
+ * Replace none alpha characters in the string with the given value.
+ *
+ * @param string $replacement Value to replace none alpha characters with
+ * @param bool   $strict      Should spaces be preserved or not. Default is false.
+ */
+public function replaceNonAlpha(string $replacement = '', bool $strict = false): self
+```
+
+##### Example
+
+```php
+// Replace none alpha characters in the string
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha();
+
+// Replace none alpha characters in the string with _
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_');
+
+// Replace none alpha characters in the string with _ and replace all spaces.
+$string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_', true);
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`
@@ -970,7 +1200,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->padLeft(50,
 public function replaceArray(string $search, array $replace): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']);
@@ -988,7 +1218,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->replaceArra
 public function replaceFirst(string $search, string $replace): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2');
@@ -1006,7 +1236,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->replaceFirs
 public function replaceLast(string $search, string $replace): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3');
@@ -1023,7 +1253,7 @@ $string = Strings::create('SG-1 returns from an off-world mission')->replaceLast
 public function start(string $prefix): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('movies/sg-1/season-5/episode-21/')->start('/');
@@ -1040,7 +1270,7 @@ $string = Strings::create('movies/sg-1/season-5/episode-21/')->start('/');
 public function startsWith($needles): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 $result = Strings::create('/movies/sg-1/season-5/episode-21/')->startsWith('/');
@@ -1057,7 +1287,7 @@ $result = Strings::create('/movies/sg-1/season-5/episode-21/')->startsWith('/');
 public function endsWith($needles): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 $result = Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('/');
@@ -1074,7 +1304,7 @@ $result = Strings::create('/movies/sg-1/season-5/episode-21/')->endsWith('/');
 public function finish(string $cap): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $result = Strings::create('/movies/sg-1/season-5/episode-21')->finish('/');
@@ -1094,7 +1324,7 @@ $result = Strings::create('/movies/sg-1/season-5/episode-21')->finish('/');
 public function hash(string $algorithm = 'md5', bool $raw_output = false): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 // Get string hash with predefined settings
@@ -1118,7 +1348,7 @@ $result = Strings::create('SG-1 returns from an off-world mission')->hash('sha25
 public function prepend(string ...$values): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
@@ -1135,7 +1365,7 @@ $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
 public function append(string ...$values): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('WORK HARD.')->append(' PLAY HARD.');
@@ -1150,7 +1380,7 @@ $string = Strings::create('WORK HARD.')->append(' PLAY HARD.');
 public function shuffle(): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('hello')->shuffle();
@@ -1167,7 +1397,7 @@ $string = Strings::create('hello')->shuffle();
 public function similarity(string $string): float
 ```
 
-**Examples**
+##### Example
 
 ```php
 $percent = Strings::create('hello')->similarity('hello');
@@ -1184,7 +1414,7 @@ $percent = Strings::create('hello')->similarity('hello');
 public function at(int $index): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $character = Strings::create('hello')->at(3);
@@ -1205,7 +1435,7 @@ $character = Strings::create('hello')->at(3);
 public function indexOf($needle, int $offset = 0, bool $caseSensitive = true)
 ```
 
-**Examples**
+##### Example
 
 ```php
 $index = Strings::create('hello')->indexOf('e');
@@ -1226,7 +1456,7 @@ $index = Strings::create('hello')->indexOf('e');
 public function indexOfLast(string $needle, int $offset = 0, bool $caseSensitive = true)
 ```
 
-**Examples**
+##### Example
 
 ```php
 $index = Strings::create('hello')->indexOfLast('l');
@@ -1246,7 +1476,7 @@ $index = Strings::create('hello')->indexOfLast('l');
 public function move(int $start, int $length, int $destination): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('hello world')->move(0, 5, 10);
@@ -1264,7 +1494,7 @@ $string = Strings::create('hello world')->move(0, 5, 10);
 public function insert(string $substring, int $index): self
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('world')->insert('hello ');
@@ -1280,7 +1510,7 @@ $string = Strings::create('hello')->insert(' world', 5);
 public function toString(): string
 ```
 
-**Examples**
+##### Example
 
 ```php
 $string = Strings::create('hello world')->toString();
@@ -1295,7 +1525,7 @@ $string = Strings::create('hello world')->toString();
 public function toInteger(): int
 ```
 
-**Examples**
+##### Example
 
 ```php
 $integer = Strings::create('42')->toInteger();
@@ -1310,7 +1540,7 @@ $integer = Strings::create('42')->toInteger();
 public function toFloat(): float
 ```
 
-**Examples**
+##### Example
 
 ```php
 $float = Strings::create('42.0')->toFloat();
@@ -1336,7 +1566,7 @@ $float = Strings::create('42.0')->toFloat();
 public function toBoolean(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 $state = Strings::create('on')->toBoolean();
@@ -1354,7 +1584,7 @@ $state = Strings::create('off')->toBoolean();
 public function toArray(string $delimiter = null): array
 ```
 
-**Examples**
+##### Example
 
 ```php
 $array = Strings::create('hello world')->toArray();
@@ -1370,7 +1600,7 @@ $array = Strings::create('hello, world')->toArray(',');
 public function isEmpty(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create()->isEmpty()) {
@@ -1387,7 +1617,7 @@ if (Strings::create()->isEmpty()) {
 public function isAscii(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('#@$%')->isAscii()) {
@@ -1404,7 +1634,7 @@ if (Strings::create('#@$%')->isAscii()) {
 public function isAlphanumeric(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('fòôbàřs12345')->isAlphanumeric()) {
@@ -1421,7 +1651,7 @@ if (Strings::create('fòôbàřs12345')->isAlphanumeric()) {
 public function isAlpha(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('fòôbàřs')->isAlpha()) {
@@ -1438,7 +1668,7 @@ if (Strings::create('fòôbàřs')->isAlpha()) {
 public function isBlank(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create()->isBlank()) {
@@ -1455,7 +1685,7 @@ if (Strings::create()->isBlank()) {
 public function isNumeric(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('42')->isNumeric()) {
@@ -1472,7 +1702,7 @@ if (Strings::create('42')->isNumeric()) {
 public function isDigit(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('01234569')->isDigit()) {
@@ -1489,7 +1719,7 @@ if (Strings::create('01234569')->isDigit()) {
 public function isLower(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('fòôbàřs')->isLower()) {
@@ -1506,10 +1736,44 @@ if (Strings::create('fòôbàřs')->isLower()) {
 public function isUpper(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('FOOBAR')->isUpper()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isEmail"></a> Method: `isEmail()`
+
+```php
+/**
+ * Returns true if the string is email and it is valid, false otherwise.
+ */
+public function isEmail(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('awilum@atomastic.com')->isEmail()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isUrl"></a> Method: `isUrl()`
+
+```php
+/**
+* Returns true if the string is url and it is valid, false otherwise.
+*/
+public function isUrl(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('http://atomastic.com')->isUrl()) {
     // do something...
 }
 ```
@@ -1523,7 +1787,7 @@ if (Strings::create('FOOBAR')->isUpper()) {
 public function isHexadecimal(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('19FDE')->isHexadecimal()) {
@@ -1540,7 +1804,7 @@ if (Strings::create('19FDE')->isHexadecimal()) {
 public function isPrintable(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('LKA#@%.54')->isPrintable()) {
@@ -1557,7 +1821,7 @@ if (Strings::create('LKA#@%.54')->isPrintable()) {
 public function isPunctuation(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create(',')->isPunctuation()) {
@@ -1574,7 +1838,7 @@ if (Strings::create(',')->isPunctuation()) {
 public function isSerialized(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('s:11:"fòôbàřs";'))->isSerialized()) {
@@ -1591,7 +1855,7 @@ if (Strings::create('s:11:"fòôbàřs";'))->isSerialized()) {
 public function isJson(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('{"yaml": "json"}'))->isJson()) {
@@ -1608,7 +1872,7 @@ if (Strings::create('{"yaml": "json"}'))->isJson()) {
 public function isBase64(): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('ZsOyw7Riw6DFmXM='))->isBase64()) {
@@ -1630,7 +1894,7 @@ if (Strings::create('ZsOyw7Riw6DFmXM='))->isBase64()) {
 public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('fòôbàřs')->isSimilar('fòôbàřs')) {
@@ -1653,13 +1917,45 @@ if (Strings::create('fòôbàřs')->isSimilar('fòô', 50.0)) {
 public function isEqual(string $string): bool
 ```
 
-**Examples**
+##### Example
 
 ```php
 if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
     // do something...
 }
 ```
+
+##### <a name="strings_wordsSortAsc"></a> Method: `wordsSortAsc()`
+
+```php
+/**
+ * Sort words in string ascending.
+ */
+public function wordsSortAsc(): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('car fòô bàřs apple')->wordsSortAsc();
+```
+
+
+##### <a name="strings_wordsSortDesc"></a> Method: `wordsSortDesc()`
+
+```php
+/**
+ * Sort words in string descending.
+ */
+public function wordsSortDesc(): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('car fòô bàřs apple')->wordsSortDesc();
+```
+
 
 ### Tests
 
