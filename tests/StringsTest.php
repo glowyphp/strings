@@ -672,6 +672,12 @@ test('test isMAC() method', function (): void {
     $this->assertFalse(Strings::create('127.0.0.1')->isMAC());
 });
 
+test('test isHTML() method', function (): void {
+    $this->assertTrue(Strings::create('<b>fòôbàřs</b>')->isHTML());
+    $this->assertTrue(Strings::create('fòôbàřs<br>')->isHTML());
+    $this->assertFalse(Strings::create('fòôbàřs')->isHTML());
+});
+
 test('test repeat() method', function (): void {
     $this->assertEquals('fòôfòôfòô', Strings::create('fòô')->repeat(3));
 });

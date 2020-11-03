@@ -64,6 +64,7 @@ use function sort;
 use function str_pad;
 use function str_repeat;
 use function str_replace;
+use function strip_tags;
 use function strncmp;
 use function strpos;
 use function strrpos;
@@ -73,9 +74,13 @@ use function trim;
 use function ucwords;
 use function unserialize;
 
+use const FILTER_FLAG_IPV4;
+use const FILTER_FLAG_IPV6;
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const FILTER_VALIDATE_EMAIL;
+use const FILTER_VALIDATE_IP;
+use const FILTER_VALIDATE_MAC;
 use const FILTER_VALIDATE_URL;
 use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
@@ -1491,6 +1496,14 @@ class Strings
     public function isMAC(): bool
     {
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_MAC);
+    }
+
+    /**
+     * Determine whether the string is HTML.
+     */
+    public function isHTML(): bool
+    {
+        return $this->toString() !== strip_tags($this->toString());
     }
 
     /**

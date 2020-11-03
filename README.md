@@ -139,6 +139,8 @@ $strings = strings();
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
 | <a href="#strings_isIP">`isIP()`</a> | Determine whether the string is IP and it is a valid IP address. |
+| <a href="#strings_isMAC">`isMAC()`</a> | Determine whether the string is MAC address and it is a valid MAC address. |
+| <a href="#strings_isHTML">`isHTML()`</a> | Determine whether the string is HTML. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -1949,7 +1951,6 @@ if (Strings::create('127.0.0.1')->isIP()) {
 }
 ```
 
-
 ##### <a name="strings_isMAC"></a> Method: `isMAC()`
 
 ```php
@@ -1963,6 +1964,23 @@ public function isMAC(): bool
 
 ```php
 if (Strings::create('00:11:22:33:44:55')->isMAC()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isHTML"></a> Method: `isHTML()`
+
+```php
+/**
+ * Determine whether the string is HTML.
+ */
+public function isHTML(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('<b>fòôbàřs</b>')->isHTML()) {
     // do something...
 }
 ```
