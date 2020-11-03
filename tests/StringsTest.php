@@ -662,6 +662,11 @@ test('test isEqual() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isEqual('fòô'));
 });
 
+test('test isIP() method', function (): void {
+    $this->assertTrue(Strings::create('127.0.0.1')->isIP());
+    $this->assertFalse(Strings::create('fòôbàřs')->isIP());
+});
+
 test('test repeat() method', function (): void {
     $this->assertEquals('fòôfòôfòô', Strings::create('fòô')->repeat(3));
 });

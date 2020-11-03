@@ -138,6 +138,7 @@ $strings = strings();
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
+| <a href="#strings_isIP">`isIP()`</a> | Determine whether the string is IP and it is a valid IP address. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -1921,6 +1922,29 @@ public function isEqual(string $string): bool
 
 ```php
 if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
+    // do something...
+}
+```
+
+##### <a name="strings_isIP"></a> Method: `isIP()`
+
+```php
+/**
+ * Determine whether the string is IP and it is a valid IP address.
+ *
+ * @param $flags Flags:
+ *                  FILTER_FLAG_IPV4
+ *                  FILTER_FLAG_IPV6
+ *                  FILTER_FLAG_NO_PRIV_RANGE
+ *                  FILTER_FLAG_NO_RES_RANGE
+ */
+public function isIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('127.0.0.1')->isIP()) {
     // do something...
 }
 ```

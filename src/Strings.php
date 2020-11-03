@@ -1472,6 +1472,20 @@ class Strings
     }
 
     /**
+     * Determine whether the string is IP and it is a valid IP address.
+     *
+     * @param $flags Flags:
+     *                  FILTER_FLAG_IPV4
+     *                  FILTER_FLAG_IPV6
+     *                  FILTER_FLAG_NO_PRIV_RANGE
+     *                  FILTER_FLAG_NO_RES_RANGE
+     */
+    public function isIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_IP, $flags);
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string
