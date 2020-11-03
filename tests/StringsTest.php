@@ -667,6 +667,11 @@ test('test isIP() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isIP());
 });
 
+test('test isMAC() method', function (): void {
+    $this->assertTrue(Strings::create('00:11:22:33:44:55')->isMAC());
+    $this->assertFalse(Strings::create('127.0.0.1')->isMAC());
+});
+
 test('test repeat() method', function (): void {
     $this->assertEquals('fòôfòôfòô', Strings::create('fòô')->repeat(3));
 });

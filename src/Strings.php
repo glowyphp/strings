@@ -1486,6 +1486,14 @@ class Strings
     }
 
     /**
+     * Determine whether the string is MAC address and it is a valid MAC address.
+     */
+    public function isMAC(): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_MAC);
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string
