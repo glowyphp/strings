@@ -138,6 +138,12 @@ $strings = strings();
 | <a href="#strings_isBase64">`isBase64()`</a> | Returns true if the string is base64 encoded, false otherwise. |
 | <a href="#strings_isSimilar">`isSimilar()`</a> | Check if two strings are similar. |
 | <a href="#strings_isEqual">`isEqual()`</a> | Determine whether the string is equals to `$string`. |
+| <a href="#strings_isIP">`isIP()`</a> | Determine whether the string is IP and it is a valid IP address. |
+| <a href="#strings_isMAC">`isMAC()`</a> | Determine whether the string is MAC address and it is a valid MAC address. |
+| <a href="#strings_isHTML">`isHTML()`</a> | Determine whether the string is HTML. |
+| <a href="#strings_isBoolean">`isBoolean()`</a> | Determine whether the string is Boolean. |
+| <a href="#strings_isTrue">`isTrue()`</a> | Determine whether the string is Boolean and it is TRUE. |
+| <a href="#strings_isFalse">`isFalse()`</a> | Determine whether the string is Boolean and it is FALSE. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -1921,6 +1927,124 @@ public function isEqual(string $string): bool
 
 ```php
 if (Strings::create('fòôbàřs')->isEqual('fòôbàřs')) {
+    // do something...
+}
+```
+
+##### <a name="strings_isIP"></a> Method: `isIP()`
+
+```php
+/**
+ * Determine whether the string is IP and it is a valid IP address.
+ *
+ * @param $flags Flags:
+ *                  FILTER_FLAG_IPV4
+ *                  FILTER_FLAG_IPV6
+ *                  FILTER_FLAG_NO_PRIV_RANGE
+ *                  FILTER_FLAG_NO_RES_RANGE
+ */
+public function isIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('127.0.0.1')->isIP()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isMAC"></a> Method: `isMAC()`
+
+```php
+/**
+ * Determine whether the string is MAC address and it is a valid MAC address.
+ */
+public function isMAC(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('00:11:22:33:44:55')->isMAC()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isHTML"></a> Method: `isHTML()`
+
+```php
+/**
+ * Determine whether the string is HTML.
+ */
+public function isHTML(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('<b>fòôbàřs</b>')->isHTML()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBoolean"></a> Method: `isBoolean()`
+
+```php
+/**
+ * Determine whether the string is Boolean.
+ *
+ * Boolean representation for logical strings:
+ * 'true', '1', 'on' and 'yes' will return true.
+ * 'false', '0', 'off', and 'no' will return false.
+ *
+ * In all instances, case is ignored.
+ */
+public function isBoolean(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('on')->isBoolean()) {
+    // do something...
+}
+
+if (Strings::create('off')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isTrue"></a> Method: `isTrue()`
+
+```php
+/**
+ * Determine whether the string is Boolean and it is TRUE.
+ */
+public function isTrue(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('on')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isFalse"></a> Method: `isFalse()`
+
+```php
+/**
+ * Determine whether the string is Boolean and it is FALSE.
+ */
+public function isFalse(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('off')->isBoolean()) {
     // do something...
 }
 ```

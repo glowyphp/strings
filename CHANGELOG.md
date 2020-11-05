@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/atomastic/strings) (2020-11-05)
+* add isIP method.
+* add isMAC method.
+* add isHTML method.
+* add isBoolean method.
+* add isTrue method.
+* add isFalse method.
+* improve tests for toBoolean method.
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/atomastic/strings) (2020-10-28)
 

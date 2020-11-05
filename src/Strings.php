@@ -64,6 +64,7 @@ use function sort;
 use function str_pad;
 use function str_repeat;
 use function str_replace;
+use function strip_tags;
 use function strncmp;
 use function strpos;
 use function strrpos;
@@ -73,9 +74,13 @@ use function trim;
 use function ucwords;
 use function unserialize;
 
+use const FILTER_FLAG_IPV4;
+use const FILTER_FLAG_IPV6;
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const FILTER_VALIDATE_EMAIL;
+use const FILTER_VALIDATE_IP;
+use const FILTER_VALIDATE_MAC;
 use const FILTER_VALIDATE_URL;
 use const JSON_ERROR_NONE;
 use const MB_CASE_TITLE;
@@ -1469,6 +1474,66 @@ class Strings
     public function isEqual(string $string): bool
     {
         return $string === $this->toString();
+    }
+
+    /**
+     * Determine whether the string is IP and it is a valid IP address.
+     *
+     * @param $flags Flags:
+     *                  FILTER_FLAG_IPV4
+     *                  FILTER_FLAG_IPV6
+     *                  FILTER_FLAG_NO_PRIV_RANGE
+     *                  FILTER_FLAG_NO_RES_RANGE
+     */
+    public function isIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_IP, $flags);
+    }
+
+    /**
+     * Determine whether the string is MAC address and it is a valid MAC address.
+     */
+    public function isMAC(): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_MAC);
+    }
+
+    /**
+     * Determine whether the string is HTML.
+     */
+    public function isHTML(): bool
+    {
+        return $this->toString() !== strip_tags($this->toString());
+    }
+
+    /**
+     * Determine whether the string is Boolean.
+     *
+     * Boolean representation for logical strings:
+     * 'true', '1', 'on' and 'yes' will return true.
+     * 'false', '0', 'off', and 'no' will return false.
+     *
+     * In all instances, case is ignored.
+     */
+    public function isBoolean(): bool
+    {
+        return in_array(mb_strtolower($this->toString()), ['true', 'false', '1', '0', 'yes', 'no', 'on', 'off'], true);
+    }
+
+    /**
+     * Determine whether the string is Boolean and it is TRUE.
+     */
+    public function isTrue(): bool
+    {
+        return $this->toBoolean() === true;
+    }
+
+    /**
+     * Determine whether the string is Boolean and it is FALSE.
+     */
+    public function isFalse(): bool
+    {
+        return $this->toBoolean() === false;
     }
 
     /**
