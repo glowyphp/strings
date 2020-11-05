@@ -1507,6 +1507,36 @@ class Strings
     }
 
     /**
+     * Determine whether the string is Boolean.
+     *
+     * Boolean representation for logical strings:
+     * 'true', '1', 'on' and 'yes' will return true.
+     * 'false', '0', 'off', and 'no' will return false.
+     *
+     * In all instances, case is ignored.
+     */
+    public function isBoolean(): bool
+    {
+        return in_array(mb_strtolower($this->toString()), ['true', 'false', '1', '0', 'yes', 'no', 'on', 'off'], true);
+    }
+
+    /**
+     * Determine whether the string is Boolean and it is TRUE.
+     */
+    public function isTrue(): bool
+    {
+        return $this->toBoolean() === true;
+    }
+
+    /**
+     * Determine whether the string is Boolean and it is FALSE.
+     */
+    public function isFalse(): bool
+    {
+        return $this->toBoolean() === false;
+    }
+
+    /**
      * Return Strings object as string.
      */
     public function toString(): string

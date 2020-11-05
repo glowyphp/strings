@@ -141,6 +141,9 @@ $strings = strings();
 | <a href="#strings_isIP">`isIP()`</a> | Determine whether the string is IP and it is a valid IP address. |
 | <a href="#strings_isMAC">`isMAC()`</a> | Determine whether the string is MAC address and it is a valid MAC address. |
 | <a href="#strings_isHTML">`isHTML()`</a> | Determine whether the string is HTML. |
+| <a href="#strings_isBoolean">`isBoolean()`</a> | Determine whether the string is Boolean. |
+| <a href="#strings_isTrue">`isTrue()`</a> | Determine whether the string is Boolean and it is TRUE. |
+| <a href="#strings_isFalse">`isFalse()`</a> | Determine whether the string is Boolean and it is FALSE. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -1981,6 +1984,67 @@ public function isHTML(): bool
 
 ```php
 if (Strings::create('<b>fòôbàřs</b>')->isHTML()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isBoolean"></a> Method: `isBoolean()`
+
+```php
+/**
+ * Determine whether the string is Boolean.
+ *
+ * Boolean representation for logical strings:
+ * 'true', '1', 'on' and 'yes' will return true.
+ * 'false', '0', 'off', and 'no' will return false.
+ *
+ * In all instances, case is ignored.
+ */
+public function isBoolean(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('on')->isBoolean()) {
+    // do something...
+}
+
+if (Strings::create('off')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isTrue"></a> Method: `isTrue()`
+
+```php
+/**
+ * Determine whether the string is Boolean and it is TRUE.
+ */
+public function isTrue(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('on')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_isFalse"></a> Method: `isFalse()`
+
+```php
+/**
+ * Determine whether the string is Boolean and it is FALSE.
+ */
+public function isFalse(): bool
+```
+
+##### Example
+
+```php
+if (Strings::create('off')->isBoolean()) {
     // do something...
 }
 ```
