@@ -672,6 +672,7 @@ test('test isJson() method', function (): void {
 });
 
 test('test isSerialized() method', function (): void {
+    $this->assertFalse(Strings::create()->isSerialized());
     $this->assertTrue(Strings::create('s:6:"foobar";')->isSerialized());
     $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
     $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
