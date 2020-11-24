@@ -361,6 +361,7 @@ test('test replaceFirst() method', function (): void {
 
 test('test replaceLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an P9Y-3C3 mission', Strings::create('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3'));
+    $this->assertEquals('SG-3', Strings::create('SG-1 returns from an off-world mission')->replaceLast('SG-3', 'SG-4'));
 });
 
 test('test start() method', function (): void {
