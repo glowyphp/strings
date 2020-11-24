@@ -296,6 +296,7 @@ test('test after() method', function (): void {
 
 test('test afterLast() method', function (): void {
     $this->assertEquals(' returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1'));
+    $this->assertEquals('fòô bàřs', Strings::create('fòô bàřs')->afterLast('123'));
 });
 
 test('test stripSpaces() method', function (): void {
