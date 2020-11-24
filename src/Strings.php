@@ -353,7 +353,9 @@ class Strings
         $key = $this->string;
 
         if (isset($this->cache['studly'][$key])) {
-            return $this->cache['studly'][$key];
+            $this->string = $this->cache['studly'][$key];
+
+            return $this;
         }
 
         $this->cache['studly'][$key] = str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $this->string)));
