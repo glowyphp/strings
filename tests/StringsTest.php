@@ -432,6 +432,7 @@ test('test hash() method', function (): void {
     $this->assertEquals(Strings::create('test')->hash(), Strings::create('test')->hash());
     $this->assertEquals(Strings::create('test')->hash('sha256'), Strings::create('test')->hash('sha256'));
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
+    $this->assertEquals(Strings::create('test')->hash('foo'), Strings::create('test')->hash('foo'));
 });
 
 test('test prepend() method', function (): void {
