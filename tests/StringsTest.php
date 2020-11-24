@@ -41,6 +41,7 @@ test('test normalizeSpaces() method', function (): void {
 });
 
 test('test random() method', function (): void {
+    $this->assertNotEquals(Strings::create()->random(0), Strings::create()->random(0));
     $this->assertNotEquals(Strings::create()->random(), Strings::create()->random());
     $this->assertNotEquals(Strings::create()->random(10), Strings::create()->random(10));
     $this->assertNotEquals(Strings::create()->random(10, '0123456789'), Strings::create()->random(10, '0123456789'));
