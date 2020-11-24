@@ -464,6 +464,7 @@ test('test at() method', function (): void {
 
 test('test move() method', function (): void {
     $this->assertEquals('bàřsfòô', Strings::create('fòôbàřs')->move(0, 3, 7));
+    $this->assertEquals('fòôbàřs', Strings::create('fòôbàřs')->move(0, 7, 7));
 });
 
 test('test indexOf() method', function (): void {
