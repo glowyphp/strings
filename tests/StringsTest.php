@@ -481,7 +481,8 @@ test('test indexOf() method', function (): void {
 
 test('test indexOfLast() method', function (): void {
     $this->assertFalse(Strings::create('')->indexOfLast(''));
-    $this->assertFalse(Strings::create('')->indexOfLast('', 1));
+    $this->assertFalse(Strings::create('')->indexOfLast('', 10));
+    $this->assertFalse(Strings::create('')->indexOfLast('', -10));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô'));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô', 11));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsFòô')->indexOfLast('Fòô', 0, false));
