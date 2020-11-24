@@ -277,6 +277,7 @@ test('test lastSegment() method', function (): void {
 
 test('test between() method', function (): void {
     $this->assertEquals(' returns ', Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from'));
+    $this->assertEquals('SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->between('', ''));
 });
 
 test('test before() method', function (): void {
