@@ -4,6 +4,22 @@ declare(strict_types=1);
 
 use Atomastic\Strings\Strings;
 
+test('test __construct() method', function (): void {
+    $this->assertInstanceOf(Strings::class, new Strings());
+
+    $mb_internal_encoding = mb_internal_encoding();
+    $strings = new Strings('', null);
+    $this->assertEquals($mb_internal_encoding, $strings->getEncoding());
+});
+
+test('test __construct() throws exception InvalidArgumentException with array param', function (): void {
+    $strings = new Strings([]);
+})->throws(InvalidArgumentException::class);
+
+test('test __construct() throws exception InvalidArgumentException with object without __toString', function (): void {
+    $strings = new Strings((object) []);
+})->throws(InvalidArgumentException::class);
+
 test('test create() method', function (): void {
     $this->assertEquals(new Strings(), Strings::create());
 });
