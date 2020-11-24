@@ -117,7 +117,7 @@ class Strings
      *
      * @return void
      */
-    public function __construct($string = '', string $encoding = 'UTF-8')
+    public function __construct($string = '', $encoding = 'UTF-8')
     {
         if (is_array($string)) {
             throw new InvalidArgumentException(
