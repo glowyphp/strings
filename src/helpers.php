@@ -16,7 +16,7 @@ if (! function_exists('strings')) {
      * @param mixed  $string   Value to modify, after being cast to string. Default: ''
      * @param string $encoding The character encoding. Default: UTF-8
      */
-    function strings($string = '', string $encoding = 'UTF-8'): Strings
+    function strings($string = '', $encoding = 'UTF-8'): Strings
     {
         return new Strings($string, $encoding);
     }
