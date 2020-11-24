@@ -4,6 +4,22 @@ declare(strict_types=1);
 
 use Atomastic\Strings\Strings;
 
+test('test __construct() method', function (): void {
+    $this->assertInstanceOf(Strings::class, new Strings());
+
+    $mb_internal_encoding = mb_internal_encoding();
+    $strings = new Strings('', null);
+    $this->assertEquals($mb_internal_encoding, $strings->getEncoding());
+});
+
+test('test __construct() throws exception InvalidArgumentException with array param', function (): void {
+    $strings = new Strings([]);
+})->throws(InvalidArgumentException::class);
+
+test('test __construct() throws exception InvalidArgumentException with object without __toString', function (): void {
+    $strings = new Strings((object) []);
+})->throws(InvalidArgumentException::class);
+
 test('test create() method', function (): void {
     $this->assertEquals(new Strings(), Strings::create());
 });
@@ -41,6 +57,7 @@ test('test normalizeSpaces() method', function (): void {
 });
 
 test('test random() method', function (): void {
+    $this->assertNotEquals(Strings::create()->random(0), Strings::create()->random(0));
     $this->assertNotEquals(Strings::create()->random(), Strings::create()->random());
     $this->assertNotEquals(Strings::create()->random(10), Strings::create()->random(10));
     $this->assertNotEquals(Strings::create()->random(10, '0123456789'), Strings::create()->random(10, '0123456789'));
@@ -63,6 +80,11 @@ test('test limit() method', function (): void {
     $this->assertEquals(
         'Lorem...',
         Strings::create('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')->limit(5)
+    );
+
+    $this->assertEquals(
+        'Excepteur sint occaecat cupidatat non proident',
+        Strings::create('Excepteur sint occaecat cupidatat non proident')->limit(100)
     );
 
     $this->assertEquals(
@@ -272,6 +294,7 @@ test('test lastSegment() method', function (): void {
 
 test('test between() method', function (): void {
     $this->assertEquals(' returns ', Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from'));
+    $this->assertEquals('SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->between('', ''));
 });
 
 test('test before() method', function (): void {
@@ -282,6 +305,7 @@ test('test before() method', function (): void {
 test('test beforeLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->beforeLast('bàřs'));
+    $this->assertEquals('fòô bàřs', Strings::create('fòô bàřs')->beforeLast('123'));
 });
 
 test('test after() method', function (): void {
@@ -290,6 +314,7 @@ test('test after() method', function (): void {
 
 test('test afterLast() method', function (): void {
     $this->assertEquals(' returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1'));
+    $this->assertEquals('fòô bàřs', Strings::create('fòô bàřs')->afterLast('123'));
 });
 
 test('test stripSpaces() method', function (): void {
@@ -347,10 +372,12 @@ test('test replaceArray() method', function (): void {
 
 test('test replaceFirst() method', function (): void {
     $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceFirst('SG-1', 'SG-2'));
+    $this->assertEquals('SG-3', Strings::create('SG-1 returns from an off-world mission')->replaceFirst('SG-3', 'SG-4'));
 });
 
 test('test replaceLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an P9Y-3C3 mission', Strings::create('SG-1 returns from an off-world mission')->replaceLast('off-world', 'P9Y-3C3'));
+    $this->assertEquals('SG-3', Strings::create('SG-1 returns from an off-world mission')->replaceLast('SG-3', 'SG-4'));
 });
 
 test('test start() method', function (): void {
@@ -421,6 +448,7 @@ test('test hash() method', function (): void {
     $this->assertEquals(Strings::create('test')->hash(), Strings::create('test')->hash());
     $this->assertEquals(Strings::create('test')->hash('sha256'), Strings::create('test')->hash('sha256'));
     $this->assertEquals(Strings::create('test')->hash('sha256', true), Strings::create('test')->hash('sha256', true));
+    $this->assertEquals(Strings::create('test')->hash('foo'), Strings::create('test')->hash('foo'));
 });
 
 test('test prepend() method', function (): void {
@@ -448,12 +476,18 @@ test('test similarity() method', function (): void {
     $this->assertEquals(62.5, Strings::create('fòôbàřs')->similarity('fòô'));
 });
 
+test('test isSimilar() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isSimilar('fòôbàřs'));
+    $this->assertFalse(Strings::create('fòôbàřs')->isSimilar('fò'));
+});
+
 test('test at() method', function (): void {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
 });
 
 test('test move() method', function (): void {
     $this->assertEquals('bàřsfòô', Strings::create('fòôbàřs')->move(0, 3, 7));
+    $this->assertEquals('fòôbàřs', Strings::create('fòôbàřs')->move(0, 7, 7));
 });
 
 test('test indexOf() method', function (): void {
@@ -462,9 +496,15 @@ test('test indexOf() method', function (): void {
     $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs', 3));
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 3, false));
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 0, false));
+    $this->assertFalse(Strings::create('')->indexOf(''));
 });
 
 test('test indexOfLast() method', function (): void {
+    $this->assertFalse(Strings::create('')->indexOfLast(''));
+    $this->assertFalse(Strings::create('')->indexOfLast('', 10));
+    $this->assertFalse(Strings::create('')->indexOfLast('', -10));
+    $this->assertFalse(Strings::create('à')->indexOfLast('à', 10));
+    $this->assertFalse(Strings::create('à')->indexOfLast('à', -10));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô'));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsfòô')->indexOfLast('fòô', 11));
     $this->assertEquals(11, Strings::create('bàřsfòôbàřsFòô')->indexOfLast('Fòô', 0, false));
@@ -649,6 +689,7 @@ test('test isJson() method', function (): void {
 });
 
 test('test isSerialized() method', function (): void {
+    $this->assertFalse(Strings::create()->isSerialized());
     $this->assertTrue(Strings::create('s:6:"foobar";')->isSerialized());
     $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
     $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
@@ -657,6 +698,7 @@ test('test isSerialized() method', function (): void {
 test('test isBase64() method', function (): void {
     $this->assertTrue(Strings::create('ZsOyw7Riw6DFmXM=')->isBase64());
     $this->assertFalse(Strings::create('fòôbàřs')->isBase64());
+    $this->assertFalse(Strings::create()->isBase64());
 });
 
 test('test isEqual() method', function (): void {
