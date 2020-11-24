@@ -99,13 +99,6 @@ class Strings
     protected $string;
 
     /**
-     * The cache for words.
-     *
-     * @var array
-     */
-    protected $cache = [];
-
-    /**
      * The string's encoding, which should be one of the mbstring module's
      * supported encodings.
      *
@@ -350,17 +343,7 @@ class Strings
      */
     public function studly(): self
     {
-        $key = $this->string;
-
-        if (isset($this->cache['studly'][$key])) {
-            $this->string = $this->cache['studly'][$key];
-
-            return $this;
-        }
-
-        $this->cache['studly'][$key] = str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $this->string)));
-
-        $this->string = $this->cache['studly'][$key];
+        $this->string = str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $this->string)));
 
         return $this;
     }
@@ -374,16 +357,12 @@ class Strings
     {
         $key = $this->string;
 
-        if (isset($this->cache['snake'][$key][$delimiter])) {
-            return $this->cache['snake'][$key][$delimiter];
-        }
-
         if (! ctype_lower($this->string)) {
             $string = preg_replace('/\s+/u', '', ucwords($this->string));
             $string = static::create(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $string), $this->encoding)->lower();
         }
 
-        $this->string = $this->cache['snake'][$key][$delimiter] = $string;
+        $this->string = $string;
 
         return $this;
     }
@@ -393,11 +372,7 @@ class Strings
      */
     public function camel(): self
     {
-        if (isset($this->cache['camel'][$this->string])) {
-            return $this->cache['camel'][$this->string];
-        }
-
-        $this->string = $this->cache['camel'][$this->string] = lcfirst((string) static::create($this->string, $this->encoding)->studly());
+        $this->string = lcfirst((string) static::create($this->string, $this->encoding)->studly());
 
         return $this;
     }

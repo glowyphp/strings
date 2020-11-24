@@ -87,7 +87,6 @@ test('test upper() method', function (): void {
 test('test studly() method', function (): void {
     $this->assertEquals('FooBar', Strings::create('foo_bar')->studly());
     $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
-    $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
 });
 
 test('test snake() method', function (): void {
