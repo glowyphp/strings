@@ -477,6 +477,7 @@ test('test indexOf() method', function (): void {
     $this->assertEquals(3, Strings::create('fòôbàřs')->indexOf('bàřs', 3));
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 3, false));
     $this->assertEquals(3, Strings::create('fòôBàřs')->indexOf('bàřs', 0, false));
+    $this->assertFalse(Strings::create('')->indexOf(''));
 });
 
 test('test indexOfLast() method', function (): void {
