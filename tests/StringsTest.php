@@ -287,6 +287,7 @@ test('test before() method', function (): void {
 test('test beforeLast() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->beforeLast('bàřs'));
+    $this->assertEquals('fòô bàřs', Strings::create('fòô bàřs')->beforeLast('123'));
 });
 
 test('test after() method', function (): void {
