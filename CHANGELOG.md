@@ -1,3 +1,26 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/atomastic/strings) (2020-11-24)
+* fix limit() method if string length is lower or equals to provided limit.
+* fix studly() method.
+* fix issue with encoding on new Strings object creation.
+* remove memory cache for words.
+* add tests for isSimilar() method.
+* improve tests for isBase64() method.
+* improve tests for move() method.
+* improve tests for beforeLast() method.
+* improve tests for afterLast() method.
+* improve tests for replaceFirst() method.
+* improve tests for between() method.
+* improve tests for indexOfLast() method.
+* improve tests for indexOf() method.
+* improve tests for random() method.
+* improve tests for replaceLast() method.
+* improve tests for isSerialized() method.
+* improve tests for hash() method.
+* improve tests for studly() method.
+* improve tests for __costruct() method.
+* improve tests workflow.
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/atomastic/strings) (2020-11-05)
 * add isIP method.

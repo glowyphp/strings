@@ -162,7 +162,7 @@ $strings = strings();
  * @param mixed  $string   Value to modify, after being cast to string. Default: ''
  * @param string $encoding The character encoding. Default: UTF-8
  */
-public static function create($string = '', string $encoding = 'UTF-8'): self
+public static function create($string = '', $encoding = 'UTF-8'): self
 ```
 
 ##### Example
