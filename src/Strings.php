@@ -318,9 +318,9 @@ class Strings
     {
         if (mb_strwidth($this->string, 'UTF-8') <= $limit) {
             $this->string = $this->string;
+        } else {
+            $this->string = static::create(mb_strimwidth($this->string, 0, $limit, '', $this->encoding), $this->encoding)->trimRight() . $append;
         }
-
-        $this->string = static::create(mb_strimwidth($this->string, 0, $limit, '', $this->encoding), $this->encoding)->trimRight() . $append;
 
         return $this;
     }
