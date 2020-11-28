@@ -959,6 +959,19 @@ class Strings
     }
 
     /**
+     * Replace the given value in the given string.
+     *
+     * @param  string                     $search  Search
+     * @param  array<int|string, string>  $replace Replace
+     */
+    public function replace(string $search, $replace): self
+    {
+        $this->string = str_replace($search, $replace, $this->string);
+
+        return $this;
+    }
+
+    /**
      * Replace a given value in the string sequentially with an array.
      *
      * @param  string $search  Search

@@ -98,6 +98,7 @@ $strings = strings();
 | <a href="#strings_replaceDashes">`replaceDashes()`</a> | Replace all punctuations characters in the string with the given value. |
 | <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
 | <a href="#strings_replaceNonAlpha">`replaceNonAlpha()`</a> | Replace none alpha characters in the string with the given value. |
+| <a href="#strings_replace">`replace()`</a> | Replace the given value in the given string. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
 | <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
 | <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
@@ -1192,6 +1193,24 @@ $string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_');
 
 // Replace none alpha characters in the string with _ and replace all spaces.
 $string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_', true);
+```
+
+##### <a name="strings_replace"></a> Method: `replace()`
+
+```php
+/**
+ * Replace the given value in the given string.
+ *
+ * @param  string                     $search  Search
+ * @param  array<int|string, string>  $replace Replace
+ */
+public function replace(string $search, $replace): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->replace('SG-1', 'SG-2');
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`

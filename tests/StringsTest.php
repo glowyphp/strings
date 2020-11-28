@@ -366,6 +366,12 @@ test('test replaceNonAlpha() method', function (): void {
     $this->assertEquals('FooBar', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlpha('', true)->toString());
 });
 
+test('test replace() method', function (): void {
+    $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
+                                                               ->replace('*', 'bàř')
+                                                               ->replace('#', 'bàz'));
+});
+
 test('test replaceArray() method', function (): void {
     $this->assertEquals('fòô/bàř/bàz', Strings::create('?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
     $this->assertEquals('fòô/bàř/bàz/?', Strings::create('?/?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
