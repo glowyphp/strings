@@ -91,6 +91,7 @@ $strings = strings();
 | <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
 | <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
 | <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
+| <a href="#strings_pipe">`pipe()`</a> | Passes the strings to the given callback and return the result. |
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
@@ -1039,6 +1040,31 @@ public function afterLast(string $search): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
+```
+
+
+##### <a name="strings_pipe"></a> Method: `pipe()`
+
+```php
+/**
+ * Passes the strings to the given callback and return the result.
+ *
+ * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+ *
+ * @return mixed Result returned by the callback.
+ */
+public function pipe(Closure $callback)
+```
+
+##### Example
+
+```php
+$string = Strings::create('Fòô');
+
+$string->pipe(static function ($string) {
+    $word = ' bàřs';
+    return $strings->append($word);
+});
 ```
 
 ##### <a name="strings_padBoth"></a> Method: `padBoth()`

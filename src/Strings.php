@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Atomastic\Strings;
 
 use InvalidArgumentException;
+use Closure;
 
 use function abs;
 use function array_count_values;
@@ -1288,6 +1289,18 @@ class Strings
                         static::create($this->string)->substr($index)->toString();
 
         return $this;
+    }
+
+    /**
+     * Passes the strings to the given callback and return the result.
+     *
+     * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+     *
+     * @return mixed Result returned by the callback.
+     */
+    public function pipe(Closure $callback)
+    {
+        return $callback($this);
     }
 
     /**

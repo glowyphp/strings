@@ -366,6 +366,15 @@ test('test replaceNonAlpha() method', function (): void {
     $this->assertEquals('FooBar', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlpha('', true)->toString());
 });
 
+test('test pipe() method', function (): void {
+    $strings = new Strings('Fòô');
+
+    $this->assertEquals('Fòô bàřs', $strings->pipe(static function ($strings) {
+        $word = ' bàřs';
+        return $strings->append($word);
+    }));
+});
+
 test('test replace() method', function (): void {
     $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
                                                                ->replace('*', 'bàř')
