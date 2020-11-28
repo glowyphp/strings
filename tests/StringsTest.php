@@ -367,7 +367,13 @@ test('test replaceNonAlpha() method', function (): void {
 });
 
 test('test replaceArray() method', function (): void {
-    $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']));
+    $this->assertEquals('fòô/bàř/bàz', Strings::create('?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř/bàz/?', Strings::create('?/?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('?/?/?', Strings::create('?/?/?')->replaceArray('x', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô?/bàř/bàz', Strings::create('?/?/?')->replaceArray('?', ['fòô?', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', [1 => 'fòô', 2 => 'bàř']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', ['x' => 'fòô', 'y' => 'bàř']));
 });
 
 test('test replaceFirst() method', function (): void {
