@@ -629,12 +629,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the beginning and end of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trim(string $character_mask = null): self
     {
-        $this->string = trim($this->string, $character_mask);
+        $this->string = trim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }
@@ -642,12 +641,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the beginning of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trimLeft(string $character_mask = null): self
     {
-        $this->string = ltrim($this->string, $character_mask);
+        $this->string = ltrim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }
@@ -655,12 +653,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the end of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trimRight(string $character_mask = null): self
     {
-        $this->string = rtrim($this->string, $character_mask);
+        $this->string = rtrim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }

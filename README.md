@@ -774,10 +774,9 @@ $string = Strings::create('daniel')->ucfirst();
 /**
  * Strip whitespace (or other characters) from the beginning and end of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+public function trim(string $character_mask = null): self
 ```
 
 ##### Example
@@ -792,10 +791,9 @@ $string = Strings::create(' daniel ')->trim();
 /**
  * Strip whitespace (or other characters) from the end of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+public function trimRight(string $character_mask = null): self
 ```
 
 ##### Example
@@ -810,10 +808,9 @@ $string = Strings::create('daniel ')->trimRight();
 /**
  * Strip whitespace (or other characters) from the beginning of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+public function trimLeft(string $character_mask = null): self
 ```
 
 ##### Example
