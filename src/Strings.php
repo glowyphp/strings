@@ -6,6 +6,12 @@ namespace Atomastic\Strings;
 
 use InvalidArgumentException;
 use Closure;
+use ArrayAccess;
+use Countable;
+use Exception;
+use OutOfBoundsException;
+use ArrayIterator;
+use IteratorAggregate;
 
 use function abs;
 use function array_count_values;
@@ -90,7 +96,7 @@ use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
 
-class Strings
+class Strings implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * The underlying string value.
@@ -1204,6 +1210,22 @@ class Strings
     }
 
     /**
+     * Returns an array consisting of the characters in the string.
+     *
+     * @return array An array of string chars
+     */
+    public function chars(): array
+    {
+        $chars = [];
+
+        for ($i = 0, $length = $this->length(); $i < $length; $i++) {
+            $chars[] = static::create($this->toString())->at($i)->toString();
+        }
+
+        return $chars;
+    }
+
+    /**
      * Get chars usage frequency array.
      *
      * @param int    $decimals     Number of decimal points. Default is 2.
@@ -1609,5 +1631,94 @@ class Strings
         );
 
         return $array;
+    }
+
+    /**
+     * Returns a new ArrayIterator, thus implementing the IteratorAggregate
+     * interface. The ArrayIterator's constructor is passed an array of chars
+     * in the multibyte string. This enables the use of foreach with instances
+     * of Strings\Strings.
+     *
+     * @return ArrayIterator An iterator for the characters in the string
+     */
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->chars());
+    }
+
+    /**
+     * Returns whether or not a character exists at an index. Offsets may be
+     * negative to count from the last character in the string. Implements
+     * part of the ArrayAccess interface.
+     *
+     * @param  mixed   $offset The index to check
+     *
+     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     */
+    public function offsetExists($offset)
+    {
+        $length = $this->length();
+        $offset = (int) $offset;
+
+        if ($offset >= 0) {
+            return ($length > $offset);
+        }
+
+        return ($length >= abs($offset));
+    }
+
+    /**
+     * Returns the character at the given index. Offsets may be negative to
+     * count from the last character in the string. Implements part of the
+     * ArrayAccess interface, and throws an OutOfBoundsException if the index
+     * does not exist.
+     *
+     * @param  mixed $offset         The index from which to retrieve the char
+     *
+     * @return mixed                 The character at the specified index
+     * @throws OutOfBoundsException  If the positive or negative offset does
+     *                               not exist
+     *
+     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     */
+    public function offsetGet($offset)
+    {
+        $offset = (int) $offset;
+        $length = $this->length();
+
+        if (($offset >= 0 && $length <= $offset) || $length < abs($offset)) {
+            throw new OutOfBoundsException('No character exists at the index');
+        }
+
+        return mb_substr($this->toString(), $offset, 1, $this->encoding);
+    }
+
+    /**
+     * Implements part of the ArrayAccess interface, but throws an exception
+     * when called. This maintains the immutability of Strings objects.
+     *
+     * @param  mixed      $offset The index of the character
+     * @param  mixed      $value  Value to set
+     *
+     * @throws Exception When called
+     */
+    public function offsetSet($offset, $value)
+    {
+        // Strings is immutable, cannot directly set char
+        throw new Exception('Strings object is immutable, cannot modify char');
+    }
+
+    /**
+     * Implements part of the ArrayAccess interface, but throws an exception
+     * when called. This maintains the immutability of Strings objects.
+     *
+     * @param  mixed      $offset The index of the character
+     *
+     * @throws Exception When called
+     */
+    public function offsetUnset($offset)
+    {
+        // Don't allow directly modifying the string
+        throw new Exception('Strings object is immutable, cannot unset char');
     }
 }
