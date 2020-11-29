@@ -135,6 +135,12 @@ test('test kebab() method', function (): void {
     $this->assertEquals('fòô-bàř', Strings::create('fòôBàř')->kebab());
 });
 
+test('test chars() method', function (): void {
+    $this->assertEquals(
+        ['F', 'ò', 'ô'],
+        Strings::create("Fòô")->chars()
+    );
+});
 
 test('test lines() method', function (): void {
     $this->assertEquals(
@@ -504,6 +510,7 @@ test('test isSimilar() method', function (): void {
 
 test('test at() method', function (): void {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
+    $this->assertEquals('b', Strings::create('fòôbàřs')->at(3));
 });
 
 test('test move() method', function (): void {
@@ -782,4 +789,53 @@ test('test repeat() method', function (): void {
 
 test('test setEncoding() and getEncoding() methods', function (): void {
     $this->assertEquals('UTF-8', Strings::create('fòô')->setEncoding('UTF-8')->getEncoding());
+});
+
+test('test offsetExists() method', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertTrue($strings[0] == 'f');
+    $this->assertTrue($strings[1] == 'ò');
+    $this->assertTrue($strings[2] == 'ô');
+    $this->assertTrue($strings->offsetExists(0));
+    $this->assertTrue($strings->offsetExists(1));
+    $this->assertTrue($strings->offsetExists(2));
+});
+
+test('test offsetExists() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertFalse($strings[3] == 'f');
+    $this->assertFalse($strings->offsetExists(3));
+})->throws(OutOfBoundsException::class);
+
+test('test offsetGet() method', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertEquals('f', $strings[0]);
+    $this->assertEquals('ò', $strings[1]);
+    $this->assertEquals('ô', $strings[2]);
+    $this->assertEquals('f', $strings->offsetGet(0));
+    $this->assertEquals('ò', $strings->offsetGet(1));
+    $this->assertEquals('ô', $strings->offsetGet(2));
+});
+
+test('test offsetGet() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertEquals('f', $strings[3]);
+    $this->assertEquals('f', $strings->offsetGet(3));
+})->throws(OutOfBoundsException::class);
+
+test('test offsetSet() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $strings->offsetSet(3, 'foo');
+})->throws(Exception::class);
+
+test('test offsetUnset() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $strings->offsetUnset(3);
+})->throws(Exception::class);
+
+test('test getIterator() method', function (): void {
+    $this->assertInstanceOf(
+        ArrayIterator::class,
+        Strings::create()->getIterator()
+    );
 });

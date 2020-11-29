@@ -110,6 +110,7 @@ $strings = strings();
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 | <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string. |
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
+| <a href="#strings_getIterator">`getIterator()`</a> | Returns a new ArrayIterator, thus implementing the IteratorAggregate interface. The ArrayIterator's constructor is passed an array of chars in the multibyte string. This enables the use of foreach with instances of Strings\Strings. |
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
@@ -146,6 +147,10 @@ $strings = strings();
 | <a href="#strings_isBoolean">`isBoolean()`</a> | Determine whether the string is Boolean. |
 | <a href="#strings_isTrue">`isTrue()`</a> | Determine whether the string is Boolean and it is TRUE. |
 | <a href="#strings_isFalse">`isFalse()`</a> | Determine whether the string is Boolean and it is FALSE. |
+| <a href="#strings_offsetGet">`offsetGet()`</a> | Returns the character at the given index. Offsets may be negative to count from the last character in the string. Implements part of the ArrayAccess interface, and throws an OutOfBoundsException if the index does not exist. |
+| <a href="#strings_offsetSet">`offsetSet()`</a> | Implements part of the ArrayAccess interface, but throws an exception when called. This maintains the immutability of Strings objects. |
+| <a href="#strings_offsetUnset">`offsetUnset()`</a> | Implements part of the ArrayAccess interface, but throws an exception when called. This maintains the immutability of Strings objects. |
+| <a href="#strings_offsetExists">`offsetExists()`</a> | Returns whether or not a character exists at an index. Offsets may be negative to count from the last character in the string. Implements part of the ArrayAccess interface. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -1413,6 +1418,21 @@ $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
 public function append(string ...$values): self
 ```
 
+##### <a name="strings_getIterator"></a> Method: `getIterator()`
+
+```php
+/**
+ * Create a new iterator from an ArrayObject instance
+ */
+public function getIterator(): ArrayIterator
+```
+
+##### Example
+
+```php
+$iterator = Strings::create('foo')->getIterator();
+```
+
 ##### Example
 
 ```php
@@ -2087,6 +2107,116 @@ public function isFalse(): bool
 
 ```php
 if (Strings::create('off')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_offsetGet"></a> Method: `offsetGet()`
+
+```php
+/**
+ * Returns the character at the given index. Offsets may be negative to
+ * count from the last character in the string. Implements part of the
+ * ArrayAccess interface, and throws an OutOfBoundsException if the index
+ * does not exist.
+ *
+ * @param  mixed $offset         The index from which to retrieve the char
+ *
+ * @return mixed                 The character at the specified index
+ * @throws OutOfBoundsException  If the positive or negative offset does
+ *                               not exist
+ *
+ * @return bool Return TRUE key exists in the array, FALSE otherwise.
+ */
+public function offsetGet($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+
+echo $strings[0];
+echo $strings[1];
+echo $strings[2];
+echo $strings->offsetGet(0);
+echo $strings->offsetGet(1);
+echo $strings->offsetGet(2);
+```
+
+##### <a name="strings_offsetSet"></a> Method: `offsetSet()`
+
+```php
+/**
+ * Implements part of the ArrayAccess interface, but throws an exception
+ * when called. This maintains the immutability of Strings objects.
+ *
+ * @param  mixed      $offset The index of the character
+ * @param  mixed      $value  Value to set
+ *
+ * @throws Exception When called
+ */
+public function offsetSet($offset, $value)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+$strings->offsetSet(3, 'foo');
+
+// Will throws an exception!
+```
+
+##### <a name="strings_offsetUnset"></a> Method: `offsetUnset()`
+
+```php
+/**
+ * Implements part of the ArrayAccess interface, but throws an exception
+ * when called. This maintains the immutability of Strings objects.
+ *
+ * @param  mixed      $offset The index of the character
+ *
+ * @throws Exception When called
+ */
+public function offsetUnset($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+$strings->offsetUnset(3);
+
+// Will throws an exception!
+```
+
+
+##### <a name="strings_offsetExists"></a> Method: `offsetExists()`
+
+```php
+/**
+ * Returns whether or not a character exists at an index. Offsets may be
+ * negative to count from the last character in the string. Implements
+ * part of the ArrayAccess interface.
+ *
+ * @param  mixed   $offset The index to check
+ *
+ * @return bool Return TRUE key exists in the array, FALSE otherwise.
+ */
+public function offsetExists($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+
+if (isset($strings[2]) && $strings[2] == 'ô') {
+    // do something...
+}
+
+if ($strings->offsetExists(2) && $strings->offsetGet(2) == 'ô') {
     // do something...
 }
 ```
