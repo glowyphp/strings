@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Atomastic\Strings;
 
-use InvalidArgumentException;
-use Closure;
 use ArrayAccess;
+use ArrayIterator;
+use Closure;
 use Countable;
 use Exception;
-use OutOfBoundsException;
-use ArrayIterator;
+use InvalidArgumentException;
 use IteratorAggregate;
+use OutOfBoundsException;
 
 use function abs;
 use function array_count_values;
+use function array_merge;
 use function array_pop;
 use function array_reverse;
 use function array_shift;
@@ -28,6 +29,7 @@ use function end;
 use function explode;
 use function filter_var;
 use function floatval;
+use function func_get_args;
 use function hash;
 use function hash_algos;
 use function implode;
@@ -120,16 +122,14 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * without a __toString method.
      *
      * @param mixed  $string   Value to modify, after being cast to string. Default: ''
-     * @param string $encoding The character encoding. Default: UTF-8
+     * @param mixed  $encoding The character encoding. Default: UTF-8
      *
      * @return void
      */
     public function __construct($string = '', $encoding = 'UTF-8')
     {
         if (is_array($string)) {
-            throw new InvalidArgumentException(
-                'Passed value cannot be an array'
-            );
+            throw new InvalidArgumentException('Passed value cannot be an array');
         }
 
         if (
@@ -137,9 +137,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
             &&
             ! method_exists($string, '__toString')
         ) {
-            throw new InvalidArgumentException(
-                'Passed object must have a __toString method'
-            );
+            throw new InvalidArgumentException('Passed object must have a __toString method');
         }
 
         if ($encoding === null) {
@@ -638,7 +636,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trim(string $character_mask = null): self
+    public function trim(?string $character_mask = null): self
     {
         $this->string = trim(...array_merge([$this->string], func_get_args()));
 
@@ -650,7 +648,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimLeft(string $character_mask = null): self
+    public function trimLeft(?string $character_mask = null): self
     {
         $this->string = ltrim(...array_merge([$this->string], func_get_args()));
 
@@ -662,7 +660,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimRight(string $character_mask = null): self
+    public function trimRight(?string $character_mask = null): self
     {
         $this->string = rtrim(...array_merge([$this->string], func_get_args()));
 
@@ -965,8 +963,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Replace the given value in the given string.
      *
-     * @param  string                     $search  Search
-     * @param  array<int|string, string>  $replace Replace
+     * @param  string $search  Search
+     * @param  mixed  $replace Replace
      */
     public function replace(string $search, $replace): self
     {
@@ -1651,20 +1649,20 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * negative to count from the last character in the string. Implements
      * part of the ArrayAccess interface.
      *
-     * @param  mixed   $offset The index to check
+     * @param  mixed $offset The index to check
      *
      * @return bool Return TRUE key exists in the array, FALSE otherwise.
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $length = $this->length();
         $offset = (int) $offset;
 
         if ($offset >= 0) {
-            return ($length > $offset);
+            return $length > $offset;
         }
 
-        return ($length >= abs($offset));
+        return $length >= abs($offset);
     }
 
     /**
@@ -1673,13 +1671,13 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * ArrayAccess interface, and throws an OutOfBoundsException if the index
      * does not exist.
      *
-     * @param  mixed $offset         The index from which to retrieve the char
+     * @param  mixed $offset The index from which to retrieve the char
      *
      * @return mixed                 The character at the specified index
+     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     *
      * @throws OutOfBoundsException  If the positive or negative offset does
      *                               not exist
-     *
-     * @return bool Return TRUE key exists in the array, FALSE otherwise.
      */
     public function offsetGet($offset)
     {
@@ -1697,12 +1695,12 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Implements part of the ArrayAccess interface, but throws an exception
      * when called. This maintains the immutability of Strings objects.
      *
-     * @param  mixed      $offset The index of the character
-     * @param  mixed      $value  Value to set
+     * @param  mixed $offset The index of the character
+     * @param  mixed $value  Value to set
      *
      * @throws Exception When called
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         // Strings is immutable, cannot directly set char
         throw new Exception('Strings object is immutable, cannot modify char');
@@ -1712,11 +1710,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Implements part of the ArrayAccess interface, but throws an exception
      * when called. This maintains the immutability of Strings objects.
      *
-     * @param  mixed      $offset The index of the character
+     * @param  mixed $offset The index of the character
      *
      * @throws Exception When called
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         // Don't allow directly modifying the string
         throw new Exception('Strings object is immutable, cannot unset char');
