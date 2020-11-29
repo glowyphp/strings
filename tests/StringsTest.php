@@ -8,9 +8,10 @@ test('test __construct() method', function (): void {
     $this->assertInstanceOf(Strings::class, new Strings());
 
     $mb_internal_encoding = mb_internal_encoding();
-    $strings = new Strings('', null);
+    $strings              = new Strings('', null);
     $this->assertEquals($mb_internal_encoding, $strings->getEncoding());
 });
+
 
 test('test __construct() throws exception InvalidArgumentException with array param', function (): void {
     $strings = new Strings([]);
@@ -57,9 +58,10 @@ test('test normalizeSpaces() method', function (): void {
 });
 
 test('test random() method', function (): void {
-    $this->assertNotEquals(Strings::create()->random(0), Strings::create()->random(0));
+    $this->assertTrue(is_string(Strings::create()->random(0)->toString()));
+    $this->assertStringContainsString(Strings::create()->random(0)->toString(), '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     $this->assertNotEquals(Strings::create()->random(), Strings::create()->random());
-    $this->assertNotEquals(Strings::create()->random(10), Strings::create()->random(10));
+    $this->assertNotEquals(Strings::create()->random(100), Strings::create()->random(100));
     $this->assertNotEquals(Strings::create()->random(10, '0123456789'), Strings::create()->random(10, '0123456789'));
     $this->assertEquals(10, Strings::create(Strings::create()->random(10, '0123456789'))->length());
 });
@@ -135,6 +137,12 @@ test('test kebab() method', function (): void {
     $this->assertEquals('fòô-bàř', Strings::create('fòôBàř')->kebab());
 });
 
+test('test chars() method', function (): void {
+    $this->assertEquals(
+        ['F', 'ò', 'ô'],
+        Strings::create('Fòô')->chars()
+    );
+});
 
 test('test lines() method', function (): void {
     $this->assertEquals(
@@ -366,8 +374,30 @@ test('test replaceNonAlpha() method', function (): void {
     $this->assertEquals('FooBar', Strings::create('Foo Bar 123{}.,;=-@#$!@$#$(!&*!$^!)')->replaceNonAlpha('', true)->toString());
 });
 
+test('test pipe() method', function (): void {
+    $strings = new Strings('Fòô');
+
+    $this->assertEquals('Fòô bàřs', $strings->pipe(static function ($strings) {
+        $word = ' bàřs';
+
+        return $strings->append($word);
+    }));
+});
+
+test('test replace() method', function (): void {
+    $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
+                                                               ->replace('*', 'bàř')
+                                                               ->replace('#', 'bàz'));
+});
+
 test('test replaceArray() method', function (): void {
-    $this->assertEquals('SG-2 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->replaceArray('SG-1', ['SG-2']));
+    $this->assertEquals('fòô/bàř/bàz', Strings::create('?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř/bàz/?', Strings::create('?/?/?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('?/?/?', Strings::create('?/?/?')->replaceArray('x', ['fòô', 'bàř', 'bàz']));
+    $this->assertEquals('fòô?/bàř/bàz', Strings::create('?/?/?')->replaceArray('?', ['fòô?', 'bàř', 'bàz']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', [1 => 'fòô', 2 => 'bàř']));
+    $this->assertEquals('fòô/bàř', Strings::create('?/?')->replaceArray('?', ['x' => 'fòô', 'y' => 'bàř']));
 });
 
 test('test replaceFirst() method', function (): void {
@@ -483,6 +513,7 @@ test('test isSimilar() method', function (): void {
 
 test('test at() method', function (): void {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
+    $this->assertEquals('b', Strings::create('fòôbàřs')->at(3));
 });
 
 test('test move() method', function (): void {
@@ -761,4 +792,53 @@ test('test repeat() method', function (): void {
 
 test('test setEncoding() and getEncoding() methods', function (): void {
     $this->assertEquals('UTF-8', Strings::create('fòô')->setEncoding('UTF-8')->getEncoding());
+});
+
+test('test offsetExists() method', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertTrue($strings[0] === 'f');
+    $this->assertTrue($strings[1] === 'ò');
+    $this->assertTrue($strings[2] === 'ô');
+    $this->assertTrue($strings->offsetExists(0));
+    $this->assertTrue($strings->offsetExists(1));
+    $this->assertTrue($strings->offsetExists(2));
+});
+
+test('test offsetExists() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertFalse($strings[3] === 'f');
+    $this->assertFalse($strings->offsetExists(3));
+})->throws(OutOfBoundsException::class);
+
+test('test offsetGet() method', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertEquals('f', $strings[0]);
+    $this->assertEquals('ò', $strings[1]);
+    $this->assertEquals('ô', $strings[2]);
+    $this->assertEquals('f', $strings->offsetGet(0));
+    $this->assertEquals('ò', $strings->offsetGet(1));
+    $this->assertEquals('ô', $strings->offsetGet(2));
+});
+
+test('test offsetGet() method throws exception OutOfBoundsException', function (): void {
+    $strings = Strings::create('fòô');
+    $this->assertEquals('f', $strings[3]);
+    $this->assertEquals('f', $strings->offsetGet(3));
+})->throws(OutOfBoundsException::class);
+
+test('test offsetSet() method throws exception OutOfBoundsException', static function (): void {
+    $strings = Strings::create('fòô');
+    $strings->offsetSet(3, 'foo');
+})->throws(Throwable::class);
+
+test('test offsetUnset() method throws exception OutOfBoundsException', static function (): void {
+    $strings = Strings::create('fòô');
+    $strings->offsetUnset(3);
+})->throws(Throwable::class);
+
+test('test getIterator() method', function (): void {
+    $this->assertInstanceOf(
+        ArrayIterator::class,
+        Strings::create()->getIterator()
+    );
 });

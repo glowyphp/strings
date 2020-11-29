@@ -1,3 +1,16 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/atomastic/strings) (2020-11-30)
+* add replace() method.
+* add pipe() method.
+* add chars() method.
+* add getIterator() method.
+* add offsetExists() offsetGet() offsetSet() offsetExists() methods.
+* implement interface: ArrayAccess, Countable, IteratorAggregate.
+* improve methods trim() trimLeft() trimRight()
+* improve tests for replaceArray() method.
+* improve tests workflow
+* general code refactoring
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/atomastic/strings) (2020-11-24)
 * fix limit() method if string length is lower or equals to provided limit.

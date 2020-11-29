@@ -91,6 +91,7 @@ $strings = strings();
 | <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
 | <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
 | <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
+| <a href="#strings_pipe">`pipe()`</a> | Passes the strings to the given callback and return the result. |
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
 | <a href="#strings_padRight">`padRight()`</a> | Pad the right side of a string with another. |
@@ -98,6 +99,7 @@ $strings = strings();
 | <a href="#strings_replaceDashes">`replaceDashes()`</a> | Replace all punctuations characters in the string with the given value. |
 | <a href="#strings_replaceNonAlphanumeric">`replaceNonAlphanumeric()`</a> | Replace none alphanumeric characters in the string with the given value. |
 | <a href="#strings_replaceNonAlpha">`replaceNonAlpha()`</a> | Replace none alpha characters in the string with the given value. |
+| <a href="#strings_replace">`replace()`</a> | Replace the given value in the given string. |
 | <a href="#strings_replaceArray">`replaceArray()`</a> | Replace a given value in the string sequentially with an array. |
 | <a href="#strings_replaceFirst">`replaceFirst()`</a> | Replace the first occurrence of a given value in the string. |
 | <a href="#strings_replaceLast">`replaceLast()`</a> | Replace the last occurrence of a given value in the string. |
@@ -108,6 +110,7 @@ $strings = strings();
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 | <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string. |
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
+| <a href="#strings_getIterator">`getIterator()`</a> | Returns a new ArrayIterator, thus implementing the IteratorAggregate interface. The ArrayIterator's constructor is passed an array of chars in the multibyte string. This enables the use of foreach with instances of Strings\Strings. |
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
@@ -144,6 +147,10 @@ $strings = strings();
 | <a href="#strings_isBoolean">`isBoolean()`</a> | Determine whether the string is Boolean. |
 | <a href="#strings_isTrue">`isTrue()`</a> | Determine whether the string is Boolean and it is TRUE. |
 | <a href="#strings_isFalse">`isFalse()`</a> | Determine whether the string is Boolean and it is FALSE. |
+| <a href="#strings_offsetGet">`offsetGet()`</a> | Returns the character at the given index. Offsets may be negative to count from the last character in the string. Implements part of the ArrayAccess interface, and throws an OutOfBoundsException if the index does not exist. |
+| <a href="#strings_offsetSet">`offsetSet()`</a> | Implements part of the ArrayAccess interface, but throws an exception when called. This maintains the immutability of Strings objects. |
+| <a href="#strings_offsetUnset">`offsetUnset()`</a> | Implements part of the ArrayAccess interface, but throws an exception when called. This maintains the immutability of Strings objects. |
+| <a href="#strings_offsetExists">`offsetExists()`</a> | Returns whether or not a character exists at an index. Offsets may be negative to count from the last character in the string. Implements part of the ArrayAccess interface. |
 | <a href="#strings_wordsSortAsc">`wordsSortAsc()`</a> | Sort words in the string ascending. |
 | <a href="#strings_wordsSortDesc">`wordsSortDesc()`</a> | Sort words in the string descending. |
 
@@ -773,10 +780,9 @@ $string = Strings::create('daniel')->ucfirst();
 /**
  * Strip whitespace (or other characters) from the beginning and end of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+public function trim(string $character_mask = null): self
 ```
 
 ##### Example
@@ -791,10 +797,9 @@ $string = Strings::create(' daniel ')->trim();
 /**
  * Strip whitespace (or other characters) from the end of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+public function trimRight(string $character_mask = null): self
 ```
 
 ##### Example
@@ -809,10 +814,9 @@ $string = Strings::create('daniel ')->trimRight();
 /**
  * Strip whitespace (or other characters) from the beginning of a string.
  *
- * @param string $character_mask Optionally, the stripped characters can also be
- *                               specified using the character_mask parameter..
+ * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
  */
-public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+public function trimLeft(string $character_mask = null): self
 ```
 
 ##### Example
@@ -1043,6 +1047,31 @@ public function afterLast(string $search): self
 $string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
 ```
 
+
+##### <a name="strings_pipe"></a> Method: `pipe()`
+
+```php
+/**
+ * Passes the strings to the given callback and return the result.
+ *
+ * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+ *
+ * @return mixed Result returned by the callback.
+ */
+public function pipe(Closure $callback)
+```
+
+##### Example
+
+```php
+$string = Strings::create('Fòô');
+
+$string->pipe(static function ($string) {
+    $word = ' bàřs';
+    return $strings->append($word);
+});
+```
+
 ##### <a name="strings_padBoth"></a> Method: `padBoth()`
 
 ```php
@@ -1192,6 +1221,24 @@ $string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_');
 
 // Replace none alpha characters in the string with _ and replace all spaces.
 $string = Strings::create('Fòô-bàřs-123')->replaceNonAlpha('_', true);
+```
+
+##### <a name="strings_replace"></a> Method: `replace()`
+
+```php
+/**
+ * Replace the given value in the given string.
+ *
+ * @param  string                     $search  Search
+ * @param  array<int|string, string>  $replace Replace
+ */
+public function replace(string $search, $replace): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->replace('SG-1', 'SG-2');
 ```
 
 ##### <a name="strings_replaceArray"></a> Method: `replaceArray()`
@@ -1369,6 +1416,21 @@ $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
  * @param  string[] $values
  */
 public function append(string ...$values): self
+```
+
+##### <a name="strings_getIterator"></a> Method: `getIterator()`
+
+```php
+/**
+ * Create a new iterator from an ArrayObject instance
+ */
+public function getIterator(): ArrayIterator
+```
+
+##### Example
+
+```php
+$iterator = Strings::create('foo')->getIterator();
 ```
 
 ##### Example
@@ -2045,6 +2107,116 @@ public function isFalse(): bool
 
 ```php
 if (Strings::create('off')->isBoolean()) {
+    // do something...
+}
+```
+
+##### <a name="strings_offsetGet"></a> Method: `offsetGet()`
+
+```php
+/**
+ * Returns the character at the given index. Offsets may be negative to
+ * count from the last character in the string. Implements part of the
+ * ArrayAccess interface, and throws an OutOfBoundsException if the index
+ * does not exist.
+ *
+ * @param  mixed $offset         The index from which to retrieve the char
+ *
+ * @return mixed                 The character at the specified index
+ * @throws OutOfBoundsException  If the positive or negative offset does
+ *                               not exist
+ *
+ * @return bool Return TRUE key exists in the array, FALSE otherwise.
+ */
+public function offsetGet($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+
+echo $strings[0];
+echo $strings[1];
+echo $strings[2];
+echo $strings->offsetGet(0);
+echo $strings->offsetGet(1);
+echo $strings->offsetGet(2);
+```
+
+##### <a name="strings_offsetSet"></a> Method: `offsetSet()`
+
+```php
+/**
+ * Implements part of the ArrayAccess interface, but throws an exception
+ * when called. This maintains the immutability of Strings objects.
+ *
+ * @param  mixed      $offset The index of the character
+ * @param  mixed      $value  Value to set
+ *
+ * @throws Exception When called
+ */
+public function offsetSet($offset, $value)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+$strings->offsetSet(3, 'foo');
+
+// Will throws an exception!
+```
+
+##### <a name="strings_offsetUnset"></a> Method: `offsetUnset()`
+
+```php
+/**
+ * Implements part of the ArrayAccess interface, but throws an exception
+ * when called. This maintains the immutability of Strings objects.
+ *
+ * @param  mixed      $offset The index of the character
+ *
+ * @throws Exception When called
+ */
+public function offsetUnset($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+$strings->offsetUnset(3);
+
+// Will throws an exception!
+```
+
+
+##### <a name="strings_offsetExists"></a> Method: `offsetExists()`
+
+```php
+/**
+ * Returns whether or not a character exists at an index. Offsets may be
+ * negative to count from the last character in the string. Implements
+ * part of the ArrayAccess interface.
+ *
+ * @param  mixed   $offset The index to check
+ *
+ * @return bool Return TRUE key exists in the array, FALSE otherwise.
+ */
+public function offsetExists($offset)
+```
+
+##### Example
+
+```php
+$strings = Strings::create('fòô');
+
+if (isset($strings[2]) && $strings[2] == 'ô') {
+    // do something...
+}
+
+if ($strings->offsetExists(2) && $strings->offsetGet(2) == 'ô') {
     // do something...
 }
 ```

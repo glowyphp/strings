@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace Atomastic\Strings;
 
+use ArrayAccess;
+use ArrayIterator;
+use Closure;
+use Countable;
+use Exception;
 use InvalidArgumentException;
+use IteratorAggregate;
+use OutOfBoundsException;
 
 use function abs;
 use function array_count_values;
+use function array_merge;
 use function array_pop;
 use function array_reverse;
 use function array_shift;
@@ -21,6 +29,7 @@ use function end;
 use function explode;
 use function filter_var;
 use function floatval;
+use function func_get_args;
 use function hash;
 use function hash_algos;
 use function implode;
@@ -89,7 +98,7 @@ use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
 
-class Strings
+class Strings implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * The underlying string value.
@@ -113,16 +122,14 @@ class Strings
      * without a __toString method.
      *
      * @param mixed  $string   Value to modify, after being cast to string. Default: ''
-     * @param string $encoding The character encoding. Default: UTF-8
+     * @param mixed  $encoding The character encoding. Default: UTF-8
      *
      * @return void
      */
     public function __construct($string = '', $encoding = 'UTF-8')
     {
         if (is_array($string)) {
-            throw new InvalidArgumentException(
-                'Passed value cannot be an array'
-            );
+            throw new InvalidArgumentException('Passed value cannot be an array');
         }
 
         if (
@@ -130,9 +137,7 @@ class Strings
             &&
             ! method_exists($string, '__toString')
         ) {
-            throw new InvalidArgumentException(
-                'Passed object must have a __toString method'
-            );
+            throw new InvalidArgumentException('Passed object must have a __toString method');
         }
 
         if ($encoding === null) {
@@ -629,12 +634,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the beginning and end of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trim(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trim(?string $character_mask = null): self
     {
-        $this->string = trim($this->string, $character_mask);
+        $this->string = trim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }
@@ -642,12 +646,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the beginning of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimLeft(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trimLeft(?string $character_mask = null): self
     {
-        $this->string = ltrim($this->string, $character_mask);
+        $this->string = ltrim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }
@@ -655,12 +658,11 @@ class Strings
     /**
      * Strip whitespace (or other characters) from the end of a string.
      *
-     * @param string $character_mask Optionally, the stripped characters can also be
-     *                               specified using the character_mask parameter..
+     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
      */
-    public function trimRight(string $character_mask = " \t\n\r\0\x0B"): self
+    public function trimRight(?string $character_mask = null): self
     {
-        $this->string = rtrim($this->string, $character_mask);
+        $this->string = rtrim(...array_merge([$this->string], func_get_args()));
 
         return $this;
     }
@@ -959,6 +961,19 @@ class Strings
     }
 
     /**
+     * Replace the given value in the given string.
+     *
+     * @param  string $search  Search
+     * @param  mixed  $replace Replace
+     */
+    public function replace(string $search, $replace): self
+    {
+        $this->string = str_replace($search, $replace, $this->string);
+
+        return $this;
+    }
+
+    /**
      * Replace a given value in the string sequentially with an array.
      *
      * @param  string $search  Search
@@ -1193,6 +1208,22 @@ class Strings
     }
 
     /**
+     * Returns an array consisting of the characters in the string.
+     *
+     * @return array An array of string chars
+     */
+    public function chars(): array
+    {
+        $chars = [];
+
+        for ($i = 0, $length = $this->length(); $i < $length; $i++) {
+            $chars[] = static::create($this->toString())->at($i)->toString();
+        }
+
+        return $chars;
+    }
+
+    /**
      * Get chars usage frequency array.
      *
      * @param int    $decimals     Number of decimal points. Default is 2.
@@ -1278,6 +1309,18 @@ class Strings
                         static::create($this->string)->substr($index)->toString();
 
         return $this;
+    }
+
+    /**
+     * Passes the strings to the given callback and return the result.
+     *
+     * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+     *
+     * @return mixed Result returned by the callback.
+     */
+    public function pipe(Closure $callback)
+    {
+        return $callback($this);
     }
 
     /**
@@ -1586,5 +1629,94 @@ class Strings
         );
 
         return $array;
+    }
+
+    /**
+     * Returns a new ArrayIterator, thus implementing the IteratorAggregate
+     * interface. The ArrayIterator's constructor is passed an array of chars
+     * in the multibyte string. This enables the use of foreach with instances
+     * of Strings\Strings.
+     *
+     * @return ArrayIterator An iterator for the characters in the string
+     */
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->chars());
+    }
+
+    /**
+     * Returns whether or not a character exists at an index. Offsets may be
+     * negative to count from the last character in the string. Implements
+     * part of the ArrayAccess interface.
+     *
+     * @param  mixed $offset The index to check
+     *
+     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     */
+    public function offsetExists($offset): bool
+    {
+        $length = $this->length();
+        $offset = (int) $offset;
+
+        if ($offset >= 0) {
+            return $length > $offset;
+        }
+
+        return $length >= abs($offset);
+    }
+
+    /**
+     * Returns the character at the given index. Offsets may be negative to
+     * count from the last character in the string. Implements part of the
+     * ArrayAccess interface, and throws an OutOfBoundsException if the index
+     * does not exist.
+     *
+     * @param  mixed $offset The index from which to retrieve the char
+     *
+     * @return mixed                 The character at the specified index
+     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     *
+     * @throws OutOfBoundsException  If the positive or negative offset does
+     *                               not exist
+     */
+    public function offsetGet($offset)
+    {
+        $offset = (int) $offset;
+        $length = $this->length();
+
+        if (($offset >= 0 && $length <= $offset) || $length < abs($offset)) {
+            throw new OutOfBoundsException('No character exists at the index');
+        }
+
+        return mb_substr($this->toString(), $offset, 1, $this->encoding);
+    }
+
+    /**
+     * Implements part of the ArrayAccess interface, but throws an exception
+     * when called. This maintains the immutability of Strings objects.
+     *
+     * @param  mixed $offset The index of the character
+     * @param  mixed $value  Value to set
+     *
+     * @throws Exception When called
+     */
+    public function offsetSet($offset, $value): void
+    {
+        // Strings is immutable, cannot directly set char
+        throw new Exception('Strings object is immutable, cannot modify char');
+    }
+
+    /**
+     * Implements part of the ArrayAccess interface, but throws an exception
+     * when called. This maintains the immutability of Strings objects.
+     *
+     * @param  mixed $offset The index of the character
+     *
+     * @throws Exception When called
+     */
+    public function offsetUnset($offset): void
+    {
+        // Don't allow directly modifying the string
+        throw new Exception('Strings object is immutable, cannot unset char');
     }
 }
