@@ -1,5 +1,5 @@
 <a name="2.3.0"></a>
-# [2.3.0](https://github.com/atomastic/strings) (2020-11-xx)
+# [2.3.0](https://github.com/atomastic/strings) (2020-11-30)
 * add replace() method.
 * add pipe() method.
 * add chars() method.
