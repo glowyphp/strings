@@ -1324,6 +1324,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Creates a new Strings object with the same string.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function copy(): self
+    {
+        return clone $this;
+    }
+
+    /**
      * Returns true if the string is email and it is valid, false otherwise.
      */
     public function isEmail(): bool

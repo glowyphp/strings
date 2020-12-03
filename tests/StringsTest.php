@@ -842,3 +842,12 @@ test('test getIterator() method', function (): void {
         Strings::create()->getIterator()
     );
 });
+
+test('test copy() method', function (): void {
+    $foo = Strings::create('fòô');
+    $bar = $foo->copy();
+
+    $this->assertInstanceOf(Strings::class, $foo);
+    $this->assertInstanceOf(Strings::class, $bar);
+    $this->assertEquals('fòô', $bar->toString());
+});

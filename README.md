@@ -56,6 +56,7 @@ $strings = strings();
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
 | <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
+| <a href="#strings_copy">`copy()`</a> | Creates a new Strings object with the same string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
 | <a href="#strings_wordsCount">`wordsCount()`</a> | Get words count from the string. |
 | <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
@@ -364,6 +365,25 @@ public function repeat(int $multiplier): self
 
 ```php
 $string = Strings::create('fòô')->repeat(3);
+```
+
+
+##### <a name="strings_copy"></a> Method: `copy()`
+
+```php
+/**
+ * Creates a new Strings object with the same string.
+ *
+ * @return self Returns instance of The Strings class.
+ */
+public function copy(): self
+```
+
+##### Example
+
+```php
+$strings1 = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3');
+$strings2 = $strings1->copy();
 ```
 
 ##### <a name="strings_length"></a> Method: `length()`
