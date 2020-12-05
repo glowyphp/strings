@@ -45,7 +45,7 @@ $strings = strings();
 Strings are "macroable", which allows you to add additional methods to the Strings class at run time. For example, the following code adds a customMethod method to the Strings class:
 
 ```php
-use Atomastic\Arrays\Strings;
+use Atomastic\Strings\Strings;
 use Atomastic\Macroable\Macroable;
 
 Strings::macro('concatenate', function(string $string) {
