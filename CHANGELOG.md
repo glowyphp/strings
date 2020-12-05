@@ -1,3 +1,21 @@
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/atomastic/strings) (2020-12-05)
+* add copy() method.
+* add ability to extend Strings class with Macros.
+
+    ```php
+    use Atomastic\Strings\Strings;
+    use Atomastic\Macroable\Macroable;
+
+    Strings::macro('concatenate', function(string $string) {
+        return $this->toString() . $string;
+    });
+
+    $strings = new Strings('Hello');
+
+    echo $strings->concatenate(' World'));
+    ```
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/atomastic/strings) (2020-11-30)
 * add replace() method.
