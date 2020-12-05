@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Atomastic\Strings;
 
+use Atomastic\Macroable\Macroable;
+
 use ArrayAccess;
 use ArrayIterator;
 use Closure;
@@ -100,6 +102,8 @@ use const STR_PAD_RIGHT;
 
 class Strings implements ArrayAccess, Countable, IteratorAggregate
 {
+    use Macroable;
+
     /**
      * The underlying string value.
      *

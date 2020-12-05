@@ -12,6 +12,7 @@ Strings Component provide a fluent, object-oriented interface for working with m
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Exteding](#extending)
 * [Methods](#methods)
 * [Tests](#tests)
 * [License](#license)
@@ -37,6 +38,29 @@ $strings = Strings::create();
 
 // Create Strings instance using global helper function strings()
 $strings = strings();
+```
+
+### Extending
+
+Strings are "macroable", which allows you to add additional methods to the Strings class at run time. For example, the following code adds a customMethod method to the Strings class:
+
+```php
+use Atomastic\Arrays\Strings;
+use Atomastic\Macroable\Macroable;
+
+Strings::macro('concatenate', function(string $string) {
+    return $this->toString() . $string;
+});
+
+$strings = new Strings('Hello');
+
+echo $strings->concatenate(' World');
+```
+
+##### The above example will output:
+
+```
+Hello World
 ```
 
 ### Methods
