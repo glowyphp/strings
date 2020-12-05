@@ -842,3 +842,21 @@ test('test getIterator() method', function (): void {
         Strings::create()->getIterator()
     );
 });
+
+test('test copy() method', function (): void {
+    $foo = Strings::create('fòô');
+    $bar = $foo->copy();
+
+    $this->assertInstanceOf(Strings::class, $foo);
+    $this->assertInstanceOf(Strings::class, $bar);
+    $this->assertEquals('fòô', $bar->toString());
+});
+
+
+test('test macro() method', function (): void {
+    Strings::macro('concatenate', function(string $string) {
+        return $this->toString() . $string;
+    });
+    $strings = new Strings('Hello');
+    $this->assertEquals('Hello World', $strings->concatenate(' World'));
+});
