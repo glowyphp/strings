@@ -492,7 +492,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function contains($needles, bool $caseSensitive = true): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && (bool) static::create($this->string, $this->encoding)->indexOf($needle, 0, $caseSensitive) !== false) {
+            if ($needle !== '' && static::create($this->string, $this->encoding)->indexOf($needle, 0, $caseSensitive) !== false) {
                 return true;
             }
         }
@@ -768,7 +768,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function before(string $search): self
     {
-        $this->string = $search === '' ? $this->string : explode($search, $this->string)[0];
+        $search === '' and $this->string = $search;
+
+        $result = strstr($this->string, (string) $search, true);
+
+        $this->string = $result === false ? $search : $result;
 
         return $this;
     }

@@ -31,8 +31,8 @@
         ]
     },
     "require-dev": {
-        "doctrine/coding-standard": "8.1.0",
-        "pestphp/pest": "^0.3.3",
-        "phpstan/phpstan": "^0.12.42"
+        "doctrine/coding-standard": "8.2.0",
+        "pestphp/pest": "^1.0.1",
+        "phpstan/phpstan": "^0.12.70"
     }
 }
