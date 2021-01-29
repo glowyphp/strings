@@ -492,7 +492,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function contains($needles, bool $caseSensitive = true): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && (bool) static::create($this->string, $this->encoding)->indexOf($needle, 0, $caseSensitive) !== false) {
+            if ($needle !== '' && static::create($this->string, $this->encoding)->indexOf($needle, 0, $caseSensitive) !== false) {
                 return true;
             }
         }

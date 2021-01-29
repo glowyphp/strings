@@ -203,6 +203,7 @@ test('test wordsCount() method', function (): void {
 });
 
 test('test contains() method', function (): void {
+    $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains('Lorem'));
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains('ipsum'));
     $this->assertFalse(Strings::create('Lorem ipsum dolor')->contains('test'));
     $this->assertTrue(Strings::create('Lorem ipsum dolor')->contains(['ipsum', 'dolor']));
