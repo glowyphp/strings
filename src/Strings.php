@@ -768,7 +768,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function before(string $search): self
     {
-        $this->string = $search === '' ? $this->string : explode($search, $this->string)[0];
+        $search === '' and $this->string = $search;
+
+        $result = strstr($this->string, (string) $search, true);
+
+        $this->string = $result === false ? $search : $result;
 
         return $this;
     }
