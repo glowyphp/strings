@@ -1,3 +1,8 @@
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/atomastic/strings) (2021-01-29)
+* fix contains() method
+* improve before() method
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/atomastic/strings) (2020-12-05)
 * add copy() method.

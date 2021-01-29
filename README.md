@@ -2307,4 +2307,4 @@ Run tests
 
 ### License
 [The MIT License (MIT)](https://github.com/atomastic/strings/blob/master/LICENSE)
-Copyright (c) 2020 [Sergey Romanenko](https://github.com/Awilum)
+Copyright (c) 2021 [Sergey Romanenko](https://github.com/Awilum)
