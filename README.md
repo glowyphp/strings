@@ -68,6 +68,7 @@ Hello World
 | Method | Description |
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
+| <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
 | <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
 | <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
@@ -136,7 +137,6 @@ Hello World
 | <a href="#strings_finish">`finish()`</a> | Cap a string with a single instance of a given value. |
 | <a href="#strings_hash">`hash()`</a> | Generate a hash string from the input string. |
 | <a href="#strings_prepend">`prepend()`</a> | The prepend method prepends the given values onto the string. |
-| <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
 | <a href="#strings_getIterator">`getIterator()`</a> | Returns a new ArrayIterator, thus implementing the IteratorAggregate interface. The ArrayIterator's constructor is passed an array of chars in the multibyte string. This enables the use of foreach with instances of Strings\Strings. |
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
@@ -203,6 +203,31 @@ public static function create($string = '', $encoding = 'UTF-8'): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission');
+```
+
+##### <a name="strings_append"></a> Method: `append()`
+
+```php
+/**
+ * Append the given values to the string.
+ *
+ * @param  string[] $values
+ */
+public function append(string ...$values): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
+
+echo $string;
+```
+
+##### The above example will output:
+
+```
+WORK HARD. PLAY HARD.
 ```
 
 ##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
@@ -1491,17 +1516,6 @@ public function prepend(string ...$values): self
 
 ```php
 $string = Strings::create('PLAY HARD.')->prepend('WORK HARD. ');
-```
-
-##### <a name="strings_append"></a> Method: `append()`
-
-```php
-/**
- * Append the given values to the string.
- *
- * @param  string[] $values
- */
-public function append(string ...$values): self
 ```
 
 ##### <a name="strings_getIterator"></a> Method: `getIterator()`
