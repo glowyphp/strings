@@ -1342,6 +1342,18 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Echo the string.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function echo(): self
+    {
+        echo $this->toString();
+
+        return $this;
+    }
+
+    /**
      * Returns true if the string is email and it is valid, false otherwise.
      */
     public function isEmail(): bool

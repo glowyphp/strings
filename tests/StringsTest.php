@@ -853,11 +853,20 @@ test('test copy() method', function (): void {
     $this->assertEquals('fòô', $bar->toString());
 });
 
-
 test('test macro() method', function (): void {
     Strings::macro('concatenate', function(string $string) {
         return $this->toString() . $string;
     });
     $strings = new Strings('Hello');
     $this->assertEquals('Hello World', $strings->concatenate(' World'));
+});
+
+test('test echo() method', function (): void {
+    $strings = new Strings('Hello World');
+
+    ob_start();
+    $echo = $strings->echo();
+    ob_end_clean();
+
+    $this->assertEquals($echo, 'Hello World');
 });

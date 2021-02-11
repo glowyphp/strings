@@ -79,6 +79,7 @@ Hello World
 | <a href="#strings_random">`random()`</a> | Creates a random string of characters. |
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
 | <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
+| <a href="#strings_echo">`echo()`</a> | Echo the string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_copy">`copy()`</a> | Creates a new Strings object with the same string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
@@ -391,6 +392,23 @@ public function repeat(int $multiplier): self
 $string = Strings::create('fòô')->repeat(3);
 ```
 
+##### <a name="strings_echo"></a> Method: `echo()`
+
+```php
+/**
+ * Echo the string.
+ *
+ * @return self Returns instance of The Strings class.
+ */
+public function echo(): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('Hello');
+$string->append(' World')->echo()->hash()->echo();
+```
 
 ##### <a name="strings_copy"></a> Method: `copy()`
 
@@ -615,7 +633,6 @@ public function lines(): array
 ```php
 $lines = Strings::create("Fòô òô\n fòô fò fò \nfò\r")->lines();
 ```
-
 
 ##### <a name="strings_words"></a> Method: `words()`
 
