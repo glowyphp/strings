@@ -12,7 +12,6 @@ test('test __construct() method', function (): void {
     $this->assertEquals($mb_internal_encoding, $strings->getEncoding());
 });
 
-
 test('test __construct() throws exception InvalidArgumentException with array param', function (): void {
     $strings = new Strings([]);
 })->throws(InvalidArgumentException::class);
