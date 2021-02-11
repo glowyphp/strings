@@ -69,6 +69,7 @@ Hello World
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
+| <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
 | <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
 | <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
@@ -140,7 +141,6 @@ Hello World
 | <a href="#strings_getIterator">`getIterator()`</a> | Returns a new ArrayIterator, thus implementing the IteratorAggregate interface. The ArrayIterator's constructor is passed an array of chars in the multibyte string. This enables the use of foreach with instances of Strings\Strings. |
 | <a href="#strings_shuffle">`shuffle()`</a> | Randomly shuffles a string. |
 | <a href="#strings_similarity">`similarity()`</a> | Calculate the similarity between two strings. |
-| <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
 | <a href="#strings_indexOf">`indexOf()`</a> | Returns the index of the first occurrence of `$needle` in the string, and false if not found. Accepts an optional offset from which to begin the search. By default, search is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.  |
 | <a href="#strings_indexOfLast">`indexOfLast()`</a> | Returns the index of the last occurrence of `$needle` in the string, and false if not found. Accepts an optional `$offset` from which to begin the search. Offsets may be negative to count from the last character in the string. By default, search is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_move">`move()`</a> | Move substring of desired `$length` to `$destination` index of the original string. In case $destination is less than $length returns the string untouched. |
@@ -183,7 +183,6 @@ Hello World
 
 #### Methods Details
 
-
 ##### <a name="strings_create"></a> Method: `create()`
 
 ```php
@@ -203,9 +202,17 @@ public static function create($string = '', $encoding = 'UTF-8'): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission');
+
+echo $string;
 ```
 
-#### <a name="strings_append"></a> Method: `append()`
+##### The above example will output:
+
+```
+SG-1 returns from an off-world mission
+```
+
+##### <a name="strings_append"></a> Method: `append()`
 
 ```php
 /**
@@ -228,6 +235,29 @@ echo $string;
 
 ```
 WORK HARD. PLAY HARD.
+```
+
+##### <a name="strings_at"></a> Method: `at()`
+
+```php
+/**
+* Returns the character at $index, with indexes starting at 0.
+*
+* @param int $index Position of the character
+*/
+public function at(int $index): self
+```
+
+##### Example
+
+```php
+$character = Strings::create('hello')->at(3);
+```
+
+##### The above example will output:
+
+```
+l
 ```
 
 ##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
@@ -1569,23 +1599,6 @@ public function similarity(string $string): float
 
 ```php
 $percent = Strings::create('hello')->similarity('hello');
-```
-
-##### <a name="strings_at"></a> Method: `at()`
-
-```php
-/**
-* Returns the character at $index, with indexes starting at 0.
-*
-* @param int $index Position of the character
-*/
-public function at(int $index): self
-```
-
-##### Example
-
-```php
-$character = Strings::create('hello')->at(3);
 ```
 
 ##### <a name="strings_indexOf"></a> Method: `indexOf()`
