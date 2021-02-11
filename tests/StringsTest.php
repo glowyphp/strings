@@ -870,3 +870,12 @@ test('test echo() method', function (): void {
 
     $this->assertEquals($echo, 'Hello World');
 });
+
+test('test format() method', function (): void {
+    $strings = new Strings('There are %d monkeys in the %s');
+
+    $num = 5;
+    $location = 'tree';
+
+    $this->assertEquals($strings->format($num, $location), 'There are 5 monkeys in the tree');
+});

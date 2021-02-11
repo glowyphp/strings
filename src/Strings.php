@@ -1354,6 +1354,20 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Return the formatted string.
+     *
+     * @param mixed ...$args Any number of elements to fill the string.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function format(...$args): self
+    {
+        $this->string = sprintf($this->string, ...$args);
+
+        return $this;
+    }
+
+    /**
      * Returns true if the string is email and it is valid, false otherwise.
      */
     public function isEmail(): bool

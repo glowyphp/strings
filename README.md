@@ -80,6 +80,7 @@ Hello World
 | <a href="#strings_increment">`increment()`</a> | Add's `_1` to a string or increment the ending number to allow `_2`, `_3`, etc. |
 | <a href="#strings_repeat">`repeat()`</a> | Returns a repeated string given a multiplier. |
 | <a href="#strings_echo">`echo()`</a> | Echo the string. |
+| <a href="#strings_format">`format()`</a> | Return the formatted string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
 | <a href="#strings_copy">`copy()`</a> | Creates a new Strings object with the same string. |
 | <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
@@ -408,6 +409,30 @@ public function echo(): self
 ```php
 $string = Strings::create('Hello');
 $string->append(' World')->echo()->hash()->echo();
+```
+
+##### <a name="strings_format"></a> Method: `format()`
+
+```php
+/**
+ * Return the formatted string.
+ *
+ * @param mixed ...$args Any number of elements to fill the string.
+ *
+ * @return self Returns instance of The Strings class.
+ */
+public function format(...$args): self
+```
+
+##### Example
+
+```php
+$strings = new Strings('There are %d monkeys in the %s');
+
+$num = 5;
+$location = 'tree';
+
+echo $strings->format($num, $location);
 ```
 
 ##### <a name="strings_copy"></a> Method: `copy()`
