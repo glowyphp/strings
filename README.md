@@ -205,7 +205,7 @@ public static function create($string = '', $encoding = 'UTF-8'): self
 $string = Strings::create('SG-1 returns from an off-world mission');
 ```
 
-##### <a name="strings_append"></a> Method: `append()`
+#### <a name="strings_append"></a> Method: `append()`
 
 ```php
 /**
