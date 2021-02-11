@@ -69,6 +69,8 @@ Hello World
 |---|---|
 | <a href="#strings_create">`create()`</a> | Initializes a Strings object and assigns both `$string` and `$encoding` properties the supplied values. `$string` is cast to a string prior to assignment. Throws an InvalidArgumentException if the first argument is an array or object without a `__toString` method. |
 | <a href="#strings_append">`append()`</a> | The append method appends the given values to the string. |
+| <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
+| <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
 | <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
 | <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
@@ -118,8 +120,6 @@ Hello World
 | <a href="#strings_between">`between()`</a> | Get the portion of a string between two given values. |
 | <a href="#strings_before">`before()`</a> | Get the portion of a string before the first occurrence of a given value. |
 | <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
-| <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
-| <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
 | <a href="#strings_pipe">`pipe()`</a> | Passes the strings to the given callback and return the result. |
 | <a href="#strings_padBoth">`padBoth()`</a> | Pad both sides of a string with another. |
 | <a href="#strings_padLeft">`padLeft()`</a> | Pad the left side of a string with another. |
@@ -235,6 +235,52 @@ echo $string;
 
 ```
 WORK HARD. PLAY HARD.
+```
+
+##### <a name="strings_after"></a> Method: `after()`
+
+```php
+/**
+ * Return the remainder of a string after the first occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function after(string $search): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->after('SG-1');
+```
+
+##### The above example will output:
+
+```
+ returns from an off-world mission
+```
+
+##### <a name="strings_afterLast"></a> Method: `afterLast()`
+
+```php
+/**
+ * Return the remainder of a string after the last occurrence of a given value.
+ *
+ * @param string $search Search
+ */
+public function afterLast(string $search): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
+```
+
+##### The above example will output:
+
+```
+ returns from an off-world mission
 ```
 
 ##### <a name="strings_at"></a> Method: `at()`
@@ -1153,41 +1199,6 @@ public function beforeLast(string $search): self
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission');
 ```
-
-##### <a name="strings_after"></a> Method: `after()`
-
-```php
-/**
- * Return the remainder of a string after the first occurrence of a given value.
- *
- * @param string $search Search
- */
-public function after(string $search): self
-```
-
-##### Example
-
-```php
-$string = Strings::create('SG-1 returns from an off-world mission')->after('SG-1');
-```
-
-##### <a name="strings_afterLast"></a> Method: `afterLast()`
-
-```php
-/**
- * Return the remainder of a string after the last occurrence of a given value.
- *
- * @param string $search Search
- */
-public function afterLast(string $search): self
-```
-
-##### Example
-
-```php
-$string = Strings::create('SG-1 returns from an off-world mission')->afterLast('SG-1');
-```
-
 
 ##### <a name="strings_pipe"></a> Method: `pipe()`
 
