@@ -155,6 +155,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns the value in $string.
+     *
+     * @return string Returns string.
      */
     public function __toString()
     {
@@ -171,6 +173,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param mixed  $string   Value to modify, after being cast to string. Default: ''
      * @param string $encoding The character encoding. Default: UTF-8
+     *
+     * @return self Returns instance of The Strings class.
      */
     public static function create($string = '', string $encoding = 'UTF-8'): self
     {
@@ -181,6 +185,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Set the character encoding.
      *
      * @param string $encoding Character encoding.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function setEncoding(string $encoding): self
     {
@@ -191,6 +197,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Get character encoding.
+     *
+     * @return string Returns internal encoding.
      */
     public function getEncoding(): string
     {
@@ -199,6 +207,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Removes any leading and traling slashes from a string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function trimSlashes(): self
     {
@@ -209,6 +219,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Reduces multiple slashes in a string to single slashes.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function reduceSlashes(): self
     {
@@ -219,6 +231,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Removes single and double quotes from a string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function stripQuotes(): self
     {
@@ -231,6 +245,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Convert single and double quotes to entities.
      *
      * @param  string $string String with single and double quotes
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function quotesToEntities(): self
     {
@@ -241,6 +257,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Standardize line endings to unix-like.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function normalizeNewLines(): self
     {
@@ -251,6 +269,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Normalize white-spaces to a single space.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function normalizeSpaces(): self
     {
@@ -264,6 +284,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $length   The number of characters. Default is 16
      * @param  string $keyspace The keyspace
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function random(int $length = 64, string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): self
     {
@@ -288,6 +310,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $first     Start with
      * @param  string $separator Separator
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function increment(int $first = 1, string $separator = '_'): self
     {
@@ -302,6 +326,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Returns a repeated string given a multiplier.
      *
      * @param int $multiplier The number of times to repeat the string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function repeat(int $multiplier): self
     {
@@ -315,6 +341,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $limit  Limit of characters
      * @param  string $append Text to append to the string IF it gets truncated
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function limit(int $limit = 100, string $append = '...'): self
     {
@@ -329,6 +357,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Convert the given string to lower-case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function lower(): self
     {
@@ -339,6 +369,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Convert the given string to upper-case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function upper(): self
     {
@@ -349,6 +381,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Convert a string to studly caps case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function studly(): self
     {
@@ -361,6 +395,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Convert a string to snake case.
      *
      * @param  string $delimiter Delimeter
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function snake(string $delimiter = '_'): self
     {
@@ -378,6 +414,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Convert a string to camel case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function camel(): self
     {
@@ -388,6 +426,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Convert a string to kebab case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function kebab(): self
     {
@@ -401,6 +441,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $words  Words limit
      * @param  string $append Text to append to the string IF it gets truncated
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function wordsLimit(int $words = 100, string $append = '...'): self
     {
@@ -419,6 +461,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get words from the string.
      *
      * @param string $ignore Ingnore symbols.
+     *
+     * @return array Returns words array.
      */
     public function words(string $ignore = '?!;:,.'): array
     {
@@ -431,6 +475,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Get array of individual lines in the string.
+     *
+     * @return array Returns array of lines.
      */
     public function lines(): array
     {
@@ -443,6 +489,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns the length of the string, analog to length().
+     *
+     * @return int Returns string length.
      */
     public function count(): int
     {
@@ -456,6 +504,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $substring     The substring to search.
      * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return int Returns the number of occurrences of $substring in the given string.
      */
     public function countSubString(string $substring, bool $caseSensitive = true): int
     {
@@ -473,6 +523,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get words count from the string.
      *
      * @param string $ignore Ingnore symbols.
+     *
+     * @return int Returns words count.
      */
     public function wordsCount(string $ignore = '?!;:,.'): int
     {
@@ -488,6 +540,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string|string[] $needles       The string to find in haystack.
      * @param  bool            $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function contains($needles, bool $caseSensitive = true): bool
     {
@@ -505,6 +559,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string[] $needles       The array of strings to find in haystack.
      * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function containsAll(array $needles, bool $caseSensitive = true): bool
     {
@@ -523,6 +579,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param  string   $haystack      The string being checked.
      * @param  string[] $needles       The array of strings to find in haystack.
      * @param  bool     $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function containsAny(array $needles, bool $caseSensitive = true): bool
     {
@@ -538,6 +596,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Converts the first character of a string to upper case
      * and leaves the other characters unchanged.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function ucfirst(): self
     {
@@ -548,6 +608,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Converts the first character of every word of string to upper case and the others to lower case.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function capitalize(): self
     {
@@ -558,6 +620,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Return the length of the given string.
+     *
+     * @return int Returns the length of the given string.
      */
     public function length(): int
     {
@@ -573,6 +637,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *                          0 is 'a', the character at position 2 is 'c', and so forth.
      * @param  int|null $length Maximum number of characters to use from string.
      *                          If omitted or NULL is passed, extract all characters to the end of the string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function substr(int $start, ?int $length = null): self
     {
@@ -589,6 +655,9 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param int|string $needle        The string to find in haystack.
      * @param int        $offset        The search offset. If it is not specified, 0 is used.
      * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return mixed Returns the index of the first occurrence of $needle in the string,
+     * and false if not found.
      */
     public function indexOf($needle, int $offset = 0, bool $caseSensitive = true)
     {
@@ -1131,6 +1200,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param  string $algorithm  Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4", etc..).
      *                            For a list of supported algorithms see hash_algos(). Default is md5.
      * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function hash(string $algorithm = 'md5', bool $raw_output = false): self
     {
@@ -1145,6 +1216,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Randomly shuffles a string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function shuffle(): self
     {
