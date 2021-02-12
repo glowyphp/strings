@@ -72,9 +72,9 @@ Hello World
 | <a href="#strings_after">`after()`</a> | Return the remainder of a string after the first occurrence of a given value. |
 | <a href="#strings_afterLast">`afterLast()`</a> | Return the remainder of a string after the last occurrence of a given value. |
 | <a href="#strings_at">`at()`</a> | Returns the character at `$index`, with indexes starting at 0. |
-| <a href="#strings_between">`between()`</a> | Get the portion of a string between two given values. |
 | <a href="#strings_before">`before()`</a> | Get the portion of a string before the first occurrence of a given value. |
 | <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
+| <a href="#strings_between">`between()`</a> | Get the portion of a string between two given values. |
 | <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
 | <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
@@ -306,24 +306,6 @@ $character = Strings::create('hello')->at(3);
 l
 ```
 
-##### <a name="strings_between"></a> Method: `between()`
-
-```php
-/**
- * Get the portion of a string between two given values.
- *
- * @param  string $from From
- * @param  string $to   To
- */
-public function between(string $from, string $to): self
-```
-
-##### Example
-
-```php
-$string = Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from');
-```
-
 ##### <a name="strings_before"></a> Method: `before()`
 
 ```php
@@ -356,6 +338,24 @@ public function beforeLast(string $search): self
 
 ```php
 $string = Strings::create('SG-1 returns from an off-world mission')->beforeLast('mission');
+```
+
+##### <a name="strings_between"></a> Method: `between()`
+
+```php
+/**
+ * Get the portion of a string between two given values.
+ *
+ * @param  string $from From
+ * @param  string $to   To
+ */
+public function between(string $from, string $to): self
+```
+
+##### Example
+
+```php
+$string = Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from');
 ```
 
 ##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
