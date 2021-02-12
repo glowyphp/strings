@@ -677,6 +677,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param int|string $needle        The string to find in haystack.
      * @param int        $offset        The search offset. If it is not specified, 0 is used.
      * @param bool       $caseSensitive Whether or not to enforce case-sensitivity. Default is true.
+     *
+     * @return mixed Returns the index of the last occurrence of $needle in the string, and false if not found.
      */
     public function indexOfLast(string $needle, int $offset = 0, bool $caseSensitive = true)
     {
@@ -705,6 +707,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Strip whitespace (or other characters) from the beginning and end of a string.
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function trim(?string $character_mask = null): self
     {
@@ -717,6 +721,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Strip whitespace (or other characters) from the beginning of a string.
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function trimLeft(?string $character_mask = null): self
     {
@@ -729,6 +735,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Strip whitespace (or other characters) from the end of a string.
      *
      * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function trimRight(?string $character_mask = null): self
     {
@@ -739,6 +747,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Reverses string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function reverse(): self
     {
@@ -757,6 +767,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get array of segments from a string based on a delimiter.
      *
      * @param string $delimiter Delimeter
+     *
+     * @return array Returns array of segments.
      */
     public function segments(string $delimiter = ' '): array
     {
@@ -770,6 +782,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param int    $index     Index
      * @param string $delimiter Delimeter
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function segment(int $index, string $delimiter = ' '): self
     {
@@ -789,6 +803,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get the first segment from a string based on a delimiter.
      *
      * @param string $delimiter Delimeter
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function firstSegment(string $delimiter = ' '): self
     {
@@ -802,6 +818,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $string    String
      * @param string $delimiter Delimeter
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function lastSegment(string $delimiter = ' '): self
     {
@@ -815,6 +833,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $from From
      * @param  string $to   To
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function between(string $from, string $to): self
     {
@@ -831,6 +851,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get the portion of a string before the first occurrence of a given value.
      *
      * @param string $search Search
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function before(string $search): self
     {
@@ -847,6 +869,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Get the portion of a string before the last occurrence of a given value.
      *
      * @param string $search Search
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function beforeLast(string $search): self
     {
@@ -865,6 +889,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Return the remainder of a string after the first occurrence of a given value.
      *
      * @param string $search Search
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function after(string $search): self
     {
@@ -877,6 +903,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Return the remainder of a string after the last occurrence of a given value.
      *
      * @param string $search Search
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function afterLast(string $search): self
     {
@@ -896,6 +924,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
      * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function padBoth(int $length, string $pad = ' '): self
     {
@@ -909,6 +939,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
      * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function padLeft(int $length, string $pad = ' '): self
     {
@@ -922,6 +954,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  int    $length If the value of pad_length is negative, less than, or equal to the length of the input string, no padding takes place, and input will be returned.
      * @param  string $pad    The pad string may be truncated if the required number of padding characters can't be evenly divided by the pad_string's length.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function padRight(int $length, string $pad = ' '): self
     {
@@ -932,6 +966,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Strip all whitespaces from the given string.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function stripSpaces(): self
     {
@@ -945,6 +981,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $replacement Value to replace dashes characters with replacement. Default is ''
      * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceDashes(string $replacement = '', bool $strict = false): self
     {
@@ -968,6 +1006,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $replacement Value to replace punctuations characters with replacement. Default is ''
      * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replacePunctuations(string $replacement = '', bool $strict = false): self
     {
@@ -991,6 +1031,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $replacement Value to replace none alphanumeric characters with. Default is ''
      * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceNonAlphanumeric(string $replacement = '', bool $strict = false): self
     {
@@ -1014,6 +1056,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $replacement Value to replace none alpha characters with
      * @param bool   $strict      Should spaces be preserved or not. Default is false.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceNonAlpha(string $replacement = '', bool $strict = false): self
     {
@@ -1039,6 +1083,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $search  Search
      * @param  mixed  $replace Replace
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replace(string $search, $replace): self
     {
@@ -1052,6 +1098,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $search  Search
      * @param  array  $replace Replace
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceArray(string $search, array $replace): self
     {
@@ -1073,6 +1121,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $search  Search
      * @param  string $replace Replace
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceFirst(string $search, string $replace): self
     {
@@ -1092,6 +1142,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param  string $search  Search
      * @param  string $replace Replace
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function replaceLast(string $search, string $replace): self
     {
@@ -1110,6 +1162,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Begin a string with a single instance of a given value.
      *
      * @param  string $prefix Prefix
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function start(string $prefix): self
     {
@@ -1124,6 +1178,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Determine if a given string starts with a given substring.
      *
      * @param  string|string[] $needles Needles
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function startsWith($needles): bool
     {
@@ -1140,6 +1196,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Determine if a given string ends with a given substring.
      *
      * @param  string|string[] $needles needles
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function endsWith($needles): bool
     {
@@ -1156,6 +1214,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Cap a string with a single instance of a given value.
      *
      * @param  string $cap Cap
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function finish(string $cap): self
     {
@@ -1169,7 +1229,9 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Prepend the given values to the string.
      *
-     * @param  string[] $values
+     * @param  string[] $values Values
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function prepend(string ...$values): self
     {
@@ -1181,7 +1243,9 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Append the given values to the string.
      *
-     * @param  string[] $values
+     * @param  string[] $values Values
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function append(string ...$values): self
     {
@@ -1237,6 +1301,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Calculate the similarity between two strings.
      *
      * @param string $string The delimiting string.
+     *
+     * @return float Returns similarity percent.
      */
     public function similarity(string $string): float
     {
@@ -1248,7 +1314,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Returns the character at $index, with indexes starting at 0.
      *
-     * @param int $index Position of the character
+     * @param int $index Position of the character.
      */
     public function at(int $index): self
     {
@@ -1259,6 +1325,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Sort words in string descending.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function wordsSortDesc(): self
     {
@@ -1273,6 +1341,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Sort words in string ascending.
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function wordsSortAsc(): self
     {
@@ -1288,7 +1358,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Returns an array consisting of the characters in the string.
      *
-     * @return array An array of string chars
+     * @return array Returns an array of string chars.
      */
     public function chars(): array
     {
@@ -1307,6 +1377,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param int    $decimals     Number of decimal points. Default is 2.
      * @param string $decPoint     Separator for the decimal point. Default is ".".
      * @param string $thousandsSep Thousands separator. Default is ",".
+     *
+     * @return array Returns an chars usage frequency array.
      */
     public function charsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
     {
@@ -1332,6 +1404,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param int    $decimals     Number of decimal points. Default is 2.
      * @param string $decPoint     Separator for the decimal point. Default is ".".
      * @param string $thousandsSep Thousands separator. Default is ",".
+     *
+     * @return array Returns an words usage frequency array.
      */
     public function wordsFrequency(int $decimals = 2, string $decPoint = '.', string $thousandsSep = ','): array
     {
@@ -1358,6 +1432,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param int $start       Start
      * @param int $length      Length
      * @param int $destination Destination
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function move(int $start, int $length, int $destination): self
     {
@@ -1379,6 +1455,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $substring Substring
      * @param int    $index     Index
+     *
+     * @return self Returns instance of The Strings class.
      */
     public function insert(string $substring, int $index): self
     {
@@ -1439,6 +1517,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is email and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isEmail(): bool
     {
@@ -1447,6 +1527,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is url and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isUrl(): bool
     {
@@ -1455,6 +1537,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is not empty, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isEmpty(): bool
     {
@@ -1463,6 +1547,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains ASCII, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isAscii(): bool
     {
@@ -1471,6 +1557,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isAlphanumeric(): bool
     {
@@ -1479,6 +1567,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only alphabetic chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isAlpha(): bool
     {
@@ -1487,6 +1577,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only whitespace chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isBlank(): bool
     {
@@ -1495,6 +1587,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is a number or a numeric strings, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isNumeric(): bool
     {
@@ -1503,6 +1597,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only digit chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isDigit(): bool
     {
@@ -1511,6 +1607,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only lower case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isLower(): bool
     {
@@ -1519,6 +1617,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only upper case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isUpper(): bool
     {
@@ -1527,6 +1627,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only hexadecimal chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isHexadecimal(): bool
     {
@@ -1535,6 +1637,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only printable (non-invisible) chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isPrintable(): bool
     {
@@ -1543,6 +1647,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string contains only punctuation chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isPunctuation(): bool
     {
@@ -1551,6 +1657,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is serialized, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isSerialized(): bool
     {
@@ -1563,6 +1671,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is JSON, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isJson(): bool
     {
@@ -1573,6 +1683,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Returns true if the string is base64 encoded, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isBase64(): bool
     {
@@ -1594,6 +1706,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @param string $string                  The string to compare against.
      * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
     {
@@ -1604,6 +1718,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Determine whether the string is equals to $string.
      *
      * @param $string String to compare.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isEqual(string $string): bool
     {
@@ -1618,6 +1734,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *                  FILTER_FLAG_IPV6
      *                  FILTER_FLAG_NO_PRIV_RANGE
      *                  FILTER_FLAG_NO_RES_RANGE
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
     {
@@ -1626,6 +1744,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Determine whether the string is MAC address and it is a valid MAC address.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isMAC(): bool
     {
@@ -1634,6 +1754,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Determine whether the string is HTML.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isHTML(): bool
     {
@@ -1648,6 +1770,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * 'false', '0', 'off', and 'no' will return false.
      *
      * In all instances, case is ignored.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isBoolean(): bool
     {
@@ -1656,6 +1780,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Determine whether the string is Boolean and it is TRUE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isTrue(): bool
     {
@@ -1664,6 +1790,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Determine whether the string is Boolean and it is FALSE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isFalse(): bool
     {
@@ -1672,6 +1800,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Return Strings object as string.
+     *
+     * @return string Returns strings object as string.
      */
     public function toString(): string
     {
@@ -1680,6 +1810,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Return Strings object as integer.
+     *
+     * @return int Return Strings object as integer.
      */
     public function toInteger(): int
     {
@@ -1688,6 +1820,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Return Strings object as float.
+     *
+     * @return float Return Strings object as float.
      */
     public function toFloat(): float
     {
@@ -1707,6 +1841,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * In addition, blank strings consisting of only whitespace will return
      * false. For all other strings, the return value is a result of a
      * boolean cast.
+     *
+     * @return bool Returns a boolean representation of the given logical string value.
      */
     public function toBoolean(): bool
     {
@@ -1719,6 +1855,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * Return Strings object as array based on a delimiter.
      *
      * @param string $delimiter Delimeter. Default is null.
+     *
+     * @return array Return Strings object as array based on a delimiter.
      */
     public function toArray(?string $delimiter = null): array
     {
