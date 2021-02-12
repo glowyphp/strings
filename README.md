@@ -75,6 +75,15 @@ Hello World
 | <a href="#strings_before">`before()`</a> | Get the portion of a string before the first occurrence of a given value. |
 | <a href="#strings_beforeLast">`beforeLast()`</a> | Get the portion of a string before the last occurrence of a given value. |
 | <a href="#strings_between">`between()`</a> | Get the portion of a string between two given values. |
+| <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
+| <a href="#strings_capitalize">`capitalize()`</a> | Converts the first character of every word of string to upper case and the others to lower case. |
+| <a href="#strings_charsFrequency">`charsFrequency()`</a> | Get chars usage frequency array. |
+| <a href="#strings_copy">`copy()`</a> | Creates a new Strings object with the same string. |
+| <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
+| <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
+| <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
+| <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
+| <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.|
 | <a href="#strings_setEncoding">`setEncoding()`</a> | Set the character encoding. |
 | <a href="#strings_getEncoding">`getEncoding()`</a> | Get the character encoding. |
 | <a href="#strings_stripSpaces">`stripSpaces()`</a> | Strip all whitespaces from the given string. |
@@ -89,32 +98,23 @@ Hello World
 | <a href="#strings_echo">`echo()`</a> | Echo the string. |
 | <a href="#strings_format">`format()`</a> | Return the formatted string. |
 | <a href="#strings_length">`length()`</a> | Return the length of the given string. |
-| <a href="#strings_copy">`copy()`</a> | Creates a new Strings object with the same string. |
-| <a href="#strings_count">`count()`</a> | Returns the length of the string, analog to `length()`. |
 | <a href="#strings_wordsCount">`wordsCount()`</a> | Get words count from the string. |
-| <a href="#strings_countSubString">`countSubString()`</a> | Returns the number of occurrences of `$substring` in the given string. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
 | <a href="#strings_lower">`lower()`</a> | Convert the given string to lower-case. |
 | <a href="#strings_upper">`upper()`</a> | Convert the given string to upper-case. |
 | <a href="#strings_limit">`limit()`</a> | Limit the number of characters in a string. |
 | <a href="#strings_studly">`studly()`</a> | Convert a value to studly caps case. |
 | <a href="#strings_snake">`snake()`</a> | Convert a string to snake case. |
-| <a href="#strings_camel">`camel()`</a> | Convert a string to camel case. |
 | <a href="#strings_kebab">`kebab()`</a> | Convert a string to kebab case. |
 | <a href="#strings_lines">`lines()`</a> | Get array of individual lines in the string. |
 | <a href="#strings_words">`words()`</a> | Get words from the string. |
 | <a href="#strings_wordsLimit">`wordsLimit()`</a> | Limit the number of words in a string. |
 | <a href="#strings_wordsFrequency">`wordsFrequency()`</a> | Get words usage frequency array. |
-| <a href="#strings_charsFrequency">`charsFrequency()`</a> | Get chars usage frequency array. |
-| <a href="#strings_contains">`contains()`</a> | Determine if a given string contains a given substring. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
-| <a href="#strings_containsAll">`containsAll()`</a> | Determine if a given string contains all array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false. |
-| <a href="#strings_containsAny">`containsAny()`</a> | Determine if a given string contains any of array values. By default, the comparison is case-sensitive, but can be made insensitive by setting `$caseSensitive` to false.|
 | <a href="#strings_substr">`substr()`</a> | Returns the portion of string specified by the start and length parameters. |
 | <a href="#strings_ucfirst">`ucfirst()`</a> | Converts the first character of a UTF-8 string to upper case and leaves the other characters unchanged. |
 | <a href="#strings_trim">`trim()`</a> | Strip whitespace (or other characters) from the beginning and end of a string. |
 | <a href="#strings_trimRight">`trimRight()`</a> | Strip whitespace (or other characters) from the end of a string. |
 | <a href="#strings_trimLeft">`trimLeft()`</a> | Strip whitespace (or other characters) from the beginning of a string. |
 | <a href="#strings_trimSlashes">`trimSlashes()`</a> | Removes any leading and trailing slashes from a string. |
-| <a href="#strings_capitalize">`capitalize()`</a> | Converts the first character of every word of string to upper case and the others to lower case. |
 | <a href="#strings_reverse">`reverse()`</a> | Reverses string. |
 | <a href="#strings_segments">`segments()`</a> | Get array of segments from a string based on a delimiter. |
 | <a href="#strings_segment">`segment()`</a> | Get a segment from a string based on a delimiter. Returns an empty string when the offset doesn't exist. Use a negative index to start counting from the last element. |
@@ -358,6 +358,63 @@ public function between(string $from, string $to): self
 $string = Strings::create('SG-1 returns from an off-world mission')->between('SG-1', 'from');
 ```
 
+##### <a name="strings_copy"></a> Method: `copy()`
+
+```php
+/**
+ * Creates a new Strings object with the same string.
+ *
+ * @return self Returns instance of The Strings class.
+ */
+public function copy(): self
+```
+
+##### Example
+
+```php
+$strings1 = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3');
+$strings2 = $strings1->copy();
+```
+
+##### <a name="strings_count"></a> Method: `count()`
+
+```php
+/**
+ * Returns the length of the string, analog to length().
+ */
+public function count(): int
+```
+
+##### Example
+
+```php
+$count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
+```
+
+##### <a name="strings_countSubString"></a> Method: `countSubString()`
+
+```php
+/**
+ * Returns the number of occurrences of $substring in the given string.
+ * By default, the comparison is case-sensitive, but can be made insensitive
+ * by setting $caseSensitive to false.
+ *
+ * @param  string $substring      The substring to search for
+ * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity
+ */
+public function countSubString(string $substring, bool $caseSensitive = true): int
+```
+
+##### Example
+
+```php
+// Returns the number of occurrences of $substring in the given string.
+$result = Strings::create('Test string here for test')->countSubString('test');
+
+// Returns the number of occurrences of $substring in the given string with $caseSensitive false.
+$result = Strings::create('Test string here for test')->countSubString('test', false);
+```
+
 ##### <a name="strings_setEncoding"></a> Method: `setEncoding()`
 
 ```php
@@ -588,24 +645,6 @@ $location = 'tree';
 echo $strings->format($num, $location);
 ```
 
-##### <a name="strings_copy"></a> Method: `copy()`
-
-```php
-/**
- * Creates a new Strings object with the same string.
- *
- * @return self Returns instance of The Strings class.
- */
-public function copy(): self
-```
-
-##### Example
-
-```php
-$strings1 = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3');
-$strings2 = $strings1->copy();
-```
-
 ##### <a name="strings_length"></a> Method: `length()`
 
 ```php
@@ -619,21 +658,6 @@ public function length(): int
 
 ```php
 $length = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->length();
-```
-
-##### <a name="strings_count"></a> Method: `count()`
-
-```php
-/**
- * Returns the length of the string, analog to length().
- */
-public function count(): int
-```
-
-##### Example
-
-```php
-$count = Strings::create('SG-1 returns from an off-world mission to P9Y-3C3')->count();
 ```
 
 ##### <a name="strings_wordsCount"></a> Method: `wordsCount()`
@@ -652,31 +676,6 @@ public function wordsCount(string $ignore = '?!;:,.'): int
 ```php
 // Returns the number of words found
 $result = Strings::create('SG-1 returns from an off-world mission')->wordsCount();
-```
-
-##### <a name="strings_countSubString"></a> Method: `countSubString()`
-
-```php
-/**
- * Returns the number of occurrences of $substring in the given string.
- * By default, the comparison is case-sensitive, but can be made insensitive
- * by setting $caseSensitive to false.
- *
- * @param  string $substring      The substring to search for
- * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity
- */
-public function countSubString(string $substring, bool $caseSensitive = true): int
-```
-
-##### Example
-
-```php
-// Returns the number of occurrences of $substring in the given string.
-$result = Strings::create('Test string here for test')->countSubString('test');
-
-// Returns the number of occurrences of $substring in the given string with $caseSensitive false.
-$result = Strings::create('Test string here for test')->countSubString('test', false);
-
 ```
 
 ##### <a name="strings_lower"></a> Method: `lower()`
