@@ -13,8 +13,8 @@ if (! function_exists('strings')) {
      * an InvalidArgumentException if the first argument is an array or object
      * without a __toString method.
      *
-     * @param mixed  $string   Value to modify, after being cast to string. Default: ''
-     * @param mixed  $encoding The character encoding. Default: UTF-8
+     * @param mixed $string   Value to modify, after being cast to string. Default: ''
+     * @param mixed $encoding The character encoding. Default: UTF-8
      */
     function strings($string = '', $encoding = 'UTF-8'): Strings
     {
