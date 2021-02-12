@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Atomastic\Strings;
 
-use Atomastic\Macroable\Macroable;
-
 use ArrayAccess;
 use ArrayIterator;
+use Atomastic\Macroable\Macroable;
 use Closure;
 use Countable;
 use Exception;
@@ -72,6 +71,7 @@ use function rtrim;
 use function shuffle;
 use function similar_text;
 use function sort;
+use function sprintf;
 use function str_pad;
 use function str_repeat;
 use function str_replace;
@@ -79,6 +79,7 @@ use function strip_tags;
 use function strncmp;
 use function strpos;
 use function strrpos;
+use function strstr;
 use function strval;
 use function substr_replace;
 use function trim;
@@ -106,18 +107,14 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * The underlying string value.
-     *
-     * @var string
      */
-    protected $string;
+    protected string $string;
 
     /**
      * The string's encoding, which should be one of the mbstring module's
      * supported encodings.
-     *
-     * @var string
      */
-     protected $encoding;
+    protected string $encoding;
 
     /**
      * Initializes a Strings object and assigns both $string and $encoding properties
@@ -125,8 +122,8 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * an InvalidArgumentException if the first argument is an array or object
      * without a __toString method.
      *
-     * @param mixed  $string   Value to modify, after being cast to string. Default: ''
-     * @param mixed  $encoding The character encoding. Default: UTF-8
+     * @param mixed $string   Value to modify, after being cast to string. Default: ''
+     * @param mixed $encoding The character encoding. Default: UTF-8
      *
      * @return void
      */
@@ -158,7 +155,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return string Returns string.
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->string;
     }
