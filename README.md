@@ -10,13 +10,6 @@ Strings Component provide a fluent, object-oriented interface for working with m
 
 <br>
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Exteding](#extending)
-* [Methods](#methods)
-* [Tests](#tests)
-* [License](#license)
-
 ### Installation
 
 #### With [Composer](https://getcomposer.org)
