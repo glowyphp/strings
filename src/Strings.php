@@ -404,7 +404,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
             $string = static::create(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $string), $this->encoding)->lower();
         }
 
-        $this->string = $string;
+        $this->string = $string->toString();
 
         return $this;
     }
@@ -428,7 +428,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function kebab(): self
     {
-        $this->string = static::create($this->string, $this->encoding)->snake('-');
+        $this->string = static::create($this->string, $this->encoding)->snake('-')->toString();
 
         return $this;
     }
@@ -841,7 +841,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         if ($from === '' || $to === '') {
             $this->string = $this->string;
         } else {
-            $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to);
+            $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to)->toString();
         }
 
         return $this;
@@ -1805,7 +1805,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function toString(): string
     {
-        return strval($this->string);
+        return strval($this);
     }
 
     /**
