@@ -493,6 +493,18 @@ test('test sha1() method', function (): void {
     $this->assertEquals(sha1('test'), Strings::create('test')->sha1());
 });
 
+test('test sha256() method', function (): void {
+    $this->assertEquals(hash('sha256', 'test'), Strings::create('test')->sha256());
+});
+
+test('test base64Decode() method', function (): void {
+    $this->assertEquals(base64_decode('test'), Strings::create('test')->base64Decode());
+});
+
+test('test base64Encode() method', function (): void {
+    $this->assertEquals(base64_encode('test'), Strings::create('test')->base64Encode());
+});
+
 test('test prepend() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('PLAY HARD.')->prepend('WORK HARD. '));
 });

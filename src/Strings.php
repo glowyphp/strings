@@ -1313,6 +1313,44 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Generate a sha256 hash string from the input string.
+     *
+     * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function sha256(bool $raw_output = false): self
+    {
+        $this->string = hash('sha256', $this->string, $raw_output);
+
+        return $this;
+    }
+
+    /**
+     * Encodes data with MIME base64.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function base64Encode(): self
+    {
+        $this->string = base64_encode($this->string);
+
+        return $this;
+    }
+
+    /**
+     * Decodes data encoded with MIME base64
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function base64Decode(): self
+    {
+        $this->string = base64_decode($this->string);
+
+        return $this;
+    }
+
+    /**
      * Randomly shuffles a string.
      *
      * @return self Returns instance of The Strings class.
