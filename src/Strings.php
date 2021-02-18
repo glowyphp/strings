@@ -1285,6 +1285,34 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Generate a md5 hash string from the input string.
+     *
+     * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function md5(bool $raw_output = false): self
+    {
+        $this->string = hash('md5', $this->string, $raw_output);
+
+        return $this;
+    }
+
+    /**
+     * Generate a sha1 hash string from the input string.
+     *
+     * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function sha1(bool $raw_output = false): self
+    {
+        $this->string = hash('sha1', $this->string, $raw_output);
+
+        return $this;
+    }
+
+    /**
      * Randomly shuffles a string.
      *
      * @return self Returns instance of The Strings class.
