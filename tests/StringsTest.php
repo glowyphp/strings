@@ -481,6 +481,10 @@ test('test hash() method', function (): void {
     $this->assertEquals(Strings::create('test')->hash('foo'), Strings::create('test')->hash('foo'));
 });
 
+test('test crc32() method', function (): void {
+    $this->assertEquals(crc32('test'), Strings::create('test')->crc32());
+});
+
 test('test prepend() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('PLAY HARD.')->prepend('WORK HARD. '));
 });

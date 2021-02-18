@@ -1257,7 +1257,6 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Generate a hash string from the input string.
      *
-     * @param  string $string     String
      * @param  string $algorithm  Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4", etc..).
      *                            For a list of supported algorithms see hash_algos(). Default is md5.
      * @param  string $raw_output When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits. Default is FALSE
@@ -1273,6 +1272,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         }
 
         return $this;
+    }
+
+    /**
+     * Generate the crc32 polynomial from the input string.
+     *
+     * @return int Returns crc32 polynomial from the input string.
+     */
+    public function crc32(): int
+    {
+        return crc32($this->string);
     }
 
     /**
