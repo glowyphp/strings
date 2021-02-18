@@ -491,6 +491,7 @@ test('test prepend() method', function (): void {
 
 test('test append() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('WORK HARD.')->append(' PLAY HARD.'));
+    $this->assertEquals('fòôbàřsfòô', Strings::create('fòô')->append('bàřs')->append('fòô'));
 });
 
 test('test shuffle() method', function (): void {
