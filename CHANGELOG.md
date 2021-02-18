@@ -1,3 +1,15 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/atomastic/strings) (2021-02-18)
+* Moving to PHP 7.4.0
+* add echo() method
+* add format() method
+* add crc32() method
+* add md5() method
+* add sha1() method
+* add sha256() method
+* add base64Decode() method
+* add base64Encode() method
+
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/atomastic/strings) (2021-01-29)
 * fix contains() method

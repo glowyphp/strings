@@ -12,7 +12,6 @@ test('test __construct() method', function (): void {
     $this->assertEquals($mb_internal_encoding, $strings->getEncoding());
 });
 
-
 test('test __construct() throws exception InvalidArgumentException with array param', function (): void {
     $strings = new Strings([]);
 })->throws(InvalidArgumentException::class);
@@ -482,12 +481,37 @@ test('test hash() method', function (): void {
     $this->assertEquals(Strings::create('test')->hash('foo'), Strings::create('test')->hash('foo'));
 });
 
+test('test crc32() method', function (): void {
+    $this->assertEquals(crc32('test'), Strings::create('test')->crc32());
+});
+
+test('test md5() method', function (): void {
+    $this->assertEquals(md5('test'), Strings::create('test')->md5());
+});
+
+test('test sha1() method', function (): void {
+    $this->assertEquals(sha1('test'), Strings::create('test')->sha1());
+});
+
+test('test sha256() method', function (): void {
+    $this->assertEquals(hash('sha256', 'test'), Strings::create('test')->sha256());
+});
+
+test('test base64Decode() method', function (): void {
+    $this->assertEquals(base64_decode('test'), Strings::create('test')->base64Decode());
+});
+
+test('test base64Encode() method', function (): void {
+    $this->assertEquals(base64_encode('test'), Strings::create('test')->base64Encode());
+});
+
 test('test prepend() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('PLAY HARD.')->prepend('WORK HARD. '));
 });
 
 test('test append() method', function (): void {
     $this->assertEquals('WORK HARD. PLAY HARD.', Strings::create('WORK HARD.')->append(' PLAY HARD.'));
+    $this->assertEquals('fòôbàřsfòô', Strings::create('fòô')->append('bàřs')->append('fòô'));
 });
 
 test('test shuffle() method', function (): void {
@@ -853,11 +877,29 @@ test('test copy() method', function (): void {
     $this->assertEquals('fòô', $bar->toString());
 });
 
-
 test('test macro() method', function (): void {
     Strings::macro('concatenate', function(string $string) {
         return $this->toString() . $string;
     });
     $strings = new Strings('Hello');
     $this->assertEquals('Hello World', $strings->concatenate(' World'));
+});
+
+test('test echo() method', function (): void {
+    $strings = new Strings('Hello World');
+
+    ob_start();
+    $echo = $strings->echo();
+    ob_end_clean();
+
+    $this->assertEquals($echo, 'Hello World');
+});
+
+test('test format() method', function (): void {
+    $strings = new Strings('There are %d monkeys in the %s');
+
+    $num = 5;
+    $location = 'tree';
+
+    $this->assertEquals($strings->format($num, $location), 'There are 5 monkeys in the tree');
 });
