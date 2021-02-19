@@ -1,3 +1,7 @@
+<a name="3.0.1"></a>
+# [3.0.1](https://github.com/atomastic/strings) (2021-02-19)
+* fix dependencies.
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/atomastic/strings) (2021-02-18)
 * Moving to PHP 7.4.0
