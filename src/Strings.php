@@ -402,9 +402,9 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         if (! ctype_lower($this->string)) {
             $string = preg_replace('/\s+/u', '', ucwords($this->string));
             $string = static::create(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $string), $this->encoding)->lower();
+        
+            $this->string = $string->toString();
         }
-
-        $this->string = $string->toString();
 
         return $this;
     }
