@@ -1,3 +1,7 @@
+<a name="3.0.2"></a>
+# [3.0.2](https://github.com/atomastic/strings) (2021-04-13)
+* fix snake() method
+
 <a name="3.0.1"></a>
 # [3.0.1](https://github.com/atomastic/strings) (2021-02-19)
 * fix dependencies.
