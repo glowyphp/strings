@@ -2006,6 +2006,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @throws OutOfBoundsException  If the positive or negative offset does
      *                               not exist
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $offset = (int) $offset;
