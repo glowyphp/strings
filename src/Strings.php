@@ -2029,7 +2029,6 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function offsetSet($offset, $value): void
     {
-        // Strings is immutable, cannot directly set char
         throw new Exception('Strings object is immutable, cannot modify char');
     }
 
@@ -2043,7 +2042,6 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function offsetUnset($offset): void
     {
-        // Don't allow directly modifying the string
         throw new Exception('Strings object is immutable, cannot unset char');
     }
 }
