@@ -854,12 +854,12 @@ test('test offsetGet() method throws exception OutOfBoundsException', function (
 test('test offsetSet() method throws exception OutOfBoundsException', static function (): void {
     $strings = Strings::create('fòô');
     $strings->offsetSet(3, 'foo');
-})->throws(Throwable::class);
+})->throws(Exception::class);
 
 test('test offsetUnset() method throws exception OutOfBoundsException', static function (): void {
     $strings = Strings::create('fòô');
     $strings->offsetUnset(3);
-})->throws(Throwable::class);
+})->throws(Exception::class);
 
 test('test getIterator() method', function (): void {
     $this->assertInstanceOf(
