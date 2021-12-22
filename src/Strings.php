@@ -6,7 +6,7 @@ namespace Glowy\Strings;
 
 use ArrayAccess;
 use ArrayIterator;
-use Atomastic\Macroable\Macroable;
+use Glowy\Macroable\Macroable;
 use Closure;
 use Countable;
 use Exception;
