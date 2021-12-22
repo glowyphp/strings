@@ -1,3 +1,9 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/glowyphp/strings) (2021-12-22)
+* Released under Glowy PHP Organization
+* Add PHP 8.1 support
+* Updated dependencies.
+
 <a name="3.0.2"></a>
 # [3.0.2](https://github.com/glowyphp/strings) (2021-04-13)
 * fix snake() method
