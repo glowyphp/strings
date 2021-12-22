@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Atomastic\Strings;
+namespace Glowy\Strings;
 
 use ArrayAccess;
 use ArrayIterator;
-use Atomastic\Macroable\Macroable;
+use Glowy\Macroable\Macroable;
 use Closure;
 use Countable;
 use Exception;
@@ -2006,6 +2006,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @throws OutOfBoundsException  If the positive or negative offset does
      *                               not exist
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $offset = (int) $offset;
@@ -2029,7 +2030,6 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function offsetSet($offset, $value): void
     {
-        // Strings is immutable, cannot directly set char
         throw new Exception('Strings object is immutable, cannot modify char');
     }
 
@@ -2043,7 +2043,6 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function offsetUnset($offset): void
     {
-        // Don't allow directly modifying the string
         throw new Exception('Strings object is immutable, cannot unset char');
     }
 }

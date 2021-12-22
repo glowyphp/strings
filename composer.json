@@ -1,13 +1,13 @@
 {
-    "name": "atomastic/strings",
+    "name": "glowy/strings",
     "description": "Strings Component provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.",
     "license": "MIT",
     "keywords": [
-        "Strings", "strings", "php-strings", "php", "atomastic", "strings-manipulation"
+        "Strings", "strings", "php-strings", "php", "glowy", "glowyphp", "strings-manipulation"
     ],
     "support": {
-      "source": "https://github.com/atomastic/strings",
-      "issues": "https://github.com/atomastic/strings/issues"
+      "source": "https://github.com/glowyphp/strings",
+      "issues": "https://github.com/glowyphp/strings/issues"
     },
     "authors": [
         {
@@ -20,19 +20,20 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "atomastic/macroable": "^2.0"
+        "glowy/macroable": "^3.0"
     },
     "autoload":{
         "psr-4": {
-            "Atomastic\\Strings\\": "src/"
+            "Glowy\\Strings\\": "src/"
         },
         "files": [
             "src/helpers.php"
         ]
     },
     "require-dev": {
-        "doctrine/coding-standard": "8.2.0",
-        "pestphp/pest": "^1.0.2",
-        "phpstan/phpstan": "^0.12.75"
+        "doctrine/coding-standard": "9.0.0",
+        "pestphp/pest": "^1.21.1",
+        "phpstan/phpstan": "^1.2.0",
+        "symfony/var-dumper": "^5.4.0"
     }
 }

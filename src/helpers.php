@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Atomastic\Strings\Strings;
+use Glowy\Strings\Strings;
 
 if (! function_exists('strings')) {
     /**

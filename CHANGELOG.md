@@ -1,13 +1,19 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/glowyphp/strings) (2021-12-22)
+* Released under Glowy PHP Organization
+* Add PHP 8.1 support
+* Updated dependencies.
+
 <a name="3.0.2"></a>
-# [3.0.2](https://github.com/atomastic/strings) (2021-04-13)
+# [3.0.2](https://github.com/glowyphp/strings) (2021-04-13)
 * fix snake() method
 
 <a name="3.0.1"></a>
-# [3.0.1](https://github.com/atomastic/strings) (2021-02-19)
+# [3.0.1](https://github.com/glowyphp/strings) (2021-02-19)
 * fix dependencies.
 
 <a name="3.0.0"></a>
-# [3.0.0](https://github.com/atomastic/strings) (2021-02-18)
+# [3.0.0](https://github.com/glowyphp/strings) (2021-02-18)
 * Moving to PHP 7.4.0
 * add echo() method
 * add format() method
@@ -19,18 +25,18 @@
 * add base64Encode() method
 
 <a name="2.5.0"></a>
-# [2.5.0](https://github.com/atomastic/strings) (2021-01-29)
+# [2.5.0](https://github.com/glowyphp/strings) (2021-01-29)
 * fix contains() method
 * improve before() method
 
 <a name="2.4.0"></a>
-# [2.4.0](https://github.com/atomastic/strings) (2020-12-05)
+# [2.4.0](https://github.com/glowyphp/strings) (2020-12-05)
 * add copy() method.
 * add ability to extend Strings class with Macros.
 
     ```php
-    use Atomastic\Strings\Strings;
-    use Atomastic\Macroable\Macroable;
+    use Glowy\Strings\Strings;
+    use Glowy\Macroable\Macroable;
 
     Strings::macro('concatenate', function(string $string) {
         return $this->toString() . $string;
@@ -42,7 +48,7 @@
     ```
 
 <a name="2.3.0"></a>
-# [2.3.0](https://github.com/atomastic/strings) (2020-11-30)
+# [2.3.0](https://github.com/glowyphp/strings) (2020-11-30)
 * add replace() method.
 * add pipe() method.
 * add chars() method.
@@ -55,7 +61,7 @@
 * general code refactoring
 
 <a name="2.2.0"></a>
-# [2.2.0](https://github.com/atomastic/strings) (2020-11-24)
+# [2.2.0](https://github.com/glowyphp/strings) (2020-11-24)
 * fix limit() method if string length is lower or equals to provided limit.
 * fix studly() method.
 * fix issue with encoding on new Strings object creation.
@@ -78,7 +84,7 @@
 * improve tests workflow.
 
 <a name="2.1.0"></a>
-# [2.1.0](https://github.com/atomastic/strings) (2020-11-05)
+# [2.1.0](https://github.com/glowyphp/strings) (2020-11-05)
 * add isIP method.
 * add isMAC method.
 * add isHTML method.
@@ -88,7 +94,7 @@
 * improve tests for toBoolean method.
 
 <a name="2.0.0"></a>
-# [2.0.0](https://github.com/atomastic/strings) (2020-10-28)
+# [2.0.0](https://github.com/glowyphp/strings) (2020-10-28)
 
 * simplify length() method.
 * add lines() method.
@@ -114,5 +120,5 @@
 * USE wordsLimit() INSTEAD OF words()
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/atomastic/strings) (2020-09-25)
+# [1.0.0](https://github.com/glowyphp/strings) (2020-09-25)
 * Initial release
