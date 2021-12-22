@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Atomastic\Strings\Strings;
+use Glowy\Strings\Strings;
 
 test('test __construct() method', function (): void {
     $this->assertInstanceOf(Strings::class, new Strings());

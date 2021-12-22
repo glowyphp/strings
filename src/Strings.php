@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atomastic\Strings;
+namespace Glowy\Strings;
 
 use ArrayAccess;
 use ArrayIterator;
