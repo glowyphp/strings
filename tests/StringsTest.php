@@ -384,6 +384,12 @@ test('test pipe() method', function (): void {
     }));
 });
 
+test('test replaceSubstr() method', function (): void {
+    $this->assertEquals('19-84', Strings::create('1984')->replaceSubstr('-', 2, 0)->toString());
+    $this->assertEquals('fòô bàř bàz', Strings::create('fòô bàz')->replaceSubstr('bàř ', 4, 0)->toString());
+    $this->assertEquals('foo zed bar', Strings::create('foo bar')->replaceSubstr('zed ', 4, 0)->toString());
+});
+
 test('test replace() method', function (): void {
     $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
                                                                ->replace('*', 'bàř')
@@ -703,13 +709,13 @@ test('test isDigit() method', function (): void {
 });
 
 test('test isEmail() method', function (): void {
-    $this->assertTrue(Strings::create('awilum@atomastic.com')->isEmail());
-    $this->assertFalse(Strings::create('awilum.atomastic.com')->isEmail());
+    $this->assertTrue(Strings::create('awilum@glowyphp.com')->isEmail());
+    $this->assertFalse(Strings::create('awilum.glowyphp.com')->isEmail());
 });
 
 test('test isUrl() method', function (): void {
-    $this->assertTrue(Strings::create('http://atomastic.com')->isUrl());
-    $this->assertFalse(Strings::create('atomastic.com')->isUrl());
+    $this->assertTrue(Strings::create('http://glowyphp.com')->isUrl());
+    $this->assertFalse(Strings::create('glowyphp.com')->isUrl());
 });
 
 test('test isLower() method', function (): void {

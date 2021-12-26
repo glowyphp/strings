@@ -1079,6 +1079,28 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Replace the given value within a portion of a string.
+     *
+     * @param  string|array   $replace The replacement string.
+     * @param  array|int      $offset  Offset.
+     * @param  array|int|null $length  Length.
+     * 
+     * @return self Returns instance of The Strings class.
+     */
+    public function replaceSubstr($replace, $offset = 0, $length = null): self
+    {
+        if ($length === null) {
+            $length = mb_strlen($this->string);
+        }
+
+        $this->string = mb_substr($this->string, 0, $offset, $this->encoding) . 
+                        $replace . 
+                        mb_substr($this->string, $offset + $length, mb_strlen($this->string, $this->encoding), $this->encoding);
+      
+        return $this;
+    }
+
+    /**
      * Replace the given value in the given string.
      *
      * @param  string $search  Search
