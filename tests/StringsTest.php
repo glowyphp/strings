@@ -107,6 +107,16 @@ test('test studly() method', function (): void {
     $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
 });
 
+test('test headline() method', function (): void {
+    $this->assertEquals('Foo Bar', Strings::create('foo_bar')->headline());
+    $this->assertEquals('Foo Bar', Strings::create('foo bar')->headline());
+    $this->assertEquals('Fòô Bàř', Strings::create('fòô_bàř')->headline());
+    $this->assertEquals('Fòô Bàř', Strings::create('fòô bàř')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO fòô bàř bAr')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO_fòô_bàř_bAr')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO-fòô-bàř_bAr')->headline());
+});
+
 test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));

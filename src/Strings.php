@@ -353,6 +353,27 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Convert the given string to title case for each word.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function headline(): self
+    {
+        $parts = static::create($this->string)->replace(' ', '_')->segments('_');
+
+        if (count($parts) > 1) {
+            $capParts = [];
+            foreach($parts as $part) {
+                $capParts[] = static::create($part)->capitalize()->toString();
+            }
+        }
+
+        $this->string = implode(' ', preg_split('/(?=[A-Z])/', static::create(implode($capParts))->studly()->toString(), -1, PREG_SPLIT_NO_EMPTY));
+
+        return $this;
+    }
+
+    /**
      * Convert the given string to lower-case.
      *
      * @return self Returns instance of The Strings class.
