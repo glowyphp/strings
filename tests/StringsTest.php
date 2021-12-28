@@ -117,6 +117,10 @@ test('test headline() method', function (): void {
     $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO-fòô-bàř_bAr')->headline());
 });
 
+test('test mask() method', function (): void {
+    $this->assertEquals('***bar', Strings::create('foobar')->mask('*', 0, 3));
+});
+
 test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));
