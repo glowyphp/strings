@@ -353,6 +353,37 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Masks a portion of a string with a repeated character.
+     *
+     * @param  string   $character Character.
+     * @param  int      $index     Index.
+     * @param  int|null $length    Length.
+     * 
+     * @return self Returns instance of The Strings class.
+     */
+    public function mask(string $character, int $index, $length = null)
+    {
+        if ($character === '') {
+            return $this->string;
+        }
+
+        if ($length === null) {
+            $length = mb_strlen($this->string, $this->encoding);
+        }
+
+        $segment = static::create($this->string, $this->encoding)->substr($index, $length)->toString();
+
+        if ($segment === '') {
+            return $this->string;
+        }
+
+        $start = mb_substr($this->toString(), 0, mb_strpos($this->toString(), $segment, 0, $this->encoding), $this->encoding);
+        $end = mb_substr($this->toString(), mb_strpos($this->toString(), $segment, 0, $this->encoding) + mb_strlen($segment, $this->encoding));
+
+        return $start . str_repeat(mb_substr($character, 0, 1, $this->encoding), mb_strlen($segment, $this->encoding)) . $end;
+    }
+
+    /**
      * Convert the given string to title case for each word.
      *
      * @return self Returns instance of The Strings class.

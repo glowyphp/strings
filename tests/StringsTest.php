@@ -119,6 +119,11 @@ test('test headline() method', function (): void {
 
 test('test mask() method', function (): void {
     $this->assertEquals('***bar', Strings::create('foobar')->mask('*', 0, 3));
+    $this->assertEquals('foo***', Strings::create('foobar')->mask('*', 3));
+    $this->assertEquals('******', Strings::create('foobar')->mask('*', -6));
+    $this->assertEquals('foo***', Strings::create('foobar')->mask('*', -3));
+    $this->assertEquals('fòô ***', Strings::create('fòô bàř')->mask('*', -3));
+    $this->assertEquals('*** ***', Strings::create('fòô bàř')->mask('*', -7));
 });
 
 test('test snake() method', function (): void {
