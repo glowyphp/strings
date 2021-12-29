@@ -1,38 +1,46 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/glowyphp/strings) (2021-12-xx)
+* Added headline() method.
+* Added replaceSubstr() method.
+* Added mask() method.
+* Added sponge() method.
+* Added swap() method.
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/glowyphp/strings) (2021-12-22)
 * Released under Glowy PHP Organization
-* Add PHP 8.1 support
+* Added PHP 8.1 support
 * Updated dependencies.
 
 <a name="3.0.2"></a>
 # [3.0.2](https://github.com/glowyphp/strings) (2021-04-13)
-* fix snake() method
+* Fixed snake() method
 
 <a name="3.0.1"></a>
 # [3.0.1](https://github.com/glowyphp/strings) (2021-02-19)
-* fix dependencies.
+* Fixed dependencies.
 
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/glowyphp/strings) (2021-02-18)
 * Moving to PHP 7.4.0
-* add echo() method
-* add format() method
-* add crc32() method
-* add md5() method
-* add sha1() method
-* add sha256() method
-* add base64Decode() method
-* add base64Encode() method
+* Added echo() method
+* Added format() method
+* Added crc32() method
+* Added md5() method
+* Added sha1() method
+* Added sha256() method
+* Added base64Decode() method
+* Added base64Encode() method
 
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/glowyphp/strings) (2021-01-29)
-* fix contains() method
-* improve before() method
+* Fixed contains() method
+* Improved before() method
 
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/glowyphp/strings) (2020-12-05)
-* add copy() method.
-* add ability to extend Strings class with Macros.
+* Added copy() method.
+* Added ability to extend Strings class with Macros.
 
     ```php
     use Glowy\Strings\Strings;
@@ -49,69 +57,69 @@
 
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/glowyphp/strings) (2020-11-30)
-* add replace() method.
-* add pipe() method.
-* add chars() method.
-* add getIterator() method.
-* add offsetExists() offsetGet() offsetSet() offsetExists() methods.
+* Added replace() method.
+* Added pipe() method.
+* Added chars() method.
+* Added getIterator() method.
+* Added offsetExists() offsetGet() offsetSet() offsetExists() methods.
 * implement interface: ArrayAccess, Countable, IteratorAggregate.
-* improve methods trim() trimLeft() trimRight()
-* improve tests for replaceArray() method.
-* improve tests workflow
+* Improved methods trim() trimLeft() trimRight()
+* Improved tests for replaceArray() method.
+* Improved tests workflow
 * general code refactoring
 
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/glowyphp/strings) (2020-11-24)
-* fix limit() method if string length is lower or equals to provided limit.
-* fix studly() method.
-* fix issue with encoding on new Strings object creation.
-* remove memory cache for words.
-* add tests for isSimilar() method.
-* improve tests for isBase64() method.
-* improve tests for move() method.
-* improve tests for beforeLast() method.
-* improve tests for afterLast() method.
-* improve tests for replaceFirst() method.
-* improve tests for between() method.
-* improve tests for indexOfLast() method.
-* improve tests for indexOf() method.
-* improve tests for random() method.
-* improve tests for replaceLast() method.
-* improve tests for isSerialized() method.
-* improve tests for hash() method.
-* improve tests for studly() method.
-* improve tests for __costruct() method.
-* improve tests workflow.
+* Fixed limit() method if string length is lower or equals to provided limit.
+* Fixed studly() method.
+* Fixed issue with encoding on new Strings object creation.
+* Removed memory cache for words.
+* Added tests for isSimilar() method.
+* Improved tests for isBase64() method.
+* Improved tests for move() method.
+* Improved tests for beforeLast() method.
+* Improved tests for afterLast() method.
+* Improved tests for replaceFirst() method.
+* Improved tests for between() method.
+* Improved tests for indexOfLast() method.
+* Improved tests for indexOf() method.
+* Improved tests for random() method.
+* Improved tests for replaceLast() method.
+* Improved tests for isSerialized() method.
+* Improved tests for hash() method.
+* Improved tests for studly() method.
+* Improved tests for __costruct() method.
+* Improved tests workflow.
 
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/glowyphp/strings) (2020-11-05)
-* add isIP method.
-* add isMAC method.
-* add isHTML method.
-* add isBoolean method.
-* add isTrue method.
-* add isFalse method.
-* improve tests for toBoolean method.
+* Added isIP method.
+* Added isMAC method.
+* Added isHTML method.
+* Added isBoolean method.
+* Added isTrue method.
+* Added isFalse method.
+* Improved tests for toBoolean method.
 
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/glowyphp/strings) (2020-10-28)
 
 * simplify length() method.
-* add lines() method.
-* add words() method.
-* add charsFrequency() method.
-* add wordsFrequency() method.
-* add wordsSortDesc() and wordsSortAsc() methods.
-* add replaceDashes() method.
-* add replacePunctuations() method.
-* add getEncoding() and setEncoding() methods.
-* add replaceNonAlpha() method and update replaceNonAlphanumeric() method.
-* add replaceNonAlphanumeric() method.
-* add isUrl() method.
-* add isEmail() method.
-* improve stripSpaces() method.
+* Added lines() method.
+* Added words() method.
+* Added charsFrequency() method.
+* Added wordsFrequency() method.
+* Added wordsSortDesc() and wordsSortAsc() methods.
+* Added replaceDashes() method.
+* Added replacePunctuations() method.
+* Added getEncoding() and setEncoding() methods.
+* Added replaceNonAlpha() method and update replaceNonAlphanumeric() method.
+* Added replaceNonAlphanumeric() method.
+* Added isUrl() method.
+* Added isEmail() method.
+* Improved stripSpaces() method.
 * rewrite method logic and rename countWords() to wordsCount()
-* rename method words() to wordsLimit() and improve tests for this method.
+* rename method words() to wordsLimit() and Improved tests for this method.
 * update tests for segments() method.
 
 ### BREAKING CHANGES
