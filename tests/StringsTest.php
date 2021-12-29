@@ -126,6 +126,11 @@ test('test mask() method', function (): void {
     $this->assertEquals('*******', Strings::create('fòô bàř')->mask('*', -7));
 });
 
+test('test sponge() method', function (): void {
+    $this->assertNotEquals('fòôbàřfòôbàřfòôbàřfòôbàř', Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->sponge());
+    $this->assertEquals(Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length(), Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length());
+});
+
 test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));

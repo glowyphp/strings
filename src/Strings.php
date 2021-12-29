@@ -405,6 +405,28 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Transform the given string with random capitalization applied.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function sponge(): self
+    {
+        $result = '';
+
+        foreach (static::create($this->string)->chars() as $char) {
+            if (mt_rand(0, 100) > 50) {
+                $result .= static::create($char)->upper()->toString();
+            } else {
+                $result .= static::create($char)->lower()->toString();
+            }
+        }
+
+        $this->string = $result;
+
+        return $this;
+    }
+
+    /**
      * Convert the given string to lower-case.
      *
      * @return self Returns instance of The Strings class.
