@@ -131,6 +131,11 @@ test('test sponge() method', function (): void {
     $this->assertEquals(Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length(), Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length());
 });
 
+test('test swap() method', function (): void {
+    $this->assertEquals('fÒÔ bÀŘ', Strings::create('Fòô Bàř')->swap());
+    $this->assertEquals('Fòô Bàř', Strings::create('fÒÔ bÀŘ')->swap());
+});
+
 test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));

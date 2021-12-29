@@ -427,6 +427,28 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Transform the given string by swapping every character from upper to lower case, or lower to upper case.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function swap(): self
+    {
+        $result = '';
+
+        foreach (static::create($this->string)->chars() as $char) {
+            if (static::create($char)->isUpper()) {
+                $result .= static::create($char)->lower()->toString();
+            } else {
+                $result .= static::create($char)->upper()->toString();
+            }
+        }
+
+        $this->string = $result;
+
+        return $this;
+    }
+
+    /**
      * Convert the given string to lower-case.
      *
      * @return self Returns instance of The Strings class.
