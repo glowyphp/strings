@@ -1,5 +1,5 @@
 <a name="4.1.0"></a>
-# [4.1.0](https://github.com/glowyphp/strings) (2021-12-xx)
+# [4.1.0](https://github.com/glowyphp/strings) (2021-12-30)
 * Added headline() method.
 * Added replaceSubstr() method.
 * Added mask() method.
