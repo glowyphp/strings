@@ -107,6 +107,35 @@ test('test studly() method', function (): void {
     $this->assertEquals('FòôBàř', Strings::create('fòô_bàř')->studly());
 });
 
+test('test headline() method', function (): void {
+    $this->assertEquals('Foo Bar', Strings::create('foo_bar')->headline());
+    $this->assertEquals('Foo Bar', Strings::create('foo bar')->headline());
+    $this->assertEquals('Fòô Bàř', Strings::create('fòô_bàř')->headline());
+    $this->assertEquals('Fòô Bàř', Strings::create('fòô bàř')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO fòô bàř bAr')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO_fòô_bàř_bAr')->headline());
+    $this->assertEquals('Foo Fòô Bàř Bar', Strings::create('FoO-fòô-bàř_bAr')->headline());
+});
+
+test('test mask() method', function (): void {
+    $this->assertEquals('***bar', Strings::create('foobar')->mask('*', 0, 3));
+    $this->assertEquals('foo***', Strings::create('foobar')->mask('*', 3));
+    $this->assertEquals('******', Strings::create('foobar')->mask('*', -6));
+    $this->assertEquals('foo***', Strings::create('foobar')->mask('*', -3));
+    $this->assertEquals('fòô ***', Strings::create('fòô bàř')->mask('*', -3));
+    $this->assertEquals('*******', Strings::create('fòô bàř')->mask('*', -7));
+});
+
+test('test sponge() method', function (): void {
+    $this->assertNotEquals('fòôbàřfòôbàřfòôbàřfòôbàř', Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->sponge());
+    $this->assertEquals(Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length(), Strings::create('fòôbàřfòôbàřfòôbàřfòôbàř')->length());
+});
+
+test('test swap() method', function (): void {
+    $this->assertEquals('fÒÔ bÀŘ', Strings::create('Fòô Bàř')->swap());
+    $this->assertEquals('Fòô Bàř', Strings::create('fÒÔ bÀŘ')->swap());
+});
+
 test('test snake() method', function (): void {
     $this->assertEquals('foo_bar', Strings::create('fooBar')->snake());
     $this->assertEquals('foo__bar', Strings::create('fooBar')->snake('__'));
@@ -382,6 +411,12 @@ test('test pipe() method', function (): void {
 
         return $strings->append($word);
     }));
+});
+
+test('test replaceSubstr() method', function (): void {
+    $this->assertEquals('19-84', Strings::create('1984')->replaceSubstr('-', 2, 0)->toString());
+    $this->assertEquals('fòô bàř bàz', Strings::create('fòô bàz')->replaceSubstr('bàř ', 4, 0)->toString());
+    $this->assertEquals('foo zed bar', Strings::create('foo bar')->replaceSubstr('zed ', 4, 0)->toString());
 });
 
 test('test replace() method', function (): void {
@@ -703,13 +738,13 @@ test('test isDigit() method', function (): void {
 });
 
 test('test isEmail() method', function (): void {
-    $this->assertTrue(Strings::create('awilum@atomastic.com')->isEmail());
-    $this->assertFalse(Strings::create('awilum.atomastic.com')->isEmail());
+    $this->assertTrue(Strings::create('awilum@glowyphp.com')->isEmail());
+    $this->assertFalse(Strings::create('awilum.glowyphp.com')->isEmail());
 });
 
 test('test isUrl() method', function (): void {
-    $this->assertTrue(Strings::create('http://atomastic.com')->isUrl());
-    $this->assertFalse(Strings::create('atomastic.com')->isUrl());
+    $this->assertTrue(Strings::create('http://glowyphp.com')->isUrl());
+    $this->assertFalse(Strings::create('glowyphp.com')->isUrl());
 });
 
 test('test isLower() method', function (): void {

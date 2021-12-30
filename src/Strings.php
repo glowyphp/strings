@@ -353,6 +353,102 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Masks a portion of a string with a repeated character.
+     *
+     * @param  string   $character Character.
+     * @param  int      $index     Index.
+     * @param  int|null $length    Length.
+     * 
+     * @return self Returns instance of The Strings class.
+     */
+    public function mask(string $character, int $index, $length = null)
+    {
+        if ($character === '') {
+            return $this->string;
+        }
+
+        if ($length === null) {
+            $length = mb_strlen($this->string, $this->encoding);
+        }
+
+        $segment = static::create($this->string, $this->encoding)->substr($index, $length)->toString();
+
+        if ($segment === '') {
+            return $this->string;
+        }
+
+        $start = mb_substr($this->toString(), 0, mb_strpos($this->toString(), $segment, 0, $this->encoding), $this->encoding);
+        $end = mb_substr($this->toString(), mb_strpos($this->toString(), $segment, 0, $this->encoding) + mb_strlen($segment, $this->encoding));
+
+        return $start . str_repeat(mb_substr($character, 0, 1, $this->encoding), mb_strlen($segment, $this->encoding)) . $end;
+    }
+
+    /**
+     * Convert the given string to title case for each word.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function headline(): self
+    {
+        $parts = static::create($this->string)->replace(' ', '_')->segments('_');
+
+        if (count($parts) > 1) {
+            $capParts = [];
+            foreach($parts as $part) {
+                $capParts[] = static::create($part)->capitalize()->toString();
+            }
+        }
+
+        $this->string = implode(' ', preg_split('/(?=[A-Z])/', static::create(implode($capParts))->studly()->toString(), -1, PREG_SPLIT_NO_EMPTY));
+
+        return $this;
+    }
+
+    /**
+     * Transform the given string with random capitalization applied.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function sponge(): self
+    {
+        $result = '';
+
+        foreach (static::create($this->string)->chars() as $char) {
+            if (mt_rand(0, 100) > 50) {
+                $result .= static::create($char)->upper()->toString();
+            } else {
+                $result .= static::create($char)->lower()->toString();
+            }
+        }
+
+        $this->string = $result;
+
+        return $this;
+    }
+
+    /**
+     * Transform the given string by swapping every character from upper to lower case, or lower to upper case.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function swap(): self
+    {
+        $result = '';
+
+        foreach (static::create($this->string)->chars() as $char) {
+            if (static::create($char)->isUpper()) {
+                $result .= static::create($char)->lower()->toString();
+            } else {
+                $result .= static::create($char)->upper()->toString();
+            }
+        }
+
+        $this->string = $result;
+
+        return $this;
+    }
+
+    /**
      * Convert the given string to lower-case.
      *
      * @return self Returns instance of The Strings class.
@@ -1075,6 +1171,28 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
                                 ->toString();
         }
 
+        return $this;
+    }
+
+    /**
+     * Replace the given value within a portion of a string.
+     *
+     * @param  string|array   $replace The replacement string.
+     * @param  array|int      $offset  Offset.
+     * @param  array|int|null $length  Length.
+     * 
+     * @return self Returns instance of The Strings class.
+     */
+    public function replaceSubstr($replace, $offset = 0, $length = null): self
+    {
+        if ($length === null) {
+            $length = mb_strlen($this->string);
+        }
+
+        $this->string = mb_substr($this->string, 0, $offset, $this->encoding) . 
+                        $replace . 
+                        mb_substr($this->string, $offset + $length, mb_strlen($this->string, $this->encoding), $this->encoding);
+      
         return $this;
     }
 

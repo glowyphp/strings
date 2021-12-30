@@ -1,6 +1,6 @@
-<h1 align="center">Strings Component</h1>
+<h1 align="center">Strings</h1>
 <p align="center">
-Strings Component provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+Strings Package provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@ composer require glowy/strings
 ```
 
 ### Resources
-* [Documentation](https://digital.flextype.org/glowyphp/components/strings)
+* [Documentation](https://digital.flextype.org/glowyphp/packages/strings)
 
 ### Tests
 
