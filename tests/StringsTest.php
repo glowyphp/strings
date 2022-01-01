@@ -752,6 +752,14 @@ test('test isDate() method', function (): void {
     $this->assertFalse(Strings::create('90/11/2022')->isDate());
 });
 
+test('test isAffirmative() method', function (): void {
+    $this->assertTrue(Strings::create('true')->isAffirmative());
+    $this->assertTrue(Strings::create('yes')->isAffirmative());
+    $this->assertTrue(Strings::create('t')->isAffirmative());
+    $this->assertTrue(Strings::create('y')->isAffirmative());
+    $this->assertTrue(Strings::create('ok')->isAffirmative());
+    $this->assertTrue(Strings::create('okay')->isAffirmative());
+});
 
 test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
@@ -766,6 +774,13 @@ test('test isUpper() method', function (): void {
 test('test isHexadecimal() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isHexadecimal());
     $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
+});
+
+test('test isHexColor() method', function (): void {
+    $this->assertTrue(Strings::create('#333')->isHexColor());
+    $this->assertFalse(Strings::create('#3333')->isHexColor());
+    $this->assertTrue(Strings::create('fff')->isHexColor());
+    $this->assertFalse(Strings::create('fffff')->isHexColor());
 });
 
 test('test isPrintable() method', function (): void {

@@ -1709,6 +1709,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is hex color, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isHexColor(): bool
+    {
+        return (bool) mb_ereg_match('^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', $this->string);
+    }
+
+    /**
      * Returns true if the string is affirmative, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
