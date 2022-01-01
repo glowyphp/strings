@@ -747,6 +747,12 @@ test('test isUrl() method', function (): void {
     $this->assertFalse(Strings::create('glowyphp.com')->isUrl());
 });
 
+test('test isDate() method', function (): void {
+    $this->assertTrue(Strings::create('11/11/2022')->isDate());
+    $this->assertFalse(Strings::create('90/11/2022')->isDate());
+});
+
+
 test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());

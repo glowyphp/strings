@@ -1709,6 +1709,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is date and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isDate(): bool
+    {
+        return (bool) strtotime($this->string);
+    }
+
+    /**
      * Returns true if the string is email and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
