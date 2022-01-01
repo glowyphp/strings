@@ -1709,6 +1709,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is affirmative, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isAffirmative(): bool
+    {
+        return (bool) mb_ereg_match('^(?:1|t(?:rue)?|y(?:es)?|ok(?:ay)?)$', $this->string);
+    }
+
+    /**
      * Returns true if the string is date and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
