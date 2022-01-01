@@ -1,3 +1,9 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/glowyphp/strings) (2022-01-01)
+* Added isHexColor() method.
+* Added isAffirmative() method.
+* Added isDate() method.
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/glowyphp/strings) (2021-12-30)
 * Added headline() method.
