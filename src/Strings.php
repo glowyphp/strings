@@ -2022,6 +2022,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is UUID and it is valid.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isUuid(): bool
+    {
+        return preg_match('/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iD', $this->toString()) > 0;
+    }
+
+    /**
      * Return Strings object as string.
      *
      * @return string Returns strings object as string.

@@ -776,6 +776,12 @@ test('test isHexadecimal() method', function (): void {
     $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
 });
 
+test('test isUuid() method', function (): void {
+    $this->assertTrue(Strings::create('f47ac10b-58cc-4372-a567-0e02b2c3d479')->isUuid());
+    $this->assertFalse(Strings::create('f47ac10b')->isUuid());
+    $this->assertFalse(Strings::create('0e02b2c3d479')->isUuid());
+});
+
 test('test isHexColor() method', function (): void {
     $this->assertTrue(Strings::create('#333')->isHexColor());
     $this->assertFalse(Strings::create('#3333')->isHexColor());
