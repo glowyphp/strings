@@ -407,9 +407,10 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function headline(): self
     {
         $parts = static::create($this->string)->replace(' ', '_')->segments('_');
+        
+        $capParts = [];
 
         if (count($parts) > 1) {
-            $capParts = [];
             foreach($parts as $part) {
                 $capParts[] = static::create($part)->capitalize()->toString();
             }
@@ -1650,12 +1651,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
             return $this;
         }
 
-        $substr       = mb_substr($this->string, $start, $length);
-        $this->string = mb_substr($this->string, 0, $destination) . $substr . mb_substr($this->string, $destination);
-
-        $pos          = mb_strpos($this->string, $substr, 0);
-        $this->string = mb_substr($this->string, 0, $pos) . mb_substr($this->string, $pos + mb_strlen($substr));
-
+        $string = $this->string;
+        $substr = mb_substr($string, $start, $length);
+        $string = mb_substr($string, 0, $destination) . $substr . mb_substr($string, $destination);
+        $pos    = mb_strpos($string, $substr, 0);
+        if (!$pos) {
+            $pos = 0;
+        }
+        $string = mb_substr($string, 0, $pos) . mb_substr($string, $pos + mb_strlen($substr));
+        $this->string = $string;
+    
         return $this;
     }
 
@@ -1956,7 +1961,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Determine whether the string is equals to $string.
      *
-     * @param $string String to compare.
+     * @param string $string String to compare.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1968,11 +1973,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Determine whether the string is IP and it is a valid IP address.
      *
-     * @param $flags Flags:
-     *                  FILTER_FLAG_IPV4
-     *                  FILTER_FLAG_IPV6
-     *                  FILTER_FLAG_NO_PRIV_RANGE
-     *                  FILTER_FLAG_NO_RES_RANGE
+     * @param int $flags Flags:
+     *                   FILTER_FLAG_IPV4
+     *                   FILTER_FLAG_IPV6
+     *                   FILTER_FLAG_NO_PRIV_RANGE
+     *                   FILTER_FLAG_NO_RES_RANGE
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -2113,7 +2118,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         $string   = static::create($this->string, $encoding)->trim()->toString();
 
         if ($delimiter !== null) {
-            $array = explode($delimiter, $string);
+            $array = ! empty($delimiter) ? explode($delimiter, $string) : [$string];
         } else {
             $array = [$string];
         }
@@ -2175,7 +2180,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param  mixed $offset The index from which to retrieve the char
      *
      * @return mixed                 The character at the specified index
-     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     * @return mixed Return TRUE key exists in the array, FALSE otherwise.
      *
      * @throws OutOfBoundsException  If the positive or negative offset does
      *                               not exist
