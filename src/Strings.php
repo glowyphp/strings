@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Glowy Strings Package.
+ *
+ * (c) Sergey Romanenko
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Glowy\Strings;
@@ -101,6 +110,13 @@ use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
 
+/**
+ * Strings Class.
+ * 
+ * Provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+ * 
+ * @author Sergey Romanenko
+ */
 class Strings implements ArrayAccess, Countable, IteratorAggregate
 {
     use Macroable;
