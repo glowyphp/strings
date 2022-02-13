@@ -415,11 +415,11 @@ test('test replaceNonAlpha() method', function (): void {
 test('test pipe() method', function (): void {
     $strings = new Strings('Fòô');
 
-    $this->assertEquals('Fòô bàřs', $strings->pipe(static function ($strings) {
-        $word = ' bàřs';
+    $strings->pipe(static function ($strings) {
+        $strings->append(' bàřs');
+    });
 
-        return $strings->append($word);
-    }));
+    $this->assertEquals('Fòô bàřs', $strings);
 });
 
 test('test replaceSubstr() method', function (): void {

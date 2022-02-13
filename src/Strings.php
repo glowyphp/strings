@@ -1682,15 +1682,19 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Passes the strings to the given callback and return the result.
+     * Call the given callback.
      *
-     * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+     * @param callable $callback Callback function.
      *
-     * @return mixed Result returned by the callback.
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
      */
-    public function pipe(Closure $callback)
+    public function pipe(callable $callback): self
     {
-        return $callback($this);
+        $callback($this);
+
+        return $this;
     }
 
     /**
