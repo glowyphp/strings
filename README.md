@@ -21,7 +21,7 @@ composer require glowy/strings
 ```
 
 ### Resources
-* [Documentation](https://digital.flextype.org/glowyphp/packages/strings)
+* [Documentation](https://awilum.github.io/glowyphp/strings/)
 
 ### Tests
 
