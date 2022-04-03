@@ -432,6 +432,9 @@ test('test replace() method', function (): void {
     $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
                                                                ->replace('*', 'bàř')
                                                                ->replace('#', 'bàz'));
+
+    $this->assertEquals('Welcome, Eleven', Strings::create('Welcome, {{ name }}')
+                                                               ->replace('{{ name }}', 'Eleven'));
 });
 
 test('test replaceArray() method', function (): void {
