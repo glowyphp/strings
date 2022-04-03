@@ -343,6 +343,14 @@ test('test between() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->between('', ''));
 });
 
+test('test betweenFirst() method', function (): void {
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('', ''));
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('', 'ô'));
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('f', ''));
+    $this->assertEquals('ò', Strings::create('fòô')->betweenFirst('f', 'ô'));
+    $this->assertEquals('ò', Strings::create('[ò]ab[ô]')->betweenFirst('[', ']'));
+});
+
 test('test before() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->before('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->before('bàřs'));

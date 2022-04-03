@@ -952,11 +952,30 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function between(string $from, string $to): self
     {
         if ($from === '' || $to === '') {
-            $this->string = $this->string;
-        } else {
-            $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to)->toString();
+            return $this;
+        }
+        
+        $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to)->toString();
+
+        return $this;
+    }
+
+    /**
+     * Get the portion of a string between first two given values.
+     *
+     * @param  string $from From
+     * @param  string $to   To
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function betweenFirst(string $from, string $to): self
+    {
+        if ($from === '' || $to === '') {
+            return $this;
         }
 
+        $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->before($to)->toString();
+        
         return $this;
     }
 
