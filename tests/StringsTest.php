@@ -867,6 +867,10 @@ test('test isNull() method', function (): void {
     $this->assertTrue(Strings::create('null')->isNull());
 });
 
+test('test toNull() method', function (): void {
+    $this->assertTrue(Strings::create('null')->toNull() === null);
+});
+
 test('test isMAC() method', function (): void {
     $this->assertTrue(Strings::create('00:11:22:33:44:55')->isMAC());
     $this->assertFalse(Strings::create('127.0.0.1')->isMAC());

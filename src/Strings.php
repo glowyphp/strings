@@ -2138,9 +2138,9 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Return Strings object as null.
      *
-     * @return float Return Strings object as null.
+     * @return null Return Strings object as null.
      */
-    public function toNull(): float
+    public function toNull()
     {
         return null;
     }

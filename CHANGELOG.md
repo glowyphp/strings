@@ -1,3 +1,7 @@
+<a name="4.3.1"></a>
+# [4.3.1](https://github.com/glowyphp/strings) (2022-05-08)
+* Fix toNull() method.
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/glowyphp/strings) (2022-05-08)
 * Added isNull() method.
