@@ -2030,6 +2030,36 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is integer.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isInteger(): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_INT);
+    }
+
+    /**
+     * Determine whether the string is float.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isFloat(): bool
+    {
+        return ((bool) filter_var($this->toString(), FILTER_VALIDATE_FLOAT) !== $this->isInteger());
+    }
+
+    /**
+     * Determine whether the string is null.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNull(): bool
+    {
+        return $this->toString() === null || $this->toString() === 'null';
+    }
+
+    /**
      * Determine whether the string is Boolean.
      *
      * Boolean representation for logical strings:
@@ -2103,6 +2133,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function toFloat(): float
     {
         return floatval($this->string);
+    }
+
+    /**
+     * Return Strings object as null.
+     *
+     * @return float Return Strings object as null.
+     */
+    public function toNull(): float
+    {
+        return null;
     }
 
     /**

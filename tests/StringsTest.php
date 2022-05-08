@@ -849,6 +849,24 @@ test('test isIP() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isIP());
 });
 
+test('test isInteger() method', function (): void {
+    $this->assertTrue(Strings::create('1')->isInteger());
+    $this->assertFalse(Strings::create('1.0')->isInteger());
+    $this->assertFalse(Strings::create('Foo')->isInteger());
+});
+
+test('test isFloat() method', function (): void {
+    $this->assertFalse(Strings::create('1')->isFloat());
+    $this->assertTrue(Strings::create('0.1')->isFloat());
+    $this->assertTrue(Strings::create('1.0')->isFloat());
+    $this->assertTrue(Strings::create('0.1')->isFloat());
+    $this->assertFalse(Strings::create('Foo')->isFloat());
+});
+
+test('test isNull() method', function (): void {
+    $this->assertTrue(Strings::create('null')->isNull());
+});
+
 test('test isMAC() method', function (): void {
     $this->assertTrue(Strings::create('00:11:22:33:44:55')->isMAC());
     $this->assertFalse(Strings::create('127.0.0.1')->isMAC());
