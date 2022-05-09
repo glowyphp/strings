@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Glowy Strings Package.
+ *
+ * (c) Sergey Romanenko
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Glowy\Strings;
@@ -101,6 +110,13 @@ use const STR_PAD_BOTH;
 use const STR_PAD_LEFT;
 use const STR_PAD_RIGHT;
 
+/**
+ * Strings Class.
+ * 
+ * Provide a fluent, object-oriented interface for working with multibyte string, allowing you to chain multiple string operations together using a more readable syntax compared to traditional PHP strings functions.
+ * 
+ * @author Sergey Romanenko
+ */
 class Strings implements ArrayAccess, Countable, IteratorAggregate
 {
     use Macroable;
@@ -391,9 +407,10 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function headline(): self
     {
         $parts = static::create($this->string)->replace(' ', '_')->segments('_');
+        
+        $capParts = [];
 
         if (count($parts) > 1) {
-            $capParts = [];
             foreach($parts as $part) {
                 $capParts[] = static::create($part)->capitalize()->toString();
             }
@@ -935,11 +952,30 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function between(string $from, string $to): self
     {
         if ($from === '' || $to === '') {
-            $this->string = $this->string;
-        } else {
-            $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to)->toString();
+            return $this;
+        }
+        
+        $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->beforeLast($to)->toString();
+
+        return $this;
+    }
+
+    /**
+     * Get the portion of a string between first two given values.
+     *
+     * @param  string $from From
+     * @param  string $to   To
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function betweenFirst(string $from, string $to): self
+    {
+        if ($from === '' || $to === '') {
+            return $this;
         }
 
+        $this->string = static::create((string) static::create($this->string, $this->encoding)->after($from), $this->encoding)->before($to)->toString();
+        
         return $this;
     }
 
@@ -1634,12 +1670,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
             return $this;
         }
 
-        $substr       = mb_substr($this->string, $start, $length);
-        $this->string = mb_substr($this->string, 0, $destination) . $substr . mb_substr($this->string, $destination);
-
-        $pos          = mb_strpos($this->string, $substr, 0);
-        $this->string = mb_substr($this->string, 0, $pos) . mb_substr($this->string, $pos + mb_strlen($substr));
-
+        $string = $this->string;
+        $substr = mb_substr($string, $start, $length);
+        $string = mb_substr($string, 0, $destination) . $substr . mb_substr($string, $destination);
+        $pos    = mb_strpos($string, $substr, 0);
+        if (!$pos) {
+            $pos = 0;
+        }
+        $string = mb_substr($string, 0, $pos) . mb_substr($string, $pos + mb_strlen($substr));
+        $this->string = $string;
+    
         return $this;
     }
 
@@ -1661,15 +1701,19 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Passes the strings to the given callback and return the result.
+     * Call the given callback.
      *
-     * @param Closure $callback Function with strings as parameter which returns arbitrary result.
+     * @param callable $callback Callback function.
      *
-     * @return mixed Result returned by the callback.
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
      */
-    public function pipe(Closure $callback)
+    public function pipe(callable $callback): self
     {
-        return $callback($this);
+        $callback($this);
+
+        return $this;
     }
 
     /**
@@ -1940,7 +1984,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Determine whether the string is equals to $string.
      *
-     * @param $string String to compare.
+     * @param string $string String to compare.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1952,11 +1996,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Determine whether the string is IP and it is a valid IP address.
      *
-     * @param $flags Flags:
-     *                  FILTER_FLAG_IPV4
-     *                  FILTER_FLAG_IPV6
-     *                  FILTER_FLAG_NO_PRIV_RANGE
-     *                  FILTER_FLAG_NO_RES_RANGE
+     * @param int $flags Flags:
+     *                   FILTER_FLAG_IPV4
+     *                   FILTER_FLAG_IPV6
+     *                   FILTER_FLAG_NO_PRIV_RANGE
+     *                   FILTER_FLAG_NO_RES_RANGE
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1983,6 +2027,36 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isHTML(): bool
     {
         return $this->toString() !== strip_tags($this->toString());
+    }
+
+    /**
+     * Determine whether the string is integer.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isInteger(): bool
+    {
+        return (bool) filter_var($this->toString(), FILTER_VALIDATE_INT);
+    }
+
+    /**
+     * Determine whether the string is float.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isFloat(): bool
+    {
+        return ((bool) filter_var($this->toString(), FILTER_VALIDATE_FLOAT) !== $this->isInteger());
+    }
+
+    /**
+     * Determine whether the string is null.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNull(): bool
+    {
+        return $this->toString() === null || $this->toString() === 'null';
     }
 
     /**
@@ -2022,6 +2096,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is UUID and it is valid.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isUuid(): bool
+    {
+        return preg_match('/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iD', $this->toString()) > 0;
+    }
+
+    /**
      * Return Strings object as string.
      *
      * @return string Returns strings object as string.
@@ -2049,6 +2133,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function toFloat(): float
     {
         return floatval($this->string);
+    }
+
+    /**
+     * Return Strings object as null.
+     *
+     * @return null Return Strings object as null.
+     */
+    public function toNull()
+    {
+        return null;
     }
 
     /**
@@ -2087,7 +2181,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         $string   = static::create($this->string, $encoding)->trim()->toString();
 
         if ($delimiter !== null) {
-            $array = explode($delimiter, $string);
+            $array = ! empty($delimiter) ? explode($delimiter, $string) : [$string];
         } else {
             $array = [$string];
         }
@@ -2149,7 +2243,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      * @param  mixed $offset The index from which to retrieve the char
      *
      * @return mixed                 The character at the specified index
-     * @return bool Return TRUE key exists in the array, FALSE otherwise.
+     * @return mixed Return TRUE key exists in the array, FALSE otherwise.
      *
      * @throws OutOfBoundsException  If the positive or negative offset does
      *                               not exist

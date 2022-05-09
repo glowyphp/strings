@@ -33,7 +33,13 @@
     "require-dev": {
         "doctrine/coding-standard": "9.0.0",
         "pestphp/pest": "^1.21.1",
-        "phpstan/phpstan": "^1.2.0",
-        "symfony/var-dumper": "^5.4.0"
+        "phpstan/phpstan": "^1.4.5",
+        "symfony/var-dumper": "^5.4.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Glowy Strings Package.
+ *
+ * (c) Sergey Romanenko
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 use Glowy\Strings\Strings;
@@ -334,6 +343,14 @@ test('test between() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world mission', Strings::create('SG-1 returns from an off-world mission')->between('', ''));
 });
 
+test('test betweenFirst() method', function (): void {
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('', ''));
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('', 'ô'));
+    $this->assertEquals('fòô', Strings::create('fòô')->betweenFirst('f', ''));
+    $this->assertEquals('ò', Strings::create('fòô')->betweenFirst('f', 'ô'));
+    $this->assertEquals('ò', Strings::create('[ò]ab[ô]')->betweenFirst('[', ']'));
+});
+
 test('test before() method', function (): void {
     $this->assertEquals('SG-1 returns from an off-world ', Strings::create('SG-1 returns from an off-world mission')->before('mission'));
     $this->assertEquals('fòô ', Strings::create('fòô bàřs')->before('bàřs'));
@@ -406,11 +423,11 @@ test('test replaceNonAlpha() method', function (): void {
 test('test pipe() method', function (): void {
     $strings = new Strings('Fòô');
 
-    $this->assertEquals('Fòô bàřs', $strings->pipe(static function ($strings) {
-        $word = ' bàřs';
+    $strings->pipe(static function ($strings) {
+        $strings->append(' bàřs');
+    });
 
-        return $strings->append($word);
-    }));
+    $this->assertEquals('Fòô bàřs', $strings);
 });
 
 test('test replaceSubstr() method', function (): void {
@@ -423,6 +440,9 @@ test('test replace() method', function (): void {
     $this->assertEquals('fòô/bàř/bàz', Strings::create('?/*/#')->replace('?', 'fòô')
                                                                ->replace('*', 'bàř')
                                                                ->replace('#', 'bàz'));
+
+    $this->assertEquals('Welcome, Eleven', Strings::create('Welcome, {{ name }}')
+                                                               ->replace('{{ name }}', 'Eleven'));
 });
 
 test('test replaceArray() method', function (): void {
@@ -776,6 +796,12 @@ test('test isHexadecimal() method', function (): void {
     $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
 });
 
+test('test isUuid() method', function (): void {
+    $this->assertTrue(Strings::create('f47ac10b-58cc-4372-a567-0e02b2c3d479')->isUuid());
+    $this->assertFalse(Strings::create('f47ac10b')->isUuid());
+    $this->assertFalse(Strings::create('0e02b2c3d479')->isUuid());
+});
+
 test('test isHexColor() method', function (): void {
     $this->assertTrue(Strings::create('#333')->isHexColor());
     $this->assertFalse(Strings::create('#3333')->isHexColor());
@@ -821,6 +847,28 @@ test('test isEqual() method', function (): void {
 test('test isIP() method', function (): void {
     $this->assertTrue(Strings::create('127.0.0.1')->isIP());
     $this->assertFalse(Strings::create('fòôbàřs')->isIP());
+});
+
+test('test isInteger() method', function (): void {
+    $this->assertTrue(Strings::create('1')->isInteger());
+    $this->assertFalse(Strings::create('1.0')->isInteger());
+    $this->assertFalse(Strings::create('Foo')->isInteger());
+});
+
+test('test isFloat() method', function (): void {
+    $this->assertFalse(Strings::create('1')->isFloat());
+    $this->assertTrue(Strings::create('0.1')->isFloat());
+    $this->assertTrue(Strings::create('1.0')->isFloat());
+    $this->assertTrue(Strings::create('0.1')->isFloat());
+    $this->assertFalse(Strings::create('Foo')->isFloat());
+});
+
+test('test isNull() method', function (): void {
+    $this->assertTrue(Strings::create('null')->isNull());
+});
+
+test('test toNull() method', function (): void {
+    $this->assertTrue(Strings::create('null')->toNull() === null);
 });
 
 test('test isMAC() method', function (): void {
