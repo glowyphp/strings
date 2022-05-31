@@ -1753,6 +1753,40 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string matches a given pattern.
+     *
+     * @param  string|array  $pattern Pattern to match.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function is($pattern): bool
+    {
+        $patterns = is_array($pattern) ? $pattern : [$pattern];
+        $value    = $this->toString();
+
+        if (empty($patterns)) {
+            return false;
+        }
+
+        foreach ($patterns as $pattern) {
+            $pattern = (string) $pattern;
+
+            if ($pattern === $value) {
+                return true;
+            }
+
+            $pattern = preg_quote($pattern, '#');
+            $pattern = str_replace('\*', '.*', $pattern);
+
+            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Returns true if the string is hex color, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.

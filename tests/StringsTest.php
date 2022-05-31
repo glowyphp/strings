@@ -581,6 +581,12 @@ test('test shuffle() method', function (): void {
     );
 });
 
+test('test is() method', function (): void {
+    $this->assertTrue(Strings::create('blog/post')->is('blog/*'));
+    $this->assertTrue(Strings::create('blog/post')->is(['blog/*', 'blog/post']));
+    $this->assertTrue(Strings::create('blog/post')->is(['']));
+});
+
 test('test similarity() method', function (): void {
     $this->assertEquals(100, Strings::create('fòôbàřs')->similarity('fòôbàřs'));
     $this->assertEquals(62.5, Strings::create('fòôbàřs')->similarity('fòô'));
