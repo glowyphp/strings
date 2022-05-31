@@ -819,6 +819,13 @@ test('test isHexColor() method', function (): void {
     $this->assertFalse(Strings::create('fffff')->isHexColor());
 });
 
+test('text isNotHexColor() method', function (): void {
+    $this->assertFalse(Strings::create('#333')->isNotHexColor());
+    $this->assertTrue(Strings::create('#3333')->isNotHexColor());
+    $this->assertFalse(Strings::create('fff')->isNotHexColor());
+    $this->assertTrue(Strings::create('fffff')->isNotHexColor());
+});
+
 test('test isPrintable() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isPrintable());
     $this->assertTrue(Strings::create('19FDE')->isPrintable());

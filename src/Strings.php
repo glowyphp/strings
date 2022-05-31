@@ -1809,6 +1809,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns false if the string is not hex color, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHexColor(): bool
+    {
+        return !$this->isHexColor();
+    }
+
+    /**
      * Returns true if the string is affirmative, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
