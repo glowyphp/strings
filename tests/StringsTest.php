@@ -723,6 +723,12 @@ test('test isEmpty() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isEmpty());
 });
 
+test('test isNotEmpty() method', function (): void {
+    $this->assertFalse(Strings::create()->isNotEmpty());
+    $this->assertTrue(Strings::create(' ')->isNotEmpty());
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotEmpty());
+});
+
 test('test isAscii() method', function (): void {
     $this->assertTrue(Strings::create('#')->isAscii());
     $this->assertFalse(Strings::create('fòôbàřs')->isAscii());

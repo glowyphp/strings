@@ -1899,13 +1899,23 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns true if the string is not empty, false otherwise.
+     * Returns true if the string is empty, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isEmpty(): bool
     {
         return empty($this->string);
+    }
+
+    /**
+     * Returns true if the string is not empty, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEmpty(): bool
+    {
+        return !$this->isEmpty();
     }
 
     /**
