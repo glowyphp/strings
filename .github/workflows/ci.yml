@@ -27,7 +27,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions:  fileinfo, spl, json, dom, mbstring
+        extensions:  fileinfo, spl, json, dom, mbstring, pcntl
         tools: composer:v2
         coverage: xdebug
 
