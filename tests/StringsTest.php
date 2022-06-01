@@ -424,10 +424,26 @@ test('test pipe() method', function (): void {
     $strings = new Strings('Fòô');
 
     $strings->pipe(static function ($strings) {
-        $strings->append(' bàřs');
+        return $strings->append(' bàřs');
     });
 
     $this->assertEquals('Fòô bàřs', $strings);
+});
+
+test('test when() method', function (): void {
+    $strings = new Strings('Fòô');
+    $strings->when(true, function ($strings) {
+        return $strings->append(' bàřs')->upper();
+    });
+    $strings->prepend('test - ');
+    $this->assertEquals('test - FÒÔ BÀŘS', $strings->toString());
+
+    $strings2 = new Strings('Fòô');
+    $strings2->when(function () { return true; }, function ($strings2) {
+        return $strings2->append(' bàřs')->upper();
+    });
+    $strings2->prepend('test - ');
+    $this->assertEquals('test - FÒÔ BÀŘS', $strings2->toString());
 });
 
 test('test replaceSubstr() method', function (): void {

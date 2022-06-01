@@ -1709,9 +1709,31 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @access public
      */
-    public function pipe(callable $callback): self
+    public function pipe(callable $callback)
     {
-        $callback($this);
+        return $callback($this);
+    }
+
+    /**
+     * Apply the callback if the given "value" is (or resolves to) truthy.
+     *
+     * @param mixed    $value    Value
+     * @param callable $callback Callback function.
+     * @param callable $default  Callback function.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function when($value, callable $callback = null, callable $default = null)
+    {
+        $value = $value instanceof Closure ? $value($this) : $value;
+
+        if ($value) {
+            return $callback($this, $value) ?? $this;
+        } elseif ($default) {
+            return $default($this, $value) ?? $this;
+        }
 
         return $this;
     }
