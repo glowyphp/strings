@@ -1757,7 +1757,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Execute the given callback if the string equal a given substring.
      *
-     * @param string    $string String to compare.
+     * @param string    $string   String to compare.
      * @param callable  $callback Callback function.
      * @param callable  $default  Callback function.
      * 
@@ -1765,9 +1765,25 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @access public
      */
-    public function whenEqual($needles, $callback, $default = null)
+    public function whenEqual($string, $callback, $default = null)
     {
-        return $this->when($this->isEqual($needles), $callback, $default);
+        return $this->when($this->isEqual($string), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string matches a given pattern.
+     *
+     * @param string|array  $pattern Pattern to match.
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIs($pattern, $callback, $default = null)
+    {
+        return $this->when($this->is($pattern), $callback, $default);
     }
 
     /**
