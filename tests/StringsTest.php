@@ -446,6 +446,22 @@ test('test when() method', function (): void {
     $this->assertEquals('test - FÒÔ BÀŘS', $strings2->toString());
 });
 
+test('test unless() method', function (): void {
+    $strings = new Strings('Fòô');
+    $strings->unless(false, function ($strings) {
+        return $strings->append(' bàřs')->upper();
+    });
+    $strings->prepend('test - ');
+    $this->assertEquals('test - FÒÔ BÀŘS', $strings->toString());
+
+    $strings2 = new Strings('Fòô');
+    $strings2->unless(function () { return false; }, function ($strings2) {
+        return $strings2->append(' bàřs')->upper();
+    });
+    $strings2->prepend('test - ');
+    $this->assertEquals('test - FÒÔ BÀŘS', $strings2->toString());
+});
+
 test('test replaceSubstr() method', function (): void {
     $this->assertEquals('19-84', Strings::create('1984')->replaceSubstr('-', 2, 0)->toString());
     $this->assertEquals('fòô bàř bàz', Strings::create('fòô bàz')->replaceSubstr('bàř ', 4, 0)->toString());

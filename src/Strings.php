@@ -1739,6 +1739,30 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Apply the callback if the given "value" is (or resolves to) falsy.
+     *
+     * @param mixed    $value    Value
+     * @param callable $callback Callback function.
+     * @param callable $default  Callback function.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function unless($value, callable $callback = null, callable $default = null)
+    {
+        $value = $value instanceof Closure ? $value($this) : $value;
+
+        if (!$value) {
+            return $callback($this, $value) ?? $this;
+        } elseif ($default) {
+            return $default($this, $value) ?? $this;
+        }
+
+        return $this;
+    }
+
+    /**
      * Creates a new Strings object with the same string.
      *
      * @return self Returns instance of The Strings class.
