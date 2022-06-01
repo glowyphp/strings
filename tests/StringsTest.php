@@ -791,6 +791,10 @@ test('test isAffirmative() method', function (): void {
     $this->assertTrue(Strings::create('okay')->isAffirmative());
 });
 
+test('test isNotAffirmative() method', function (): void {
+    $this->assertTrue(Strings::create('abc')->isNotAffirmative());
+});
+
 test('test isLower() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isLower());
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());

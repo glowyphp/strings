@@ -1829,6 +1829,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns false if the string is not affirmative, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAffirmative(): bool
+    {
+        return !$this->isAffirmative();
+    }
+
+    /**
      * Returns true if the string is date and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
