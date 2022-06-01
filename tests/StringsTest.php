@@ -734,10 +734,18 @@ test('test isAscii() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isAscii());
 });
 
+test('test isNotAscii() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotAscii());
+});
+
 test('test isAlphanumeric() method', function (): void {
     $this->assertTrue(Strings::create('fòôbàřs')->isAlphanumeric());
     $this->assertTrue(Strings::create('12345')->isAlphanumeric());
     $this->assertTrue(Strings::create('fòôbàřs12345')->isAlphanumeric());
+});
+
+test('test isNotAlphanumeric() method', function (): void {
+    $this->assertTrue(Strings::create('#')->isNotAlphanumeric());
 });
 
 test('test isAlpha() method', function (): void {
@@ -746,9 +754,17 @@ test('test isAlpha() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs12345')->isAlpha());
 });
 
+test('test isNotAlpha() method', function (): void {
+    $this->assertTrue(Strings::create('#')->isNotAlpha());
+});
+
 test('test isBlank() method', function (): void {
     $this->assertTrue(Strings::create(' ')->isBlank());
     $this->assertFalse(Strings::create(' fòôbàřs')->isBlank());
+});
+
+test('test isNotBlank() method', function (): void {
+    $this->assertTrue(Strings::create(' fòôbàřs')->isNotBlank());
 });
 
 test('test isNumeric() method', function (): void {
@@ -767,10 +783,18 @@ test('test isNumeric() method', function (): void {
     $this->assertFalse(Strings::create(null)->isNumeric());
 });
 
+test('test isNotNumeric() method', function (): void {
+    $this->assertTrue(Strings::create('foo')->isNotNumeric());
+});
+
 test('test isDigit() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isDigit());
     $this->assertTrue(Strings::create('01234569')->isDigit());
     $this->assertFalse(Strings::create('fòôbàřs01234569')->isDigit());
+});
+
+test('test isNotDigit() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotDigit());
 });
 
 test('test isEmail() method', function (): void {
@@ -822,14 +846,26 @@ test('test isLower() method', function (): void {
     $this->assertFalse(Strings::create('Fòôbàřs')->isLower());
 });
 
+test('test isNotLower() method', function (): void {
+    $this->assertTrue(Strings::create('FOO')->isNotLower());
+});
+
 test('test isUpper() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isUpper());
     $this->assertTrue(Strings::create('FOOBAR')->isUpper());
 });
 
+test('test isNotUpper() method', function (): void {
+    $this->assertTrue(Strings::create('foo')->isNotUpper());
+});
+
 test('test isHexadecimal() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isHexadecimal());
     $this->assertTrue(Strings::create('19FDE')->isHexadecimal());
+});
+
+test('test isNotHexadecimal() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotHexadecimal());
 });
 
 test('test isUuid() method', function (): void {

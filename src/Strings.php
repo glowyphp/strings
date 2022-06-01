@@ -1929,6 +1929,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains ASCII, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAscii(): bool
+    {
+        return !$this->isAscii();
+    }
+
+    /**
      * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1936,6 +1946,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isAlphanumeric(): bool
     {
         return mb_ereg_match('^[[:alnum:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only alphabetic and numeric chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAlphanumeric(): bool
+    {
+        return !$this->isAlphanumeric();
     }
 
     /**
@@ -1949,6 +1969,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only alphabetic chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAlpha(): bool
+    {
+        return !$this->isAlpha();
+    }
+
+    /**
      * Returns true if the string contains only whitespace chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1956,6 +1986,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isBlank(): bool
     {
         return mb_ereg_match('^[[:space:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only whitespace chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBlank(): bool
+    {
+        return !$this->isBlank();
     }
 
     /**
@@ -1969,6 +2009,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not a number or a numeric strings, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotNumeric(): bool 
+    {
+        return !$this->isNumeric();
+    }
+
+    /**
      * Returns true if the string contains only digit chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1978,6 +2028,17 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         return mb_ereg_match('^[[:digit:]]*$', $this->string);
     }
 
+
+    /**
+     * Returns true if the string is not contains only digit chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotDigit(): bool
+    {
+        return !$this->isDigit();
+    }
+    
     /**
      * Returns true if the string contains only lower case chars, false otherwise.
      *
@@ -1986,6 +2047,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isLower(): bool
     {
         return mb_ereg_match('^[[:lower:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only lower case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotLower(): bool
+    {
+        return !$this->isLower();
     }
 
     /**
@@ -1999,6 +2070,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only upper case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUpper(): bool
+    {
+        return !$this->isUpper();
+    }
+    
+    /**
      * Returns true if the string contains only hexadecimal chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2006,6 +2087,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isHexadecimal(): bool
     {
         return mb_ereg_match('^[[:xdigit:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only hexadecimal chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHexadecimal(): bool
+    {
+        return !$this->isHexadecimal();
     }
 
     /**
