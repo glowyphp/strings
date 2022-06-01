@@ -4,10 +4,9 @@ Strings Package provide a fluent, object-oriented interface for working with mul
 </p>
 
 <p align="center">
-<a href="https://github.com/glowyphp/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/glowyphp/strings.svg?label=version&color=green"></a>
-<a href="https://github.com/glowyphp/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=green" alt="License"></a>
-<a href="https://packagist.org/packages/glowy/strings"><img src="https://poser.pugx.org/glowy/strings/downloads" alt="Total downloads"></a>
-<img src="https://github.com/glowyphp/strings/actions/workflows/ci.yml/badge.svg"></a> <img src="http://poser.pugx.org/glowy/strings/require/php">
+<a href="https://github.com/glowyphp/strings/releases"><img alt="Version" src="https://img.shields.io/github/release/glowyphp/strings.svg?label=version&style=for-the-badge"></a>
+<a href="https://github.com/glowyphp/strings"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge" alt="License"></a>
+<a href="https://packagist.org/packages/glowy/strings"><img src="https://poser.pugx.org/glowy/strings/downloads?style=for-the-badge" alt="Total downloads"></a><img src="http://poser.pugx.org/glowy/strings/require/php?style=for-the-badge">
 </p>
 
 <br>
