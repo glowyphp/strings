@@ -37,10 +37,11 @@
         "symfony/var-dumper": "^5.4.9"
     },
     "config": {
-        "platform-check": false,
         "allow-plugins": {
+            "sort-packages": true,
             "pestphp/pest-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
-    }
+    },
+    "prefer-stable": true
 }
