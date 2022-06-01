@@ -1787,7 +1787,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns false if the string not matches a given pattern.
+     * Returns true if the string not matches a given pattern.
      *
      * @param  string|array $pattern Pattern to match.
      * 
@@ -1809,7 +1809,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns false if the string is not hex color, false otherwise.
+     * Returns true if the string is not hex color, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1829,7 +1829,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns false if the string is not affirmative, false otherwise.
+     * Returns true if the string is not affirmative, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1849,7 +1849,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns false if the string is not date and it is valid, false otherwise.
+     * Returns true if the string is not date and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1869,7 +1869,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns false if the string is not email and it is valid, false otherwise.
+     * Returns true if the string is not email and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
@@ -1886,6 +1886,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isUrl(): bool
     {
         return (bool) filter_var($this->string, FILTER_VALIDATE_URL);
+    }
+
+    /**
+     * Returns true if the string is not url and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUrl(): bool
+    {
+        return !$this->isUrl();
     }
 
     /**
