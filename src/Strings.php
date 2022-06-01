@@ -1739,6 +1739,22 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Execute the given callback if the string contains a given substring.
+     *
+     * @param string|string[]  $needles  The string to find in haystack.
+     * @param callable         $callback Callback function.
+     * @param callable         $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenContains($needles, $callback, $default = null)
+    {
+        return $this->when($this->contains($needles), $callback, $default);
+    }
+
+    /**
      * Apply the callback if the given "value" is (or resolves to) falsy.
      *
      * @param mixed    $value    Value
