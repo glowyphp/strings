@@ -1869,6 +1869,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns false if the string is not email and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEmail(): bool
+    {
+        return !$this->isEmail();
+    }
+
+    /**
      * Returns true if the string is url and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.

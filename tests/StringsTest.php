@@ -772,6 +772,12 @@ test('test isEmail() method', function (): void {
     $this->assertFalse(Strings::create('awilum.glowyphp.com')->isEmail());
 });
 
+test('test isNotEmail() method', function (): void {
+    $this->assertTrue(Strings::create('foo')->isNotEmail());
+    $this->assertTrue(Strings::create('foo@')->isNotEmail());
+    $this->assertTrue(Strings::create('foo@bar')->isNotEmail());
+});
+
 test('test isUrl() method', function (): void {
     $this->assertTrue(Strings::create('http://glowyphp.com')->isUrl());
     $this->assertFalse(Strings::create('glowyphp.com')->isUrl());
