@@ -57,13 +57,14 @@ jobs:
       if: "matrix.php == 8.1"
       run: ./vendor/bin/pest --coverage
       
-  message:
+  notify:
+    name: Discord Notification
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: send message
-        uses: appleboy/discord-action@master
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: fateyan/action-discord-notifier@v1
         with:
-          webhook_id: ${{ secrets.WEBHOOK_ID }}
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          message: Test
+          message-title: Test
+          webhook: ${{ secrets.WEBHOOK_TOKEN }}
+
