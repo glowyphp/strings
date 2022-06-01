@@ -2110,6 +2110,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only printable (non-invisible) chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotPrintable(): bool
+    {
+        return !$this->isPrintable();
+    }
+
+    /**
      * Returns true if the string contains only punctuation chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2117,6 +2127,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isPunctuation(): bool
     {
         return mb_ereg_match('^[[:punct:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only punctuation chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotPunctuation(): bool
+    {
+        return !$this->isPunctuation();
     }
 
     /**
@@ -2134,6 +2154,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not serialized, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotSerialized(): bool
+    {
+        return !$this->isSerialized();
+    }
+
+    /**
      * Returns true if the string is JSON, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2143,6 +2173,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         json_decode($this->string);
 
         return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    /**
+     * Returns true if the string is not JSON, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotJson(): bool
+    {
+        return !$this->isJson();
     }
 
     /**
@@ -2166,6 +2206,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not base64 encoded, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBase64(): bool
+    {
+        return !$this->isBase64();
+    }
+
+    /**
      * Check if two strings are similar.
      *
      * @param string $string                  The string to compare against.
@@ -2179,6 +2229,19 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Check if two strings are not similar.
+     *
+     * @param string $string                  The string to compare against.
+     * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
+    {
+        return !$this->isSimilar($string, $minPercentForSimilarity);
+    }
+
+    /**
      * Determine whether the string is equals to $string.
      *
      * @param string $string String to compare.
@@ -2188,6 +2251,18 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isEqual(string $string): bool
     {
         return $string === $this->toString();
+    }
+
+    /**
+     * Determine whether the string is not equals to $string.
+     *
+     * @param string $string String to compare.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEqual(string $string): bool
+    {
+        return !$this->isEqual($string);
     }
 
     /**
@@ -2206,6 +2281,22 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_IP, $flags);
     }
 
+    /**
+     * Determine whether the string is not IP and it is not a valid IP address.
+     *
+     * @param int $flags Flags:
+     *                   FILTER_FLAG_IPV4
+     *                   FILTER_FLAG_IPV6
+     *                   FILTER_FLAG_NO_PRIV_RANGE
+     *                   FILTER_FLAG_NO_RES_RANGE
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+    {
+        return !$this->isIP($flags);
+    }
+    
     /**
      * Determine whether the string is MAC address and it is a valid MAC address.
      *

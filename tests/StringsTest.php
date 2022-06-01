@@ -601,6 +601,11 @@ test('test isSimilar() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isSimilar('fò'));
 });
 
+test('test isNotSimilar() method', function (): void {
+    $this->assertFalse(Strings::create('fòôbàřs')->isNotSimilar('fòôbàřs'));
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotSimilar('fò'));
+});
+
 test('test at() method', function (): void {
     $this->assertEquals('ô', Strings::create('fòôbàřs')->at(2));
     $this->assertEquals('b', Strings::create('fòôbàřs')->at(3));
@@ -894,10 +899,18 @@ test('test isPrintable() method', function (): void {
     $this->assertTrue(Strings::create('LKA#@%.54')->isPrintable());
 });
 
+test('test isNotPrintable() method', function (): void {
+    $this->assertTrue(Strings::create('')->isPrintable());
+});
+
 test('test isPunctuation() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isPunctuation());
     $this->assertTrue(Strings::create(',')->isPunctuation());
     $this->assertTrue(Strings::create('.')->isPunctuation());
+});
+
+test('test isNotPunctuation() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotPunctuation());
 });
 
 test('test isJson() method', function (): void {
@@ -905,11 +918,22 @@ test('test isJson() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isJson());
 });
 
+test('test isNotJson() method', function (): void {
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotJson());
+});
+
 test('test isSerialized() method', function (): void {
     $this->assertFalse(Strings::create()->isSerialized());
     $this->assertTrue(Strings::create('s:6:"foobar";')->isSerialized());
     $this->assertTrue(Strings::create('s:11:"fòôbàřs";')->isSerialized());
     $this->assertFalse(Strings::create('fòôbàřs')->isSerialized());
+});
+
+test('test isNotSerialized() method', function (): void {
+    $this->assertTrue(Strings::create()->isNotSerialized());
+    $this->assertFalse(Strings::create('s:6:"foobar";')->isNotSerialized());
+    $this->assertFalse(Strings::create('s:11:"fòôbàřs";')->isNotSerialized());
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotSerialized());
 });
 
 test('test isBase64() method', function (): void {
@@ -923,10 +947,20 @@ test('test isEqual() method', function (): void {
     $this->assertFalse(Strings::create('fòôbàřs')->isEqual('fòô'));
 });
 
+test('test isNotEqual() method', function (): void {
+    $this->assertFalse(Strings::create('fòôbàřs')->isNotEqual('fòôbàřs'));
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotEqual('fòô'));
+});
+
 test('test isIP() method', function (): void {
     $this->assertTrue(Strings::create('127.0.0.1')->isIP());
     $this->assertFalse(Strings::create('fòôbàřs')->isIP());
 });
+
+test('test isNotIP() method', function (): void {
+    $this->assertFalse(Strings::create('127.0.0.1')->isNotIP());
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotIP());
+});  
 
 test('test isInteger() method', function (): void {
     $this->assertTrue(Strings::create('1')->isInteger());
