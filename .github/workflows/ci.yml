@@ -66,5 +66,5 @@ jobs:
       - uses: sebastianpopp/discord-action@releases/v1
         with:
           webhook: ${{ secrets.WEBHOOK_TOKEN }}
-          message: "Developing open-source software is a passion of mine. It requires a significant amount of time to create new features, fix bugs, write documentation, helps the community, etc. If you benefit from any of my open-source work and would like to help contribute, here are all the ways you can do it. https://github.com/Awilum/awilum/blob/master/support-me.md"
+          message: "Support ongoing development: https://github.com/Awilum/awilum/blob/master/support-me.md"
 
