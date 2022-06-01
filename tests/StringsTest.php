@@ -454,6 +454,14 @@ test('test whenContains() method', function (): void {
     $this->assertEquals('Maxine Mayfield', $strings->toString());
 });
 
+test('test whenEqual() method', function (): void {
+    $strings = new Strings('stranger things');
+    $strings->whenEqual('stranger things', function ($strings) {
+        return $strings->headline();
+    });
+    $this->assertEquals('Stranger Things', $strings->toString());
+});
+
 test('test unless() method', function (): void {
     $strings = new Strings('Fòô');
     $strings->unless(false, function ($strings) {
