@@ -1849,6 +1849,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns false if the string is not date and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotDate(): bool
+    {
+        return !$this->isDate();
+    }
+
+    /**
      * Returns true if the string is email and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.

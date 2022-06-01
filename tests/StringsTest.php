@@ -782,6 +782,10 @@ test('test isDate() method', function (): void {
     $this->assertFalse(Strings::create('90/11/2022')->isDate());
 });
 
+test('test isNotDate() method', function (): void {
+    $this->assertTrue(Strings::create('foo')->isNotDate());
+});
+
 test('test isAffirmative() method', function (): void {
     $this->assertTrue(Strings::create('true')->isAffirmative());
     $this->assertTrue(Strings::create('yes')->isAffirmative());
