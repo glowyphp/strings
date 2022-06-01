@@ -57,7 +57,7 @@ jobs:
       if: "matrix.php == 8.1"
       run: ./vendor/bin/pest --coverage
       
-  notify:
+  support:
     name: Discord Notification
     runs-on: ubuntu-latest
     steps:
@@ -65,6 +65,6 @@ jobs:
         uses: actions/checkout@v2
       - uses: fateyan/action-discord-notifier@v1
         with:
-          message-title: Test
+          message-title: "Developing open-source software is a passion of mine. It requires a significant amount of time to create new features, fix bugs, write documentation, helps the community, etc. If you benefit from any of my open-source work and would like to help contribute, here are all the ways you can do it. https://github.com/Awilum/awilum/blob/master/support-me.md"
           webhook: ${{ secrets.WEBHOOK_TOKEN }}
 
