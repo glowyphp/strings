@@ -63,8 +63,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: Ilshidur/action-discord@master
-        env: 
-          DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_TOKEN }}
-          DISCORD_EMBEDS: '{"embeds": [{"color": 15485081, "description": "❤️ **SUPPORT ONGOING DEVELOPMENT**\n➡️ https://github.com/Awilum#support-me"}]}'
+      - uses: sebastianpopp/discord-action@releases/v1
+        with:
+          webhook: ${{ secrets.WEBHOOK_TOKEN }}
+          message: "**❤️ SUPPORT ONGOING DEVELOPMENT**\n➡️ https://github.com/Awilum#support-me"
 
