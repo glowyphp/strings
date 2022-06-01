@@ -28,7 +28,7 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
         extensions:  fileinfo, spl, json, dom, mbstring, pcntl
-        ini-values: disable_functions='', error_reporting=E_ALL
+        ini-values: disable_functions, error_reporting=E_ALL
         tools: composer:v2
         coverage: xdebug
 
