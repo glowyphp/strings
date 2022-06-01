@@ -879,6 +879,10 @@ test('test isUuid() method', function (): void {
     $this->assertFalse(Strings::create('0e02b2c3d479')->isUuid());
 });
 
+test('test isNotUuid() method', function (): void {
+    $this->assertTrue(Strings::create('a')->isNotUuid());
+});
+
 test('test isHexColor() method', function (): void {
     $this->assertTrue(Strings::create('#333')->isHexColor());
     $this->assertFalse(Strings::create('#3333')->isHexColor());
@@ -968,6 +972,12 @@ test('test isInteger() method', function (): void {
     $this->assertFalse(Strings::create('Foo')->isInteger());
 });
 
+test('test isNotInteger() method', function (): void {
+    $this->assertFalse(Strings::create('1')->isNotInteger());
+    $this->assertTrue(Strings::create('1.0')->isNotInteger());
+    $this->assertTrue(Strings::create('Foo')->isNotInteger());
+});
+
 test('test isFloat() method', function (): void {
     $this->assertFalse(Strings::create('1')->isFloat());
     $this->assertTrue(Strings::create('0.1')->isFloat());
@@ -976,8 +986,20 @@ test('test isFloat() method', function (): void {
     $this->assertFalse(Strings::create('Foo')->isFloat());
 });
 
+test('test isNotFloat() method', function (): void {
+    $this->assertTrue(Strings::create('1')->isNotFloat());
+    $this->assertFalse(Strings::create('0.1')->isNotFloat());
+    $this->assertFalse(Strings::create('1.0')->isNotFloat());
+    $this->assertFalse(Strings::create('0.1')->isNotFloat());
+    $this->assertTrue(Strings::create('Foo')->isNotFloat());
+});
+
 test('test isNull() method', function (): void {
     $this->assertTrue(Strings::create('null')->isNull());
+});
+
+test('test isNotNull() method', function (): void {
+    $this->assertFalse(Strings::create('null')->isNotNull());
 });
 
 test('test toNull() method', function (): void {
@@ -989,10 +1011,20 @@ test('test isMAC() method', function (): void {
     $this->assertFalse(Strings::create('127.0.0.1')->isMAC());
 });
 
+test('test isNotMAC() method', function (): void {
+    $this->assertTrue(Strings::create('foo')->isNotMAC());
+});
+
 test('test isHTML() method', function (): void {
     $this->assertTrue(Strings::create('<b>fòôbàřs</b>')->isHTML());
     $this->assertTrue(Strings::create('fòôbàřs<br>')->isHTML());
     $this->assertFalse(Strings::create('fòôbàřs')->isHTML());
+});
+
+test('test isNotHTML() method', function (): void {
+    $this->assertFalse(Strings::create('<b>fòôbàřs</b>')->isNotHTML());
+    $this->assertFalse(Strings::create('fòôbàřs<br>')->isNotHTML());
+    $this->assertTrue(Strings::create('fòôbàřs')->isNotHTML());
 });
 
 test('test isBoolean() method', function (): void {
@@ -1010,6 +1042,21 @@ test('test isBoolean() method', function (): void {
     $this->assertTrue(Strings::create('FALSE')->isBoolean());
 });
 
+test('test isNotBoolean() method', function (): void {
+    $this->assertFalse(Strings::create('1')->isNotBoolean());
+    $this->assertFalse(Strings::create(1)->isNotBoolean());
+    $this->assertFalse(Strings::create('true')->isNotBoolean());
+    $this->assertFalse(Strings::create('trUe')->isNotBoolean());
+    $this->assertFalse(Strings::create('TRUE')->isNotBoolean());
+    $this->assertFalse(Strings::create('on')->isNotBoolean());
+    $this->assertFalse(Strings::create('0')->isNotBoolean());
+    $this->assertFalse(Strings::create(0)->isNotBoolean());
+    $this->assertFalse(Strings::create('false')->isNotBoolean());
+    $this->assertFalse(Strings::create('off')->isNotBoolean());
+    $this->assertFalse(Strings::create('falSe')->isNotBoolean());
+    $this->assertFalse(Strings::create('FALSE')->isNotBoolean());
+});
+
 test('test isTrue() method', function (): void {
     $this->assertTrue(Strings::create('1')->isTrue());
     $this->assertTrue(Strings::create(1)->isTrue());
@@ -1019,6 +1066,15 @@ test('test isTrue() method', function (): void {
     $this->assertTrue(Strings::create('on')->isTrue());
 });
 
+test('test isNotTrue() method', function (): void {
+    $this->assertFalse(Strings::create('1')->isNotTrue());
+    $this->assertFalse(Strings::create(1)->isNotTrue());
+    $this->assertFalse(Strings::create('true')->isNotTrue());
+    $this->assertFalse(Strings::create('trUe')->isNotTrue());
+    $this->assertFalse(Strings::create('TRUE')->isNotTrue());
+    $this->assertFalse(Strings::create('on')->isNotTrue());
+});
+
 test('test isFalse() method', function (): void {
     $this->assertTrue(Strings::create('0')->isFalse());
     $this->assertTrue(Strings::create(0)->isFalse());
@@ -1026,6 +1082,15 @@ test('test isFalse() method', function (): void {
     $this->assertTrue(Strings::create('falSe')->isFalse());
     $this->assertTrue(Strings::create('FALSE')->isFalse());
     $this->assertTrue(Strings::create('off')->isFalse());
+});
+
+test('test isNotFalse() method', function (): void {
+    $this->assertFalse(Strings::create('0')->isNotFalse());
+    $this->assertFalse(Strings::create(0)->isNotFalse());
+    $this->assertFalse(Strings::create('false')->isNotFalse());
+    $this->assertFalse(Strings::create('falSe')->isNotFalse());
+    $this->assertFalse(Strings::create('FALSE')->isNotFalse());
+    $this->assertFalse(Strings::create('off')->isNotFalse());
 });
 
 test('test repeat() method', function (): void {

@@ -2296,7 +2296,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     {
         return !$this->isIP($flags);
     }
-    
+
     /**
      * Determine whether the string is MAC address and it is a valid MAC address.
      *
@@ -2305,6 +2305,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isMAC(): bool
     {
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_MAC);
+    }
+
+    /**
+     * Determine whether the string is not MAC address and it is not a valid MAC address.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotMAC(): bool
+    {
+        return !$this->isMAC();
     }
 
     /**
@@ -2318,6 +2328,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not HTML.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHTML(): bool
+    {
+        return !$this->isHTML();
+    }
+
+    /**
      * Determine whether the string is integer.
      * 
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2325,6 +2345,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isInteger(): bool
     {
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_INT);
+    }
+
+    /**
+     * Determine whether the string is not integer.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotInteger(): bool
+    {
+        return !$this->isInteger();
     }
 
     /**
@@ -2338,6 +2368,15 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not float.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotFloat(): bool {
+        return !$this->isFloat();
+    }
+
+    /**
      * Determine whether the string is null.
      * 
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2345,6 +2384,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isNull(): bool
     {
         return $this->toString() === null || $this->toString() === 'null';
+    }
+
+    /**
+     * Determine whether the string is not null.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotNull(): bool
+    {
+        return !$this->isNull();
     }
 
     /**
@@ -2364,6 +2413,22 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not Boolean.
+     *
+     * Boolean representation for logical strings:
+     * 'true', '1', 'on' and 'yes' will return true.
+     * 'false', '0', 'off', and 'no' will return false.
+     *
+     * In all instances, case is ignored.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBoolean(): bool
+    {
+        return !$this->isBoolean();
+    }
+
+    /**
      * Determine whether the string is Boolean and it is TRUE.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2371,6 +2436,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isTrue(): bool
     {
         return $this->toBoolean() === true;
+    }
+
+    /**
+     * Determine whether the string is not Boolean and it is not TRUE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotTrue(): bool
+    {
+        return !$this->isTrue();
     }
 
     /**
@@ -2384,6 +2459,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not Boolean and it is not FALSE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotFalse(): bool
+    {
+        return !$this->isFalse();
+    }
+
+    /**
      * Determine whether the string is UUID and it is valid.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2391,6 +2476,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isUuid(): bool
     {
         return preg_match('/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iD', $this->toString()) > 0;
+    }
+
+    /**
+     * Determine whether the string is not UUID and it is not valid.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUuid(): bool
+    {
+        return !$this->isUuid();
     }
 
     /**
