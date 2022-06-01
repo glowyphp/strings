@@ -56,3 +56,14 @@ jobs:
     - name: Run Tests for PHP 8.1
       if: "matrix.php == 8.1"
       run: ./vendor/bin/pest --coverage
+      
+  message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: send message
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          message: Test
