@@ -66,5 +66,5 @@ jobs:
       - uses: sebastianpopp/discord-action@releases/v1
         with:
           webhook: ${{ secrets.WEBHOOK_TOKEN }}
-          message: "**❤️ SUPPORT ONGOING DEVELOPMENT** ➡️ https://github.com/Awilum#support-me"
+          message: "**❤️ SUPPORT ONGOING DEVELOPMENT**\n\n➡️ https://github.com/Awilum#support-me"
 
