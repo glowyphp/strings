@@ -1893,6 +1893,24 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Wrap the string with the given strings.
+     *
+     * @param  string       $before String to wrap before.
+     * @param  string|null  $after  String to wrap after.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function wrap($before, $after = null)
+    {
+        $this->string = $before . $this->string . ($after ??= $before);
+        
+        return $this;
+    }
+
+
+    /**
      * Returns true if the string matches a given pattern.
      *
      * @param  string|array  $pattern Pattern to match.
