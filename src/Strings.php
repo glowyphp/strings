@@ -2742,6 +2742,34 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Dumps the strings using the given function (print_r by default).
+     *
+     * @param callable $callback Function receiving the strings as parameter.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function dump(?callable $callback = null): self
+    {
+        $callback ? $callback($this->strings) : print_r($this->items);
+
+        return $this;
+    }
+
+    /**
+     * Dumps the string using the given function (print_r by default) and exit(1).
+     *
+     * @param callable $callback Function receiving the strings as parameter.
+     *
+     * @return void Return void.
+     */
+    public function dd(?callable $callback = null): void
+    {
+        $this->dump($callback);
+
+        exit(1);
+    }
+    
+    /**
      * Returns a new ArrayIterator, thus implementing the IteratorAggregate
      * interface. The ArrayIterator's constructor is passed an array of chars
      * in the multibyte string. This enables the use of foreach with instances
