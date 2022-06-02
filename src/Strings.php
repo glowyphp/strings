@@ -1802,6 +1802,37 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Execute the given callback if the string is a valid UUID.
+     *
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIsUuid($callback, $default = null)
+    {
+        return $this->when($this->isUuid(), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string starts with a given substring.
+     *
+     * @param string|string[]  $needles  The string to find in haystack.
+     * @param callable         $callback Callback function.
+     * @param callable         $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenStartsWith($needles, $callback, $default = null)
+    {
+        return $this->when($this->startsWith($needles), $callback, $default);
+    }
+
+    /**
      * Apply the callback if the given "value" is (or resolves to) falsy.
      *
      * @param mixed    $value    Value

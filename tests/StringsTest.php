@@ -478,6 +478,22 @@ test('test whenIsAscii() method', function (): void {
     $this->assertEquals('# EL', $strings->toString());
 });
 
+test('test whenIsUuid() method', function (): void {
+    $strings = new Strings('f47ac10b-58cc-4372-a567-0e02b2c3d479');
+    $strings->whenIsUuid(function ($strings) {
+        return $strings->prepend('uuid: ');
+    });
+    $this->assertEquals('uuid: f47ac10b-58cc-4372-a567-0e02b2c3d479', $strings->toString());
+});
+
+test('test whenStartsWith() method', function (): void {
+    $strings = new Strings('maxine mayfield');
+    $strings->whenStartsWith('maxine', function ($strings) {
+        return $strings->headline();
+    });
+    $this->assertEquals('Maxine Mayfield', $strings->toString());
+});
+
 test('test unless() method', function (): void {
     $strings = new Strings('Fòô');
     $strings->unless(false, function ($strings) {
