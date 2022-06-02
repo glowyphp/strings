@@ -1,3 +1,52 @@
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/glowyphp/strings) (2022-07-02)
+* Added is() method.
+* Added isNot() method.
+* Added isNotHexColor() method.
+* Added isNotAffirmative() method.
+* Added isNotDate() method.
+* Added isNotEmail() method.
+* Added isNotUrl() method.
+* Added isNotEmpty() method.
+* Added isNotAscii() method.
+* Added isNotAlphanumeric() method.
+* Added isNotAlpha() method.
+* Added isNotBlank() method.
+* Added isNotNumeric() method.
+* Added isNotDigit() method.
+* Added isNotLower() method.
+* Added isNotUpper() method.
+* Added isNotHexadecimal() method.
+* Added isNotPrintable() method.
+* Added isNotPunctuation() method.
+* Added isNotSerialized() method.
+* Added isNotJson() method.
+* Added isNotBase64() method.
+* Added isNotSimilar() method.
+* Added isNotEqual() method.
+* Added isNotIP() method.
+* Added isNotMAC() method.
+* Added isNotHTML() method.
+* Added isNotInteger() method.
+* Added isNotFloat() method.
+* Added isNotNull() method.
+* Added isNotBoolean() method.
+* Added isNotTrue() method.
+* Added isNotFalse() method.
+* Added isNotUuid() method.
+* Added when() method.
+* Added unless() method.
+* Added whenContains() method.
+* Added whenEqual() method.
+* Added whenIs() method.
+* Added whenIsAscii() method.
+* Added whenStartsWith() method.
+* Added whenIsUuid() method.
+* Added wrap() method.
+* Added dump() method.
+* Added dd() method.
+* Added newLine() method.
+
 <a name="4.3.1"></a>
 # [4.3.1](https://github.com/glowyphp/strings) (2022-05-08)
 * Fix toNull() method.
