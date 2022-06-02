@@ -470,6 +470,14 @@ test('test whenEqual() method', function (): void {
     $this->assertEquals('Stranger Things', $strings->toString());
 });
 
+test('test whenIsAscii() method', function (): void {
+    $strings = new Strings('#');
+    $strings->whenIsAscii(function ($strings) {
+        return $strings->append(' EL');
+    });
+    $this->assertEquals('# EL', $strings->toString());
+});
+
 test('test unless() method', function (): void {
     $strings = new Strings('Fòô');
     $strings->unless(false, function ($strings) {

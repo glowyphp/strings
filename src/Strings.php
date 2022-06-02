@@ -1787,6 +1787,21 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Execute the given callback if the string is ASCII.
+     *
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIsAscii($callback, $default = null)
+    {
+        return $this->when($this->isAscii(), $callback, $default);
+    }
+
+    /**
      * Apply the callback if the given "value" is (or resolves to) falsy.
      *
      * @param mixed    $value    Value
