@@ -2750,7 +2750,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      */
     public function dump(?callable $callback = null): self
     {
-        $callback ? $callback($this->strings) : print_r($this->items);
+        $callback ? $callback($this->strings) : print_r($this->strings);
 
         return $this;
     }
