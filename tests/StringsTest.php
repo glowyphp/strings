@@ -515,6 +515,11 @@ test('test wrap() method', function(): void {
     $this->assertEquals('#Stranger Things#', Strings::create('Stranger Things')->wrap('#')->toString());
 });
 
+test('test newLine() method', function(): void {
+    $this->assertEquals('Foo' . PHP_EOL, Strings::create('Foo')->newLine()->toString());
+    $this->assertEquals('Foo' . PHP_EOL . PHP_EOL, Strings::create('Foo')->newLine(2)->toString());
+});
+
 test('test replaceSubstr() method', function (): void {
     $this->assertEquals('19-84', Strings::create('1984')->replaceSubstr('-', 2, 0)->toString());
     $this->assertEquals('fòô bàř bàz', Strings::create('fòô bàz')->replaceSubstr('bàř ', 4, 0)->toString());

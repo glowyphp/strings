@@ -2768,7 +2768,21 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
 
         exit(1);
     }
-    
+
+    /**
+     * Append a new line to the string.
+     *
+     * @param  int  $count Count of new lines. Default is 1.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function newLine(int $count = 1): self
+    {
+        return $this->append(str_repeat(PHP_EOL, $count));
+    }
+
     /**
      * Returns a new ArrayIterator, thus implementing the IteratorAggregate
      * interface. The ArrayIterator's constructor is passed an array of chars
