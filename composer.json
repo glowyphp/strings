@@ -12,7 +12,7 @@
     "authors": [
         {
             "name": "Sergey Romanenko",
-            "email": "sergey.romanenko@flextype.org",
+            "email": "awilum@msn.com",
             "homepage": "https://github.com/Awilum"
         }
     ],
@@ -32,14 +32,16 @@
     },
     "require-dev": {
         "doctrine/coding-standard": "9.0.0",
-        "pestphp/pest": "^1.21.1",
+        "pestphp/pest": "^1.21.3",
         "phpstan/phpstan": "^1.4.5",
-        "symfony/var-dumper": "^5.4.3"
+        "symfony/var-dumper": "^5.4.9"
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
-    }
+    },
+    "prefer-stable": true
 }

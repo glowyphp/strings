@@ -1709,9 +1709,149 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @access public
      */
-    public function pipe(callable $callback): self
+    public function pipe(callable $callback)
     {
-        $callback($this);
+        return $callback($this);
+    }
+
+    /**
+     * Apply the callback if the given "value" is (or resolves to) truthy.
+     *
+     * @param mixed    $value    Value
+     * @param callable $callback Callback function.
+     * @param callable $default  Callback function.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function when($value, callable $callback = null, callable $default = null)
+    {
+        $value = $value instanceof Closure ? $value($this) : $value;
+
+        if ($value) {
+            return $callback($this, $value) ?? $this;
+        } elseif ($default) {
+            return $default($this, $value) ?? $this;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Execute the given callback if the string contains a given substring.
+     *
+     * @param string|string[]  $needles  The string to find in haystack.
+     * @param callable         $callback Callback function.
+     * @param callable         $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenContains($needles, $callback, $default = null)
+    {
+        return $this->when($this->contains($needles), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string equal a given substring.
+     *
+     * @param string    $string   String to compare.
+     * @param callable  $callback Callback function.
+     * @param callable  $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenEqual($string, $callback, $default = null)
+    {
+        return $this->when($this->isEqual($string), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string matches a given pattern.
+     *
+     * @param string|array  $pattern Pattern to match.
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIs($pattern, $callback, $default = null)
+    {
+        return $this->when($this->is($pattern), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string is ASCII.
+     *
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIsAscii($callback, $default = null)
+    {
+        return $this->when($this->isAscii(), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string is a valid UUID.
+     *
+     * @param callable      $callback Callback function.
+     * @param callable      $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenIsUuid($callback, $default = null)
+    {
+        return $this->when($this->isUuid(), $callback, $default);
+    }
+
+    /**
+     * Execute the given callback if the string starts with a given substring.
+     *
+     * @param string|string[]  $needles  The string to find in haystack.
+     * @param callable         $callback Callback function.
+     * @param callable         $default  Callback function.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function whenStartsWith($needles, $callback, $default = null)
+    {
+        return $this->when($this->startsWith($needles), $callback, $default);
+    }
+
+    /**
+     * Apply the callback if the given "value" is (or resolves to) falsy.
+     *
+     * @param mixed    $value    Value
+     * @param callable $callback Callback function.
+     * @param callable $default  Callback function.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function unless($value, callable $callback = null, callable $default = null)
+    {
+        $value = $value instanceof Closure ? $value($this) : $value;
+
+        if (!$value) {
+            return $callback($this, $value) ?? $this;
+        } elseif ($default) {
+            return $default($this, $value) ?? $this;
+        }
 
         return $this;
     }
@@ -1753,6 +1893,70 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Wrap the string with the given strings.
+     *
+     * @param  string       $before String to wrap before.
+     * @param  string|null  $after  String to wrap after.
+     *
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function wrap($before, $after = null)
+    {
+        $this->string = $before . $this->string . ($after ??= $before);
+        
+        return $this;
+    }
+
+
+    /**
+     * Returns true if the string matches a given pattern.
+     *
+     * @param  string|array  $pattern Pattern to match.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function is($pattern): bool
+    {
+        $patterns = is_array($pattern) ? $pattern : [$pattern];
+        $value    = $this->toString();
+
+        if (empty($patterns)) {
+            return false;
+        }
+
+        foreach ($patterns as $pattern) {
+            $pattern = (string) $pattern;
+
+            if ($pattern === $value) {
+                return true;
+            }
+
+            $pattern = preg_quote($pattern, '#');
+            $pattern = str_replace('\*', '.*', $pattern);
+
+            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns true if the string not matches a given pattern.
+     *
+     * @param  string|array $pattern Pattern to match.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNot($pattern): bool
+    {
+        return !$this->is($pattern);
+    }
+
+    /**
      * Returns true if the string is hex color, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1760,6 +1964,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isHexColor(): bool
     {
         return (bool) mb_ereg_match('^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not hex color, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHexColor(): bool
+    {
+        return !$this->isHexColor();
     }
 
     /**
@@ -1773,6 +1987,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not affirmative, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAffirmative(): bool
+    {
+        return !$this->isAffirmative();
+    }
+
+    /**
      * Returns true if the string is date and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1780,6 +2004,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isDate(): bool
     {
         return (bool) strtotime($this->string);
+    }
+
+    /**
+     * Returns true if the string is not date and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotDate(): bool
+    {
+        return !$this->isDate();
     }
 
     /**
@@ -1793,6 +2027,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not email and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEmail(): bool
+    {
+        return !$this->isEmail();
+    }
+
+    /**
      * Returns true if the string is url and it is valid, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1803,13 +2047,33 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Returns true if the string is not empty, false otherwise.
+     * Returns true if the string is not url and it is valid, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUrl(): bool
+    {
+        return !$this->isUrl();
+    }
+
+    /**
+     * Returns true if the string is empty, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
      */
     public function isEmpty(): bool
     {
         return empty($this->string);
+    }
+
+    /**
+     * Returns true if the string is not empty, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEmpty(): bool
+    {
+        return !$this->isEmpty();
     }
 
     /**
@@ -1823,6 +2087,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains ASCII, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAscii(): bool
+    {
+        return !$this->isAscii();
+    }
+
+    /**
      * Returns true if the string contains only alphabetic and numeric chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1830,6 +2104,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isAlphanumeric(): bool
     {
         return mb_ereg_match('^[[:alnum:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only alphabetic and numeric chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAlphanumeric(): bool
+    {
+        return !$this->isAlphanumeric();
     }
 
     /**
@@ -1843,6 +2127,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only alphabetic chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotAlpha(): bool
+    {
+        return !$this->isAlpha();
+    }
+
+    /**
      * Returns true if the string contains only whitespace chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1850,6 +2144,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isBlank(): bool
     {
         return mb_ereg_match('^[[:space:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only whitespace chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBlank(): bool
+    {
+        return !$this->isBlank();
     }
 
     /**
@@ -1863,6 +2167,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not a number or a numeric strings, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotNumeric(): bool 
+    {
+        return !$this->isNumeric();
+    }
+
+    /**
      * Returns true if the string contains only digit chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1872,6 +2186,17 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         return mb_ereg_match('^[[:digit:]]*$', $this->string);
     }
 
+
+    /**
+     * Returns true if the string is not contains only digit chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotDigit(): bool
+    {
+        return !$this->isDigit();
+    }
+    
     /**
      * Returns true if the string contains only lower case chars, false otherwise.
      *
@@ -1880,6 +2205,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isLower(): bool
     {
         return mb_ereg_match('^[[:lower:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only lower case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotLower(): bool
+    {
+        return !$this->isLower();
     }
 
     /**
@@ -1893,6 +2228,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only upper case chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUpper(): bool
+    {
+        return !$this->isUpper();
+    }
+    
+    /**
      * Returns true if the string contains only hexadecimal chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1900,6 +2245,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isHexadecimal(): bool
     {
         return mb_ereg_match('^[[:xdigit:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only hexadecimal chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHexadecimal(): bool
+    {
+        return !$this->isHexadecimal();
     }
 
     /**
@@ -1913,6 +2268,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not contains only printable (non-invisible) chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotPrintable(): bool
+    {
+        return !$this->isPrintable();
+    }
+
+    /**
      * Returns true if the string contains only punctuation chars, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1920,6 +2285,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isPunctuation(): bool
     {
         return mb_ereg_match('^[[:punct:]]*$', $this->string);
+    }
+
+    /**
+     * Returns true if the string is not contains only punctuation chars, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotPunctuation(): bool
+    {
+        return !$this->isPunctuation();
     }
 
     /**
@@ -1937,6 +2312,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not serialized, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotSerialized(): bool
+    {
+        return !$this->isSerialized();
+    }
+
+    /**
      * Returns true if the string is JSON, false otherwise.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -1946,6 +2331,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         json_decode($this->string);
 
         return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    /**
+     * Returns true if the string is not JSON, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotJson(): bool
+    {
+        return !$this->isJson();
     }
 
     /**
@@ -1969,6 +2364,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Returns true if the string is not base64 encoded, false otherwise.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBase64(): bool
+    {
+        return !$this->isBase64();
+    }
+
+    /**
      * Check if two strings are similar.
      *
      * @param string $string                  The string to compare against.
@@ -1982,6 +2387,19 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Check if two strings are not similar.
+     *
+     * @param string $string                  The string to compare against.
+     * @param float  $minPercentForSimilarity The percentage of needed similarity. Default is 80%
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotSimilar(string $string, float $minPercentForSimilarity = 80.0): bool
+    {
+        return !$this->isSimilar($string, $minPercentForSimilarity);
+    }
+
+    /**
      * Determine whether the string is equals to $string.
      *
      * @param string $string String to compare.
@@ -1991,6 +2409,18 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isEqual(string $string): bool
     {
         return $string === $this->toString();
+    }
+
+    /**
+     * Determine whether the string is not equals to $string.
+     *
+     * @param string $string String to compare.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotEqual(string $string): bool
+    {
+        return !$this->isEqual($string);
     }
 
     /**
@@ -2010,6 +2440,22 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not IP and it is not a valid IP address.
+     *
+     * @param int $flags Flags:
+     *                   FILTER_FLAG_IPV4
+     *                   FILTER_FLAG_IPV6
+     *                   FILTER_FLAG_NO_PRIV_RANGE
+     *                   FILTER_FLAG_NO_RES_RANGE
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotIP(int $flags = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6): bool
+    {
+        return !$this->isIP($flags);
+    }
+
+    /**
      * Determine whether the string is MAC address and it is a valid MAC address.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2017,6 +2463,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isMAC(): bool
     {
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_MAC);
+    }
+
+    /**
+     * Determine whether the string is not MAC address and it is not a valid MAC address.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotMAC(): bool
+    {
+        return !$this->isMAC();
     }
 
     /**
@@ -2030,6 +2486,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not HTML.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotHTML(): bool
+    {
+        return !$this->isHTML();
+    }
+
+    /**
      * Determine whether the string is integer.
      * 
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2037,6 +2503,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isInteger(): bool
     {
         return (bool) filter_var($this->toString(), FILTER_VALIDATE_INT);
+    }
+
+    /**
+     * Determine whether the string is not integer.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotInteger(): bool
+    {
+        return !$this->isInteger();
     }
 
     /**
@@ -2050,6 +2526,15 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not float.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotFloat(): bool {
+        return !$this->isFloat();
+    }
+
+    /**
      * Determine whether the string is null.
      * 
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2057,6 +2542,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isNull(): bool
     {
         return $this->toString() === null || $this->toString() === 'null';
+    }
+
+    /**
+     * Determine whether the string is not null.
+     * 
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotNull(): bool
+    {
+        return !$this->isNull();
     }
 
     /**
@@ -2076,6 +2571,22 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not Boolean.
+     *
+     * Boolean representation for logical strings:
+     * 'true', '1', 'on' and 'yes' will return true.
+     * 'false', '0', 'off', and 'no' will return false.
+     *
+     * In all instances, case is ignored.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotBoolean(): bool
+    {
+        return !$this->isBoolean();
+    }
+
+    /**
      * Determine whether the string is Boolean and it is TRUE.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2083,6 +2594,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isTrue(): bool
     {
         return $this->toBoolean() === true;
+    }
+
+    /**
+     * Determine whether the string is not Boolean and it is not TRUE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotTrue(): bool
+    {
+        return !$this->isTrue();
     }
 
     /**
@@ -2096,6 +2617,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Determine whether the string is not Boolean and it is not FALSE.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotFalse(): bool
+    {
+        return !$this->isFalse();
+    }
+
+    /**
      * Determine whether the string is UUID and it is valid.
      *
      * @return bool Returns TRUE on success or FALSE otherwise.
@@ -2103,6 +2634,16 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     public function isUuid(): bool
     {
         return preg_match('/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iD', $this->toString()) > 0;
+    }
+
+    /**
+     * Determine whether the string is not UUID and it is not valid.
+     *
+     * @return bool Returns TRUE on success or FALSE otherwise.
+     */
+    public function isNotUuid(): bool
+    {
+        return !$this->isUuid();
     }
 
     /**
@@ -2198,6 +2739,48 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
         );
 
         return $array;
+    }
+
+    /**
+     * Dumps the strings using the given function (print_r by default).
+     *
+     * @param callable $callback Function receiving the strings as parameter.
+     *
+     * @return self Returns instance of The Strings class.
+     */
+    public function dump(?callable $callback = null): self
+    {
+        $callback ? $callback($this->toString()) : print_r($this->toString());
+
+        return $this;
+    }
+
+    /**
+     * Dumps the string using the given function (print_r by default) and exit(1).
+     *
+     * @param callable $callback Function receiving the strings as parameter.
+     *
+     * @return void Return void.
+     */
+    public function dd(?callable $callback = null): void
+    {
+        $this->dump($callback);
+
+        exit(1);
+    }
+
+    /**
+     * Append a new line to the string.
+     *
+     * @param  int  $count Count of new lines. Default is 1.
+     * 
+     * @return self Returns instance of the Strings class.
+     *
+     * @access public
+     */
+    public function newLine(int $count = 1): self
+    {
+        return $this->append(str_repeat(PHP_EOL, $count));
     }
 
     /**
