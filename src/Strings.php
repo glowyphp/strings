@@ -321,12 +321,12 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Add's _1 to a string or increment the ending number to allow _2, _3, etc.
      *
-     * @param  int    $first     Start with
      * @param  string $separator Separator
+     * @param  int    $first     Start with
      *
      * @return self Returns instance of The Strings class.
      */
-    public function increment(int $first = 1, string $separator = '_'): self
+    public function increment(string $separator = '_', int $first = 1): self
     {
         preg_match('/(.+)' . $separator . '([0-9]+)$/', $this->string, $match);
 

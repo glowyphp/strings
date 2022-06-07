@@ -76,8 +76,8 @@ test('test random() method', function (): void {
 
 test('test increment() method', function (): void {
     $this->assertEquals('page_2', Strings::create('page_1')->increment());
-    $this->assertEquals('page_3', Strings::create('page')->increment(3));
-    $this->assertEquals('page-3', Strings::create('page')->increment(3, '-'));
+    $this->assertEquals('page_3', Strings::create('page')->increment('_', 3));
+    $this->assertEquals('page-3', Strings::create('page')->increment('-', 3));
 });
 
 
