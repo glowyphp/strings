@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Glowy\Strings;
 
+use Stringable;
 use ArrayAccess;
 use ArrayIterator;
 use Glowy\Macroable\Macroable;
@@ -23,6 +24,7 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfBoundsException;
 
+use function Glowy\Strings\strings;
 use function abs;
 use function array_count_values;
 use function array_merge;
@@ -117,7 +119,7 @@ use const STR_PAD_RIGHT;
  * 
  * @author Sergey Romanenko
  */
-class Strings implements ArrayAccess, Countable, IteratorAggregate
+class Strings implements ArrayAccess, Countable, IteratorAggregate, Stringable
 {
     use Macroable;
 
@@ -321,12 +323,12 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Add's _1 to a string or increment the ending number to allow _2, _3, etc.
      *
-     * @param  int    $first     Start with
      * @param  string $separator Separator
+     * @param  int    $first     Start with
      *
      * @return self Returns instance of The Strings class.
      */
-    public function increment(int $first = 1, string $separator = '_'): self
+    public function increment(string $separator = '_', int $first = 1): self
     {
         preg_match('/(.+)' . $separator . '([0-9]+)$/', $this->string, $match);
 
@@ -823,7 +825,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return self Returns instance of The Strings class.
      */
-    public function trim(?string $character_mask = null): self
+    public function trim(string|null $character_mask = null): self
     {
         $this->string = trim(...array_merge([$this->string], func_get_args()));
 
@@ -837,7 +839,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return self Returns instance of The Strings class.
      */
-    public function trimLeft(?string $character_mask = null): self
+    public function trimLeft(string|null $character_mask = null): self
     {
         $this->string = ltrim(...array_merge([$this->string], func_get_args()));
 
@@ -847,11 +849,11 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
     /**
      * Strip whitespace (or other characters) from the end of a string.
      *
-     * @param string $character_mask Stripped characters can also be specified using the character_mask parameter.
+     * @param string|null $character_mask Stripped characters can also be specified using the character_mask parameter.
      *
      * @return self Returns instance of The Strings class.
      */
-    public function trimRight(?string $character_mask = null): self
+    public function trimRight(string|null $character_mask = null): self
     {
         $this->string = rtrim(...array_merge([$this->string], func_get_args()));
 
@@ -2716,7 +2718,7 @@ class Strings implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return array Return Strings object as array based on a delimiter.
      */
-    public function toArray(?string $delimiter = null): array
+    public function toArray(string|null $delimiter = null): array
     {
         $encoding = $this->encoding;
         $string   = static::create($this->string, $encoding)->trim()->toString();

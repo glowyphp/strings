@@ -12,6 +12,7 @@
 declare(strict_types=1);
 
 use Glowy\Strings\Strings;
+use function Glowy\Strings\strings;
 
 test('test __construct() method', function (): void {
     $this->assertInstanceOf(Strings::class, new Strings());
@@ -76,8 +77,8 @@ test('test random() method', function (): void {
 
 test('test increment() method', function (): void {
     $this->assertEquals('page_2', Strings::create('page_1')->increment());
-    $this->assertEquals('page_3', Strings::create('page')->increment(3));
-    $this->assertEquals('page-3', Strings::create('page')->increment(3, '-'));
+    $this->assertEquals('page_3', Strings::create('page')->increment('_', 3));
+    $this->assertEquals('page-3', Strings::create('page')->increment('-', 3));
 });
 
 

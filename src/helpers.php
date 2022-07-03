@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Glowy\Strings;
+
 use Glowy\Strings\Strings;
 
 if (! function_exists('strings')) {
@@ -25,7 +27,7 @@ if (! function_exists('strings')) {
      * @param mixed $string   Value to modify, after being cast to string. Default: ''
      * @param mixed $encoding The character encoding. Default: UTF-8
      */
-    function strings($string = '', $encoding = 'UTF-8'): Strings
+    function strings($string = '', $encoding = 'UTF-8'): \Glowy\Strings\Strings
     {
         return new Strings($string, $encoding);
     }
