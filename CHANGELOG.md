@@ -1,3 +1,13 @@
+<a name="5.0.1"></a>
+# [5.0.1](https://github.com/glowyphp/strings) (2022-07-03)
+* Dependencies fixes.
+
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/glowyphp/strings) (2022-07-03)
+* All Helpers functions are placed into the Glowy/Strings namespace.
+* Use union types.
+* Moving to PHP 8.1
+
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/glowyphp/strings) (2022-07-02)
 * Added is() method.
