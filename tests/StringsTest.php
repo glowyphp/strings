@@ -12,6 +12,7 @@
 declare(strict_types=1);
 
 use Glowy\Strings\Strings;
+use function Glowy\Strings\strings;
 
 test('test __construct() method', function (): void {
     $this->assertInstanceOf(Strings::class, new Strings());
